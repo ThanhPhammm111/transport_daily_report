@@ -1477,7 +1477,7 @@ function loadDA(){
       }catch(e){delete window[cbName];reject(e);}
     };
     const base='https://docs.google.com/spreadsheets/d/19XDx4Nb0N9qzFfe5IzDP10ATSUDd-lA4fAl6w8RemqY/gviz/tq';
-    const q=encodeURIComponent("select F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X where G is not null offset 2");
+    const q=encodeURIComponent("select F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X where G is not null");
     const s=document.createElement('script');
     s.src=base+'?sheet=T%E1%BB%B7%20l%E1%BB%87%20%C4%91%C3%A1p%20%E1%BB%A9ng&tq='+q+'&tqx=responseHandler:'+cbName;
     s.onerror=function(){delete window[cbName];reject(new Error('Không tải được dữ liệu'));};
