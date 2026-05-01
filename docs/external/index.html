@@ -117,7 +117,7 @@ body {
 
 <div class="top-header">
   <h1>📊 Dashboard ABA Đông Mát</h1>
-  <div class="subtitle">Tổng hợp báo cáo T4/2026 &nbsp;|&nbsp; Cập nhật: <span id="updateDate">30/04/2026</span></div>
+  <div class="subtitle">Tổng hợp báo cáo T4-T5/2026 &nbsp;|&nbsp; Cập nhật: <span id="updateDate"></span></div>
 </div>
 
 <div class="main-tabs">
@@ -138,6 +138,12 @@ body {
 </div>
 
 <script>
+// Auto update timestamp
+const now = new Date();
+const pad = n => String(n).padStart(2,'0');
+document.getElementById('updateDate').textContent = 
+  `${pad(now.getDate())}/${pad(now.getMonth()+1)}/${now.getFullYear()} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+
 function switchMainTab(idx) {
   document.querySelectorAll('.main-tab').forEach((t,i) => {
     t.classList.toggle('active', i === idx);
