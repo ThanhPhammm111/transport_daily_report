@@ -1600,11 +1600,12 @@ function renderDapUng() {
     const label = isMt ? `🔶 ${r.d}` : isWk ? `⚡ ${r.d}` : r.d;
     const dayCol = isSpecial ? `color:${specHex};` : 'color:#94a3b8;';
     const m = getMonth(r.d);
-    const mLabel = isSpecial ? '' : (m===3?'T3':m===4?'T4':'');
+    const mLabel = isSpecial ? '' : (m===3?'T3':m===4?'T4':m===5?'T5':'');
 
     rows += `<tr style="${bg}${bdr}">
       <td style="${fw}color:#e2e8f0;white-space:nowrap">${label}</td>
       <td style="${dayCol}${fw}text-align:center;font-size:10px">${isWk ? r.wkRange||'' : isMt ? 'Tổng' : r.w||''}</td>
+      <td style="text-align:center;color:#10b981;font-size:10px;${fw}">${isSpecial ? '' : r.wk||''}</td>
       <td style="text-align:center;color:#f59e0b;font-size:10px;${fw}">${mLabel}</td>
       <td style="text-align:right;color:#818cf8;${fw}">${fmt(r.fc)}</td>
       <td style="text-align:right;color:#22d3ee;${fw}">${fmt(r.bkTon)}</td>
@@ -1635,6 +1636,7 @@ function renderDapUng() {
       <tr>
         <th rowspan="2" style="width:70px;position:sticky;left:0;background:#141938;z-index:2">Ngày</th>
         <th rowspan="2" style="width:45px">Thứ</th>
+        <th rowspan="2" style="width:40px;color:#10b981">Tuần</th>
         <th rowspan="2" style="width:30px;color:#f59e0b">Tháng</th>
         <th colspan="5" style="text-align:center;color:#22d3ee;border-bottom:2px solid #22d3ee">📦 ITEM</th>
         <th colspan="5" style="text-align:center;color:#a78bfa;border-bottom:2px solid #a78bfa">⚖️ Trọng lượng (kg)</th>
