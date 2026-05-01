@@ -1525,38 +1525,7 @@ function renderDapUng() {
     });
   }
 
-  // Compute monthly totals and insert after each month group
-  if (!daSummary && !daMSummary) {
-    const months = [...new Set(filtered.filter(r => !r.wkTotal && !r.mTotal).map(r => getMonth(r.d)).filter(m => m > 0))];
-    let withTotals = [];
-    let lastMonth = 0;
-    filtered.forEach(r => {
-      const m = r.wkTotal ? 0 : getMonth(r.d);
-      if (m > 0 && lastMonth > 0 && m !== lastMonth && months.includes(lastMonth)) {
-        const mDays = filtered.filter(x => !x.wkTotal && !x.mTotal && getMonth(x.d) === lastMonth);
-        if (mDays.length > 0) {
-          const tot = {mTotal:true, d:`Tháng ${lastMonth}`, fc:0, bkTon:0, tx:0, diff:0, tlFc:0, tlBkTon:0, tlTx:0, tlDiff:0};
-          mDays.forEach(x => { tot.fc+=x.fc; tot.bkTon+=x.bkTon; tot.tx+=x.tx; tot.diff+=x.diff; tot.tlFc+=x.tlFc; tot.tlBkTon+=x.tlBkTon; tot.tlTx+=x.tlTx; tot.tlDiff+=x.tlDiff; });
-          tot.du = tot.bkTon > 0 ? Math.round(tot.tx/tot.bkTon*10000)/100 : 0;
-          tot.duTl = tot.tlBkTon > 0 ? Math.round(tot.tlTx/tot.tlBkTon*10000)/100 : 0;
-          withTotals.push(tot);
-        }
-      }
-      if (m > 0) lastMonth = m;
-      withTotals.push(r);
-    });
-    if (lastMonth > 0 && months.includes(lastMonth)) {
-      const mDays = filtered.filter(x => !x.wkTotal && !x.mTotal && getMonth(x.d) === lastMonth);
-      if (mDays.length > 0) {
-        const tot = {mTotal:true, d:`Tháng ${lastMonth}`, fc:0, bkTon:0, tx:0, diff:0, tlFc:0, tlBkTon:0, tlTx:0, tlDiff:0};
-        mDays.forEach(x => { tot.fc+=x.fc; tot.bkTon+=x.bkTon; tot.tx+=x.tx; tot.diff+=x.diff; tot.tlFc+=x.tlFc; tot.tlBkTon+=x.tlBkTon; tot.tlTx+=x.tlTx; tot.tlDiff+=x.tlDiff; });
-        tot.du = tot.bkTon > 0 ? Math.round(tot.tx/tot.bkTon*10000)/100 : 0;
-        tot.duTl = tot.tlBkTon > 0 ? Math.round(tot.tlTx/tot.tlBkTon*10000)/100 : 0;
-        withTotals.push(tot);
-      }
-    }
-    filtered = withTotals;
-  }
+  // Monthly totals only shown when daMSummary is active (removed auto-insert)
 
   // Dropdown style
   const selStyle = `background:#141938;color:#e2e8f0;border:1px solid #1e293b;border-radius:6px;padding:5px 8px;font-size:12px;font-family:Inter;cursor:pointer`;
