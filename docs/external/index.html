@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard ABA Đông Mát — T4-T5/2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family:'Inter',-apple-system,sans-serif;
+  background:#0a0a1a;
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(79,172,254,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(161,140,209,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 90%, rgba(67,233,123,0.04) 0%, transparent 60%);
+  min-height:100vh;
+  color:#e0e0e0;
+  display:flex;
+  flex-direction:column;
+}
+
+/* ─── HEADER ─── */
+.top-header {
+  text-align:center;
+  padding:20px 20px 0;
+}
+.top-header h1 {
+  font-size:1.8rem;
+  font-weight:900;
+  background:linear-gradient(135deg, #00f2fe 0%, #4facfe 40%, #a18cd1 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  letter-spacing:-0.5px;
+  margin-bottom:4px;
+}
+.top-header .subtitle {
+  font-size:0.82rem;
+  color:#6b7094;
+}
+.top-header .subtitle span {
+  color:#4facfe;
+  font-weight:600;
+}
+
+/* ─── MAIN TABS ─── */
+.main-tabs {
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  padding:16px 20px 0;
+}
+.main-tab {
+  padding:12px 36px;
+  border-radius:14px;
+  font-family:'Inter',sans-serif;
+  font-size:0.95rem;
+  font-weight:700;
+  cursor:pointer;
+  border:1px solid rgba(255,255,255,0.08);
+  background:rgba(255,255,255,0.03);
+  color:#6b7094;
+  transition:all 0.3s ease;
+  letter-spacing:0.3px;
+  position:relative;
+}
+.main-tab:hover {
+  background:rgba(79,172,254,0.08);
+  color:#8bb8f0;
+  border-color:rgba(79,172,254,0.2);
+}
+.main-tab.active {
+  background:linear-gradient(135deg,rgba(79,172,254,0.18),rgba(161,140,209,0.15));
+  color:#fff;
+  border-color:rgba(79,172,254,0.4);
+  box-shadow:0 4px 20px rgba(79,172,254,0.15);
+}
+.main-tab.active::after {
+  content:'';
+  position:absolute;
+  bottom:-1px;
+  left:20%;
+  right:20%;
+  height:3px;
+  border-radius:3px 3px 0 0;
+  background:linear-gradient(90deg,#4facfe,#00f2fe);
+}
+
+/* ─── IFRAME ─── */
+.frame-container {
+  flex:1;
+  padding:8px;
+  display:none;
+}
+.frame-container.active {
+  display:block;
+}
+.frame-container iframe {
+  width:100%;
+  height:calc(100vh - 120px);
+  border:none;
+  border-radius:12px;
+  background:#0b0d12;
+}
+
+/* ─── FOOTER ─── */
+.bottom-footer {
+  text-align:center;
+  padding:6px 0 12px;
+  color:#3a3e5e;
+  font-size:0.7rem;
+}
+</style>
+</head>
+<body>
+
+<div class="top-header">
+  <h1>📊 Dashboard ABA Đông Mát</h1>
+  <div class="subtitle">Tổng hợp báo cáo T4-T5/2026 &nbsp;|&nbsp; Cập nhật: <span id="updateDate">01/05/2026</span></div>
+</div>
+
+<div class="main-tabs">
+  <button class="main-tab active" onclick="switchMainTab(0)">📦 Nhập / Xuất & Đáp ứng</button>
+  <button class="main-tab" onclick="switchMainTab(1)">📋 Claim ABA</button>
+</div>
+
+<div class="frame-container active" id="frame0">
+  <iframe src="nhap_xuat_dm.html" loading="lazy"></iframe>
+</div>
+
+<div class="frame-container" id="frame1">
+  <iframe src="claim_aba.html" loading="lazy"></iframe>
+</div>
+
+<div class="bottom-footer">
+  Dashboard ABA Đông Mát — KFM Logistics &nbsp;•&nbsp; Auto-generated
+</div>
+
+<script>
+function switchMainTab(idx) {
+  document.querySelectorAll('.main-tab').forEach((t,i) => {
+    t.classList.toggle('active', i === idx);
+  });
+  document.querySelectorAll('.frame-container').forEach((f,i) => {
+    f.classList.toggle('active', i === idx);
+  });
+}
+</script>
+</body>
+</html>
