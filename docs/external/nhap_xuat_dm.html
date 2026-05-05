@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sáº£n LÆ°á»£ng Nháº­p Xuáº¥t â€” ABA ÄÃ´ng MÃ¡t T4/2026</title>
+<title>Sáº£n LÆ°á»£ng Nháº­p Xuáº¥t ï¿½?" ABA ÄÃ´ng MÃ¡t T4/2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -312,23 +312,23 @@ tbody tr.summary td.c-tx { color:var(--cyan) !important; }
 .s-card .s-label { font-size:9px; text-transform:uppercase; letter-spacing:0.6px; color:var(--txt2); font-weight:700; }
 .s-card .s-val { font-size:18px; font-weight:800; margin-top:3px; font-variant-numeric:tabular-nums; }
 
-/* SKU rá»›t â€” purple */
+/* SKU rï¿½>t ï¿½?" purple */
 .s-card.sc-sku { border-color:rgba(167,139,250,0.5); box-shadow:0 0 12px rgba(167,139,250,0.15); }
 .s-card.sc-sku .s-val { color:#c4b5fd; text-shadow:0 0 8px rgba(167,139,250,0.4); }
 
-/* Booking â€” cyan */
+/* Booking ï¿½?" cyan */
 .s-card.sc-bk { border-color:rgba(34,211,238,0.5); box-shadow:0 0 12px rgba(34,211,238,0.15); }
 .s-card.sc-bk .s-val { color:#22d3ee; text-shadow:0 0 8px rgba(34,211,238,0.4); }
 
-/* Thá»±c xuáº¥t â€” green */
+/* Thực xuất ï¿½?" green */
 .s-card.sc-tx { border-color:rgba(52,211,153,0.5); box-shadow:0 0 12px rgba(52,211,153,0.15); }
 .s-card.sc-tx .s-val { color:#34d399; text-shadow:0 0 8px rgba(52,211,153,0.4); }
 
-/* ChÃªnh lá»‡ch â€” orange/amber */
+/* ChÃªnh lï¿½?ch ï¿½?" orange/amber */
 .s-card.sc-diff { border-color:rgba(251,146,60,0.5); box-shadow:0 0 12px rgba(251,146,60,0.15); }
 .s-card.sc-diff .s-val { color:#fb923c; text-shadow:0 0 8px rgba(251,146,60,0.4); }
 
-/* %TX/BK â€” yellow */
+/* %TX/BK ï¿½?" yellow */
 .s-card.sc-pct { border-color:rgba(253,224,71,0.5); box-shadow:0 0 12px rgba(253,224,71,0.15); }
 .s-card.sc-pct .s-val { color:#fde047; text-shadow:0 0 8px rgba(253,224,71,0.4); }
 .badge-cat { font-size:9px; padding:2px 8px; border-radius:8px; font-weight:700; margin-left:6px; }
@@ -429,36 +429,36 @@ tbody tr.summary td.c-tx { color:var(--cyan) !important; }
 <body>
 
 <div class="header">
-  <h1>BÃO CÃO Sáº¢N LÆ¯á»¢NG ABA ÄÃ”NG MÃT T4-T5 2026</h1>
-  <div class="sub" id="headerSub">XUáº¤T HÃ€NG</div>
+  <h1>BÃO CÃO Sáº¢N LÆ¯á»¢NG ABA Äï¿½"NG MÃT T4-T5 2026</h1>
+  <div class="sub" id="headerSub">XUáº¤T Hï¿½?NG</div>
 </div>
 
 <div class="tab-nav">
-  <button class="tab-btn active" id="tabXuat" onclick="switchTab('xuat')">ðŸ“¦ XUáº¤T HÃ€NG</button>
-  <button class="tab-btn" id="tabNhap" onclick="switchTab('nhap')">ðŸ“¥ NHáº¬P HÃ€NG</button>
-  <button class="tab-btn" id="tabDapUng" onclick="switchTab('dapung')">ðŸ“ˆ Tá»¶ Lá»† ÄÃP á»¨NG</button>
+  <button class="tab-btn active" id="tabXuat" onclick="switchTab('xuat')">ï¿½Y"ï¿½ XUáº¤T Hï¿½?NG</button>
+  <button class="tab-btn" id="tabNhap" onclick="switchTab('nhap')">ï¿½Y"ï¿½ NHáº¬P Hï¿½?NG</button>
+  <button class="tab-btn" id="tabDapUng" onclick="switchTab('dapung')">ï¿½Y"^ Tá»¶ Lï¿½? ÄÃP á»¨NG</button>
 </div>
 
 <div class="day-nav">
-  <button onclick="prev()" id="btnPrev">â—€ TrÆ°á»›c</button>
+  <button onclick="prev()" id="btnPrev">ï¿½-? TrÆ°ï¿½>c</button>
   <div class="day-info">
     <div class="date" id="navDate"></div>
     <div class="dow" id="navDow"></div>
     <div class="week" id="navWeek"></div>
   </div>
-  <button onclick="next()" id="btnNext">Sau â–¶</button>
+  <button onclick="next()" id="btnNext">Sau ï¿½-ï¿½</button>
 </div>
 
 <div id="content"></div>
 
 <div class="legend">
-  <span><span class="dot" style="background:var(--cyan-bg);border:1px solid var(--cyan)"></span> %Bk/FC â‰¥ 100%</span>
-  <span><span class="dot" style="background:var(--yellow-bg);border:1px solid var(--yellow)"></span> %Bk/FC â‰¥ 200%</span>
-  <span><span class="dot" style="background:var(--pick-ok)"></span> Pick rá»›t OK</span>
-  <span><span class="dot" style="background:var(--pick-warn)"></span> Pick rá»›t â‰¥ 1%</span>
-  <span><span class="dot" style="background:var(--pick-bad)"></span> Pick rá»›t â‰¥ 5%</span>
-  <span style="color:var(--label-cat)">â– </span><span style="margin-left:-4px"> Chá»¯ loáº¡i hÃ ng</span>
-  <span style="color:var(--num-hi)">â– </span><span style="margin-left:-4px"> Sá»‘ liá»‡u</span>
+  <span><span class="dot" style="background:var(--cyan-bg);border:1px solid var(--cyan)"></span> %Bk/FC ï¿½?ï¿½ 100%</span>
+  <span><span class="dot" style="background:var(--yellow-bg);border:1px solid var(--yellow)"></span> %Bk/FC ï¿½?ï¿½ 200%</span>
+  <span><span class="dot" style="background:var(--pick-ok)"></span> Pick rï¿½>t OK</span>
+  <span><span class="dot" style="background:var(--pick-warn)"></span> Pick rï¿½>t ï¿½?ï¿½ 1%</span>
+  <span><span class="dot" style="background:var(--pick-bad)"></span> Pick rï¿½>t ï¿½?ï¿½ 5%</span>
+  <span style="color:var(--label-cat)">ï¿½-ï¿½</span><span style="margin-left:-4px"> Chá»¯ Loại hàng</span>
+  <span style="color:var(--num-hi)">ï¿½-ï¿½</span><span style="margin-left:-4px"> Sï¿½' liï¿½?u</span>
 </div>
 
 <div id="warning-section"></div>
@@ -779,120 +779,120 @@ const D = [
 {d:'5-May',w:'T3',wk:'W19',qc:[121,119,0,33506,21700,154.41,31926,0.25,9642,4910,196.38,9276,0.13],lk:[366,362,1.09,81500,76348,106.75,81483,0.02,14768,15742,93.82,14764,0.03],tqc:[25,17,0,6530,5000,130.6,3376,0,6205,4800,129.27,2295,0],tlh:[9,9,0,1397,2000,69.85,1397,0,954,2000,47.68,953,0],ts:[521,507,0.78],ti:[122933,105048,117.03,118182,0.08],tQ:[40036,26700,149.95,29.91,35302,0.23],tL:[82897,78348,105.81,70.09,82880,0.02],tk:[31569,27452,115,27289,0.06],dong:[146,144,1.37,11531,10848,106.3,11518,0.11,3179,3346,95.02,3177,0.08],mat:[340,336,0.88,103175,94200,109.53,101591,0.38,21232,24106,88.08,20864,0.07],tcnk:[34,26,0,7927,7000,113.24,4773,0,7159,6800,105.27,3248,0]}
 ];
 
-// === CHI TIáº¾T XUáº¤T HÃ€NG DATA ===
-// sx=Sá»‘ Xuáº¥t, nqc=Nháº­p QC, qcr=HÃ ng QC rá»›t, hold=Hold
+// === CHI TIáº¾T XUáº¤T Hï¿½?NG DATA ===
+// sx=Sï¿½' Xuáº¥t, nqc=Nháº­p QC, qcr=HÃ ng QC rï¿½>t, hold=Hold
 const CT = {
 '22-Apr': {
   totalBk:99, totalTx:64, totalDiff:35,
   items:[
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'10933',name:'HS - CÃ DÃŒA NGUYÃŠN CON LÃ€M Sáº CH 350G',unit:'GÃ“I',bk:1,sx:0,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rá»›t',pct:0},
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'4953823388700',name:'LOTTE - KEM GHANA RICH 330ML',unit:'Há»˜P',bk:1,sx:0,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rá»›t',pct:0},
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'74570022021',name:'HAAGEN DAZS - KEM DÃ‚U TÃ‚Y 100ML',unit:'Há»˜P',bk:8,sx:4,nqc:null,qcr:null,hold:null,diff:4,note:'ABA pick rá»›t',pct:50},
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'74570052028',name:'HAAGEN DAZS - KEM Vá»Š BÃNH QUY VÃ€ KEM 100ML',unit:'Há»˜P',bk:12,sx:5,nqc:null,qcr:null,hold:null,diff:7,note:'ABA pick rá»›t',pct:41.67},
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8906078780894',name:'FARM BEST - KHOAI TÃ‚Y ÄÃ”NG Láº NH Sá»¢I NHá»Ž 1KG',unit:'TÃšI',bk:1,sx:0,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rá»›t',pct:0},
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8935275600247',name:'OG BLUE - Cá»’I SÃ’ ÄIá»†P NHáº¬T 240G',unit:'GÃ“I',bk:1,sx:0,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rá»›t',pct:0},
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8936076279731',name:'SUNDO - BÃNH MÃŒ QUE XÃ XÃU THá»ŠT XÃ”NG KHÃ“I 189G',unit:'GÃ“I',bk:4,sx:0,nqc:null,qcr:null,hold:null,diff:4,note:'ABA pick rá»›t',pct:0},
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8938520657447',name:'RÃ‚U Báº CH TUá»˜C CHáº¦N ÄÃ”NG Láº NH 200G',unit:'Vá»ˆ',bk:19,sx:16,nqc:null,qcr:null,hold:null,diff:3,note:'ABA pick rá»›t',pct:84.21},
-    {cat:'LÆ°u HÃ ng',temp:'MÃT',code:'8888470042001',name:'MEIJI - Sá»®A THANH TRÃ™NG SOCOLA 200ML',unit:'CHAI',bk:6,sx:0,nqc:null,qcr:null,hold:null,diff:6,note:'ABA pick rá»›t',pct:0},
-    {cat:'LÆ°u HÃ ng',temp:'MÃT',code:'8936219620161',name:'SAMHO - THANH SUMIRI HÆ¯Æ NG CUA NHÃ‚N PHÃ” MAI 30G',unit:'GÃ“I',bk:41,sx:39,nqc:null,qcr:null,hold:null,diff:2,note:'ABA pick rá»›t',pct:95.12},
-    {cat:'LÆ°u HÃ ng',temp:'MÃT',code:'8938500810084',name:'VS - TÃ”M KHÃ” L HÅ¨ 200G',unit:'GÃ“I',bk:3,sx:0,nqc:null,qcr:null,hold:null,diff:3,note:'ABA pick rá»›t',pct:0},
-    {cat:'LÆ°u HÃ ng',temp:'MÃT',code:'9300658407505',name:'FARMERS UNION - Sá»®A CHUA KIá»‚U HY Láº P NGUYÃŠN CHáº¤T 2*140G',unit:'Lá»C',bk:2,sx:0,nqc:null,qcr:null,hold:null,diff:2,note:'ABA pick rá»›t',pct:0}
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'10933',name:'HS - CÃ  Dï¿½OA NGUYï¿½SN CON Lï¿½?M Sáº CH 350G',unit:'Gï¿½"I',bk:1,sx:0,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rï¿½>t',pct:0},
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'4953823388700',name:'LOTTE - KEM GHANA RICH 330ML',unit:'Hï¿½~P',bk:1,sx:0,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rï¿½>t',pct:0},
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'74570022021',name:'HAAGEN DAZS - KEM Dï¿½,U Tï¿½,Y 100ML',unit:'Hï¿½~P',bk:8,sx:4,nqc:null,qcr:null,hold:null,diff:4,note:'ABA pick rï¿½>t',pct:50},
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'74570052028',name:'HAAGEN DAZS - KEM Vï¿½S BÃ NH QUY Vï¿½? KEM 100ML',unit:'Hï¿½~P',bk:12,sx:5,nqc:null,qcr:null,hold:null,diff:7,note:'ABA pick rï¿½>t',pct:41.67},
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'8906078780894',name:'FARM BEST - KHOAI Tï¿½,Y ĐÔNG Láº NH Sá»¢I NHï¿½Z 1KG',unit:'Tï¿½sI',bk:1,sx:0,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rï¿½>t',pct:0},
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'8935275600247',name:'OG BLUE - Cï¿½'I Sï¿½' Ä Iï¿½?P NHáº¬T 240G',unit:'Gï¿½"I',bk:1,sx:0,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rï¿½>t',pct:0},
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'8936076279731',name:'SUNDO - BÃ NH Mï¿½O QUE XÃ  XÃ U THï¿½ST Xï¿½"NG KHï¿½"I 189G',unit:'Gï¿½"I',bk:4,sx:0,nqc:null,qcr:null,hold:null,diff:4,note:'ABA pick rï¿½>t',pct:0},
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'8938520657447',name:'Rï¿½,U Báº CH TUï¿½~C CHáº¦N ĐÔNG Láº NH 200G',unit:'Vï¿½^',bk:19,sx:16,nqc:null,qcr:null,hold:null,diff:3,note:'ABA pick rï¿½>t',pct:84.21},
+    {cat:'LÆ°u HÃ ng',temp:'MÁT',code:'8888470042001',name:'MEIJI - Sá»®A THANH TRï¿½TNG SOCOLA 200ML',unit:'CHAI',bk:6,sx:0,nqc:null,qcr:null,hold:null,diff:6,note:'ABA pick rï¿½>t',pct:0},
+    {cat:'LÆ°u HÃ ng',temp:'MÁT',code:'8936219620161',name:'SAMHO - THANH SUMIRI HÆ¯Æ NG CUA NHï¿½,N PHï¿½" MAI 30G',unit:'Gï¿½"I',bk:41,sx:39,nqc:null,qcr:null,hold:null,diff:2,note:'ABA pick rï¿½>t',pct:95.12},
+    {cat:'LÆ°u HÃ ng',temp:'MÁT',code:'8938500810084',name:'VS - Tï¿½"M KHï¿½" L HÅ¨ 200G',unit:'Gï¿½"I',bk:3,sx:0,nqc:null,qcr:null,hold:null,diff:3,note:'ABA pick rï¿½>t',pct:0},
+    {cat:'LÆ°u HÃ ng',temp:'MÁT',code:'9300658407505',name:'FARMERS UNION - Sá»®A CHUA KIï¿½,U HY Láº P NGUYï¿½SN CHáº¤T 2*140G',unit:'Lá» C',bk:2,sx:0,nqc:null,qcr:null,hold:null,diff:2,note:'ABA pick rï¿½>t',pct:0}
   ]
 },
 '23-Apr': {
   totalBk:843, totalTx:797, totalDiff:46,
   items:[
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'10947',name:'HUáº¾ SPECIALTY - BÃNH Lá»ŒC HUáº¾ LOáº I 1 330G',unit:'GÃ“I',bk:4,sx:0,nqc:null,qcr:null,hold:null,diff:4,note:'ABA pick rá»›t',pct:0},
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8935360200390',name:'SAVORA - BA CHá»ˆ BÃ’ CANADA ÄÃ”NG Láº NH Cáº®T CUá»˜N - 250G',unit:'KHAY',bk:218,sx:214,nqc:null,qcr:null,hold:null,diff:4,note:'ABA pick rá»›t',pct:98.17},
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8935360203674',name:'SAVORA - BA CHá»ˆ BÃ’ CANADA CUá»˜N PHÃ” MAI 250G',unit:'KHAY',bk:20,sx:17,nqc:null,qcr:null,hold:null,diff:3,note:'ABA pick rá»›t',pct:85},
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8936013231662',name:'SG FOOD - Má»² Ã Xá»T KEM THá»ŠT XÃ”NG KHÃ“I 250G',unit:'GÃ“I',bk:154,sx:153,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rá»›t',pct:99.35},
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8936190861645',name:'FRESHFOCO - THá»ŠT BÃ’ Má»˜T Náº®NG 200G',unit:'KHAY',bk:1,sx:0,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rá»›t',pct:0},
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8938520657447',name:'RÃ‚U Báº CH TUá»˜C CHáº¦N ÄÃ”NG Láº NH 200G',unit:'Vá»ˆ',bk:57,sx:56,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rá»›t',pct:98.25},
-    {cat:'LÆ°u HÃ ng',temp:'MÃT',code:'8934673314572',name:'VINAMILK - SCU PROBI CÃ“ ÄÆ¯á»œNG 400ML',unit:'Há»˜P',bk:30,sx:26,nqc:null,qcr:null,hold:null,diff:4,note:'ABA pick rá»›t',pct:86.67},
-    {cat:'LÆ°u HÃ ng',temp:'MÃT',code:'8938500810084',name:'VS - TÃ”M KHÃ” L HÅ¨ 200G',unit:'GÃ“I',bk:3,sx:0,nqc:null,qcr:null,hold:null,diff:3,note:'ABA pick rá»›t',pct:0},
-    {cat:'LÆ°u HÃ ng',temp:'MÃT',code:'8938534740364',name:'KITKOOL - BÃNH GIÃ’ THáº¬P Cáº¨M TRá»¨NG CÃšT 150G',unit:'CÃI',bk:18,sx:0,nqc:null,qcr:null,hold:null,diff:18,note:'ABA pick rá»›t',pct:0},
-    {cat:'LÆ°u HÃ ng',temp:'MÃT',code:'9300658407505',name:'FARMERS UNION - Sá»®A CHUA KIá»‚U HY Láº P NGUYÃŠN CHáº¤T 2*140G',unit:'Lá»C',bk:2,sx:0,nqc:null,qcr:null,hold:null,diff:2,note:'ABA pick rá»›t',pct:0},
-    {cat:'QuÃ¡ Cáº£nh',temp:'MÃT',code:'11617',name:'GIÃ Äáº¬U NÃ€NH 150G',unit:'GÃ“I',bk:336,sx:331,nqc:336,qcr:-5,hold:0,diff:5,note:'ABA pick rá»›t hÃ ng QC',pct:98.51}
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'10947',name:'HUáº¾ SPECIALTY - BÃ NH Lï¿½OC HUáº¾ LOáº I 1 330G',unit:'Gï¿½"I',bk:4,sx:0,nqc:null,qcr:null,hold:null,diff:4,note:'ABA pick rï¿½>t',pct:0},
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'8935360200390',name:'SAVORA - BA CHï¿½^ Bï¿½' CANADA ĐÔNG Láº NH Cáº®T CUï¿½~N - 250G',unit:'KHAY',bk:218,sx:214,nqc:null,qcr:null,hold:null,diff:4,note:'ABA pick rï¿½>t',pct:98.17},
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'8935360203674',name:'SAVORA - BA CHï¿½^ Bï¿½' CANADA CUï¿½~N PHï¿½" MAI 250G',unit:'KHAY',bk:20,sx:17,nqc:null,qcr:null,hold:null,diff:3,note:'ABA pick rï¿½>t',pct:85},
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'8936013231662',name:'SG FOOD - Má»² Ã  Xá» T KEM THï¿½ST Xï¿½"NG KHï¿½"I 250G',unit:'Gï¿½"I',bk:154,sx:153,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rï¿½>t',pct:99.35},
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'8936190861645',name:'FRESHFOCO - THï¿½ST Bï¿½' Mï¿½~T Náº®NG 200G',unit:'KHAY',bk:1,sx:0,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rï¿½>t',pct:0},
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'8938520657447',name:'Rï¿½,U Báº CH TUï¿½~C CHáº¦N ĐÔNG Láº NH 200G',unit:'Vï¿½^',bk:57,sx:56,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rï¿½>t',pct:98.25},
+    {cat:'LÆ°u HÃ ng',temp:'MÁT',code:'8934673314572',name:'VINAMILK - SCU PROBI Cï¿½" Ä Æ¯ï¿½oNG 400ML',unit:'Hï¿½~P',bk:30,sx:26,nqc:null,qcr:null,hold:null,diff:4,note:'ABA pick rï¿½>t',pct:86.67},
+    {cat:'LÆ°u HÃ ng',temp:'MÁT',code:'8938500810084',name:'VS - Tï¿½"M KHï¿½" L HÅ¨ 200G',unit:'Gï¿½"I',bk:3,sx:0,nqc:null,qcr:null,hold:null,diff:3,note:'ABA pick rï¿½>t',pct:0},
+    {cat:'LÆ°u HÃ ng',temp:'MÁT',code:'8938534740364',name:'KITKOOL - BÃ NH GIï¿½' THáº¬P Cáº¨M TRá»¨NG Cï¿½sT 150G',unit:'CÃ I',bk:18,sx:0,nqc:null,qcr:null,hold:null,diff:18,note:'ABA pick rï¿½>t',pct:0},
+    {cat:'LÆ°u HÃ ng',temp:'MÁT',code:'9300658407505',name:'FARMERS UNION - Sá»®A CHUA KIï¿½,U HY Láº P NGUYï¿½SN CHáº¤T 2*140G',unit:'Lá» C',bk:2,sx:0,nqc:null,qcr:null,hold:null,diff:2,note:'ABA pick rï¿½>t',pct:0},
+    {cat:'QuÃ¡ Cáº£nh',temp:'MÁT',code:'11617',name:'GIÃ  Ä áº¬U Nï¿½?NH 150G',unit:'Gï¿½"I',bk:336,sx:331,nqc:336,qcr:-5,hold:0,diff:5,note:'ABA pick rï¿½>t hÃ ng QC',pct:98.51}
   ]
 },
 '24-Apr': {
   totalBk:68, totalTx:44, totalDiff:24,
   items:[
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8935275600247',name:'OG BLUE - Cá»’I SÃ’ ÄIá»†P NHáº¬T 240G',unit:'GÃ“I',bk:1,sx:0,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rá»›t',pct:0},
-    {cat:'LÆ°u HÃ ng',temp:'MÃT',code:'8934673314572',name:'VINAMILK - SCU PROBI CÃ“ ÄÆ¯á»œNG 400ML',unit:'Há»˜P',bk:12,sx:4,nqc:null,qcr:null,hold:null,diff:8,note:'ABA pick rá»›t',pct:33.33},
-    {cat:'LÆ°u HÃ ng',temp:'MÃT',code:'8938527710510',name:'SEAPRODEX - TÃ”M SÃš THá»ŠT SINH THÃI 41/50 200G',unit:'GÃ“I',bk:21,sx:12,nqc:null,qcr:null,hold:null,diff:9,note:'ABA pick rá»›t',pct:57.14},
-    {cat:'LÆ°u HÃ ng',temp:'MÃT',code:'9300658407505',name:'FARMERS UNION - Sá»®A CHUA KIá»‚U HY Láº P NGUYÃŠN CHáº¤T 2*140G',unit:'Lá»C',bk:3,sx:0,nqc:null,qcr:null,hold:null,diff:3,note:'ABA pick rá»›t',pct:0},
-    {cat:'LÆ°u HÃ ng',temp:'MÃT',code:'9336243005030',name:'ROKEBY FARMS - THá»¨C Uá»NG SMOOTHIE PROTEIN Vá»Š CÃ€ PHÃŠ ESPRESSO CHAI 425ML',unit:'CHAI',bk:31,sx:28,nqc:null,qcr:null,hold:null,diff:3,note:'ABA pick rá»›t',pct:90.32}
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'8935275600247',name:'OG BLUE - Cï¿½'I Sï¿½' Ä Iï¿½?P NHáº¬T 240G',unit:'Gï¿½"I',bk:1,sx:0,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rï¿½>t',pct:0},
+    {cat:'LÆ°u HÃ ng',temp:'MÁT',code:'8934673314572',name:'VINAMILK - SCU PROBI Cï¿½" Ä Æ¯ï¿½oNG 400ML',unit:'Hï¿½~P',bk:12,sx:4,nqc:null,qcr:null,hold:null,diff:8,note:'ABA pick rï¿½>t',pct:33.33},
+    {cat:'LÆ°u HÃ ng',temp:'MÁT',code:'8938527710510',name:'SEAPRODEX - Tï¿½"M Sï¿½s THï¿½ST SINH THÃ I 41/50 200G',unit:'Gï¿½"I',bk:21,sx:12,nqc:null,qcr:null,hold:null,diff:9,note:'ABA pick rï¿½>t',pct:57.14},
+    {cat:'LÆ°u HÃ ng',temp:'MÁT',code:'9300658407505',name:'FARMERS UNION - Sá»®A CHUA KIï¿½,U HY Láº P NGUYï¿½SN CHáº¤T 2*140G',unit:'Lá» C',bk:3,sx:0,nqc:null,qcr:null,hold:null,diff:3,note:'ABA pick rï¿½>t',pct:0},
+    {cat:'LÆ°u HÃ ng',temp:'MÁT',code:'9336243005030',name:'ROKEBY FARMS - THá»¨C Uá» NG SMOOTHIE PROTEIN Vï¿½S Cï¿½? PHï¿½S ESPRESSO CHAI 425ML',unit:'CHAI',bk:31,sx:28,nqc:null,qcr:null,hold:null,diff:3,note:'ABA pick rï¿½>t',pct:90.32}
   ]
 },
 '25-Apr': {
   totalBk:96, totalTx:73, totalDiff:23,
   items:[
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'10933',name:'HS - CÃ DÃŒA NGUYÃŠN CON LÃ€M Sáº CH 350G',unit:'GÃ“I',bk:1,sx:0,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rá»›t',pct:0},
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'10947',name:'HUáº¾ SPECIALTY - BÃNH Lá»ŒC HUáº¾ LOáº I 1 330G',unit:'GÃ“I',bk:4,sx:0,nqc:null,qcr:null,hold:null,diff:4,note:'ABA pick rá»›t',pct:0},
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8935067796295',name:'Háº¢I NAM - Äáº¦U Má»°C á»NG LOáº I A Xáº¾P KHAY 500G',unit:'GÃ“I',bk:3,sx:0,nqc:null,qcr:null,hold:null,diff:3,note:'ABA pick rá»›t',pct:0},
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8935360203674',name:'SAVORA - BA CHá»ˆ BÃ’ CANADA CUá»˜N PHÃ” MAI 250G',unit:'KHAY',bk:3,sx:0,nqc:null,qcr:null,hold:null,diff:3,note:'ABA pick rá»›t',pct:0},
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8936076279731',name:'SUNDO - BÃNH MÃŒ QUE XÃ XÃU THá»ŠT XÃ”NG KHÃ“I 189G',unit:'GÃ“I',bk:12,sx:8,nqc:null,qcr:null,hold:null,diff:4,note:'ABA pick rá»›t',pct:66.67},
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8936190861645',name:'FRESHFOCO - THá»ŠT BÃ’ Má»˜T Náº®NG 200G',unit:'KHAY',bk:1,sx:0,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rá»›t',pct:0},
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8936239090036',name:'365 FRESH FOODS - BA CHá»ˆ BÃ’ Má»¸ TÃšI ZIP 200G',unit:'TÃšI',bk:66,sx:65,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rá»›t',pct:98.48},
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8938520657447',name:'RÃ‚U Báº CH TUá»˜C CHáº¦N ÄÃ”NG Láº NH 200G',unit:'Vá»ˆ',bk:1,sx:0,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rá»›t',pct:0},
-    {cat:'LÆ°u HÃ ng',temp:'MÃT',code:'8938500810084',name:'VS - TÃ”M KHÃ” L HÅ¨ 200G',unit:'GÃ“I',bk:3,sx:0,nqc:null,qcr:null,hold:null,diff:3,note:'ABA pick rá»›t',pct:0},
-    {cat:'LÆ°u HÃ ng',temp:'MÃT',code:'9300658407505',name:'FARMERS UNION - Sá»®A CHUA KIá»‚U HY Láº P NGUYÃŠN CHáº¤T 2*140G',unit:'Lá»C',bk:2,sx:0,nqc:null,qcr:null,hold:null,diff:2,note:'ABA pick rá»›t',pct:0}
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'10933',name:'HS - CÃ  Dï¿½OA NGUYï¿½SN CON Lï¿½?M Sáº CH 350G',unit:'Gï¿½"I',bk:1,sx:0,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rï¿½>t',pct:0},
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'10947',name:'HUáº¾ SPECIALTY - BÃ NH Lï¿½OC HUáº¾ LOáº I 1 330G',unit:'Gï¿½"I',bk:4,sx:0,nqc:null,qcr:null,hold:null,diff:4,note:'ABA pick rï¿½>t',pct:0},
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'8935067796295',name:'Háº¢I NAM - Ä áº¦U Má»°C á» NG LOáº I A Xáº¾P KHAY 500G',unit:'Gï¿½"I',bk:3,sx:0,nqc:null,qcr:null,hold:null,diff:3,note:'ABA pick rï¿½>t',pct:0},
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'8935360203674',name:'SAVORA - BA CHï¿½^ Bï¿½' CANADA CUï¿½~N PHï¿½" MAI 250G',unit:'KHAY',bk:3,sx:0,nqc:null,qcr:null,hold:null,diff:3,note:'ABA pick rï¿½>t',pct:0},
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'8936076279731',name:'SUNDO - BÃ NH Mï¿½O QUE XÃ  XÃ U THï¿½ST Xï¿½"NG KHï¿½"I 189G',unit:'Gï¿½"I',bk:12,sx:8,nqc:null,qcr:null,hold:null,diff:4,note:'ABA pick rï¿½>t',pct:66.67},
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'8936190861645',name:'FRESHFOCO - THï¿½ST Bï¿½' Mï¿½~T Náº®NG 200G',unit:'KHAY',bk:1,sx:0,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rï¿½>t',pct:0},
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'8936239090036',name:'365 FRESH FOODS - BA CHï¿½^ Bï¿½' Má»¸ Tï¿½sI ZIP 200G',unit:'Tï¿½sI',bk:66,sx:65,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rï¿½>t',pct:98.48},
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'8938520657447',name:'Rï¿½,U Báº CH TUï¿½~C CHáº¦N ĐÔNG Láº NH 200G',unit:'Vï¿½^',bk:1,sx:0,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rï¿½>t',pct:0},
+    {cat:'LÆ°u HÃ ng',temp:'MÁT',code:'8938500810084',name:'VS - Tï¿½"M KHï¿½" L HÅ¨ 200G',unit:'Gï¿½"I',bk:3,sx:0,nqc:null,qcr:null,hold:null,diff:3,note:'ABA pick rï¿½>t',pct:0},
+    {cat:'LÆ°u HÃ ng',temp:'MÁT',code:'9300658407505',name:'FARMERS UNION - Sá»®A CHUA KIï¿½,U HY Láº P NGUYï¿½SN CHáº¤T 2*140G',unit:'Lá» C',bk:2,sx:0,nqc:null,qcr:null,hold:null,diff:2,note:'ABA pick rï¿½>t',pct:0}
   ]
 },
 '26-Apr': {
   totalBk:3355, totalTx:3316, totalDiff:39,
   items:[
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8935275600247',name:'OG BLUE - Cá»’I SÃ’ ÄIá»†P NHáº¬T 240G',unit:'GÃ“I',bk:1,sx:0,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rá»›t',pct:0},
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8936013231662',name:'SG FOOD - Má»² Ã Xá»T KEM THá»ŠT XÃ”NG KHÃ“I 250G',unit:'GÃ“I',bk:416,sx:415,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rá»›t',pct:99.76},
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8938500810763',name:'Há»’N VIá»†T - KHÃ” CÃ ÄÃ™ 1 Náº®NG NGUYÃŠN CON 500G',unit:'GÃ“I',bk:30,sx:28,nqc:null,qcr:null,hold:null,diff:2,note:'ABA pick rá»›t',pct:93.33},
-    {cat:'LÆ°u HÃ ng',temp:'MÃT',code:'8859544300136',name:'RL- Náº¤M KIM CHÃ‚M THÃI LAN 150G',unit:'GÃ“I',bk:1525,sx:1516,nqc:null,qcr:null,hold:null,diff:9,note:'ABA pick rá»›t',pct:99.41},
-    {cat:'LÆ°u HÃ ng',temp:'MÃT',code:'8938500810084',name:'VS - TÃ”M KHÃ” L HÅ¨ 200G',unit:'GÃ“I',bk:3,sx:0,nqc:null,qcr:null,hold:null,diff:3,note:'ABA pick rá»›t',pct:0},
-    {cat:'LÆ°u HÃ ng',temp:'MÃT',code:'9300658407505',name:'FARMERS UNION - Sá»®A CHUA KIá»‚U HY Láº P NGUYÃŠN CHáº¤T 2*140G',unit:'Lá»C',bk:3,sx:0,nqc:null,qcr:null,hold:null,diff:3,note:'ABA pick rá»›t',pct:0},
-    {cat:'TCNK LÆ°u HÃ ng',temp:'MÃT',code:'1102041',name:'TÃO ENVY Má»¸ (5-6 QUáº¢/KG)',unit:'KG',bk:540,sx:522,nqc:null,qcr:null,hold:null,diff:18,note:'SCM booking vÆ°á»£t tá»“n',pct:96.67},
-    {cat:'TCNK LÆ°u HÃ ng',temp:'MÃT',code:'8936052000823',name:'ZESPRI - Há»˜P KIWI VÃ€NG 4 QUáº¢',unit:'Há»˜P',bk:837,sx:835,nqc:null,qcr:null,hold:null,diff:2,note:'ABA pick rá»›t',pct:99.76}
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'8935275600247',name:'OG BLUE - Cï¿½'I Sï¿½' Ä Iï¿½?P NHáº¬T 240G',unit:'Gï¿½"I',bk:1,sx:0,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rï¿½>t',pct:0},
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'8936013231662',name:'SG FOOD - Má»² Ã  Xá» T KEM THï¿½ST Xï¿½"NG KHï¿½"I 250G',unit:'Gï¿½"I',bk:416,sx:415,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rï¿½>t',pct:99.76},
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'8938500810763',name:'Hï¿½'N VIï¿½?T - KHï¿½" CÃ  Ä ï¿½T 1 Náº®NG NGUYï¿½SN CON 500G',unit:'Gï¿½"I',bk:30,sx:28,nqc:null,qcr:null,hold:null,diff:2,note:'ABA pick rï¿½>t',pct:93.33},
+    {cat:'LÆ°u HÃ ng',temp:'MÁT',code:'8859544300136',name:'RL- Náº¤M KIM CHï¿½,M THÃ I LAN 150G',unit:'Gï¿½"I',bk:1525,sx:1516,nqc:null,qcr:null,hold:null,diff:9,note:'ABA pick rï¿½>t',pct:99.41},
+    {cat:'LÆ°u HÃ ng',temp:'MÁT',code:'8938500810084',name:'VS - Tï¿½"M KHï¿½" L HÅ¨ 200G',unit:'Gï¿½"I',bk:3,sx:0,nqc:null,qcr:null,hold:null,diff:3,note:'ABA pick rï¿½>t',pct:0},
+    {cat:'LÆ°u HÃ ng',temp:'MÁT',code:'9300658407505',name:'FARMERS UNION - Sá»®A CHUA KIï¿½,U HY Láº P NGUYï¿½SN CHáº¤T 2*140G',unit:'Lá» C',bk:3,sx:0,nqc:null,qcr:null,hold:null,diff:3,note:'ABA pick rï¿½>t',pct:0},
+    {cat:'TCNK LÆ°u HÃ ng',temp:'MÁT',code:'1102041',name:'TÃ O ENVY Má»¸ (5-6 QUáº¢/KG)',unit:'KG',bk:540,sx:522,nqc:null,qcr:null,hold:null,diff:18,note:'SCM booking vÆ°á»£t tï¿½"n',pct:96.67},
+    {cat:'TCNK LÆ°u HÃ ng',temp:'MÁT',code:'8936052000823',name:'ZESPRI - Hï¿½~P KIWI Vï¿½?NG 4 QUáº¢',unit:'Hï¿½~P',bk:837,sx:835,nqc:null,qcr:null,hold:null,diff:2,note:'ABA pick rï¿½>t',pct:99.76}
   ]
 },
 '28-Apr': {
   totalBk:780, totalTx:693, totalDiff:87,
   items:[
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'10933',name:'HS - CÃ DÃŒA NGUYÃŠN CON LÃ€M Sáº CH 350G',unit:'GÃ“I',bk:1,sx:0,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rá»›t',pct:0},
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'10947',name:'HUáº¾ SPECIALTY - BÃNH Lá»ŒC HUáº¾ LOáº I 1 330G',unit:'GÃ“I',bk:4,sx:0,nqc:null,qcr:null,hold:null,diff:4,note:'ABA pick rá»›t',pct:0},
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'3415581119183',name:'HAAGEN DAZS - KEM Vá»Š Háº T MACADAMIA 473ML',unit:'Há»˜P',bk:22,sx:19,nqc:null,qcr:null,hold:null,diff:3,note:'ABA pick rá»›t',pct:86.36},
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'74570022021',name:'HAAGEN DAZS - KEM DÃ‚U TÃ‚Y 100ML',unit:'Há»˜P',bk:120,sx:116,nqc:null,qcr:null,hold:null,diff:4,note:'ABA pick rá»›t',pct:96.67},
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'74570052028',name:'HAAGEN DAZS - KEM Vá»Š BÃNH QUY VÃ€ KEM 100ML',unit:'Há»˜P',bk:31,sx:24,nqc:null,qcr:null,hold:null,diff:7,note:'ABA pick rá»›t',pct:77.42},
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8934673600347',name:'VINAMILK - KEM Dá»ªA 400ML',unit:'Há»˜P',bk:36,sx:22,nqc:null,qcr:null,hold:null,diff:14,note:'ABA pick rá»›t',pct:61.11},
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8936190861645',name:'FRESHFOCO - THá»ŠT BÃ’ Má»˜T Náº®NG 200G',unit:'KHAY',bk:1,sx:0,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rá»›t',pct:0},
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8938562732133',name:'AN GIA - SÆ¯á»œN BÃ’ Má»¸ CÃ“ XÆ¯Æ NG 300G (SHORT RIB)',unit:'KHAY',bk:6,sx:4,nqc:null,qcr:null,hold:null,diff:2,note:'ABA pick rá»›t',pct:66.67},
-    {cat:'LÆ°u HÃ ng',temp:'MÃT',code:'11061',name:'Náº¤M Háº¢I Sáº¢N TQ 150G',unit:'GÃ“I',bk:185,sx:173,nqc:null,qcr:null,hold:null,diff:12,note:'ABA pick rá»›t',pct:93.51},
-    {cat:'LÆ°u HÃ ng',temp:'MÃT',code:'3412290040708',name:'PAYSAN BRETON - PHÃ” MAI BRIE 125G',unit:'Há»˜P',bk:4,sx:1,nqc:null,qcr:null,hold:null,diff:3,note:'ABA pick rá»›t',pct:25},
-    {cat:'LÆ°u HÃ ng',temp:'MÃT',code:'8935007110457',name:'LOTHAMILK - SCA NHA ÄAM 100G',unit:'Há»˜P',bk:4,sx:0,nqc:null,qcr:null,hold:null,diff:4,note:'ABA pick rá»›t',pct:0},
-    {cat:'LÆ°u HÃ ng',temp:'MÃT',code:'8936210410822',name:'KITKOOL - BÃNH GIÃ’ THáº¬P Cáº¨M TRá»¨NG CÃšT 150G',unit:'CÃI',bk:313,sx:285,nqc:null,qcr:null,hold:null,diff:28,note:'ABA pick rá»›t',pct:91.05},
-    {cat:'LÆ°u HÃ ng',temp:'MÃT',code:'8938500810084',name:'VS - TÃ”M KHÃ” L HÅ¨ 200G',unit:'GÃ“I',bk:3,sx:0,nqc:null,qcr:null,hold:null,diff:3,note:'ABA pick rá»›t',pct:0},
-    {cat:'TCNK LÆ°u HÃ ng',temp:'MÃT',code:'8938553641376',name:'TÃO POSY á»NG (4 QUáº¢)',unit:'á»NG',bk:50,sx:49,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rá»›t',pct:98}
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'10933',name:'HS - CÃ  Dï¿½OA NGUYï¿½SN CON Lï¿½?M Sáº CH 350G',unit:'Gï¿½"I',bk:1,sx:0,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rï¿½>t',pct:0},
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'10947',name:'HUáº¾ SPECIALTY - BÃ NH Lï¿½OC HUáº¾ LOáº I 1 330G',unit:'Gï¿½"I',bk:4,sx:0,nqc:null,qcr:null,hold:null,diff:4,note:'ABA pick rï¿½>t',pct:0},
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'3415581119183',name:'HAAGEN DAZS - KEM Vï¿½S Háº T MACADAMIA 473ML',unit:'Hï¿½~P',bk:22,sx:19,nqc:null,qcr:null,hold:null,diff:3,note:'ABA pick rï¿½>t',pct:86.36},
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'74570022021',name:'HAAGEN DAZS - KEM Dï¿½,U Tï¿½,Y 100ML',unit:'Hï¿½~P',bk:120,sx:116,nqc:null,qcr:null,hold:null,diff:4,note:'ABA pick rï¿½>t',pct:96.67},
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'74570052028',name:'HAAGEN DAZS - KEM Vï¿½S BÃ NH QUY Vï¿½? KEM 100ML',unit:'Hï¿½~P',bk:31,sx:24,nqc:null,qcr:null,hold:null,diff:7,note:'ABA pick rï¿½>t',pct:77.42},
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'8934673600347',name:'VINAMILK - KEM Dá»ªA 400ML',unit:'Hï¿½~P',bk:36,sx:22,nqc:null,qcr:null,hold:null,diff:14,note:'ABA pick rï¿½>t',pct:61.11},
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'8936190861645',name:'FRESHFOCO - THï¿½ST Bï¿½' Mï¿½~T Náº®NG 200G',unit:'KHAY',bk:1,sx:0,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rï¿½>t',pct:0},
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'8938562732133',name:'AN GIA - SÆ¯ï¿½oN Bï¿½' Má»¸ Cï¿½" XÆ¯Æ NG 300G (SHORT RIB)',unit:'KHAY',bk:6,sx:4,nqc:null,qcr:null,hold:null,diff:2,note:'ABA pick rï¿½>t',pct:66.67},
+    {cat:'LÆ°u HÃ ng',temp:'MÁT',code:'11061',name:'Náº¤M Háº¢I Sáº¢N TQ 150G',unit:'Gï¿½"I',bk:185,sx:173,nqc:null,qcr:null,hold:null,diff:12,note:'ABA pick rï¿½>t',pct:93.51},
+    {cat:'LÆ°u HÃ ng',temp:'MÁT',code:'3412290040708',name:'PAYSAN BRETON - PHï¿½" MAI BRIE 125G',unit:'Hï¿½~P',bk:4,sx:1,nqc:null,qcr:null,hold:null,diff:3,note:'ABA pick rï¿½>t',pct:25},
+    {cat:'LÆ°u HÃ ng',temp:'MÁT',code:'8935007110457',name:'LOTHAMILK - SCA NHA Ä AM 100G',unit:'Hï¿½~P',bk:4,sx:0,nqc:null,qcr:null,hold:null,diff:4,note:'ABA pick rï¿½>t',pct:0},
+    {cat:'LÆ°u HÃ ng',temp:'MÁT',code:'8936210410822',name:'KITKOOL - BÃ NH GIï¿½' THáº¬P Cáº¨M TRá»¨NG Cï¿½sT 150G',unit:'CÃ I',bk:313,sx:285,nqc:null,qcr:null,hold:null,diff:28,note:'ABA pick rï¿½>t',pct:91.05},
+    {cat:'LÆ°u HÃ ng',temp:'MÁT',code:'8938500810084',name:'VS - Tï¿½"M KHï¿½" L HÅ¨ 200G',unit:'Gï¿½"I',bk:3,sx:0,nqc:null,qcr:null,hold:null,diff:3,note:'ABA pick rï¿½>t',pct:0},
+    {cat:'TCNK LÆ°u HÃ ng',temp:'MÁT',code:'8938553641376',name:'TÃ O POSY á» NG (4 QUáº¢)',unit:'á» NG',bk:50,sx:49,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rï¿½>t',pct:98}
   ]
 },
 '29-Apr': {
   totalBk:10100, totalTx:9936.5, totalDiff:163.5,
   items:[
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8934717266003',name:'CJ Cáº¦U TRE - CHáº¢ GIÃ’ BÃNH Ráº¾ Háº¢I Sáº¢N 500G',unit:'GÃ“I',bk:68,sx:60,nqc:null,qcr:null,hold:null,diff:8,note:'ABA pick rá»›t',pct:88.24},
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8935275600247',name:'OG BLUE - Cá»’I SÃ’ ÄIá»†P NHáº¬T 240G',unit:'GÃ“I',bk:1,sx:0,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rá»›t',pct:0},
-    {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8935360200390',name:'SAVORA - BA CHá»ˆ BÃ’ CANADA ÄÃ”NG Láº NH Cáº®T CUá»˜N - 250G',unit:'KHAY',bk:102,sx:101,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rá»›t',pct:99.02},
-    {cat:'LÆ°u HÃ ng',temp:'MÃT',code:'8934673101479',name:'VINAMILK - Sá»®A THANH TRÃ™NG Ráº¤T ÃT ÄÆ¯á»œNG GREEN FARM 900ML',unit:'Há»˜P',bk:36,sx:35,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rá»›t',pct:97.22},
-    {cat:'LÆ°u HÃ ng',temp:'MÃT',code:'8935007110457',name:'LOTHAMILK - SCA NHA ÄAM 100G',unit:'Há»˜P',bk:4,sx:0,nqc:null,qcr:null,hold:null,diff:4,note:'ABA pick rá»›t',pct:0},
-    {cat:'LÆ°u HÃ ng',temp:'MÃT',code:'8935335402514',name:'THá»Œ PHÃT - BÃNH GIÃ’ NHÃ‚N THá»ŠT 160G',unit:'CÃI',bk:196,sx:195,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rá»›t',pct:99.49},
-    {cat:'LÆ°u HÃ ng',temp:'MÃT',code:'8938500810084',name:'VS - TÃ”M KHÃ” L HÅ¨ 200G',unit:'GÃ“I',bk:3,sx:0,nqc:null,qcr:null,hold:null,diff:3,note:'ABA pick rá»›t',pct:0},
-    {cat:'TCNK LÆ°u HÃ ng',temp:'MÃT',code:'1102039',name:'TÃO ENVY Má»¸ (3-4 QUáº¢/KG)',unit:'KG',bk:900,sx:891,nqc:null,qcr:null,hold:null,diff:9,note:'HÃ ng hold MZK',pct:99},
-    {cat:'TCNK LÆ°u HÃ ng',temp:'MÃT',code:'1102171',name:'QUÃT Ná»˜I Äá»ŠA TRUNG',unit:'KG',bk:5109,sx:5089.5,nqc:null,qcr:null,hold:null,diff:20,note:'HÃ ng hold MZK',pct:99.62},
-    {cat:'TCNK LÆ°u HÃ ng',temp:'MÃT',code:'1102721',name:'NHO XANH ÃšC VIP FRUITICO',unit:'KG',bk:270,sx:261,nqc:null,qcr:null,hold:null,diff:9,note:'HÃ ng hold MZK',pct:96.67},
-    {cat:'TCNK LÆ°u HÃ ng',temp:'MÃT',code:'8859574802662',name:'ME NGá»ŒT THÃI LAN Há»˜P 400G',unit:'Há»˜P',bk:405,sx:402,nqc:null,qcr:null,hold:null,diff:3,note:'HÃ ng hold MZK',pct:99.26},
-    {cat:'TCNK LÆ°u HÃ ng',temp:'MÃT',code:'8936052000823',name:'ZESPRI - Há»˜P KIWI VÃ€NG 4 QUáº¢',unit:'Há»˜P',bk:450,sx:449,nqc:null,qcr:null,hold:null,diff:1,note:'HÃ ng hold MZK',pct:99.78},
-    {cat:'TCNK QuÃ¡ Cáº£nh',temp:'',code:'11702',name:'CHERRY Má»¸ Há»˜P 300G',unit:'Há»˜P',bk:500,sx:495,nqc:500,qcr:-5,hold:0,diff:5,note:'HÃ ng Hold MZK',pct:99},
-    {cat:'TCNK QuÃ¡ Cáº£nh',temp:'MÃT',code:'10038',name:'DÃ‚U HÃ€N QUá»C 330G',unit:'Há»˜P',bk:394,sx:306,nqc:308,qcr:-2,hold:0,diff:88,note:'HÃ ng Hold MZK',pct:77.66},
-    {cat:'TCNK QuÃ¡ Cáº£nh',temp:'MÃT',code:'10094',name:'BLUEBERRY Má»¸ Há»˜P 125G',unit:'Há»˜P',bk:432,sx:428,nqc:432,qcr:-4,hold:0,diff:4,note:'HÃ ng Hold MZK',pct:99.07},
-    {cat:'TCNK QuÃ¡ Cáº£nh',temp:'MÃT',code:'11218',name:'Máº¬N ÃšC 500G',unit:'Há»˜P',bk:700,sx:698,nqc:700,qcr:-2,hold:0,diff:2,note:'HÃ ng Hold MZK',pct:99.71},
-    {cat:'TCNK QuÃ¡ Cáº£nh',temp:'MÃT',code:'11676',name:'ZESPRI - Há»˜P KIWI RUá»˜T Äá»Ž NEW ZEALAND (4 QUáº¢)',unit:'Há»˜P',bk:80,sx:78,nqc:80,qcr:-2,hold:0,diff:2,note:'HÃ ng Hold MZK',pct:97.5},
-    {cat:'TCNK QuÃ¡ Cáº£nh',temp:'MÃT',code:'8938541439817',name:'TÃO TÃšI 1.5KG',unit:'TÃšI',bk:450,sx:448,nqc:450,qcr:-2,hold:0,diff:2,note:'HÃ ng Hold MZK',pct:99.56}
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'8934717266003',name:'CJ Cáº¦U TRE - CHáº¢ GIï¿½' BÃ NH Ráº¾ Háº¢I Sáº¢N 500G',unit:'Gï¿½"I',bk:68,sx:60,nqc:null,qcr:null,hold:null,diff:8,note:'ABA pick rï¿½>t',pct:88.24},
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'8935275600247',name:'OG BLUE - Cï¿½'I Sï¿½' Ä Iï¿½?P NHáº¬T 240G',unit:'Gï¿½"I',bk:1,sx:0,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rï¿½>t',pct:0},
+    {cat:'LÆ°u HÃ ng',temp:'ĐÔNG',code:'8935360200390',name:'SAVORA - BA CHï¿½^ Bï¿½' CANADA ĐÔNG Láº NH Cáº®T CUï¿½~N - 250G',unit:'KHAY',bk:102,sx:101,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rï¿½>t',pct:99.02},
+    {cat:'LÆ°u HÃ ng',temp:'MÁT',code:'8934673101479',name:'VINAMILK - Sá»®A THANH TRï¿½TNG Ráº¤T Ã T Ä Æ¯ï¿½oNG GREEN FARM 900ML',unit:'Hï¿½~P',bk:36,sx:35,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rï¿½>t',pct:97.22},
+    {cat:'LÆ°u HÃ ng',temp:'MÁT',code:'8935007110457',name:'LOTHAMILK - SCA NHA Ä AM 100G',unit:'Hï¿½~P',bk:4,sx:0,nqc:null,qcr:null,hold:null,diff:4,note:'ABA pick rï¿½>t',pct:0},
+    {cat:'LÆ°u HÃ ng',temp:'MÁT',code:'8935335402514',name:'THï¿½O PHÃ T - BÃ NH GIï¿½' NHï¿½,N THï¿½ST 160G',unit:'CÃ I',bk:196,sx:195,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick rï¿½>t',pct:99.49},
+    {cat:'LÆ°u HÃ ng',temp:'MÁT',code:'8938500810084',name:'VS - Tï¿½"M KHï¿½" L HÅ¨ 200G',unit:'Gï¿½"I',bk:3,sx:0,nqc:null,qcr:null,hold:null,diff:3,note:'ABA pick rï¿½>t',pct:0},
+    {cat:'TCNK LÆ°u HÃ ng',temp:'MÁT',code:'1102039',name:'TÃ O ENVY Má»¸ (3-4 QUáº¢/KG)',unit:'KG',bk:900,sx:891,nqc:null,qcr:null,hold:null,diff:9,note:'HÃ ng hold MZK',pct:99},
+    {cat:'TCNK LÆ°u HÃ ng',temp:'MÁT',code:'1102171',name:'QUÃ T Nï¿½~I Ä ï¿½SA TRUNG',unit:'KG',bk:5109,sx:5089.5,nqc:null,qcr:null,hold:null,diff:20,note:'HÃ ng hold MZK',pct:99.62},
+    {cat:'TCNK LÆ°u HÃ ng',temp:'MÁT',code:'1102721',name:'NHO XANH ï¿½sC VIP FRUITICO',unit:'KG',bk:270,sx:261,nqc:null,qcr:null,hold:null,diff:9,note:'HÃ ng hold MZK',pct:96.67},
+    {cat:'TCNK LÆ°u HÃ ng',temp:'MÁT',code:'8859574802662',name:'ME NGï¿½OT THÃ I LAN Hï¿½~P 400G',unit:'Hï¿½~P',bk:405,sx:402,nqc:null,qcr:null,hold:null,diff:3,note:'HÃ ng hold MZK',pct:99.26},
+    {cat:'TCNK LÆ°u HÃ ng',temp:'MÁT',code:'8936052000823',name:'ZESPRI - Hï¿½~P KIWI Vï¿½?NG 4 QUáº¢',unit:'Hï¿½~P',bk:450,sx:449,nqc:null,qcr:null,hold:null,diff:1,note:'HÃ ng hold MZK',pct:99.78},
+    {cat:'TCNK QuÃ¡ Cáº£nh',temp:'',code:'11702',name:'CHERRY Má»¸ Hï¿½~P 300G',unit:'Hï¿½~P',bk:500,sx:495,nqc:500,qcr:-5,hold:0,diff:5,note:'HÃ ng Hold MZK',pct:99},
+    {cat:'TCNK QuÃ¡ Cáº£nh',temp:'MÁT',code:'10038',name:'Dï¿½,U Hï¿½?N QUá» C 330G',unit:'Hï¿½~P',bk:394,sx:306,nqc:308,qcr:-2,hold:0,diff:88,note:'HÃ ng Hold MZK',pct:77.66},
+    {cat:'TCNK QuÃ¡ Cáº£nh',temp:'MÁT',code:'10094',name:'BLUEBERRY Má»¸ Hï¿½~P 125G',unit:'Hï¿½~P',bk:432,sx:428,nqc:432,qcr:-4,hold:0,diff:4,note:'HÃ ng Hold MZK',pct:99.07},
+    {cat:'TCNK QuÃ¡ Cáº£nh',temp:'MÁT',code:'11218',name:'Máº¬N ï¿½sC 500G',unit:'Hï¿½~P',bk:700,sx:698,nqc:700,qcr:-2,hold:0,diff:2,note:'HÃ ng Hold MZK',pct:99.71},
+    {cat:'TCNK QuÃ¡ Cáº£nh',temp:'MÁT',code:'11676',name:'ZESPRI - Hï¿½~P KIWI RUï¿½~T Ä ï¿½Z NEW ZEALAND (4 QUáº¢)',unit:'Hï¿½~P',bk:80,sx:78,nqc:80,qcr:-2,hold:0,diff:2,note:'HÃ ng Hold MZK',pct:97.5},
+    {cat:'TCNK QuÃ¡ Cáº£nh',temp:'MÁT',code:'8938541439817',name:'TÃ O Tï¿½sI 1.5KG',unit:'Tï¿½sI',bk:450,sx:448,nqc:450,qcr:-2,hold:0,diff:2,note:'HÃ ng Hold MZK',pct:99.56}
   ]
 },
 '30-Apr': { totalBk:667, totalTx:573, totalDiff:94, items:[ {cat:'Luu HÃ ng',temp:'DONG',code:'10933',name:'HS - CA DIA NGUYEN CON LAM S?CH 350G',unit:'GOI',bk:1,sx:0,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick r?t',pct:0}, {cat:'Luu HÃ ng',temp:'DONG',code:'10947',name:'HU? SPECIALTY - BANH L?C HU? LO?I 1 330G',unit:'GOI',bk:4,sx:0,nqc:null,qcr:null,hold:null,diff:4,note:'ABA pick r?t',pct:0}, {cat:'Luu HÃ ng',temp:'DONG',code:'8935067796226',name:'H?I NAM - M?C ?NG NCLS LO?I A 15-20CM X?P 500G',unit:'GOI',bk:2,sx:1,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick r?t',pct:50}, {cat:'Luu HÃ ng',temp:'DONG',code:'8935067796295',name:'H?I NAM - D?U M?C ?NG LO?I A X?P KHAY 500G',unit:'GOI',bk:2,sx:0,nqc:null,qcr:null,hold:null,diff:2,note:'ABA pick r?t',pct:0}, {cat:'Luu HÃ ng',temp:'DONG',code:'8935360200390',name:'SAVORA - BA CH? BO CANADA DONG L?NH C?T CU?N - 250G',unit:'KHAY',bk:120,sx:116,nqc:null,qcr:null,hold:null,diff:4,note:'ABA pick r?t',pct:96.67}, {cat:'Luu HÃ ng',temp:'DONG',code:'8936190861645',name:'FRESHFOCO - TH?T BO M?T N?NG 200G',unit:'KHAY',bk:1,sx:0,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick r?t',pct:0}, {cat:'Luu HÃ ng',temp:'DONG',code:'8936200101563',name:'TR?N GIA - KHOAI TAY DONG L?NH 500G',unit:'GOI',bk:264,sx:263,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick r?t',pct:99.62}, {cat:'Luu HÃ ng',temp:'DONG',code:'8936239090050',name:'365 FRESH FOODS - BA CH? BO M? TUI ZIP 500G',unit:'TUI',bk:122,sx:121,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick r?t',pct:99.18}, {cat:'Luu HÃ ng',temp:'DONG',code:'8938562732133',name:'AN GIA - SU?N BO M? CO XUONG 300G (SHORT RIB)',unit:'KHAY',bk:2,sx:0,nqc:null,qcr:null,hold:null,diff:2,note:'ABA pick r?t',pct:0}, {cat:'Luu HÃ ng',temp:'MAT',code:'8801068038262',name:'SAMLIP - BANH PHO MAI MR.CHEF''S 105G',unit:'CAI',bk:125,sx:72,nqc:null,qcr:null,hold:null,diff:53,note:'ABA pick r?t',pct:57.60}, {cat:'Luu HÃ ng',temp:'MAT',code:'8801068931532',name:'SAMLIP - BANH PHO MAI DUA LU?I MR.CHEF''S 105G',unit:'CAI',bk:22,sx:0,nqc:null,qcr:null,hold:null,diff:22,note:'ABA pick r?t',pct:0}, {cat:'Luu HÃ ng',temp:'MAT',code:'8934673101479',name:'VINAMILK - S?A THANH TRUNG R?T IT DU?NG GREEN FARM 900ML',unit:'H?P',bk:1,sx:0,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick r?t',pct:0}, {cat:'Luu HÃ ng',temp:'MAT',code:'8938552425328',name:'UT MAU - TOM KHO TH? L 100G',unit:'HU',bk:1,sx:0,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick r?t',pct:0} ] },
@@ -906,7 +906,9 @@ const CT = {
 ] },
 '5-May': { totalBk:0, totalTx:0, totalDiff:0, items:[
   
-] }
+] },
+'4-May': { totalBk:0, totalTx:0, totalDiff:0, items:[] },
+'5-May': { totalBk:0, totalTx:0, totalDiff:0, items:[] }
 };
 
 // === HELPERS ===
@@ -915,10 +917,10 @@ let currentTab = 'xuat';
 let nhapIdx = 0; // Will be set after DN is defined
 
 function fmt(n) {
-  if (n===0||n===null||n===undefined||!isFinite(n)) return 'â€”';
+  if (n===0||n===null||n===undefined||!isFinite(n)) return '—';
   return Math.round(n).toLocaleString('en-US');
 }
-function fmtD(n,d) { return (n===0||!isFinite(n))?'â€”':n.toFixed(d||0); }
+function fmtD(n,d) { return (n===0||!isFinite(n))?'—':n.toFixed(d||0); }
 
 function bkTon(tx, pick) {
   if(tx===0) return 0;
@@ -946,6 +948,7 @@ function fmtPick(v) {
 
 // Render a category row group (3 rows: SKU, ITEM, kg)
 function catRows(label, c, isFirst) {
+  if (!Array.isArray(c) || c.length < 13) return '';
   const cls1 = isFirst ? ' class="cat-first"' : '';
   const sku_bkTon = bkTon(c[1], c[2]);
   const item_bkTon = bkTon(c[6], c[7]);
@@ -954,20 +957,20 @@ function catRows(label, c, isFirst) {
   return `
   <tr${cls1}>
     <td class="c-cat" rowspan="3">${label}</td>
-    <td class="c-info">Sá»‘ lÆ°á»£ng SKU</td>
+    <td class="c-info">Sï¿½' lÆ°á»£ng SKU</td>
     <td class="c-bk">${fmt(c[0])}</td><td class="c-fc c-empty"></td><td class="c-pct c-empty"></td><td class="c-ql c-empty"></td>
     <td class="c-bt">${fmt(sku_bkTon)}</td><td class="c-tx">${fmt(c[1])}</td><td class="c-pk ${pickCls(c[2])}">${fmtPick(c[2])}</td>
   </tr>
   <tr class="row-2">
-    <td class="c-info">Sá»‘ lÆ°á»£ng (ITEM)</td>
+    <td class="c-info">Sï¿½' lÆ°á»£ng (ITEM)</td>
     <td class="c-bk">${fmt(c[3])}</td><td class="c-fc">${fmt(c[4])}</td>
-    <td class="c-pct ${pctCls(c[5])}">${c[5]?fmtD(c[5],2)+'%':'â€”'}</td><td class="c-ql c-empty"></td>
+    <td class="c-pct ${pctCls(c[5])}">${c[5]?fmtD(c[5],2)+'%':'—'}</td><td class="c-ql c-empty"></td>
     <td class="c-bt">${fmt(item_bkTon)}</td><td class="c-tx">${fmt(c[6])}</td><td class="c-pk ${pickCls(c[7])}">${fmtPick(c[7])}</td>
   </tr>
   <tr class="row-3">
-    <td class="c-info">Trá»ng lÆ°á»£ng (kg)</td>
+    <td class="c-info">Trá» ng lÆ°á»£ng (kg)</td>
     <td class="c-bk">${fmt(c[8])}</td><td class="c-fc">${fmt(c[9])}</td>
-    <td class="c-pct ${pctCls(c[10])}">${c[10]?fmtD(c[10],2)+'%':'â€”'}</td><td class="c-ql c-empty"></td>
+    <td class="c-pct ${pctCls(c[10])}">${c[10]?fmtD(c[10],2)+'%':'—'}</td><td class="c-ql c-empty"></td>
     <td class="c-bt">${fmt(kg_bkTon)}</td><td class="c-tx">${fmt(c[11])}</td><td class="c-pk ${pickCls(c[12])}">${fmtPick(c[12])}</td>
   </tr>`;
 }
@@ -983,8 +986,8 @@ function sumRows(day) {
 
   return `
   <tr class="summary cat-first">
-    <td class="c-cat" rowspan="5" style="vertical-align:top">Tá»•ng há»£p</td>
-    <td class="c-info">Tá»•ng SKU</td>
+    <td class="c-cat" rowspan="5" style="vertical-align:top">Tï¿½.ng há»£p</td>
+    <td class="c-info">Tï¿½.ng SKU</td>
     <td class="c-bk">${fmt(d.ts[0])}</td><td class="c-fc c-empty"></td><td class="c-pct c-empty"></td><td class="c-ql c-empty"></td>
     <td class="c-bt">${fmt(ts_bkTon)}</td><td class="c-tx">${fmt(d.ts[1])}</td><td class="c-pk ${pickCls(d.ts[2])}">${fmtPick(d.ts[2])}</td>
   </tr>
@@ -1009,7 +1012,7 @@ function sumRows(day) {
     <td class="c-bt">${fmt(tL_bkTon)}</td><td class="c-tx">${fmt(d.tL[4])}</td><td class="c-pk ${pickCls(d.tL[5])}">${fmtPick(d.tL[5])}</td>
   </tr>
   <tr class="summary row-2">
-    <td class="c-info">Total trá»ng lÆ°á»£ng</td>
+    <td class="c-info">Total trá» ng lÆ°á»£ng</td>
     <td class="c-bk">${fmt(d.tk[0])}</td><td class="c-fc">${fmt(d.tk[1])}</td>
     <td class="c-pct ${pctCls(d.tk[2])}">${fmtD(d.tk[2],2)}%</td><td class="c-ql c-empty"></td>
     <td class="c-bt">${fmt(tk_bkTon)}</td><td class="c-tx">${fmt(d.tk[3])}</td><td class="c-pk ${pickCls(d.tk[4])}">${fmtPick(d.tk[4])}</td>
@@ -1024,11 +1027,11 @@ function tableHead(day) {
     <col class="col-qclh"><col class="col-num"><col class="col-num"><col class="col-pct">
   </colgroup>
   <thead>
-    <tr><th class="h-cat" colspan="2"></th><th class="date-head" colspan="7">${day.d} â€” ${day.w}</th></tr>
+    <tr><th class="h-cat" colspan="2"></th><th class="date-head" colspan="7">${day.d} — ${day.w}</th></tr>
     <tr>
-      <th class="h-cat">Loáº¡i hÃ ng</th><th class="h-info">ThÃ´ng tin</th>
+      <th class="h-cat">Loại hàng</th><th class="h-info">ThÃ´ng tin</th>
       <th>Booking</th><th>FC</th><th>%Booking/FC</th><th>%QC & LH</th>
-      <th>Bk theo tá»“n</th><th>Thá»±c xuáº¥t</th><th>Tá»‰ lá»‡ pick rá»›t</th>
+      <th>Bk theo tï¿½"n</th><th>Thực xuất</th><th>Tï¿½? lï¿½? pick rï¿½>t</th>
     </tr>
   </thead>`;
 }
@@ -1074,15 +1077,19 @@ function computeT2(day) {
 // === RENDER ===
 function render() {
   const day = D[curIdx];
-  document.getElementById('navDate').textContent = day.d;
-  document.getElementById('navDow').textContent = day.w;
-  document.getElementById('navWeek').textContent = day.wk;
+  if (!day) {
+    document.getElementById('content').innerHTML = '<div class="table-block">Lỗi: Không tìm thấy dữ liệu ngày này.</div>';
+    return;
+  }
+  document.getElementById('navDate').textContent = day.d || '';
+  document.getElementById('navDow').textContent = day.w || '';
+  document.getElementById('navWeek').textContent = day.wk || '';
   document.getElementById('btnPrev').disabled = curIdx === 0;
   document.getElementById('btnNext').disabled = curIdx === D.length-1;
 
   if (day.off) {
     document.getElementById('content').innerHTML = `
-      <div class="table-block"><div class="off-msg">ðŸ“… ${day.d} (${day.w}) â€” NgÃ y nghá»‰, khÃ´ng cÃ³ dá»¯ liá»‡u</div></div>`;
+      <div class="table-block"><div class="off-msg">— ${day.d} (${day.w}) — Ngày nghỉ, không có dữ liệu</div></div>`;
     return;
   }
 
@@ -1090,7 +1097,7 @@ function render() {
 
   let html = `
   <div class="table-block">
-    <div class="table-title">ðŸ“¦ Báº£ng 1 â€” Theo loáº¡i váº­n chuyá»ƒn</div>
+    <div class="table-title">📊 Bảng 1 - Theo loại vận chuyển</div>
     <table>${tableHead(day)}<tbody>
       ${catRows('HÃ ng QuÃ¡ Cáº£nh', day.qc, true)}
       ${catRows('HÃ ng LÆ°u Kho', day.lk, true)}
@@ -1101,40 +1108,40 @@ function render() {
   </div>
 
   <div class="table-block">
-    <div class="table-title">ðŸŒ¡ï¸ Báº£ng 2 â€” Theo loáº¡i nhiá»‡t Ä‘á»™ (ÄÃ´ng / MÃ¡t)</div>
+    <div class="table-title">🌡️ Bảng 2 - Theo loại nhiệt độ (Đông / Mát)</div>
     <table>${tableHead(day)}<tbody>
-      ${catRows('ÄÃ´ng', day.dong, true)}
-      ${catRows('MÃ¡t', day.mat, true)}
+      ${catRows('Đông', day.dong, true)}
+      ${catRows('Mát', day.mat, true)}
       ${catRows('TCNK', t2.tcnk, true)}
-      ${catRows('MÃ¡t quÃ¡ cáº£nh', t2.matQC, true)}
-      ${catRows('MÃ¡t lÆ°u HÃ ng', t2.matLH, true)}
-      ${catRows('TCNK lÆ°u hÃ ng', t2.tcnkLH, true)}
-      ${catRows('TCNK quÃ¡ cáº£nh', t2.tcnkQC, true)}
+      ${catRows('Mát quá cáº£nh', t2.matQC, true)}
+      ${catRows('Mát lưu HÃ ng', t2.matLH, true)}
+      ${catRows('TCNK lưu hÃ ng', t2.tcnkLH, true)}
+      ${catRows('TCNK quá cáº£nh', t2.tcnkQC, true)}
     </tbody></table>
   </div>`;
 
-  // Báº£ng 3 â€” Chi tiáº¿t xuáº¥t hÃ ng
-  const ct = CT[day.d];
-  if (ct) {
+  // Báº£ng 3 - Chi tiết xuất hàng
+  const ct = CT[day.d] || { totalBk:0, totalTx:0, totalDiff:0, items:[] };
+  if (ct && ct.items) {
     const totalPct = ct.totalBk > 0 ? ((ct.totalTx / ct.totalBk) * 100).toFixed(1) : '0';
     html += `
     <div class="table-block detail-block">
-      <div class="table-title">ðŸ“‹ Báº£ng 3 â€” Chi tiáº¿t SKU pick rá»›t</div>
+      <div class="table-title">📦 Bảng 3 - Chi tiết SKU pick rớt</div>
       <div style="padding:0 12px">
         <div class="summary-cards">
-          <div class="s-card sc-sku"><div class="s-label">SKU rá»›t</div><div class="s-val">${ct.items.length}</div></div>
+          <div class="s-card sc-sku"><div class="s-label">SKU rớt</div><div class="s-val">${ct.items.length}</div></div>
           <div class="s-card sc-bk"><div class="s-label">Booking</div><div class="s-val">${fmt(ct.totalBk)}</div></div>
-          <div class="s-card sc-tx"><div class="s-label">Thá»±c xuáº¥t</div><div class="s-val">${fmt(ct.totalTx)}</div></div>
-          <div class="s-card sc-diff"><div class="s-label">ChÃªnh lá»‡ch</div><div class="s-val">${fmt(ct.totalDiff)}</div></div>
+          <div class="s-card sc-tx"><div class="s-label">Thực xuất</div><div class="s-val">${fmt(ct.totalTx)}</div></div>
+          <div class="s-card sc-diff"><div class="s-label">Chênh lệch</div><div class="s-val">${fmt(ct.totalDiff)}</div></div>
         </div>
       </div>
       <div class="detail-wrap">
       <table class="detail-table">
         <thead><tr>
-          <th>#</th><th class="th-cat">Loáº¡i hÃ ng</th><th class="th-temp">HÃ ng</th>
-          <th class="th-code">Code</th><th class="th-name">TÃªn sáº£n pháº©m</th><th class="th-unit">ÄVT</th>
-          <th class="th-num">Booking</th><th class="th-num">Sá»‘ Xuáº¥t</th><th class="th-num">Nháº­p QC</th><th class="th-num">HÃ ng QC rá»›t</th><th class="th-num">Hold</th>
-          <th class="th-num">SL pick rá»›t</th><th class="th-note">Ghi chÃº</th><th class="th-tf">T/F</th><th class="th-pct">Tá»‰ lá»‡ Pick</th>
+          <th>#</th><th class="th-cat">Loại hÃ ng</th><th class="th-temp">HÃ ng</th>
+          <th class="th-code">Code</th><th class="th-name">Tên sản phẩm</th><th class="th-unit">ĐVT</th>
+          <th class="th-num">Booking</th><th class="th-num">Số Xuất</th><th class="th-num">Nhập QC</th><th class="th-num">HÃ ng QC rớt</th><th class="th-num">Hold</th>
+          <th class="th-num">SL pick rớt</th><th class="th-note">Ghi chú</th><th class="th-tf">T/F</th><th class="th-pct">Tỉ lệ Pick</th>
         </tr></thead><tbody>`;
     ct.items.forEach((it, idx) => {
       const pc = it.pct === 0 ? 'd-pct-bad' : it.pct < 50 ? 'd-pct-warn' : 'd-pct-good';
@@ -1142,7 +1149,7 @@ function render() {
       html += `<tr>
         <td>${idx+1}</td>
         <td class="d-cat">${it.cat}</td>
-        <td class="d-temp" style="color:${it.temp==='ÄÃ”NG'?'var(--blue)':'var(--green)'}">${it.temp}</td>
+        <td class="d-temp" style="color:${it.temp==='ĐÔNG'?'var(--blue)':'var(--green)'}">${it.temp}</td>
         <td class="d-code">${it.code}</td><td class="d-name">${it.name}</td><td class="d-unit">${it.unit}</td>
         <td class="d-bk">${fmt(it.bk)}</td>
         <td class="d-tx">${fv(it.sx)}</td>
@@ -1180,17 +1187,26 @@ document.addEventListener('keydown', e => {
   if(e.key==='ArrowRight') next();
 });
 
-render();
+try {
+  render();
+  renderWarning();
+} catch (e) {
+  console.error(e);
+  document.getElementById('content').innerHTML = `
+    <div style="padding:20px; color:#ef4444; background:rgba(239,68,68,0.1); border-radius:8px; margin:20px">
+      <h3>⚠️ Có lỗi hiển thị dữ liệu</h3>
+      <p>${e.message}</p>
+      <pre style="font-size:10px; opacity:0.7">${e.stack}</pre>
+    </div>`;
+}
 
-// SKU Ä‘Ã£ xá»­ lÃ½ xong â†’ loáº¡i khá»i Báº£ng 4
+// SKU đã xử lý xong để loại khỏi Bảng 4
 const WARN_EXCLUDE = ['9300658407505'];
-
-renderWarning();
 
 function renderWarning() {
   // Aggregate: code -> { name, cat, entries:[{date, bk, sx, diff}] }
   const codeMap = {};
-  for (const [dateKey, dayData] of Object.entries(CT)) {
+  for (const [dateKey, dayData] of Object.entries(CT || {})) {
     if (!dayData || !dayData.items) continue;
     dayData.items.forEach(it => {
       if (WARN_EXCLUDE.includes(it.code)) return;
@@ -1208,6 +1224,7 @@ function renderWarning() {
       b[1].entries.reduce((s,e)=>s+e.diff,0) - a[1].entries.reduce((s,e)=>s+e.diff,0));
 
   const el = document.getElementById('warning-section');
+  if (!el) return;
   if (warns.length === 0) {
     el.innerHTML = '';
     return;
@@ -1215,18 +1232,18 @@ function renderWarning() {
 
   let html = `
   <div class="table-block warn-block" style="animation:fadeIn 0.3s ease">
-    <div class="warn-title-bar">âš ï¸ Báº£ng 4 â€” Warning: SKU pick rá»›t láº·p láº¡i â‰¥ 3 ngÃ y<span class="warn-badge">${warns.length} SKU</span></div>
+    <div class="warn-title-bar">⚠️ Bảng 4 - Warning: SKU pick rớt lặp lại ≥ 3 ngày<span class="warn-badge">${warns.length} SKU</span></div>
     <table class="warn-table">
       <thead><tr>
         <th>#</th>
         <th class="wt-code">Code</th>
-        <th class="wt-name">TÃªn sáº£n pháº©m</th>
-        <th class="wt-cat">Loáº¡i hÃ ng</th>
-        <th class="wt-days">Sá»‘ ngÃ y</th>
-        <th class="wt-num">NgÃ y</th>
+        <th class="wt-name">Tên sản phẩm</th>
+        <th class="wt-cat">Loại hàng</th>
+        <th class="wt-days">Số ngày</th>
+        <th class="wt-num">Ngày</th>
         <th class="wt-num">Booking</th>
-        <th class="wt-num">Sá»‘ Xuáº¥t</th>
-        <th class="wt-num">SL rá»›t</th>
+        <th class="wt-num">Số Xuất</th>
+        <th class="wt-num">SL rớt</th>
       </tr></thead><tbody>`;
 
   warns.forEach(([code, v], idx) => {
@@ -1255,7 +1272,7 @@ function renderWarning() {
   el.innerHTML = html;
 }
 
-// ===================== NHáº¬P HÃ€NG =====================
+// ===================== NHẬP HÀNG =====================
 const DN = [
 {d:'1-Apr',w:'Mon',wk:'W1',po:96,qcN:17,qc:[131,128,25778,25611,7532,7500],lkN:47,lk:[188,180,86295,83165,16561,16010],tqcN:6,tqc:[17,17,5846,5815,4314,4303],tlhN:3,tlh:[6,4,1990,1950,1658,1650],ti:[119909,116541],ts:[342,329],tk:[30064,29464],dongN:23,dong:[64,64,13604,13503,4351,4331],matN:27,mat:[130,120,74681,71612,13867,13329],qc2N:23,qc2:[148,145,31624,31426,11845,11803]},
 {d:'2-Apr',w:'Tue',wk:'W1',po:77,qcN:16,qc:[104,103,18331,18305,4623,4618],lkN:30,lk:[127,121,65062,63551,17953,17564],tqcN:6,tqc:[21,21,7306,6441,4747,4525],tlhN:3,tlh:[4,4,1065,1065,890,890],ti:[91764,89362],ts:[256,249],tk:[28213,27598],dongN:9,dong:[30,28,8810,8410,3554,3423],matN:24,mat:[101,97,57317,56206,15289,15031],qc2N:22,qc2:[125,124,25637,24746,9370,9144]},
@@ -1288,150 +1305,6 @@ const DN = [
 {d:'29-Apr',w:'Wed',wk:'W5',po:114,qcN:21,qc:[133,133,28401,27666,8591,8419],lkN:52,lk:[192,183,83891,76500,19705,17799],tqcN:5,tqc:[28,25,6230,5431,4678,3800],tlhN:3,tlh:[4,4,1280,1280,675,675],ti:[119802,110877],ts:[357,345],tk:[33649,30693],dongN:25,dong:[75,74,25451,24929,6157,5990],matN:30,mat:[120,112,59620,52751,14223,12483],qc2N:26,qc2:[161,158,34631,33097,13269,12220]},
 {d:'30-Apr',w:'Thu',wk:'W5',po:28,qcN:10,qc:[60,0,8626,0,1419,0],lkN:0,lk:[0,0,0,0,0,0],tqcN:4,tqc:[27,0,7930,0,7442,0],tlhN:2,tlh:[8,0,4832,0,3974,0],ti:[21388,0],ts:[95,0],tk:[12835,0],dongN:0,dong:[0,0,0,0,0,0],matN:2,mat:[7,0,4632,0,3974,0],qc2N:14,qc2:[87,0,16556,0,8861,0]},
 {d:'1-May',w:'Fri',wk:'W1',po:13,qcN:8,qc:[65,0,14257,0,1963,0],lkN:0,lk:[0,0,0,0,0,0],tqcN:3,tqc:[13,0,1013,0,814,0],tlhN:1,tlh:[2,0,285,0,143,0],ti:[15555,0],ts:[80,0],tk:[2919,0],dongN:0,dong:[0,0,0,0,0,0],matN:1,mat:[2,0,285,0,143,0],qc2N:11,qc2:[78,0,15270,0,2777,0]},
-{d:'3-May',w:'CN',wk:'W18',po:0,qcN:0,qc:[0,0,0,0,0,0],lkN:0,lk:[0,0,0,0,0,0],tqcN:0,tqc:[0,0,0,0,0,0],tlhN:0,tlh:[0,0,0,0,0,0],ti:[0,0],ts:[0,0],tk:[0,0],dongN:0,dong:[0,0,0,0,0,0],matN:0,mat:[0,0,0,0,0,0],qc2N:0,qc2:[0,0,0,0,0,0]},
-{d:'4-May',w:'T2',wk:'W19',po:63,qcN:18,qc:[120,119,32582,32083,9412,9309],lkN:25,lk:[84,78,47886,44716,10289,9256],tqcN:3,tqc:[20,17,3760,3376,2493,2295],tlhN:1,tlh:[2,2,340,328,170,164],ti:[84568,80503],ts:[226,216],tk:[22364,21023],dongN:11,dong:[36,35,12960,12328,3525,3389],matN:14,mat:[48,43,34266,31716,6934,6030],qc2N:21,qc2:[140,136,36342,35459,11905,11604]},
-{d:'5-May',w:'T3',wk:'W19',po:0,qcN:0,qc:[0,0,0,0,0,0],lkN:0,lk:[0,0,0,0,0,0],tqcN:0,tqc:[0,0,0,0,0,0],tlhN:0,tlh:[0,0,0,0,0,0],ti:[0,0],ts:[0,0],tk:[0,0],dongN:0,dong:[0,0,0,0,0,0],matN:0,mat:[0,0,0,0,0,0],qc2N:0,qc2:[0,0,0,0,0,0]}
-];
-
-nhapIdx = DN.length - 1;
-// Find last non-off day for nhap
-while(nhapIdx > 0 && DN[nhapIdx].off) nhapIdx--;
-
-function switchTab(tab) {
-  currentTab = tab;
-  document.getElementById('tabXuat').className = tab==='xuat' ? 'tab-btn active' : 'tab-btn';
-  document.getElementById('tabNhap').className = tab==='nhap' ? 'tab-btn active-nhap' : 'tab-btn';
-  document.getElementById('tabDapUng').className = tab==='dapung' ? 'tab-btn active-du' : 'tab-btn';
-  const labels = {xuat:'XUáº¤T HÃ€NG',nhap:'NHáº¬P HÃ€NG',dapung:'Tá»¶ Lá»† ÄÃP á»¨NG'};
-  const colors = {xuat:'#ef4444',nhap:'#f59e0b',dapung:'#10b981'};
-  document.getElementById('headerSub').textContent = labels[tab];
-  document.getElementById('headerSub').style.color = colors[tab];
-  document.getElementById('warning-section').style.display = tab==='xuat' ? '' : 'none';
-  document.querySelector('.legend').style.display = tab==='xuat' ? '' : 'none';
-  // Show/hide nav buttons for table view
-  const btnDisplay = tab==='dapung' ? 'none' : '';
-  document.getElementById('btnPrev').style.display = btnDisplay;
-  document.getElementById('btnNext').style.display = btnDisplay;
-  if (tab === 'xuat') { render(); }
-  else if (tab === 'nhap') { renderNhap(); }
-  else { renderDapUng(); }
-}
-
-// Nhap: row helper [bk, tn] -> formatted row
-function nhRow(label, bk, tn, isFirst, ncc) {
-  const cls = isFirst ? ' class="cat-first"' : '';
-  const pct = bk > 0 ? ((bk-tn)/bk*100) : 0;
-  const pctTxt = bk > 0 ? pct.toFixed(2)+'%' : 'â€”';
-  const pCls = pct > 1 ? 'pick-warn' : 'pick-ok';
-  if (ncc !== undefined) {
-    // NCC row - single value, no tn
-    return `<tr${cls}><td class="c-info" style="padding-left:16px">Sá»‘ lÆ°á»£ng NCC</td><td class="c-bk">${fmt(ncc)}</td><td class="c-tx"></td><td class="c-pk"></td></tr>`;
-  }
-  return `<tr${cls}><td class="c-info" style="padding-left:16px">${label}</td><td class="c-bk">${fmt(bk)}</td><td class="c-tx">${fmt(tn)}</td><td class="c-pk ${pCls}">${pctTxt}</td></tr>`;
-}
-
-function nhCatBlock(catLabel, arr, nccVal, isFirst) {
-  // arr = [sku_bk, sku_tn, item_bk, item_tn, kg_bk, kg_tn]
-  let h = `<tr${isFirst?' class="cat-first"':''}>
-    <td class="c-cat" rowspan="4">${catLabel}</td>`;
-  // NCC row
-  h += `<td class="c-info">Sá»‘ lÆ°á»£ng NCC</td><td class="c-bk">${fmt(nccVal)}</td><td class="c-tx c-empty"></td><td class="c-pk c-empty"></td></tr>`;
-  // SKU
-  const skuPct = arr[0]>0 ? ((arr[0]-arr[1])/arr[0]*100) : 0;
-  h += `<tr><td class="c-info">Sá»‘ lÆ°á»£ng SKU</td><td class="c-bk">${fmt(arr[0])}</td><td class="c-tx">${fmt(arr[1])}</td><td class="c-pk ${skuPct>1?'pick-warn':'pick-ok'}">${arr[0]>0?skuPct.toFixed(2)+'%':'0.00%'}</td></tr>`;
-  // ITEM
-  const iPct = arr[2]>0 ? ((arr[2]-arr[3])/arr[2]*100) : 0;
-  h += `<tr class="row-2"><td class="c-info">Sá»‘ lÆ°á»£ng (ITEM)</td><td class="c-bk">${fmt(arr[2])}</td><td class="c-tx">${fmt(arr[3])}</td><td class="c-pk ${iPct>1?'pick-warn':'pick-ok'}">${arr[2]>0?iPct.toFixed(2)+'%':'0.00%'}</td></tr>`;
-  // KG
-  const kPct = arr[4]>0 ? ((arr[4]-arr[5])/arr[4]*100) : 0;
-  h += `<tr class="row-3"><td class="c-info">Trá»ng lÆ°á»£ng (kg)</td><td class="c-bk">${fmt(arr[4])}</td><td class="c-tx">${fmt(arr[5])}</td><td class="c-pk ${kPct>1?'pick-warn':'pick-ok'}">${arr[4]>0?kPct.toFixed(2)+'%':'0.00%'}</td></tr>`;
-  return h;
-}
-
-function nhTableHead(day) {
-  return `<colgroup>
-    <col style="width:110px"><col style="width:120px">
-    <col style="width:90px"><col style="width:90px"><col style="width:90px">
-  </colgroup>
-  <thead><tr><th class="h-cat" colspan="2"></th><th class="date-head" colspan="3">${day.d} â€” ${day.w}</th></tr>
-  <tr><th class="h-cat">Loáº¡i hÃ ng</th><th class="h-info">ThÃ´ng tin</th><th>Booking</th><th>Thá»±c nháº­p</th><th>Tá»‰ lá»‡ pick rá»›t</th></tr></thead>`;
-}
-
-function renderNhap() {
-  const day = DN[nhapIdx];
-  document.getElementById('navDate').textContent = day.d;
-  document.getElementById('navDow').textContent = day.w;
-  document.getElementById('navWeek').textContent = day.wk;
-  document.getElementById('btnPrev').disabled = nhapIdx === 0;
-  document.getElementById('btnNext').disabled = nhapIdx === DN.length-1;
-
-  if (day.off) {
-    document.getElementById('content').innerHTML = `<div class="table-block"><div class="off-msg">ðŸ“… ${day.d} (${day.w}) â€” NgÃ y nghá»‰, khÃ´ng cÃ³ dá»¯ liá»‡u</div></div>`;
-    return;
-  }
-
-  // Summary cards above tables
-  const tiPct = day.ti[0]>0 ? ((day.ti[0]-day.ti[1])/day.ti[0]*100) : 0;
-  const tsPct = day.ts[0]>0 ? ((day.ts[0]-day.ts[1])/day.ts[0]*100) : 0;
-  const tkPct = day.tk[0]>0 ? ((day.tk[0]-day.tk[1])/day.tk[0]*100) : 0;
-  const sumHtml = `
-  <tr class="summary cat-first"><td class="c-cat" rowspan="3" style="vertical-align:top">Tá»”NG</td>
-    <td class="c-info">Total ITEM</td><td class="c-bk">${fmt(day.ti[0])}</td><td class="c-tx">${fmt(day.ti[1])}</td><td class="c-pk ${tiPct>1?'pick-warn':'pick-ok'}">${tiPct.toFixed(2)}%</td></tr>
-  <tr class="summary row-2"><td class="c-info">Total SKUs</td><td class="c-bk">${fmt(day.ts[0])}</td><td class="c-tx">${fmt(day.ts[1])}</td><td class="c-pk ${tsPct>1?'pick-warn':'pick-ok'}">${tsPct.toFixed(2)}%</td></tr>
-  <tr class="summary row-3"><td class="c-info">Total trá»ng lÆ°á»£ng</td><td class="c-bk">${fmt(day.tk[0])}</td><td class="c-tx">${fmt(day.tk[1])}</td><td class="c-pk ${tkPct>1?'pick-warn':'pick-ok'}">${tkPct.toFixed(2)}%</td></tr>`;
-
-  let html = `<div class="table-block nh-cards">
-    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
-      <div class="s-card" style="border-color:#f59e0b"><div class="s-label" style="color:#f59e0b">PO NCC giao</div><div class="s-val">${fmt(day.po)}</div></div>
-      <div class="s-card" style="border-color:#22d3ee"><div class="s-label">Total ITEM Bk</div><div class="s-val">${fmt(day.ti[0])}</div></div>
-      <div class="s-card" style="border-color:#22d3ee"><div class="s-label">Total ITEM Nháº­p</div><div class="s-val">${fmt(day.ti[1])}</div></div>
-      <div class="s-card" style="border-color:${tiPct>1?'#f87171':'#22d3ee'}"><div class="s-label">Tá»‰ lá»‡ rá»›t</div><div class="s-val" style="color:${tiPct>1?'#f87171':'#22d3ee'}">${tiPct.toFixed(2)}%</div></div>
-      <div class="s-card" style="border-color:#a78bfa"><div class="s-label">Total SKUs</div><div class="s-val">${fmt(day.ts[0])} â†’ ${fmt(day.ts[1])}</div></div>
-    </div>
-  </div>
-
-  <div class="table-block nh-compact"><div class="table-title" style="color:#f59e0b">ðŸ“¥ Báº£ng 1 â€” Nháº­p hÃ ng theo loáº¡i váº­n chuyá»ƒn</div>
-    <table>${nhTableHead(day)}<tbody>
-    ${nhCatBlock('HÃ ng QuÃ¡ Cáº£nh', day.qc, day.qcN, true)}
-    ${nhCatBlock('HÃ ng LÆ°u Kho', day.lk, day.lkN, true)}
-    ${nhCatBlock('TCNK QuÃ¡ Cáº£nh', day.tqc, day.tqcN, true)}
-    ${nhCatBlock('TCNK LÆ°u HÃ ng', day.tlh, day.tlhN, true)}
-    ${sumHtml}
-    </tbody></table></div>`;
-
-  // Báº£ng 2
-  html += `<div class="table-block nh-compact"><div class="table-title" style="color:#f59e0b">ðŸŒ¡ï¸ Báº£ng 2 â€” Nháº­p hÃ ng theo ÄÃ´ng / MÃ¡t</div>
-    <table>${nhTableHead(day)}<tbody>
-    ${nhCatBlock('LÆ°u HÃ ng ÄÃ´ng', day.dong, day.dongN, true)}
-    ${nhCatBlock('LÆ°u HÃ ng MÃ¡t', day.mat, day.matN, true)}
-    ${nhCatBlock('HÃ ng QuÃ¡ Cáº£nh', day.qc2, day.qc2N, true)}
-    </tbody></table></div>`;
-
-  document.getElementById('content').innerHTML = html;
-}
-// === Tá»¶ Lá»† ÄÃP á»¨NG DATA ===
-const DA = [
-{d:'31-Mar',w:'T3',wk:'W14',fc:100206,bkTon:122922,tx:122864,diff:58,du:99.95,tlFc:29995,tlBkTon:33668,tlTx:33644,tlDiff:24,duTl:99.93},
-{d:'1-Apr',w:'T4',wk:'W14',fc:94710,bkTon:106211,tx:106187,diff:24,du:99.98,tlFc:30288,tlBkTon:26667,tlTx:26660,tlDiff:6,duTl:99.98},
-{d:'2-Apr',w:'T5',wk:'W14',fc:100332,bkTon:97710,tx:97707,diff:3,du:100.00,tlFc:33258,tlBkTon:27230,tlTx:27229,tlDiff:1,duTl:100.00},
-{d:'3-Apr',w:'T6',wk:'W14',fc:93092,bkTon:103630,tx:103522,diff:108,du:99.90,tlFc:31202,tlBkTon:28239,tlTx:28224,tlDiff:15,duTl:99.95},
-{d:'4-Apr',w:'T7',wk:'W14',fc:105889,bkTon:101228,tx:101210,diff:18,du:99.98,tlFc:33512,tlBkTon:27267,tlTx:27257,tlDiff:11,duTl:99.96},
-{d:'5-Apr',w:'CN',wk:'W14',fc:110075,bkTon:116434,tx:116317,diff:117,du:99.90,tlFc:35267,tlBkTon:32815,tlTx:32721,tlDiff:94,duTl:99.71},
-{d:'Tuáº§n 14',w:'',wk:'W14',wkTotal:true,wkRange:'31/03-05/04',fc:604304,bkTon:648133,tx:647805,diff:328,du:99.95,tlFc:193522,tlBkTon:175886,tlTx:175736,tlDiff:151,duTl:99.91},
-{d:'7-Apr',w:'T3',wk:'W15',fc:99582,bkTon:110095,tx:110088,diff:7,du:99.99,tlFc:29798,tlBkTon:27679,tlTx:27678,tlDiff:1,duTl:100.00},
-{d:'8-Apr',w:'T4',wk:'W15',fc:97873,bkTon:97794,tx:97746,diff:48,du:99.95,tlFc:28862,tlBkTon:24686,tlTx:24678,tlDiff:8,duTl:99.97},
-{d:'9-Apr',w:'T5',wk:'W15',fc:95233,bkTon:103777,tx:103723,diff:54,du:99.95,tlFc:29638,tlBkTon:29283,tlTx:29271,tlDiff:12,duTl:99.96},
-{d:'10-Apr',w:'T6',wk:'W15',fc:94303,bkTon:91389,tx:91323,diff:66,du:99.93,tlFc:29415,tlBkTon:25462,tlTx:25450,tlDiff:13,duTl:99.95},
-{d:'11-Apr',w:'T7',wk:'W15',fc:106021,bkTon:104057,tx:103319,diff:738,du:99.29,tlFc:31085,tlBkTon:26838,tlTx:26112,tlDiff:726,duTl:97.30},
-{d:'12-Apr',w:'CN',wk:'W15',fc:112703,bkTon:120926,tx:121034,diff:-108,du:100.09,tlFc:33628,tlBkTon:32770,tlTx:32949,tlDiff:-179,duTl:100.55},
-{d:'Tuáº§n 15',w:'',wk:'W15',wkTotal:true,wkRange:'07/04-12/04',fc:605715,bkTon:628038,tx:627233,diff:805,du:99.87,tlFc:182426,tlBkTon:166719,tlTx:166138,tlDiff:581,duTl:99.65},
-{d:'14-Apr',w:'T3',wk:'W16',fc:99634,bkTon:120524,tx:120500,diff:24,du:99.98,tlFc:27601,tlBkTon:30194,tlTx:30188,tlDiff:6,duTl:99.98},
-{d:'15-Apr',w:'T4',wk:'W16',fc:95303,bkTon:107318,tx:107305,diff:13,du:99.99,tlFc:28345,tlBkTon:32963,tlTx:32960,tlDiff:3,duTl:99.99},
-{d:'16-Apr',w:'T5',wk:'W16',fc:96358,bkTon:128244,tx:128188,diff:56,du:99.96,tlFc:29945,tlBkTon:36456,tlTx:36446,tlDiff:10,duTl:99.97},
-{d:'17-Apr',w:'T6',wk:'W16',fc:94192,bkTon:100303,tx:100276,diff:27,du:99.97,tlFc:29409,tlBkTon:28319,tlTx:28313,tlDiff:6,duTl:99.98},
-{d:'18-Apr',w:'T7',wk:'W16',fc:103765,bkTon:108824,tx:108710,diff:114,du:99.90,tlFc:30634,tlBkTon:30654,tlTx:30559,tlDiff:95,duTl:99.69},
-{d:'19-Apr',w:'CN',wk:'W16',fc:110447,bkTon:126513,tx:126486,diff:27,du:99.98,tlFc:33177,tlBkTon:34854,tlTx:34847,tlDiff:7,duTl:99.98},
-{d:'Tuáº§n 16',w:'',wk:'W16',wkTotal:true,wkRange:'14/04-19/04',fc:599699,bkTon:691726,tx:691465,diff:261,du:99.96,tlFc:179111,tlBkTon:193440,tlTx:193312,tlDiff:127,duTl:99.93},
 {d:'21-Apr',w:'T3',wk:'W17',fc:99127,bkTon:131553,tx:129217,diff:2336,du:98.22,tlFc:27452,tlBkTon:35423,tlTx:33131,tlDiff:2292,duTl:93.53},
 {d:'22-Apr',w:'T4',wk:'W17',fc:97873,bkTon:111581,tx:111546,diff:35,du:99.97,tlFc:28862,tlBkTon:28657,tlTx:28650,tlDiff:7,duTl:99.98},
 {d:'23-Apr',w:'T5',wk:'W17',fc:95955,bkTon:108985,tx:108939,diff:46,du:99.96,tlFc:29638,tlBkTon:32746,tlTx:32736,tlDiff:10,duTl:99.97},
@@ -1467,9 +1340,9 @@ function monthLabel(m) { return m===3?'ThÃ¡ng 3':m===4?'ThÃ¡ng 4':m===5?'Th�
 function renderDapUng() {
   document.getElementById('btnPrev').style.display = 'none';
   document.getElementById('btnNext').style.display = 'none';
-  document.querySelector('.day-info .date').textContent = 'Tá»· lá»‡ Ä‘Ã¡p á»©ng';
+  document.querySelector('.day-info .date').textContent = 'Tá»· lï¿½? ï¿½'Ã¡p á»©ng';
   document.querySelector('.day-info .dow').textContent = 'T4/2026';
-  document.querySelector('.day-info .week').textContent = 'Tá»•ng há»£p';
+  document.querySelector('.day-info .week').textContent = 'Tï¿½.ng há»£p';
 
   function duClr(v) { return v >= 99.5 ? '#10b981' : v >= 99 ? '#f59e0b' : '#ef4444'; }
   function diffClr(v) { return Math.abs(v) > 100 ? '#f87171' : '#10b981'; }
@@ -1530,7 +1403,7 @@ function renderDapUng() {
 
   let filterHtml = `<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:center;padding:10px 16px;background:#0f1328;border-bottom:1px solid #1e293b">
     <div style="display:flex;align-items:center;gap:6px">
-      <span style="color:#64748b;font-size:11px;font-weight:600">ðŸ“… THÃNG:</span>
+      <span style="color:#64748b;font-size:11px;font-weight:600">ï¿½Y". THÃNG:</span>
       <button style="${btnAct(daMonth===0&&!daSummary)}" onclick="daMonth=0;daSummary=false;renderDapUng()">Táº¥t cáº£</button>
       <button style="${btnAct(daMonth===3)}" onclick="daMonth=3;daSummary=false;renderDapUng()">T3</button>
       <button style="${btnAct(daMonth===4)}" onclick="daMonth=4;daSummary=false;renderDapUng()">T4</button>
@@ -1538,15 +1411,15 @@ function renderDapUng() {
     </div>
     <div style="width:1px;height:24px;background:#1e293b"></div>
     <div style="display:flex;align-items:center;gap:6px">
-      <span style="color:#64748b;font-size:11px;font-weight:600">ðŸ“† TUáº¦N:</span>
+      <span style="color:#64748b;font-size:11px;font-weight:600">ï¿½Y"? TUáº¦N:</span>
       <span style="color:#94a3b8;font-size:11px">Tá»«</span>
       <select style="${selStyle}" onchange="daWkFrom=+this.value;daSummary=false;renderDapUng()">${wkOpts(daWkFrom)}</select>
-      <span style="color:#94a3b8;font-size:11px">â†’</span>
+      <span style="color:#94a3b8;font-size:11px">ï¿½?'</span>
       <select style="${selStyle}" onchange="daWkTo=+this.value;daSummary=false;renderDapUng()">${wkOpts(daWkTo)}</select>
     </div>
     <div style="width:1px;height:24px;background:#1e293b"></div>
-    <button style="${btnAct(daSummary)}" onclick="daSummary=!daSummary;daMSummary=false;renderDapUng()">ðŸ“Š Tá»•ng tuáº§n</button>
-    <button style="${btnAct(daMSummary)}" onclick="daMSummary=!daMSummary;daSummary=false;renderDapUng()">ðŸ”¶ Tá»•ng thÃ¡ng</button>
+    <button style="${btnAct(daSummary)}" onclick="daSummary=!daSummary;daMSummary=false;renderDapUng()">ï¿½Y"S Tï¿½.ng tuáº§n</button>
+    <button style="${btnAct(daMSummary)}" onclick="daMSummary=!daMSummary;daSummary=false;renderDapUng()">ï¿½Y"ï¿½ Tï¿½.ng thÃ¡ng</button>
   </div>`;
 
   // Table rows
@@ -1560,7 +1433,7 @@ function renderDapUng() {
     const bg = isSpecial ? `background:rgba(${specColor},0.08);` : '';
     const bdr = isSpecial ? `border-top:2px solid rgba(${specColor},0.3);border-bottom:2px solid rgba(${specColor},0.3);` : '';
     const fw = isSpecial ? 'font-weight:800;' : '';
-    const label = isMt ? `ðŸ“… ${r.d}` : isWk ? `ðŸ“Š ${r.d}` : r.d;
+    const label = isMt ? `ï¿½Y". ${r.d}` : isWk ? `ï¿½Y"S ${r.d}` : r.d;
     const dayCol = isSpecial ? `color:${specHex};` : 'color:#94a3b8;';
     const m = getMonth(r.d);
     const mLabel = isSpecial ? '' : (m===3?'T3':m===4?'T4':m===5?'T5':'');
@@ -1579,12 +1452,12 @@ function renderDapUng() {
       if (prev) {
          let diffDu = (r.du - prev.du).toFixed(2);
          let diffDuTl = (r.duTl - prev.duTl).toFixed(2);
-         let arrDu = diffDu > 0 ? 'â–²' : diffDu < 0 ? 'â–¼' : '';
+         let arrDu = diffDu > 0 ? 'ï¿½-ï¿½' : diffDu < 0 ? 'ï¿½-ï¿½' : '';
          let colDu = diffDu > 0 ? '#10b981' : diffDu < 0 ? '#ef4444' : '#64748b';
          let signDu = diffDu > 0 ? '+' : '';
          if (arrDu) duStr += `<br><span style="font-size:9.5px;color:${colDu};font-weight:700">${arrDu} ${signDu}${diffDu}%</span>`;
          
-         let arrDuTl = diffDuTl > 0 ? 'â–²' : diffDuTl < 0 ? 'â–¼' : '';
+         let arrDuTl = diffDuTl > 0 ? 'ï¿½-ï¿½' : diffDuTl < 0 ? 'ï¿½-ï¿½' : '';
          let colDuTl = diffDuTl > 0 ? '#10b981' : diffDuTl < 0 ? '#ef4444' : '#64748b';
          let signDuTl = diffDuTl > 0 ? '+' : '';
          if (arrDuTl) duTlStr += `<br><span style="font-size:9.5px;color:${colDuTl};font-weight:700">${arrDuTl} ${signDuTl}${diffDuTl}%</span>`;
@@ -1593,7 +1466,7 @@ function renderDapUng() {
 
     rows += `<tr style="${bg}${bdr}">
       <td style="${fw}color:#e2e8f0;white-space:nowrap">${label}</td>
-      <td style="${dayCol}${fw}text-align:center;font-size:10px">${isWk ? r.wkRange||'' : isMt ? 'Tá»•ng' : r.w||''}</td>
+      <td style="${dayCol}${fw}text-align:center;font-size:10px">${isWk ? r.wkRange||'' : isMt ? 'Tï¿½.ng' : r.w||''}</td>
       <td style="text-align:center;color:#10b981;font-size:10px;${fw}">${isSpecial ? '' : r.wk||''}</td>
       <td style="text-align:center;color:#f59e0b;font-size:10px;${fw}">${mLabel}</td>
       <td style="text-align:right;color:#818cf8;${fw}">${fmt(r.fc)}</td>
@@ -1609,16 +1482,16 @@ function renderDapUng() {
     </tr>`;
   });
   
-  let title = 'Tá»•ng há»£p';
+  let title = 'Tï¿½.ng há»£p';
   if (daSummary) title = 'So sÃ¡nh theo tuáº§n';
   else if (daMSummary) title = 'So sÃ¡nh theo thÃ¡ng';
   else if (daMonth > 0) title = `ThÃ¡ng ${daMonth}`;
   else if (daWkFrom === daWkTo) title = `Tuáº§n ${daWkFrom}`;
-  else title = `Tuáº§n ${daWkFrom} â†’ ${daWkTo}`;
+  else title = `Tuáº§n ${daWkFrom} ï¿½?' ${daWkTo}`;
 
   let html = `${filterHtml}
   <div class="table-block" style="max-width:1200px;overflow-x:auto">
-    <div class="table-title" style="color:#10b981">ðŸ“ˆ Tá»· lá»‡ Ä‘Ã¡p á»©ng â€” ${title}</div>
+    <div class="table-title" style="color:#10b981">ï¿½Y"^ Tá»· lï¿½? ï¿½'Ã¡p á»©ng ï¿½?" ${title}</div>
     <table style="table-layout:auto;font-size:11.5px">
     <thead>
       <tr>
@@ -1626,18 +1499,18 @@ function renderDapUng() {
         <th rowspan="2" style="width:45px">Thá»©</th>
         <th rowspan="2" style="width:40px;color:#10b981">Tuáº§n</th>
         <th rowspan="2" style="width:30px;color:#f59e0b">ThÃ¡ng</th>
-        <th colspan="5" style="text-align:center;color:#22d3ee;border-bottom:2px solid #22d3ee">ðŸ“¦ ITEM</th>
-        <th colspan="5" style="text-align:center;color:#a78bfa;border-bottom:2px solid #a78bfa">âš–ï¸ Trá»ng lÆ°á»£ng (kg)</th>
+        <th colspan="5" style="text-align:center;color:#22d3ee;border-bottom:2px solid #22d3ee">ï¿½Y"ï¿½ ITEM</th>
+        <th colspan="5" style="text-align:center;color:#a78bfa;border-bottom:2px solid #a78bfa">ï¿½s-ï¸ Trá»ng lÆ°á»£ng (kg)</th>
       </tr>
       <tr>
         <th style="color:#818cf8">FC</th>
-        <th style="color:#22d3ee">Bk Tá»“n</th>
-        <th style="color:#a78bfa">Thá»±c xuáº¥t</th>
+        <th style="color:#22d3ee">Bk Tï¿½"n</th>
+        <th style="color:#a78bfa">Thực xuất</th>
         <th>CL</th>
         <th style="color:#10b981">% ÄU</th>
         <th style="color:#818cf8">FC</th>
-        <th style="color:#22d3ee">Bk Tá»“n</th>
-        <th style="color:#a78bfa">Thá»±c xuáº¥t</th>
+        <th style="color:#22d3ee">Bk Tï¿½"n</th>
+        <th style="color:#a78bfa">Thực xuất</th>
         <th>CL</th>
         <th style="color:#10b981">% ÄU</th>
       </tr>
