@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard ABA ÄÃ´ng MÃ¡t â€” T4-T5/2026</title>
+<title>Dashboard ABA &#x110;&#xF4;ng M&#xE1;t &#x2014; T4-T5/2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -16,7 +16,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:#0a0a1a;background-
 .main-tab{padding:12px 36px;border-radius:14px;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);color:#6b7094;transition:all 0.3s ease;letter-spacing:0.3px;position:relative}
 .main-tab:hover{background:rgba(79,172,254,0.08);color:#8bb8f0;border-color:rgba(79,172,254,0.2)}
 .main-tab.active{background:linear-gradient(135deg,rgba(79,172,254,0.18),rgba(161,140,209,0.15));color:#fff;border-color:rgba(79,172,254,0.4);box-shadow:0 4px 20px rgba(79,172,254,0.15)}
-.main-tab.active::after{content:'';position:absolute;bottom:-1px;left:20%;right:20%;height:3px;border-radius:3px 3px 0 0;background:linear-gradient(90deg,#4facfe,#00f2fe)}
+.main-tab.active::after{content:';position:absolute;bottom:-1px;left:20%;right:20%;height:3px;border-radius:3px 3px 0 0;background:linear-gradient(90deg,#4facfe,#00f2fe)}
 .frame-container{flex:1;padding:8px;display:none}
 .frame-container.active{display:block}
 .frame-container iframe{width:100%;height:calc(100vh - 120px);border:none;border-radius:12px;background:#0b0d12}
@@ -25,24 +25,24 @@ body{font-family:'Inter',-apple-system,sans-serif;background:#0a0a1a;background-
 </head>
 <body>
 <div class="top-header">
-  <h1>ðŸ“Š Dashboard ABA ÄÃ´ng MÃ¡t</h1>
-  <div class="subtitle">Tá»•ng há»£p bÃ¡o cÃ¡o T4-T5/2026 &nbsp;|&nbsp; Cáº­p nháº­t: <span id="updateDate"></span></div>
+  <h1>&#x1F4CA; Dashboard ABA &#x110;&#xF4;ng M&#xE1;t</h1>
+  <div class="subtitle">T&#x1ED5;ng h&#x1EE3;p b&#xE1;o c&#xE1;o T4-T5/2026 &nbsp;|&nbsp; C&#x1EAD;p nh&#x1EAD;t: <span id="updateDate"></span></div>
 </div>
 <div class="main-tabs">
-  <button class="main-tab active" onclick="switchMainTab(0)">ðŸ“¦ Nháº­p / Xuáº¥t &amp; ÄÃ¡p á»©ng</button>
-  <button class="main-tab" onclick="switchMainTab(1)">ðŸ“‹ Claim ABA</button>
+  <button class="main-tab active" onclick="switchMainTab(0)">&#x1F4E6; Nh&#x1EAD;p / Xu&#x1EA5;t &amp; &#x110;&#xE1;p &#x1EE9;ng</button>
+  <button class="main-tab" onclick="switchMainTab(1)">&#x1F4CB; Claim ABA</button>
 </div>
 <div class="frame-container active" id="frame0"><iframe id="iframe0"></iframe></div>
 <div class="frame-container" id="frame1"><iframe id="iframe1"></iframe></div>
-<div class="bottom-footer">Dashboard ABA ÄÃ´ng MÃ¡t â€” KFM Logistics</div>
+<div class="bottom-footer">Dashboard ABA &#x110;&#xF4;ng M&#xE1;t &#x2014; KFM Logistics</div>
 <script>
-const now=new Date(),pad=n=>String(n).padStart(2,'0');
-document.getElementById('updateDate').textContent=pad(now.getDate())+'/'+pad(now.getMonth()+1)+'/'+now.getFullYear()+' '+pad(now.getHours())+':'+pad(now.getMinutes());
+var now=new Date(),pad=function(n){return String(n).padStart(2,'0');};
+document.getElementById('updateDate').textContent=pad(now.getDate())+'/'+ pad(now.getMonth()+1)+'/'+ now.getFullYear()+' '+pad(now.getHours())+':'+pad(now.getMinutes());
 function switchMainTab(idx){
-  document.querySelectorAll('.main-tab').forEach((t,i)=>t.classList.toggle('active',i===idx));
-  document.querySelectorAll('.frame-container').forEach((f,i)=>f.classList.toggle('active',i===idx));
+  document.querySelectorAll('.main-tab').forEach(function(t,i){t.classList.toggle('active',i===idx);});
+  document.querySelectorAll('.frame-container').forEach(function(f,i){f.classList.toggle('active',i===idx);});
 }
-const pages=[
+var pages=[
 `<!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -3470,10 +3470,9 @@ function resetItemTableFilter() {
 <\/script>
 </body>
 </html>
-`
-];
-pages.forEach((html,i)=>{
-  const blob=new Blob([html],{type:'text/html;charset=utf-8'});
+`];
+pages.forEach(function(html,i){
+  var blob=new Blob([html],{type:'text/html;charset=utf-8'});
   document.getElementById('iframe'+i).src=URL.createObjectURL(blob);
 });
 </script>
