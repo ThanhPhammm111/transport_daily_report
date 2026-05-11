@@ -1277,8 +1277,6 @@ function renderWarning() {
   el.innerHTML = html;
 }
 
-nhapIdx = DN.length - 1;
-while(nhapIdx > 0 && DN[nhapIdx].off) nhapIdx--;
 
 function switchTab(tab) {
   currentTab = tab;
@@ -1412,7 +1410,27 @@ const DN = [
 ];
 
 const DA = [
-
+{d:'31-Mar',w:'T3',wk:'W14',fc:100206,bkTon:122922,tx:122864,diff:58,du:99.95,tlFc:29995,tlBkTon:33668,tlTx:33644,tlDiff:24,duTl:99.93},
+{d:'1-Apr',w:'T4',wk:'W14',fc:94710,bkTon:106211,tx:106187,diff:24,du:99.98,tlFc:30288,tlBkTon:26667,tlTx:26660,tlDiff:6,duTl:99.98},
+{d:'2-Apr',w:'T5',wk:'W14',fc:100332,bkTon:97710,tx:97707,diff:3,du:100.00,tlFc:33258,tlBkTon:27230,tlTx:27229,tlDiff:1,duTl:100.00},
+{d:'3-Apr',w:'T6',wk:'W14',fc:93092,bkTon:103630,tx:103522,diff:108,du:99.90,tlFc:31202,tlBkTon:28239,tlTx:28224,tlDiff:15,duTl:99.95},
+{d:'4-Apr',w:'T7',wk:'W14',fc:105889,bkTon:101228,tx:101210,diff:18,du:99.98,tlFc:33512,tlBkTon:27267,tlTx:27257,tlDiff:11,duTl:99.96},
+{d:'5-Apr',w:'CN',wk:'W14',fc:110075,bkTon:116434,tx:116317,diff:117,du:99.90,tlFc:35267,tlBkTon:32815,tlTx:32721,tlDiff:94,duTl:99.71},
+{d:'Tuần 14',w:'',wk:'W14',wkTotal:true,wkRange:'31/03-05/04',fc:604304,bkTon:648133,tx:647805,diff:328,du:99.95,tlFc:193522,tlBkTon:175886,tlTx:175736,tlDiff:151,duTl:99.91},
+{d:'7-Apr',w:'T3',wk:'W15',fc:99582,bkTon:110095,tx:110088,diff:7,du:99.99,tlFc:29798,tlBkTon:27679,tlTx:27678,tlDiff:1,duTl:100.00},
+{d:'8-Apr',w:'T4',wk:'W15',fc:97873,bkTon:97794,tx:97746,diff:48,du:99.95,tlFc:28862,tlBkTon:24686,tlTx:24678,tlDiff:8,duTl:99.97},
+{d:'9-Apr',w:'T5',wk:'W15',fc:95233,bkTon:103777,tx:103723,diff:54,du:99.95,tlFc:29638,tlBkTon:29283,tlTx:29271,tlDiff:12,duTl:99.96},
+{d:'10-Apr',w:'T6',wk:'W15',fc:94303,bkTon:91389,tx:91323,diff:66,du:99.93,tlFc:29415,tlBkTon:25462,tlTx:25450,tlDiff:13,duTl:99.95},
+{d:'11-Apr',w:'T7',wk:'W15',fc:106021,bkTon:104057,tx:103319,diff:738,du:99.29,tlFc:31085,tlBkTon:26838,tlTx:26112,tlDiff:726,duTl:97.30},
+{d:'12-Apr',w:'CN',wk:'W15',fc:112703,bkTon:120926,tx:121034,diff:-108,du:100.09,tlFc:33628,tlBkTon:32770,tlTx:32949,tlDiff:-179,duTl:100.55},
+{d:'Tuần 15',w:'',wk:'W15',wkTotal:true,wkRange:'07/04-12/04',fc:605715,bkTon:628038,tx:627233,diff:805,du:99.87,tlFc:182426,tlBkTon:166719,tlTx:166138,tlDiff:581,duTl:99.65},
+{d:'14-Apr',w:'T3',wk:'W16',fc:99634,bkTon:120524,tx:120500,diff:24,du:99.98,tlFc:27601,tlBkTon:30194,tlTx:30188,tlDiff:6,duTl:99.98},
+{d:'15-Apr',w:'T4',wk:'W16',fc:95303,bkTon:107318,tx:107305,diff:13,du:99.99,tlFc:28345,tlBkTon:32963,tlTx:32960,tlDiff:3,duTl:99.99},
+{d:'16-Apr',w:'T5',wk:'W16',fc:96358,bkTon:128244,tx:128188,diff:56,du:99.96,tlFc:29945,tlBkTon:36456,tlTx:36446,tlDiff:10,duTl:99.97},
+{d:'17-Apr',w:'T6',wk:'W16',fc:94192,bkTon:100303,tx:100276,diff:27,du:99.97,tlFc:29409,tlBkTon:28319,tlTx:28313,tlDiff:6,duTl:99.98},
+{d:'18-Apr',w:'T7',wk:'W16',fc:103765,bkTon:108824,tx:108710,diff:114,du:99.90,tlFc:30634,tlBkTon:30654,tlTx:30559,tlDiff:95,duTl:99.69},
+{d:'19-Apr',w:'CN',wk:'W16',fc:110447,bkTon:126513,tx:126486,diff:27,du:99.98,tlFc:33177,tlBkTon:34854,tlTx:34847,tlDiff:7,duTl:99.98},
+{d:'Tuần 16',w:'',wk:'W16',wkTotal:true,wkRange:'14/04-19/04',fc:599699,bkTon:691726,tx:691465,diff:261,du:99.96,tlFc:179111,tlBkTon:193440,tlTx:193312,tlDiff:127,duTl:99.93},
 {d:'21-Apr',w:'T3',wk:'W17',fc:99127,bkTon:131553,tx:129217,diff:2336,du:98.22,tlFc:27452,tlBkTon:35423,tlTx:33131,tlDiff:2292,duTl:93.53},
 {d:'22-Apr',w:'T4',wk:'W17',fc:97873,bkTon:111581,tx:111546,diff:35,du:99.97,tlFc:28862,tlBkTon:28657,tlTx:28650,tlDiff:7,duTl:99.98},
 {d:'23-Apr',w:'T5',wk:'W17',fc:95955,bkTon:108985,tx:108939,diff:46,du:99.96,tlFc:29638,tlBkTon:32746,tlTx:32736,tlDiff:10,duTl:99.97},
@@ -1436,6 +1454,8 @@ const DA = [
 ];
 
 let daIdx = DA.length - 1;
+nhapIdx = DN.length - 1;
+while(nhapIdx > 0 && DN[nhapIdx].off) nhapIdx--;
 
 let daWkFrom = 14, daWkTo = 20, daMonth = 0;
 let daSummary = false;
@@ -1460,13 +1480,16 @@ function renderDapUng() {
   function duClr(v) { return v >= 99.5 ? '#10b981' : v >= 99 ? '#f59e0b' : '#ef4444'; }
   function diffClr(v) { return Math.abs(v) > 100 ? '#f87171' : '#10b981'; }
 
-  const weeks = [...new Set(DA.map(r => r.wk))];
+  // Filter out off days first
+  const DAactive = DA.filter(r => !r.off);
+
+  const weeks = [...new Set(DAactive.map(r => r.wk))];
   const weekNums = weeks.map(w => parseInt(w.replace('W','')));
 
   // Filter
-  let filtered = DA;
+  let filtered = DAactive;
   if (daSummary) {
-    filtered = DA.filter(r => {
+    filtered = DAactive.filter(r => {
       if (!r.wkTotal) return false;
       const wn = parseInt(r.wk.replace('W',''));
       if (wn < daWkFrom || wn > daWkTo) return false;
@@ -1478,7 +1501,7 @@ function renderDapUng() {
     });
   } else if (daMSummary) {
     // Only show monthly totals
-    const allDays = DA.filter(r => !r.wkTotal);
+    const allDays = DAactive.filter(r => !r.wkTotal);
     const months = [...new Set(allDays.map(r => getMonth(r.d)).filter(m => m > 0))];
     filtered = [];
     months.forEach(mo => {
@@ -1490,12 +1513,12 @@ function renderDapUng() {
       filtered.push(tot);
     });
   } else {
-    filtered = DA.filter(r => {
+    filtered = DAactive.filter(r => {
       const wn = parseInt(r.wk.replace('W',''));
       if (wn < daWkFrom || wn > daWkTo) return false;
       if (daMonth > 0) {
         if (r.wkTotal) {
-          const hasDay = DA.some(x => !x.wkTotal && x.wk === r.wk && getMonth(x.d) === daMonth);
+          const hasDay = DAactive.some(x => !x.wkTotal && x.wk === r.wk && getMonth(x.d) === daMonth);
           return hasDay;
         }
         const m = getMonth(r.d);
@@ -1516,7 +1539,7 @@ function renderDapUng() {
 
   let filterHtml = `<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:center;padding:10px 16px;background:#0f1328;border-bottom:1px solid #1e293b">
     <div style="display:flex;align-items:center;gap:6px">
-      <span style="color:#64748b;font-size:11px;font-weight:600">Y". THÁNG:</span>
+      <span style="color:#64748b;font-size:11px;font-weight:600">📅 THÁNG:</span>
       <button style="${btnAct(daMonth===0&&!daSummary)}" onclick="daMonth=0;daSummary=false;renderDapUng()">Tất cả</button>
       <button style="${btnAct(daMonth===3)}" onclick="daMonth=3;daSummary=false;renderDapUng()">T3</button>
       <button style="${btnAct(daMonth===4)}" onclick="daMonth=4;daSummary=false;renderDapUng()">T4</button>
@@ -1524,15 +1547,15 @@ function renderDapUng() {
     </div>
     <div style="width:1px;height:24px;background:#1e293b"></div>
     <div style="display:flex;align-items:center;gap:6px">
-      <span style="color:#64748b;font-size:11px;font-weight:600">Y"? TUẦN:</span>
+      <span style="color:#64748b;font-size:11px;font-weight:600">📅 TUẦN:</span>
       <span style="color:#94a3b8;font-size:11px">Từ</span>
       <select style="${selStyle}" onchange="daWkFrom=+this.value;daSummary=false;renderDapUng()">${wkOpts(daWkFrom)}</select>
-      <span style="color:#94a3b8;font-size:11px">ỉ'</span>
+      <span style="color:#94a3b8;font-size:11px">đến</span>
       <select style="${selStyle}" onchange="daWkTo=+this.value;daSummary=false;renderDapUng()">${wkOpts(daWkTo)}</select>
     </div>
     <div style="width:1px;height:24px;background:#1e293b"></div>
-    <button style="${btnAct(daSummary)}" onclick="daSummary=!daSummary;daMSummary=false;renderDapUng()">Y"S Tổng tuần</button>
-    <button style="${btnAct(daMSummary)}" onclick="daMSummary=!daMSummary;daSummary=false;renderDapUng()">Y" Tổng tháng</button>
+    <button style="${btnAct(daSummary)}" onclick="daSummary=!daSummary;daMSummary=false;renderDapUng()">📊 Tổng tuần</button>
+    <button style="${btnAct(daMSummary)}" onclick="daMSummary=!daMSummary;daSummary=false;renderDapUng()">📊 Tổng tháng</button>
   </div>`;
 
   // Table rows
@@ -1546,7 +1569,7 @@ function renderDapUng() {
     const bg = isSpecial ? `background:rgba(${specColor},0.08);` : '';
     const bdr = isSpecial ? `border-top:2px solid rgba(${specColor},0.3);border-bottom:2px solid rgba(${specColor},0.3);` : '';
     const fw = isSpecial ? 'font-weight:800;' : '';
-    const label = isMt ? `Y". ${r.d}` : isWk ? `Y"S ${r.d}` : r.d;
+    const label = isMt ? `📅 ${r.d}` : isWk ? `📊 ${r.d}` : r.d;
     const dayCol = isSpecial ? `color:${specHex};` : 'color:#94a3b8;';
     const m = getMonth(r.d);
     const mLabel = isSpecial ? '' : (m===3?'T3':m===4?'T4':m===5?'T5':'');
@@ -1558,7 +1581,7 @@ function renderDapUng() {
       let prev = null;
       if (isWk) {
          const curWkNum = parseInt(r.wk.replace('W',''));
-         prev = DA.find(x => x.wkTotal && parseInt(x.wk.replace('W','')) === curWkNum - 1);
+         prev = DAactive.find(x => x.wkTotal && parseInt(x.wk.replace('W','')) === curWkNum - 1);
       } else if (isMt) {
          for(let i = idx-1; i>=0; i--) { if(filtered[i].mTotal) { prev = filtered[i]; break; } }
       }
@@ -1600,11 +1623,11 @@ function renderDapUng() {
   else if (daMSummary) title = 'So sánh theo tháng';
   else if (daMonth > 0) title = `Tháng ${daMonth}`;
   else if (daWkFrom === daWkTo) title = `Tuần ${daWkFrom}`;
-  else title = `Tuần ${daWkFrom} ỉ' ${daWkTo}`;
+  else title = `Tuần ${daWkFrom} đến ${daWkTo}`;
 
   let html = `${filterHtml}
   <div class="table-block" style="max-width:1200px;overflow-x:auto">
-    <div class="table-title" style="color:#10b981">Y"^ Tỷ lệ 'áp ứng ỉ" ${title}</div>
+    <div class="table-title" style="color:#10b981">📊 Tỷ lệ Đáp ứng — ${title}</div>
     <table style="table-layout:auto;font-size:11.5px">
     <thead>
       <tr>
@@ -1612,8 +1635,8 @@ function renderDapUng() {
         <th rowspan="2" style="width:45px">Thứ</th>
         <th rowspan="2" style="width:40px;color:#10b981">Tuần</th>
         <th rowspan="2" style="width:30px;color:#f59e0b">Tháng</th>
-        <th colspan="5" style="text-align:center;color:#22d3ee;border-bottom:2px solid #22d3ee">Y" ITEM</th>
-        <th colspan="5" style="text-align:center;color:#a78bfa;border-bottom:2px solid #a78bfa">Tổng-️ Trọng lượng (kg)</th>
+        <th colspan="5" style="text-align:center;color:#22d3ee;border-bottom:2px solid #22d3ee">📦 ITEM</th>
+        <th colspan="5" style="text-align:center;color:#a78bfa;border-bottom:2px solid #a78bfa">⚖️ Trọng lượng (kg)</th>
       </tr>
       <tr>
         <th style="color:#818cf8">FC</th>
