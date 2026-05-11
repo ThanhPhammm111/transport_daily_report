@@ -434,9 +434,9 @@ tbody tr.summary td.c-tx { color:var(--cyan) !important; }
 </div>
 
 <div class="tab-nav">
-  <button class="tab-btn active" id="tabXuat" onclick="switchTab('xuat')">Ô XUẤT HÀNG</button>
-  <button class="tab-btn" id="tabNhap" onclick="switchTab('nhap')">Ô NHẬP HÀNG</button>
-  <button class="tab-btn" id="tabDapUng" onclick="switchTab('dapung')">Y"^ TỶ Lỉ ĐÁP ỨNG</button>
+  <button class="tab-btn active" id="tabXuat" onclick="switchTab('xuat')">📊 XUẤT HÀNG</button>
+  <button class="tab-btn" id="tabNhap" onclick="switchTab('nhap')">📊 NHẬP HÀNG</button>
+  <button class="tab-btn" id="tabDapUng" onclick="switchTab('dapung')">📊 TỶ LỆ ĐÁP ỨNG</button>
 </div>
 
 <div class="day-nav">
@@ -1191,6 +1191,8 @@ document.addEventListener('keydown', e => {
   if(e.key==='ArrowRight') next();
 });
 
+const WARN_EXCLUDE = ['9300658407505'];
+
 try {
   render();
   renderWarning();
@@ -1205,7 +1207,6 @@ try {
 }
 
 // SKU đã xử lý xong để loại khỏi Bảng 4
-const WARN_EXCLUDE = ['9300658407505'];
 
 function renderWarning() {
   // Aggregate: code -> { name, cat, entries:[{date, bk, sx, diff}] }
