@@ -1454,6 +1454,7 @@ function renderChiTiet() {
     if (window.ctFilterCode && !it.code.toLowerCase().includes(window.ctFilterCode.toLowerCase())) return false;
     return true;
   });
+  window.ctFilteredItems = filteredItems;
 
   let totalBk = 0;
   let totalTx = 0;
@@ -1494,6 +1495,11 @@ function renderChiTiet() {
         <select id="ctSearchDate" onchange="onCtDateFilterChange(this.value)" style="width:100%; padding:8px 12px; background:var(--bg3); border:1px solid var(--border); border-radius:6px; color:var(--txt); font-family:inherit; font-size:13px; cursor:pointer; box-sizing:border-box; outline:none; transition:all 0.2s;" onfocus="this.style.borderColor='var(--cyan)'" onblur="this.style.borderColor='var(--border)'">
           ${dateOptions}
         </select>
+      </div>
+      <div style="display:flex; align-items:flex-end; height:100%; min-width:120px; padding-top:16px;">
+        <button onclick="exportCtToExcel()" style="padding:8px 16px; background:var(--cyan-bg); border:1px solid var(--cyan); border-radius:6px; color:var(--cyan); font-weight:700; font-family:inherit; font-size:13px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; transition:all 0.2s;" onmouseover="this.style.background='rgba(34,211,238,0.15)'" onmouseout="this.style.background='var(--cyan-bg)'">
+          \u23EC Xu\u00e2\u0301t Excel
+        </button>
       </div>
     </div>
   </div>
@@ -1568,6 +1574,47 @@ function onCtCodeFilterChange(val) {
 function onCtDateFilterChange(val) {
   window.ctFilterDate = val;
   renderChiTiet();
+}
+
+function exportCtToExcel() {
+  const items = window.ctFilteredItems || [];
+  if (items.length === 0) {
+    alert('Kh\u00f4ng c\u00f3 d\u1eef li\u1ec7u \u0111\u1ec3 xu\u1ea5t!');
+    return;
+  }
+  const headers = ['Nga\u0300y', 'Loa\u0323i ha\u0300ng', 'Ha\u0300ng', 'Code', 'T\u00ean sa\u0309n ph\u00e2\u0309m', '\u0110VT', 'Booking', 'S\u1ed1 Xu\u00e2\u0301t', 'Nh\u00e2\u0323p QC', 'Ha\u0300ng QC r\u01a1\u0301t', 'Hold', 'SL pick r\u01a1\u0301t', 'Ghi chu\u0301', 'T/F', 'Ti\u0309 l\u00ea\u0323 Pick'];
+  const csvRows = [headers.join(',')];
+  items.forEach(it => {
+    const f = v => {
+      if (v === null || v === undefined) return '';
+      let s = String(v);
+      if (s.includes(',') || s.includes('"') || s.includes('\n') || s.includes('\r')) {
+        s = '"' + s.replace(/"/g, '""') + '"';
+      }
+      return s;
+    };
+    const row = [
+      f(it.date), f(it.cat), f(it.temp), f(it.code), f(it.name), f(it.unit),
+      f(it.bk), f(it.sx), f(it.nqc), f(it.qcr), f(it.hold), f(it.diff),
+      f(it.note), f(it.diff > 0 ? 'FALSE' : 'TRUE'),
+      f(it.pct > 0 ? (it.pct.toFixed(2) + '%') : '0.00%')
+    ];
+    csvRows.push(row.join(','));
+  });
+  const csvContent = '\uFEFF' + csvRows.join('\n');
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement('a');
+  const url = URL.createObjectURL(blob);
+  link.setAttribute('href', url);
+  let filename = 'Chi_Tiet_Rot_Hang';
+  if (window.ctFilterDate && window.ctFilterDate !== 'all') { filename += '_' + window.ctFilterDate; }
+  if (window.ctFilterCode) { filename += '_code_' + window.ctFilterCode; }
+  filename += '.csv';
+  link.setAttribute('download', filename);
+  link.style.visibility = 'hidden';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 }
 function prev() {
   if (currentTab === 'xuat') { if(curIdx>0){curIdx--;render();window.scrollTo(0,0);} }
