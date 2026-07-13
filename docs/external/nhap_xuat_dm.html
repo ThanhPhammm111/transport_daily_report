@@ -1379,7 +1379,7 @@ function render() {
 
   let html = `
   <div class="table-block">
-    <div class="table-title">Ô Bảng 1 - Theo loại vận chuyển</div>
+    <div class="table-title">📦 Theo Loại Hàng</div>
     <table>${tableHead(day)}<tbody>
       ${catRows('Hàng Quá Cảnh', day.qc, true)}
       ${catRows('Hàng Lưu Kho', day.lk, true)}
@@ -1390,7 +1390,7 @@ function render() {
   </div>
 
   <div class="table-block">
-    <div class="table-title">🌡️ Bảng 2 - Theo loại nhiệt độ (Đông / Mát)</div>
+    <div class="table-title">🌡 Tính Chất Hàng</div>
     <table>${tableHead(day)}<tbody>
       ${catRows('Đông', day.dong, true)}
       ${catRows('Mát', day.mat, true)}
