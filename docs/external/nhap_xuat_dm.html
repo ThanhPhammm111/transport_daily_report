@@ -253,49 +253,52 @@ tbody tr.summary td.c-tx { color:var(--cyan) !important; }
 }
 .table-block { animation:fadeIn 0.3s ease; }
 
-/* Bảng 3 - Chi tiết */
+/* Báº£ng 3 - Chi tiáº¿t */
 .detail-block { max-width:1260px !important; }
 .detail-block .detail-wrap { overflow-x:auto; }
-.detail-table { font-size:11px; table-layout:fixed !important; width:100%; min-width:1200px; }
+.detail-table { font-size:11.5px; table-layout:fixed !important; width:100%; min-width:1200px; }
 .detail-table thead th {
-  font-size:9px; padding:6px 5px;
+  font-size:10px; padding:8px 6px;
   background:linear-gradient(135deg,#0c3d5e,#134050);
   color:var(--cyan); font-weight:700;
   border-bottom:2px solid rgba(34,211,238,0.3);
-  text-transform:uppercase; letter-spacing:0.3px;
+  text-transform:uppercase; letter-spacing:0.4px;
   white-space:nowrap;
 }
-.detail-table thead th:first-child { text-align:center; width:28px; }
-.detail-table thead th.th-cat { text-align:left; width:78px; }
-.detail-table thead th.th-temp { text-align:center; width:44px; }
-.detail-table thead th.th-code { text-align:left; width:72px; }
+.detail-table thead th:first-child { text-align:center; width:35px; }
+.detail-table thead th.th-date { text-align:center; width:65px; }
+.detail-table thead th.th-cat { text-align:left; width:100px; }
+.detail-table thead th.th-temp { text-align:center; width:55px; }
+.detail-table thead th.th-code { text-align:left; width:110px; }
 .detail-table thead th.th-name { text-align:left; width:auto; }
-.detail-table thead th.th-unit { text-align:center; width:40px; }
-.detail-table thead th.th-num { width:68px; }
-.detail-table thead th.th-note { text-align:left; width:120px; }
-.detail-table thead th.th-tf { width:38px; }
-.detail-table thead th.th-pct { width:68px; }
+.detail-table thead th.th-unit { text-align:center; width:50px; }
+.detail-table thead th.th-num { width:75px; }
+.detail-table thead th.th-note { text-align:left; width:150px; }
+.detail-table thead th.th-tf { width:50px; }
+.detail-table thead th.th-pct { width:80px; }
 .detail-table tbody td {
-  padding:5px 5px; height:30px;
+  padding:6px 6px; height:32px;
   border-bottom:1px solid rgba(30,34,54,0.7);
   overflow:hidden; text-overflow:ellipsis;
+  vertical-align:middle;
 }
-.detail-table tbody td:first-child { text-align:center; color:var(--txt); font-size:10px; font-weight:600; }
-.detail-table tbody td.d-cat { text-align:left; font-size:10px; color:var(--txt); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.detail-table tbody td.d-temp { text-align:center; font-size:9.5px; font-weight:700; color:var(--txt); }
-.detail-table tbody td.d-code { text-align:left; font-size:9px; color:var(--txt); font-weight:500; overflow:hidden; text-overflow:ellipsis; }
-.detail-table tbody td.d-name { text-align:left; color:var(--txt); font-size:10.5px; font-weight:500; white-space:normal; }
-.detail-table tbody td.d-unit { text-align:center; color:var(--txt); font-size:9.5px; }
-.d-bk { color:var(--cyan) !important; font-weight:700; }
-.d-tx { color:var(--cyan) !important; font-weight:600; }
-.d-qcr { color:var(--cyan) !important; font-weight:500; }
-.d-hold { color:var(--cyan) !important; font-weight:500; }
-.d-diff { color:var(--cyan) !important; font-weight:700; }
-.d-note { color:var(--txt) !important; font-weight:700; font-size:10px !important; text-align:left !important; }
-.d-tf { color:var(--txt) !important; font-size:9px !important; font-weight:600; }
-.d-pct-good { color:var(--cyan) !important; font-weight:600; }
-.d-pct-warn { color:var(--cyan) !important; font-weight:700; }
-.d-pct-bad { color:var(--cyan) !important; font-weight:700; }
+.detail-table tbody td:first-child { text-align:center; color:var(--txt); font-size:11px; font-weight:600; }
+.detail-table tbody td.d-date { text-align:center; font-size:11px; font-weight:600; color:var(--cyan); }
+.detail-table tbody td.d-cat { text-align:left; font-size:11px; color:var(--txt); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.detail-table tbody td.d-temp { text-align:center; font-size:11px; font-weight:700; color:var(--txt); }
+.detail-table tbody td.d-code { text-align:left; font-size:11px; color:#9aa0b0; font-family:'Consolas', 'Courier New', monospace; font-weight:500; overflow:hidden; text-overflow:ellipsis; }
+.detail-table tbody td.d-name { text-align:left; color:var(--txt); font-size:12px; font-weight:500; white-space:normal; line-height:1.4; }
+.detail-table tbody td.d-unit { text-align:center; color:var(--txt); font-size:11px; }
+.d-bk { color:var(--cyan) !important; font-weight:700; font-size:11.5px; }
+.d-tx { color:var(--cyan) !important; font-weight:600; font-size:11.5px; }
+.d-qcr { color:var(--cyan) !important; font-weight:500; font-size:11.5px; }
+.d-hold { color:var(--cyan) !important; font-weight:500; font-size:11.5px; }
+.d-diff { color:var(--cyan) !important; font-weight:700; font-size:11.5px; }
+.d-note { color:var(--txt) !important; font-weight:700; font-size:11px !important; text-align:left !important; }
+.d-tf { color:var(--txt) !important; font-size:10px !important; font-weight:600; }
+.d-pct-good { color:var(--cyan) !important; font-weight:600; font-size:11px; }
+.d-pct-warn { color:var(--cyan) !important; font-weight:700; font-size:11px; }
+.d-pct-bad { color:var(--cyan) !important; font-weight:700; font-size:11px; }
 .detail-table tbody tr:nth-child(odd) td { background:rgba(255,255,255,0.018); }
 .detail-table tbody tr:nth-child(even) td { background:rgba(14,17,30,0.5); }
 .detail-table tbody tr:hover td { background:rgba(94,234,212,0.06) !important; }
@@ -312,23 +315,23 @@ tbody tr.summary td.c-tx { color:var(--cyan) !important; }
 .s-card .s-label { font-size:9px; text-transform:uppercase; letter-spacing:0.6px; color:var(--txt2); font-weight:700; }
 .s-card .s-val { font-size:18px; font-weight:800; margin-top:3px; font-variant-numeric:tabular-nums; }
 
-/* SKU rớt ỉ" purple */
+/* SKU rá»›t " purple */
 .s-card.sc-sku { border-color:rgba(167,139,250,0.5); box-shadow:0 0 12px rgba(167,139,250,0.15); }
 .s-card.sc-sku .s-val { color:#c4b5fd; text-shadow:0 0 8px rgba(167,139,250,0.4); }
 
-/* Booking ỉ" cyan */
+/* Booking " cyan */
 .s-card.sc-bk { border-color:rgba(34,211,238,0.5); box-shadow:0 0 12px rgba(34,211,238,0.15); }
 .s-card.sc-bk .s-val { color:#22d3ee; text-shadow:0 0 8px rgba(34,211,238,0.4); }
 
-/* Thực xuất ỉ" green */
+/* Thá»±c xuáº¥t " green */
 .s-card.sc-tx { border-color:rgba(52,211,153,0.5); box-shadow:0 0 12px rgba(52,211,153,0.15); }
 .s-card.sc-tx .s-val { color:#34d399; text-shadow:0 0 8px rgba(52,211,153,0.4); }
 
-/* Chênh lệch ỉ" orange/amber */
+/* ChÃªnh lá»‡ch " orange/amber */
 .s-card.sc-diff { border-color:rgba(251,146,60,0.5); box-shadow:0 0 12px rgba(251,146,60,0.15); }
 .s-card.sc-diff .s-val { color:#fb923c; text-shadow:0 0 8px rgba(251,146,60,0.4); }
 
-/* %TX/BK ỉ" yellow */
+/* %TX/BK " yellow */
 .s-card.sc-pct { border-color:rgba(253,224,71,0.5); box-shadow:0 0 12px rgba(253,224,71,0.15); }
 .s-card.sc-pct .s-val { color:#fde047; text-shadow:0 0 8px rgba(253,224,71,0.4); }
 .badge-cat { font-size:9px; padding:2px 8px; border-radius:8px; font-weight:700; margin-left:6px; }
