@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard ABA Đông Mát — T4-T5/2026</title>
+<title>Báo Cáo Sản Lượng Đông Mát</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -57,8 +57,8 @@ body {
 </head>
 <body>
 <div class="top-header">
-  <h1>📊 Dashboard ABA Đông Mát</h1>
-  <div class="subtitle">Tổng hợp báo cáo T4-T5/2026 &nbsp;|&nbsp; Cập nhật: <span id="ud"></span></div>
+  <h1>📊 Báo Cáo Sản Lượng Đông Mát</h1>
+  <div class="subtitle">Tổng hợp báo cáo &nbsp;|&nbsp; Cập nhật: <span id="ud"></span></div>
 </div>
 <div class="main-tabs">
   <button class="main-tab active" onclick="sw(0)">📦 Nhập / Xuất &amp; Đáp ứng</button>
@@ -74,7 +74,7 @@ body {
 <div class="frame-wrap" id="f2">
   <iframe src="https://thanhphammm111.github.io/dashboard-nhap-xuat/" loading="lazy"></iframe>
 </div>
-<div class="bottom-footer">Dashboard ABA Đông Mát — KFM Logistics</div>
+<div class="bottom-footer">Báo Cáo Sản Lượng Đông Mát — KFM Logistics</div>
 <script>
 const n=new Date(),p=x=>String(x).padStart(2,'0');
 document.getElementById('ud').textContent=p(n.getDate())+'/'+p(n.getMonth()+1)+'/'+n.getFullYear()+' '+p(n.getHours())+':'+p(n.getMinutes());
