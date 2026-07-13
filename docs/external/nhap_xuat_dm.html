@@ -1490,7 +1490,7 @@ function renderChiTiet() {
   </div>
 
   <div class="table-block detail-block" style="animation:fadeIn 0.3s ease">
-    <div class="table-title" style="color:var(--cyan)">ðŸ“¦ Ba\u0309ng 3 - L\u01b0u tr\u01b0\u0303 chi ti\u00ea\u0301t SKU pick r\u01a1\u0301t</div>
+    <div class="table-title" style="color:var(--cyan)">ðŸ“¦ L\u01b0u tr\u01b0\u0303 chi ti\u00ea\u0301t SKU pick r\u01a1\u0301t</div>
     <div style="padding:0 12px">
       <div class="summary-cards">
         <div class="s-card sc-sku"><div class="s-label">SKU r\u01a1\u0301t</div><div class="s-val">${filteredItems.length}</div></div>
@@ -1599,75 +1599,9 @@ try {
 // SKU đã xử lý xong để loại khỏi Bảng 4
 
 function renderWarning() {
-  // Aggregate: code -> { name, cat, entries:[{date, bk, sx, diff}] }
-  const codeMap = {};
-  for (const [dateKey, dayData] of Object.entries(CT || {})) {
-    if (!dayData || !dayData.items) continue;
-    dayData.items.forEach(it => {
-      if (WARN_EXCLUDE.includes(it.code)) return;
-      if (!codeMap[it.code]) {
-        codeMap[it.code] = { name:it.name, cat:it.cat, entries:[] };
-      }
-      codeMap[it.code].entries.push({ date:dateKey, bk:it.bk, sx:it.sx, diff:it.diff });
-    });
-  }
-
-  // Filter codes with >= 3 days
-  const warns = Object.entries(codeMap)
-    .filter(([_, v]) => v.entries.length >= 3)
-    .sort((a,b) => b[1].entries.length - a[1].entries.length || 
-      b[1].entries.reduce((s,e)=>s+e.diff,0) - a[1].entries.reduce((s,e)=>s+e.diff,0));
-
   const el = document.getElementById('warning-section');
-  if (!el) return;
-  if (warns.length === 0) {
-    el.innerHTML = '';
-    return;
-  }
-
-  let html = `
-  <div class="table-block warn-block" style="animation:fadeIn 0.3s ease">
-    <div class="warn-title-bar">⚠️ Bảng 4 - Warning: SKU pick rớt lặp lại ≥ 3 ngày<span class="warn-badge">${warns.length} SKU</span></div>
-    <table class="warn-table">
-      <thead><tr>
-        <th>#</th>
-        <th class="wt-code">Code</th>
-        <th class="wt-name">Tên sản phẩm</th>
-        <th class="wt-cat">Loại hàng</th>
-        <th class="wt-days">Số ngày</th>
-        <th class="wt-num">Ngày</th>
-        <th class="wt-num">Booking</th>
-        <th class="wt-num">Số Xuất</th>
-        <th class="wt-num">SL rớt</th>
-      </tr></thead><tbody>`;
-
-  warns.forEach(([code, v], idx) => {
-    const n = v.entries.length;
-    const daysCls = n >= 5 ? 'wc-days-5' : n >= 4 ? 'wc-days-4' : 'wc-days-3';
-    v.entries.forEach((e, i) => {
-      html += `<tr${i === 0 ? ' class="warn-group-first"' : ''}>`;
-      if (i === 0) {
-        html += `
-          <td rowspan="${n}">${idx+1}</td>
-          <td class="wc-code" rowspan="${n}">${code}</td>
-          <td class="wc-name" rowspan="${n}">${v.name}</td>
-          <td class="wc-cat" rowspan="${n}">${v.cat}</td>
-          <td class="wc-days ${daysCls}" rowspan="${n}">${n}</td>`;
-      }
-      html += `
-          <td class="wc-dates">${e.date}</td>
-          <td class="wc-num">${fmt(e.bk)}</td>
-          <td class="wc-num">${fmt(e.sx)}</td>
-          <td class="wc-num">${fmt(e.diff)}</td>
-        </tr>`;
-    });
-  });
-
-  html += `</tbody></table></div>`;
-  el.innerHTML = html;
+  if (el) el.innerHTML = '';
 }
-
-
 function switchTab(tab) {
   currentTab = tab;
   document.getElementById('tabXuat').className = tab==='xuat' ? 'tab-btn active' : 'tab-btn';
