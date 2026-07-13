@@ -1403,78 +1403,160 @@ function render() {
 }
 
 function renderChiTiet() {
-  const day = D[curIdx];
-  if (!day) return;
-  document.getElementById('navDate').textContent = day.d || '';
-  document.getElementById('navDow').textContent = day.w || '';
-  document.getElementById('navWeek').textContent = day.wk || '';
-  document.getElementById('btnPrev').disabled = curIdx === 0;
-  document.getElementById('btnNext').disabled = curIdx === D.length-1;
-
-  if (day.off) {
-    document.getElementById('content').innerHTML = `
-      <div class="table-block"><div class="off-msg">— ${day.d} (${day.w}) — Ngày nghỉ, không có dữ liệu chi tiết</div></div>`;
-    renderWarning();
-    return;
+  if (window.ctFilterCode === undefined) {
+    window.ctFilterCode = '';
+    window.ctFilterDate = 'all';
   }
 
-  let html = '';
-  const ct = CT[day.d] || { totalBk:0, totalTx:0, totalDiff:0, items:[] };
-  if (ct) {
-    html += `
-    <div class="table-block detail-block">
-      <div class="table-title" style="color:var(--cyan)">📦 Bảng 3 - Chi tiết SKU pick rớt</div>
-      <div style="padding:0 12px">
-        <div class="summary-cards">
-          <div class="s-card sc-sku"><div class="s-label">SKU rớt</div><div class="s-val">${ct.items ? ct.items.length : 0}</div></div>
-          <div class="s-card sc-bk"><div class="s-label">Booking</div><div class="s-val">${fmt(ct.totalBk)}</div></div>
-          <div class="s-card sc-tx"><div class="s-label">Thực xuất</div><div class="s-val">${fmt(ct.totalTx)}</div></div>
-          <div class="s-card sc-diff"><div class="s-label">Chênh lệch</div><div class="s-val">${fmt(ct.totalDiff)}</div></div>
-        </div>
-      </div>`;
-    
-    if (!ct.items || ct.items.length === 0) {
-      html += `
-      <div class="off-msg" style="padding:20px; font-size:13px">— Không có SKU nào bị pick rớt trong ngày này —</div>
-      </div>`;
-    } else {
-      html += `
-      <div class="detail-wrap">
-      <table class="detail-table">
-        <thead><tr>
-          <th>#</th><th class="th-cat">Loại hàng</th><th class="th-temp">Hàng</th>
-          <th class="th-code">Code</th><th class="th-name">Tên sản phẩm</th><th class="th-unit">ĐVT</th>
-          <th class="th-num">Booking</th><th class="th-num">Số Xuất</th><th class="th-num">Nhập QC</th><th class="th-num">Hàng QC rớt</th><th class="th-num">Hold</th>
-          <th class="th-num">SL pick rớt</th><th class="th-note">Ghi chú</th><th class="th-tf">T/F</th><th class="th-pct">Tỉ lệ Pick</th>
-        </tr></thead><tbody>`;
-      ct.items.forEach((it, idx) => {
-        const pc = it.pct === 0 ? 'd-pct-bad' : it.pct < 50 ? 'd-pct-warn' : 'd-pct-good';
-        const fv = v => v === null ? '' : (v === 0 ? '0' : fmt(v));
-        html += `<tr>
-          <td>${idx+1}</td>
-          <td class="d-cat">${it.cat}</td>
-          <td class="d-temp" style="color:${it.temp==='ĐÔNG'?'var(--blue)':'var(--green)'}">${it.temp}</td>
-          <td class="d-code">${it.code}</td><td class="d-name">${it.name}</td><td class="d-unit">${it.unit}</td>
-          <td class="d-bk">${fmt(it.bk)}</td>
-          <td class="d-tx">${fv(it.sx)}</td>
-          <td class="d-qcr">${fv(it.nqc)}</td>
-          <td class="d-qcr">${fv(it.qcr)}</td>
-          <td class="d-hold">${fv(it.hold)}</td>
-          <td class="d-diff">${fmt(it.diff)}</td>
-          <td class="d-note">${it.note||''}</td>
-          <td class="d-tf">${it.diff > 0 ? 'FALSE' : 'TRUE'}</td>
-          <td class="${pc}">${it.pct > 0 ? it.pct.toFixed(2)+'%' : '0.00%'}</td>
-        </tr>`;
+  document.getElementById('btnPrev').style.display = 'none';
+  document.getElementById('btnNext').style.display = 'none';
+  document.querySelector('.day-info .date').textContent = 'LÆ°u Trá»¯ Chi Tiáº¿t';
+  document.querySelector('.day-info .dow').textContent = 'Táº¥t cáº£ cÃ¡c ngÃ y';
+  document.querySelector('.day-info .week').textContent = 'Báº£ng 3';
+
+  const allItems = [];
+  for (const [dateKey, dayData] of Object.entries(CT || {})) {
+    if (!dayData || !dayData.items) continue;
+    dayData.items.forEach(it => {
+      allItems.push({
+        date: dateKey,
+        cat: it.cat,
+        temp: it.temp,
+        code: it.code,
+        name: it.name,
+        unit: it.unit,
+        bk: it.bk,
+        sx: it.sx,
+        nqc: it.nqc,
+        qcr: it.qcr,
+        hold: it.hold,
+        diff: it.diff,
+        note: it.note,
+        pct: it.pct
       });
-      html += `</tbody></table>
-      </div>
-      </div>`;
-    }
+    });
   }
+
+  const filteredItems = allItems.filter(it => {
+    if (window.ctFilterDate !== 'all' && it.date !== window.ctFilterDate) return false;
+    if (window.ctFilterCode && !it.code.toLowerCase().includes(window.ctFilterCode.toLowerCase())) return false;
+    return true;
+  });
+
+  let totalBk = 0;
+  let totalTx = 0;
+  let totalDiff = 0;
+  filteredItems.forEach(it => {
+    totalBk += it.bk || 0;
+    totalTx += it.sx || 0;
+    totalDiff += it.diff || 0;
+  });
+
+  const uniqueDates = [...new Set(allItems.map(it => it.date))];
+  const monthOrder = { 'Jan':1, 'Feb':2, 'Mar':3, 'Apr':4, 'May':5, 'Jun':6, 'Jul':7, 'Aug':8, 'Sep':9, 'Oct':10, 'Nov':11, 'Dec':12 };
+  uniqueDates.sort((a, b) => {
+    const partsA = a.split('-');
+    const partsB = b.split('-');
+    const dayA = parseInt(partsA[0]);
+    const dayB = parseInt(partsB[0]);
+    const monthA = monthOrder[partsA[1]] || 0;
+    const monthB = monthOrder[partsB[1]] || 0;
+    if (monthA !== monthB) return monthB - monthA;
+    return dayB - dayA;
+  });
+
+  let dateOptions = `<option value="all" ${window.ctFilterDate === 'all' ? 'selected' : ''}>â€” Táº¥t cáº£ cÃ¡c ngÃ y â€”</option>`;
+  uniqueDates.forEach(d => {
+    dateOptions += `<option value="${d}" ${window.ctFilterDate === d ? 'selected' : ''}>${d}</option>`;
+  });
+
+  let html = `
+  <div class="table-block filter-block" style="padding:15px; margin-bottom:15px; background:var(--bg2); border:1px solid var(--border); border-radius:8px; animation:fadeIn 0.3s ease">
+    <div style="display:flex; gap:15px; flex-wrap:wrap; align-items:center;">
+      <div style="flex:1; min-width:200px;">
+        <label style="display:block; font-size:11px; color:var(--txt2); margin-bottom:5px; font-weight:700;">Lá»ŒC THEO MÃƒ Sáº¢N PHáº¨M (CODE)</label>
+        <input type="text" id="ctSearchCode" value="${window.ctFilterCode}" oninput="onCtCodeFilterChange(this.value)" placeholder="Nháº­p mÃ£ sáº£n pháº©m..." style="width:100%; padding:8px 12px; background:var(--bg3); border:1px solid var(--border); border-radius:6px; color:var(--txt); font-family:inherit; font-size:13px; box-sizing:border-box; outline:none; transition:all 0.2s;" onfocus="this.style.borderColor='var(--cyan)'" onblur="this.style.borderColor='var(--border)'">
+      </div>
+      <div style="flex:1; min-width:180px;">
+        <label style="display:block; font-size:11px; color:var(--txt2); margin-bottom:5px; font-weight:700;">Lá»ŒC THEO NGÃ€Y</label>
+        <select id="ctSearchDate" onchange="onCtDateFilterChange(this.value)" style="width:100%; padding:8px 12px; background:var(--bg3); border:1px solid var(--border); border-radius:6px; color:var(--txt); font-family:inherit; font-size:13px; cursor:pointer; box-sizing:border-box; outline:none; transition:all 0.2s;" onfocus="this.style.borderColor='var(--cyan)'" onblur="this.style.borderColor='var(--border)'">
+          ${dateOptions}
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-block detail-block" style="animation:fadeIn 0.3s ease">
+    <div class="table-title" style="color:var(--cyan)">ðŸ“¦ Báº£ng 3 - LÆ°u trá»¯ chi tiáº¿t SKU pick rá»›t</div>
+    <div style="padding:0 12px">
+      <div class="summary-cards">
+        <div class="s-card sc-sku"><div class="s-label">SKU rá»›t</div><div class="s-val">${filteredItems.length}</div></div>
+        <div class="s-card sc-bk"><div class="s-label">Booking</div><div class="s-val">${fmt(totalBk)}</div></div>
+        <div class="s-card sc-tx"><div class="s-label">Thá»±c xuáº¥t</div><div class="s-val">${fmt(totalTx)}</div></div>
+        <div class="s-card sc-diff"><div class="s-label">ChÃªnh lá»‡ch</div><div class="s-val">${fmt(totalDiff)}</div></div>
+      </div>
+    </div>`;
+
+  if (filteredItems.length === 0) {
+    html += `
+    <div class="off-msg" style="padding:40px; font-size:13px">â€” KhÃ´ng tÃ¬m tháº¥y SKU rá»›t nÃ o khá»›p vá»›i bá»™ lá»c â€”</div>
+    </div>`;
+  } else {
+    html += `
+    <div class="detail-wrap">
+    <table class="detail-table">
+      <thead><tr>
+        <th>#</th><th class="th-date">NgÃ y</th><th class="th-cat">Loáº¡i hÃ ng</th><th class="th-temp">HÃ ng</th>
+        <th class="th-code">Code</th><th class="th-name">TÃªn sáº£n pháº©m</th><th class="th-unit">ÄVT</th>
+        <th class="th-num">Booking</th><th class="th-num">Sá»‘ Xuáº¥t</th><th class="th-num">Nháº­p QC</th><th class="th-num">HÃ ng QC rá»›t</th><th class="th-num">Hold</th>
+        <th class="th-num">SL pick rá»›t</th><th class="th-note">Ghi chÃº</th><th class="th-tf">T/F</th><th class="th-pct">Tá»‰ lá»‡ Pick</th>
+      </tr></thead><tbody>`;
+    
+    filteredItems.forEach((it, idx) => {
+      const pc = it.pct === 0 ? 'd-pct-bad' : it.pct < 50 ? 'd-pct-warn' : 'd-pct-good';
+      const fv = v => v === null ? '' : (v === 0 ? '0' : fmt(v));
+      html += `<tr>
+        <td>${idx+1}</td>
+        <td class="d-date" style="color:var(--cyan); font-weight:600; text-align:center;">${it.date}</td>
+        <td class="d-cat">${it.cat}</td>
+        <td class="d-temp" style="color:${it.temp==='ÄÃ”NG'?'var(--blue)':'var(--green)'}">${it.temp}</td>
+        <td class="d-code">${it.code}</td><td class="d-name">${it.name}</td><td class="d-unit">${it.unit}</td>
+        <td class="d-bk">${fmt(it.bk)}</td>
+        <td class="d-tx">${fv(it.sx)}</td>
+        <td class="d-qcr">${fv(it.nqc)}</td>
+        <td class="d-qcr">${fv(it.qcr)}</td>
+        <td class="d-hold">${fv(it.hold)}</td>
+        <td class="d-diff">${fmt(it.diff)}</td>
+        <td class="d-note">${it.note||''}</td>
+        <td class="d-tf">${it.diff > 0 ? 'FALSE' : 'TRUE'}</td>
+        <td class="${pc}">${it.pct > 0 ? it.pct.toFixed(2)+'%' : '0.00%'}</td>
+      </tr>`;
+    });
+    
+    html += `</tbody></table>
+    </div>
+    </div>`;
+  }
+
   document.getElementById('content').innerHTML = html;
+  const searchInput = document.getElementById('ctSearchCode');
+  if (searchInput) {
+    searchInput.focus();
+    const len = searchInput.value.length;
+    searchInput.setSelectionRange(len, len);
+  }
   renderWarning();
 }
 
+function onCtCodeFilterChange(val) {
+  window.ctFilterCode = val;
+  renderChiTiet();
+}
+
+function onCtDateFilterChange(val) {
+  window.ctFilterDate = val;
+  renderChiTiet();
+}
 function prev() {
   if (currentTab === 'xuat') { if(curIdx>0){curIdx--;render();window.scrollTo(0,0);} }
   else if (currentTab === 'nhap') { if(nhapIdx>0){nhapIdx--;renderNhap();window.scrollTo(0,0);} }
