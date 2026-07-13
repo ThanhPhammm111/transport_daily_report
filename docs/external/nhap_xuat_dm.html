@@ -1378,7 +1378,7 @@ function render() {
   const t2 = computeT2(day);
 
   let html = `
-  <div class="table-block">
+  <div class="table-block" id="blockTable1">
     <div class="table-title">📦 Theo Loại Hàng</div>
     <table>${tableHead(day)}<tbody>
       ${catRows('Hàng Quá Cảnh', day.qc, true)}
@@ -1389,7 +1389,7 @@ function render() {
     </tbody></table>
   </div>
 
-  <div class="table-block">
+  <div class="table-block" id="blockTable2">
     <div class="table-title">🌡 Tính Chất Hàng</div>
     <table>${tableHead(day)}<tbody>
       ${catRows('Đông', day.dong, true)}
@@ -1403,6 +1403,15 @@ function render() {
   </div>`;
 
   document.getElementById('content').innerHTML = html;
+  const urlParams = new URLSearchParams(window.location.search);
+  const shot = urlParams.get('screenshot');
+  if (shot === 'table1') {
+    const b2 = document.getElementById('blockTable2');
+    if (b2) b2.style.display = 'none';
+  } else if (shot === 'table2') {
+    const b1 = document.getElementById('blockTable1');
+    if (b1) b1.style.display = 'none';
+  }
 }
 
 function renderChiTiet() {
@@ -1689,6 +1698,15 @@ function renderNhap() {
     ${nhCatBlock('Hàng Quá Cảnh', day.qc2, day.qc2N, true)}
     </tbody></table></div>`;
   document.getElementById('content').innerHTML = html;
+  const urlParams = new URLSearchParams(window.location.search);
+  const shot = urlParams.get('screenshot');
+  if (shot === 'table1') {
+    const b2 = document.getElementById('blockTable2');
+    if (b2) b2.style.display = 'none';
+  } else if (shot === 'table2') {
+    const b1 = document.getElementById('blockTable1');
+    if (b1) b1.style.display = 'none';
+  }
 }
 
 // ===================== NHẬP HÀNG =====================
@@ -2051,6 +2069,15 @@ function renderDapUng() {
   </div>`;
 
   document.getElementById('content').innerHTML = html;
+  const urlParams = new URLSearchParams(window.location.search);
+  const shot = urlParams.get('screenshot');
+  if (shot === 'table1') {
+    const b2 = document.getElementById('blockTable2');
+    if (b2) b2.style.display = 'none';
+  } else if (shot === 'table2') {
+    const b1 = document.getElementById('blockTable1');
+    if (b1) b1.style.display = 'none';
+  }
 }
 
 </script>
