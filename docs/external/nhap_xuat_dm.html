@@ -1410,9 +1410,9 @@ function renderChiTiet() {
 
   document.getElementById('btnPrev').style.display = 'none';
   document.getElementById('btnNext').style.display = 'none';
-  document.querySelector('.day-info .date').textContent = 'LÆ°u Trá»¯ Chi Tiáº¿t';
-  document.querySelector('.day-info .dow').textContent = 'Táº¥t cáº£ cÃ¡c ngÃ y';
-  document.querySelector('.day-info .week').textContent = 'Báº£ng 3';
+  document.querySelector('.day-info .date').textContent = 'L\u01B0u Tr\u01B0\u0303 Chi Ti\u00ea\u0301t';
+  document.querySelector('.day-info .dow').textContent = 'T\u00e2\u0301t ca\u0309 ca\u0301c nga\u0300y';
+  document.querySelector('.day-info .week').textContent = 'B\u1EA3ng 3';
 
   const allItems = [];
   for (const [dateKey, dayData] of Object.entries(CT || {})) {
@@ -1465,7 +1465,7 @@ function renderChiTiet() {
     return dayB - dayA;
   });
 
-  let dateOptions = `<option value="all" ${window.ctFilterDate === 'all' ? 'selected' : ''}>â€” Táº¥t cáº£ cÃ¡c ngÃ y â€”</option>`;
+  let dateOptions = `<option value="all" ${window.ctFilterDate === 'all' ? 'selected' : ''}>\u2014 T\u00e2\u0301t ca\u0309 ca\u0301c nga\u0300y \u2014</option>`;
   uniqueDates.forEach(d => {
     dateOptions += `<option value="${d}" ${window.ctFilterDate === d ? 'selected' : ''}>${d}</option>`;
   });
@@ -1474,11 +1474,11 @@ function renderChiTiet() {
   <div class="table-block filter-block" style="padding:15px; margin-bottom:15px; background:var(--bg2); border:1px solid var(--border); border-radius:8px; animation:fadeIn 0.3s ease">
     <div style="display:flex; gap:15px; flex-wrap:wrap; align-items:center;">
       <div style="flex:1; min-width:200px;">
-        <label style="display:block; font-size:11px; color:var(--txt2); margin-bottom:5px; font-weight:700;">Lá»ŒC THEO MÃƒ Sáº¢N PHáº¨M (CODE)</label>
-        <input type="text" id="ctSearchCode" value="${window.ctFilterCode}" oninput="onCtCodeFilterChange(this.value)" placeholder="Nháº­p mÃ£ sáº£n pháº©m..." style="width:100%; padding:8px 12px; background:var(--bg3); border:1px solid var(--border); border-radius:6px; color:var(--txt); font-family:inherit; font-size:13px; box-sizing:border-box; outline:none; transition:all 0.2s;" onfocus="this.style.borderColor='var(--cyan)'" onblur="this.style.borderColor='var(--border)'">
+        <label style="display:block; font-size:11px; color:var(--txt2); margin-bottom:5px; font-weight:700;">L\u1ECCc THEO MA\u0303 SA\u0309N PH\u00c2\u0309M (CODE)</label>
+        <input type="text" id="ctSearchCode" value="${window.ctFilterCode}" oninput="onCtCodeFilterChange(this.value)" placeholder="Nh\u00e2\u0323p ma\u0303 sa\u0309n ph\u00e2\u0309m..." style="width:100%; padding:8px 12px; background:var(--bg3); border:1px solid var(--border); border-radius:6px; color:var(--txt); font-family:inherit; font-size:13px; box-sizing:border-box; outline:none; transition:all 0.2s;" onfocus="this.style.borderColor='var(--cyan)'" onblur="this.style.borderColor='var(--border)'">
       </div>
       <div style="flex:1; min-width:180px;">
-        <label style="display:block; font-size:11px; color:var(--txt2); margin-bottom:5px; font-weight:700;">Lá»ŒC THEO NGÃ€Y</label>
+        <label style="display:block; font-size:11px; color:var(--txt2); margin-bottom:5px; font-weight:700;">L\u1ECCc THEO NGA\u0300Y</label>
         <select id="ctSearchDate" onchange="onCtDateFilterChange(this.value)" style="width:100%; padding:8px 12px; background:var(--bg3); border:1px solid var(--border); border-radius:6px; color:var(--txt); font-family:inherit; font-size:13px; cursor:pointer; box-sizing:border-box; outline:none; transition:all 0.2s;" onfocus="this.style.borderColor='var(--cyan)'" onblur="this.style.borderColor='var(--border)'">
           ${dateOptions}
         </select>
@@ -1487,29 +1487,29 @@ function renderChiTiet() {
   </div>
 
   <div class="table-block detail-block" style="animation:fadeIn 0.3s ease">
-    <div class="table-title" style="color:var(--cyan)">ðŸ“¦ Báº£ng 3 - LÆ°u trá»¯ chi tiáº¿t SKU pick rá»›t</div>
+    <div class="table-title" style="color:var(--cyan)">ðŸ“¦ Ba\u0309ng 3 - L\u01b0u tr\u01b0\u0303 chi ti\u00ea\u0301t SKU pick r\u01a1\u0301t</div>
     <div style="padding:0 12px">
       <div class="summary-cards">
-        <div class="s-card sc-sku"><div class="s-label">SKU rá»›t</div><div class="s-val">${filteredItems.length}</div></div>
+        <div class="s-card sc-sku"><div class="s-label">SKU r\u01a1\u0301t</div><div class="s-val">${filteredItems.length}</div></div>
         <div class="s-card sc-bk"><div class="s-label">Booking</div><div class="s-val">${fmt(totalBk)}</div></div>
-        <div class="s-card sc-tx"><div class="s-label">Thá»±c xuáº¥t</div><div class="s-val">${fmt(totalTx)}</div></div>
-        <div class="s-card sc-diff"><div class="s-label">ChÃªnh lá»‡ch</div><div class="s-val">${fmt(totalDiff)}</div></div>
+        <div class="s-card sc-tx"><div class="s-label">Th\u01b0\u0323c xu\u00e2\u0301t</div><div class="s-val">${fmt(totalTx)}</div></div>
+        <div class="s-card sc-diff"><div class="s-label">Ch\u00eanh l\u00ea\u0323ch</div><div class="s-val">${fmt(totalDiff)}</div></div>
       </div>
     </div>`;
 
   if (filteredItems.length === 0) {
     html += `
-    <div class="off-msg" style="padding:40px; font-size:13px">â€” KhÃ´ng tÃ¬m tháº¥y SKU rá»›t nÃ o khá»›p vá»›i bá»™ lá»c â€”</div>
+    <div class="off-msg" style="padding:40px; font-size:13px">\u2014 Kh\u00f4ng ti\u0300m th\u00e2\u0301y SKU r\u01a1\u0301t na\u0300o kh\u01a1\u0301p v\u01a1\u0301i b\u1ED9 l\u1ECDc \u2014</div>
     </div>`;
   } else {
     html += `
     <div class="detail-wrap">
     <table class="detail-table">
       <thead><tr>
-        <th>#</th><th class="th-date">NgÃ y</th><th class="th-cat">Loáº¡i hÃ ng</th><th class="th-temp">HÃ ng</th>
-        <th class="th-code">Code</th><th class="th-name">TÃªn sáº£n pháº©m</th><th class="th-unit">ÄVT</th>
-        <th class="th-num">Booking</th><th class="th-num">Sá»‘ Xuáº¥t</th><th class="th-num">Nháº­p QC</th><th class="th-num">HÃ ng QC rá»›t</th><th class="th-num">Hold</th>
-        <th class="th-num">SL pick rá»›t</th><th class="th-note">Ghi chÃº</th><th class="th-tf">T/F</th><th class="th-pct">Tá»‰ lá»‡ Pick</th>
+        <th>#</th><th class="th-date">Nga\u0300y</th><th class="th-cat">Loa\u0323i ha\u0300ng</th><th class="th-temp">Ha\u0300ng</th>
+        <th class="th-code">Code</th><th class="th-name">T\u00ean sa\u0309n ph\u00e2\u0309m</th><th class="th-unit">\u0110VT</th>
+        <th class="th-num">Booking</th><th class="th-num">S\u1ED1 Xu\u00e2\u0301t</th><th class="th-num">Nh\u00e2\u0323p QC</th><th class="th-num">Ha\u0300ng QC r\u01a1\u0301t</th><th class="th-num">Hold</th>
+        <th class="th-num">SL pick r\u01a1\u0301t</th><th class="th-note">Ghi chu\u0301</th><th class="th-tf">T/F</th><th class="th-pct">Ti\u0309 l\u00ea\u0323 Pick</th>
       </tr></thead><tbody>`;
     
     filteredItems.forEach((it, idx) => {
@@ -1519,7 +1519,7 @@ function renderChiTiet() {
         <td>${idx+1}</td>
         <td class="d-date" style="color:var(--cyan); font-weight:600; text-align:center;">${it.date}</td>
         <td class="d-cat">${it.cat}</td>
-        <td class="d-temp" style="color:${it.temp==='ÄÃ”NG'?'var(--blue)':'var(--green)'}">${it.temp}</td>
+        <td class="d-temp" style="color:${it.temp==='\u0110\u00d4NG'?'var(--blue)':'var(--green)'}">${it.temp}</td>
         <td class="d-code">${it.code}</td><td class="d-name">${it.name}</td><td class="d-unit">${it.unit}</td>
         <td class="d-bk">${fmt(it.bk)}</td>
         <td class="d-tx">${fv(it.sx)}</td>
