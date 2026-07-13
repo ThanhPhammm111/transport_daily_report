@@ -78,6 +78,17 @@ body {
 <script>
 const n=new Date(),p=x=>String(x).padStart(2,'0');
 document.getElementById('ud').textContent=p(n.getDate())+'/'+p(n.getMonth()+1)+'/'+n.getFullYear()+' '+p(n.getHours())+':'+p(n.getMinutes());
+document.getElementById('f0_iframe').src = 'external/nhap_xuat_dm.html?v=' + Date.now();
+function sw(i){
+  document.querySelectorAll('.main-tab').forEach((t,j)=>t.classList.toggle('active',j===i));
+  document.querySelectorAll('.frame-wrap').forEach((f,j)=>f.classList.toggle('active',j===i));
+  if (i === 1) {
+    const f1 = document.getElementById('f1_iframe');
+    if (f1.src === 'about:blank' || f1.src === '') {
+      f1.src = 'external/claim_aba.html?v=' + Date.now();
+    }
+  }
+}
 
 // Force refresh the reports by appending unique cache-buster timestamps
 document.getElementById('f0_iframe').src = 'external/nhap_xuat_dm.html?v=' + Date.now();
