@@ -1417,13 +1417,14 @@ function render() {
 function renderChiTiet() {
   if (window.ctFilterCode === undefined) {
     window.ctFilterCode = '';
-    window.ctFilterDate = 'all';
+    const latestDate = D.length > 0 ? D[D.length - 1].d : 'all';
+    window.ctFilterDate = latestDate;
   }
 
   document.getElementById('btnPrev').style.display = 'none';
   document.getElementById('btnNext').style.display = 'none';
   document.querySelector('.day-info .date').textContent = 'L\u01B0u Tr\u01B0\u0303 Chi Ti\u00ea\u0301t';
-  document.querySelector('.day-info .dow').textContent = 'T\u00e2\u0301t ca\u0309 ca\u0301c nga\u0300y';
+  document.querySelector('.day-info .dow').textContent = window.ctFilterDate === 'all' ? 'T\u00e2\u0301t ca\u0309 ca\u0301c nga\u0300y' : 'NgÃ y ' + window.ctFilterDate;
   document.querySelector('.day-info .week').textContent = 'B\u1EA3ng 3';
 
   const allItems = [];
