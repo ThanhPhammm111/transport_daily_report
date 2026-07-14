@@ -1639,9 +1639,17 @@ const WARN_EXCLUDE = ['9300658407505'];
 
 
 try {
-  render();
+  const urlParams = new URLSearchParams(window.location.search);
+  const tabParam = urlParams.get('tab');
+  if (tabParam) {
+    switchTab(tabParam);
+  } else {
+    render();
+  }
   renderWarning();
-  document.getElementById('warning-section').style.display = 'none';
+  if (typeof tabParam === 'undefined' || !tabParam || tabParam !== 'chitiet') {
+    document.getElementById('warning-section').style.display = 'none';
+  }
 } catch (e) {
   console.error(e);
   document.getElementById('content').innerHTML = `
