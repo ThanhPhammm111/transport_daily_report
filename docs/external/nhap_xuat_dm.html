@@ -2203,22 +2203,22 @@ function renderForecast() {
   <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:15px; margin-bottom:20px; max-width:1200px; margin-left:auto; margin-right:auto;">
     <div style="background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:15px; text-align:center;">
       <div style="color:var(--txt2); font-size:11px; font-weight:700; margin-bottom:5px; text-transform:uppercase;">Trung Bình Ngày (Thực Xuất)</div>
-      <div style="color:#22d3ee; font-size:20px; font-weight:800; margin-bottom:5px;">\${fmt(avgTx)}</div>
-      <div style="color:#94a3b8; font-size:12px; font-weight:700;">Dự báo (FC): \${fmt(avgFc)}</div>
+      <div style="color:#22d3ee; font-size:20px; font-weight:800; margin-bottom:5px;">${fmt(avgTx)}</div>
+      <div style="color:#94a3b8; font-size:12px; font-weight:700;">Dự báo (FC): ${fmt(avgFc)}</div>
     </div>
     <div style="background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:15px; text-align:center;">
       <div style="color:var(--txt2); font-size:11px; font-weight:700; margin-bottom:5px; text-transform:uppercase;">Thực Xuất Cao Nhất</div>
-      <div style="color:#10b981; font-size:20px; font-weight:800; margin-bottom:5px;">\${fmt(maxTx)}</div>
-      <div style="color:#94a3b8; font-size:12px; font-weight:700;">Ngày: \${maxTxDate}</div>
+      <div style="color:#10b981; font-size:20px; font-weight:800; margin-bottom:5px;">${fmt(maxTx)}</div>
+      <div style="color:#94a3b8; font-size:12px; font-weight:700;">Ngày: ${maxTxDate}</div>
     </div>
     <div style="background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:15px; text-align:center;">
       <div style="color:var(--txt2); font-size:11px; font-weight:700; margin-bottom:5px; text-transform:uppercase;">Thực Xuất Thấp Nhất</div>
-      <div style="color:#f59e0b; font-size:20px; font-weight:800; margin-bottom:5px;">\${fmt(minTx)}</div>
-      <div style="color:#94a3b8; font-size:12px; font-weight:700;">Ngày: \${minTxDate}</div>
+      <div style="color:#f59e0b; font-size:20px; font-weight:800; margin-bottom:5px;">${fmt(minTx)}</div>
+      <div style="color:#94a3b8; font-size:12px; font-weight:700;">Ngày: ${minTxDate}</div>
     </div>
     <div style="background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:15px; text-align:center;">
       <div style="color:var(--txt2); font-size:11px; font-weight:700; margin-bottom:5px; text-transform:uppercase;">Số Ngày Lệch >= 10%</div>
-      <div style="color:#ef4444; font-size:20px; font-weight:800; margin-bottom:5px;">\${exceededDaysCount} ngày</div>
+      <div style="color:#ef4444; font-size:20px; font-weight:800; margin-bottom:5px;">${exceededDaysCount} ngày</div>
       <div style="color:#94a3b8; font-size:12px; font-weight:700;">So với Booking theo tồn</div>
     </div>
   </div>
@@ -2245,8 +2245,8 @@ function renderForecast() {
     const yVal = Math.round(maxVal * (i / 4));
     const yPos = chartHeight - chartPaddingBottom - (yVal * scaleY);
     gridLines += `
-      <line x1="\${chartPaddingLeft}" y1="\${yPos}" x2="\${svgWidth - chartPaddingRight}" y2="\${yPos}" stroke="#1e293b" stroke-dasharray="3,3" />
-      <text x="\${chartPaddingLeft - 10}" y="\${yPos + 4}" fill="#64748b" font-size="9" text-anchor="end">\${fmt(yVal)}</text>
+      <line x1="${chartPaddingLeft}" y1="${yPos}" x2="${svgWidth - chartPaddingRight}" y2="${yPos}" stroke="#1e293b" stroke-dasharray="3,3" />
+      <text x="${chartPaddingLeft - 10}" y="${yPos + 4}" fill="#64748b" font-size="9" text-anchor="end">${fmt(yVal)}</text>
     `;
   }
 
@@ -2274,10 +2274,10 @@ function renderForecast() {
 
     bars += `
       <g>
-        <title>\${r.d}: Dự báo (FC): \${fmt(r.fc)} | Booking Tồn: \${fmt(r.bkTon)} | Thực xuất: \${fmt(r.tx)} \${exceeded ? '(Lệch Bk Tồn >=10%)' : ''}</title>
-        <rect x="\${fcX}" y="\${fcY}" width="\${barWidth}" height="\${fcHeight}" fill="#3b82f6" rx="2" opacity="0.85" />
-        <rect x="\${txX}" y="\${txY}" width="\${barWidth}" height="\${txHeight}" fill="\${actualColor}" rx="2" opacity="0.85" />
-        <text x="\${xCenter}" y="\${chartHeight - 10}" fill="#94a3b8" font-size="9" text-anchor="middle">\${r.d.split('-')[0]}</text>
+        <title>${r.d}: Dự báo (FC): ${fmt(r.fc)} | Booking Tồn: ${fmt(r.bkTon)} | Thực xuất: ${fmt(r.tx)} ${exceeded ? '(Lệch Bk Tồn >=10%)' : ''}</title>
+        <rect x="${fcX}" y="${fcY}" width="${barWidth}" height="${fcHeight}" fill="#3b82f6" rx="2" opacity="0.85" />
+        <rect x="${txX}" y="${txY}" width="${barWidth}" height="${txHeight}" fill="${actualColor}" rx="2" opacity="0.85" />
+        <text x="${xCenter}" y="${chartHeight - 10}" fill="#94a3b8" font-size="9" text-anchor="middle">${r.d.split('-')[0]}</text>
       </g>
     `;
   });
@@ -2293,10 +2293,10 @@ function renderForecast() {
       </div>
     </div>
     <div style="min-width:1150px;">
-      <svg width="100%" height="\${chartHeight}" viewBox="0 0 \${svgWidth} \${chartHeight}" style="overflow:visible;">
-        \${gridLines}
-        \${bars}
-        <line x1="\${chartPaddingLeft}" y1="\${chartHeight - chartPaddingBottom}" x2="\${svgWidth - chartPaddingRight}" y2="\${chartHeight - chartPaddingBottom}" stroke="#334155" />
+      <svg width="100%" height="${chartHeight}" viewBox="0 0 ${svgWidth} ${chartHeight}" style="overflow:visible;">
+        ${gridLines}
+        ${bars}
+        <line x1="${chartPaddingLeft}" y1="${chartHeight - chartPaddingBottom}" x2="${svgWidth - chartPaddingRight}" y2="${chartHeight - chartPaddingBottom}" stroke="#334155" />
       </svg>
     </div>
   </div>
@@ -2311,7 +2311,6 @@ function renderForecast() {
     const accuracyItemVal = fcVal > 0 ? (tx / fcVal * 100) : 0;
     const accuracyItemStr = fcVal > 0 ? accuracyItemVal.toFixed(1) + '%' : '0.0%';
     
-    // Highlight based on bkTon chênh lệch
     const itemAccColor = bk > 0 && (Math.abs(tx - bk) / bk * 100) >= 10 ? '#ef4444' : '#10b981';
 
     const tlFcVal = r.tlFc || 0;
@@ -2327,19 +2326,19 @@ function renderForecast() {
 
     tableRows += `
     <tr>
-      <td style="color:#e2e8f0; font-weight:700; white-space:nowrap; text-align:center;">\${r.d}</td>
-      <td style="color:#64748b; text-align:center; font-size:11px;">\${r.w}</td>
-      <td style="color:#64748b; text-align:center; font-size:11px;">\${r.wk}</td>
+      <td style="color:#e2e8f0; font-weight:700; white-space:nowrap; text-align:center;">${r.d}</td>
+      <td style="color:#64748b; text-align:center; font-size:11px;">${r.w}</td>
+      <td style="color:#64748b; text-align:center; font-size:11px;">${r.wk}</td>
       
-      <td style="text-align:right; color:#3b82f6;">\${fmt(fcVal)}</td>
-      <td style="text-align:right; color:#a78bfa;">\${fmt(tx)}</td>
-      <td style="text-align:right; color:\${diffItem >= 0 ? '#10b981' : '#f87171'}">\${diffItemSign}\${fmt(diffItem)}</td>
-      <td style="text-align:right; font-weight:700; color:\${itemAccColor};">\${accuracyItemStr}</td>
+      <td style="text-align:right; color:#3b82f6;">${fmt(fcVal)}</td>
+      <td style="text-align:right; color:#a78bfa;">${fmt(tx)}</td>
+      <td style="text-align:right; color:${diffItem >= 0 ? '#10b981' : '#f87171'}">${diffItemSign}${fmt(diffItem)}</td>
+      <td style="text-align:right; font-weight:700; color:${itemAccColor};">${accuracyItemStr}</td>
 
-      <td style="text-align:right; color:#3b82f6;">\${fmt(Math.round(tlFcVal))}</td>
-      <td style="text-align:right; color:#a78bfa;">\${fmt(Math.round(tlTx))}</td>
-      <td style="text-align:right; color:\${diffWeight >= 0 ? '#10b981' : '#f87171'}">\${diffWeightSign}\${fmt(Math.round(diffWeight))}</td>
-      <td style="text-align:right; font-weight:700; color:\${weightAccColor};">\${accuracyWeightStr}</td>
+      <td style="text-align:right; color:#3b82f6;">${fmt(Math.round(tlFcVal))}</td>
+      <td style="text-align:right; color:#a78bfa;">${fmt(Math.round(tlTx))}</td>
+      <td style="text-align:right; color:${diffWeight >= 0 ? '#10b981' : '#f87171'}">${diffWeightSign}${fmt(Math.round(diffWeight))}</td>
+      <td style="text-align:right; font-weight:700; color:${weightAccColor};">${accuracyWeightStr}</td>
     </tr>
     `;
   });
@@ -2368,7 +2367,7 @@ function renderForecast() {
         </tr>
       </thead>
       <tbody>
-        \${tableRows}
+        ${tableRows}
       </tbody>
     </table>
   </div>
