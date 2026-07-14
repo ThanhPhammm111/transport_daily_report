@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
@@ -2145,60 +2145,79 @@ function renderDapUng() {
 function renderForecast() {
   document.getElementById('btnPrev').style.display = 'none';
   document.getElementById('btnNext').style.display = 'none';
-  document.querySelector('.day-info .date').textContent = 'Dá»± bÃ¡o & Thá»±c táº¿';
+  document.querySelector('.day-info .date').textContent = 'Dự báo & Thực tế';
   const latestMonth = D.length > 0 ? getMonth(D[D.length - 1].d) : 7;
   const mStr = latestMonth === 6 ? 'T6/2026' : latestMonth === 7 ? 'T7/2026' : 'T5/2026';
   document.querySelector('.day-info .dow').textContent = mStr;
-  document.querySelector('.day-info .week').textContent = 'Tá»•ng há»£p';
+  document.querySelector('.day-info .week').textContent = 'Tổng hợp';
 
   // Filter out off days and week/month summary rows
   const activeDA = DA.filter(r => !r.off && !r.wkTotal && !r.mTotal);
 
-  let totalFcItem = 0;
-  let totalTxItem = 0;
-  let totalFcWeight = 0;
+  let totalBkTon = 0;
+  let totalTx = 0;
+  let totalBkWeight = 0;
   let totalTxWeight = 0;
-  let peakItemVal = 0;
-  let peakItemDay = '';
+  let maxTx = -1;
+  let maxTxDate = '';
+  let minTx = Infinity;
+  let minTxDate = '';
+  let exceededDaysCount = 0;
 
   activeDA.forEach(r => {
-    totalFcItem += r.fc || 0;
-    totalTxItem += r.tx || 0;
-    totalFcWeight += r.tlFc || 0;
+    const bk = r.bkTon || 0;
+    const tx = r.tx || 0;
+    totalBkTon += bk;
+    totalTx += tx;
+    totalBkWeight += r.tlBkTon || 0;
     totalTxWeight += r.tlTx || 0;
-    if (r.tx > peakItemVal) {
-      peakItemVal = r.tx;
-      peakItemDay = r.d;
+
+    if (tx > maxTx) {
+      maxTx = tx;
+      maxTxDate = r.d;
+    }
+    if (tx < minTx) {
+      minTx = tx;
+      minTxDate = r.d;
+    }
+
+    let exceeded = false;
+    if (bk === 0) {
+      exceeded = tx > 0;
+    } else {
+      exceeded = (Math.abs(tx - bk) / bk * 100) >= 10;
+    }
+    if (exceeded) {
+      exceededDaysCount++;
     }
   });
 
-  const accuracyItem = totalFcItem > 0 ? (totalTxItem / totalFcItem * 100).toFixed(2) + '%' : '0.00%';
-  const accuracyWeight = totalFcWeight > 0 ? (totalTxWeight / totalFcWeight * 100).toFixed(2) + '%' : '0.00%';
-  const avgFcItem = activeDA.length > 0 ? Math.round(totalFcItem / activeDA.length) : 0;
-  const avgTxItem = activeDA.length > 0 ? Math.round(totalTxItem / activeDA.length) : 0;
+  const count = activeDA.length;
+  const avgBkTon = count > 0 ? Math.round(totalBkTon / count) : 0;
+  const avgTx = count > 0 ? Math.round(totalTx / count) : 0;
 
   let html = `
   <!-- KPI cards -->
   <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:15px; margin-bottom:20px; max-width:1200px; margin-left:auto; margin-right:auto;">
     <div style="background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:15px; text-align:center;">
-      <div style="color:var(--txt2); font-size:11px; font-weight:700; margin-bottom:5px; text-transform:uppercase;">Tá»•ng Sá»‘ LÆ°á»£ng (ITEM)</div>
-      <div style="color:#22d3ee; font-size:20px; font-weight:800; margin-bottom:5px;">\${fmt(totalTxItem)} / \${fmt(totalFcItem)}</div>
-      <div style="color:#10b981; font-size:12px; font-weight:700;">Äá»™ chÃ­nh xÃ¡c: \${accuracyItem}</div>
+      <div style="color:var(--txt2); font-size:11px; font-weight:700; margin-bottom:5px; text-transform:uppercase;">Trung Bình Ngày (Thực Xuất)</div>
+      <div style="color:#22d3ee; font-size:20px; font-weight:800; margin-bottom:5px;">\${fmt(avgTx)}</div>
+      <div style="color:#94a3b8; font-size:12px; font-weight:700;">Booking: \${fmt(avgBkTon)}</div>
     </div>
     <div style="background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:15px; text-align:center;">
-      <div style="color:var(--txt2); font-size:11px; font-weight:700; margin-bottom:5px; text-transform:uppercase;">Tá»•ng Trá»ng LÆ°á»£ng (kg)</div>
-      <div style="color:#a78bfa; font-size:20px; font-weight:800; margin-bottom:5px;">\${fmt(Math.round(totalTxWeight))} / \${fmt(Math.round(totalFcWeight))}</div>
-      <div style="color:#10b981; font-size:12px; font-weight:700;">Äá»™ chÃ­nh xÃ¡c: \${accuracyWeight}</div>
+      <div style="color:var(--txt2); font-size:11px; font-weight:700; margin-bottom:5px; text-transform:uppercase;">Thực Xuất Cao Nhất</div>
+      <div style="color:#10b981; font-size:20px; font-weight:800; margin-bottom:5px;">\${fmt(maxTx)}</div>
+      <div style="color:#94a3b8; font-size:12px; font-weight:700;">Ngày: \${maxTxDate}</div>
     </div>
     <div style="background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:15px; text-align:center;">
-      <div style="color:var(--txt2); font-size:11px; font-weight:700; margin-bottom:5px; text-transform:uppercase;">Xuáº¥t Ä‘á»‰nh Ä‘iá»ƒm (Peak Day)</div>
-      <div style="color:#f59e0b; font-size:20px; font-weight:800; margin-bottom:5px;">\${fmt(peakItemVal)} ITEM</div>
-      <div style="color:#fb923c; font-size:12px; font-weight:700;">NgÃ y: \${peakItemDay}</div>
+      <div style="color:var(--txt2); font-size:11px; font-weight:700; margin-bottom:5px; text-transform:uppercase;">Thực Xuất Thấp Nhất</div>
+      <div style="color:#f59e0b; font-size:20px; font-weight:800; margin-bottom:5px;">\${fmt(minTx)}</div>
+      <div style="color:#94a3b8; font-size:12px; font-weight:700;">Ngày: \${minTxDate}</div>
     </div>
     <div style="background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:15px; text-align:center;">
-      <div style="color:var(--txt2); font-size:11px; font-weight:700; margin-bottom:5px; text-transform:uppercase;">Trung BÃ¬nh NgÃ y</div>
-      <div style="color:#38bdf8; font-size:20px; font-weight:800; margin-bottom:5px;">\${fmt(avgTxItem)} / \${fmt(avgFcItem)}</div>
-      <div style="color:#94a3b8; font-size:12px; font-weight:700;">ITEM / NgÃ y</div>
+      <div style="color:var(--txt2); font-size:11px; font-weight:700; margin-bottom:5px; text-transform:uppercase;">Số Ngày Lệch >= 10%</div>
+      <div style="color:#ef4444; font-size:20px; font-weight:800; margin-bottom:5px;">\${exceededDaysCount} ngày</div>
+      <div style="color:#94a3b8; font-size:12px; font-weight:700;">Cần theo dõi dữ liệu</div>
     </div>
   </div>
   `;
@@ -2211,7 +2230,7 @@ function renderForecast() {
   const chartPaddingBottom = 30;
   const svgWidth = 1150;
   
-  const maxVal = Math.max(...activeDA.map(r => Math.max(r.fc || 0, r.tx || 0))) || 1;
+  const maxVal = Math.max(...activeDA.map(r => Math.max(r.bkTon || 0, r.tx || 0))) || 1;
   const scaleY = (chartHeight - chartPaddingTop - chartPaddingBottom) / maxVal;
   
   const colCount = activeDA.length;
@@ -2233,19 +2252,29 @@ function renderForecast() {
   activeDA.forEach((r, idx) => {
     const xCenter = chartPaddingLeft + (idx * stepX) + (stepX / 2);
     
-    const fcHeight = (r.fc || 0) * scaleY;
-    const fcY = chartHeight - chartPaddingBottom - fcHeight;
-    const fcX = xCenter - barWidth - 1;
+    const bkHeight = (r.bkTon || 0) * scaleY;
+    const bkY = chartHeight - chartPaddingBottom - bkHeight;
+    const bkX = xCenter - barWidth - 1;
 
     const txHeight = (r.tx || 0) * scaleY;
     const txY = chartHeight - chartPaddingBottom - txHeight;
     const txX = xCenter + 1;
 
+    const bk = r.bkTon || 0;
+    const tx = r.tx || 0;
+    let exceeded = false;
+    if (bk === 0) {
+      exceeded = tx > 0;
+    } else {
+      exceeded = (Math.abs(tx - bk) / bk * 100) >= 10;
+    }
+    const actualColor = exceeded ? "#ef4444" : "#a78bfa";
+
     bars += `
       <g>
-        <title>\${r.d}: Dá»± bÃ¡o: \${fmt(r.fc)} | Thá»±c xuáº¥t: \${fmt(r.tx)}</title>
-        <rect x="\${fcX}" y="\${fcY}" width="\${barWidth}" height="\${fcHeight}" fill="#818cf8" rx="2" opacity="0.85" />
-        <rect x="\${txX}" y="\${txY}" width="\${barWidth}" height="\${txHeight}" fill="#22d3ee" rx="2" opacity="0.85" />
+        <title>\${r.d}: Booking: \${fmt(r.bkTon)} | Thực xuất: \${fmt(r.tx)} (Lệch: \${exceeded ? '>=10%' : '<10%'})</title>
+        <rect x="\${bkX}" y="\${bkY}" width="\${barWidth}" height="\${bkHeight}" fill="#3b82f6" rx="2" opacity="0.85" />
+        <rect x="\${txX}" y="\${txY}" width="\${barWidth}" height="\${txHeight}" fill="\${actualColor}" rx="2" opacity="0.85" />
         <text x="\${xCenter}" y="\${chartHeight - 10}" fill="#94a3b8" font-size="9" text-anchor="middle">\${r.d.split('-')[0]}</text>
       </g>
     `;
@@ -2254,10 +2283,11 @@ function renderForecast() {
   html += `
   <div class="table-block" style="max-width:1200px; padding:15px; margin-bottom:20px; overflow-x:auto;">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-      <div class="table-title" style="color:#a78bfa; margin-bottom:0; padding-bottom:0;">ðŸ“ˆ Biá»ƒu Ä‘á»“ so sÃ¡nh Dá»± bÃ¡o (ITEM) vs Thá»±c xuáº¥t (ITEM)</div>
+      <div class="table-title" style="color:#a78bfa; margin-bottom:0; padding-bottom:0;">📊 Biểu đồ so sánh Booking theo tồn (ITEM) vs Thực xuất (ITEM)</div>
       <div style="display:flex; gap:15px; font-size:11px;">
-        <span style="display:flex; align-items:center; gap:5px; color:#818cf8;"><span style="display:inline-block; width:10px; height:10px; background:#818cf8; border-radius:2px;"></span> Dá»± bÃ¡o (FC)</span>
-        <span style="display:flex; align-items:center; gap:5px; color:#22d3ee;"><span style="display:inline-block; width:10px; height:10px; background:#22d3ee; border-radius:2px;"></span> Thá»±c xuáº¥t (Actual)</span>
+        <span style="display:flex; align-items:center; gap:5px; color:#3b82f6;"><span style="display:inline-block; width:10px; height:10px; background:#3b82f6; border-radius:2px;"></span> Booking theo tồn</span>
+        <span style="display:flex; align-items:center; gap:5px; color:#a78bfa;"><span style="display:inline-block; width:10px; height:10px; background:#a78bfa; border-radius:2px;"></span> Thực xuất (Khớp)</span>
+        <span style="display:flex; align-items:center; gap:5px; color:#ef4444;"><span style="display:inline-block; width:10px; height:10px; background:#ef4444; border-radius:2px;"></span> Thực xuất (Lệch >= 10%)</span>
       </div>
     </div>
     <div style="min-width:1150px;">
@@ -2272,15 +2302,19 @@ function renderForecast() {
 
   let tableRows = '';
   activeDA.forEach(r => {
-    const diffItem = (r.tx || 0) - (r.fc || 0);
-    const accuracyItemVal = r.fc > 0 ? (r.tx / r.fc * 100) : 0;
-    const accuracyItemStr = r.fc > 0 ? accuracyItemVal.toFixed(1) + '%' : '0.0%';
-    const itemAccColor = accuracyItemVal >= 95 ? '#10b981' : accuracyItemVal >= 80 ? '#f59e0b' : '#ef4444';
+    const bk = r.bkTon || 0;
+    const tx = r.tx || 0;
+    const diffItem = tx - bk;
+    const accuracyItemVal = bk > 0 ? (tx / bk * 100) : 0;
+    const accuracyItemStr = bk > 0 ? accuracyItemVal.toFixed(1) + '%' : '0.0%';
+    const itemAccColor = bk > 0 && (Math.abs(tx - bk) / bk * 100) >= 10 ? '#ef4444' : '#10b981';
 
-    const diffWeight = (r.tlTx || 0) - (r.tlFc || 0);
-    const accuracyWeightVal = r.tlFc > 0 ? (r.tlTx / r.tlFc * 100) : 0;
-    const accuracyWeightStr = r.tlFc > 0 ? accuracyWeightVal.toFixed(1) + '%' : '0.0%';
-    const weightAccColor = accuracyWeightVal >= 95 ? '#10b981' : accuracyWeightVal >= 80 ? '#f59e0b' : '#ef4444';
+    const tlBk = r.tlBkTon || 0;
+    const tlTx = r.tlTx || 0;
+    const diffWeight = tlTx - tlBk;
+    const accuracyWeightVal = tlBk > 0 ? (tlTx / tlBk * 100) : 0;
+    const accuracyWeightStr = tlBk > 0 ? accuracyWeightVal.toFixed(1) + '%' : '0.0%';
+    const weightAccColor = tlBk > 0 && (Math.abs(tlTx - tlBk) / tlBk * 100) >= 10 ? '#ef4444' : '#10b981';
 
     const diffItemSign = diffItem > 0 ? '+' : '';
     const diffWeightSign = diffWeight > 0 ? '+' : '';
@@ -2291,13 +2325,13 @@ function renderForecast() {
       <td style="color:#64748b; text-align:center; font-size:11px;">\${r.w}</td>
       <td style="color:#64748b; text-align:center; font-size:11px;">\${r.wk}</td>
       
-      <td style="text-align:right; color:#818cf8;">\${fmt(r.fc)}</td>
-      <td style="text-align:right; color:#22d3ee;">\${fmt(r.tx)}</td>
+      <td style="text-align:right; color:#3b82f6;">\${fmt(bk)}</td>
+      <td style="text-align:right; color:#a78bfa;">\${fmt(tx)}</td>
       <td style="text-align:right; color:\${diffItem >= 0 ? '#10b981' : '#f87171'}">\${diffItemSign}\${fmt(diffItem)}</td>
       <td style="text-align:right; font-weight:700; color:\${itemAccColor};">\${accuracyItemStr}</td>
 
-      <td style="text-align:right; color:#818cf8;">\${fmt(Math.round(r.tlFc))}</td>
-      <td style="text-align:right; color:#22d3ee;">\${fmt(Math.round(r.tlTx))}</td>
+      <td style="text-align:right; color:#3b82f6;">\${fmt(Math.round(tlBk))}</td>
+      <td style="text-align:right; color:#a78bfa;">\${fmt(Math.round(tlTx))}</td>
       <td style="text-align:right; color:\${diffWeight >= 0 ? '#10b981' : '#f87171'}">\${diffWeightSign}\${fmt(Math.round(diffWeight))}</td>
       <td style="text-align:right; font-weight:700; color:\${weightAccColor};">\${accuracyWeightStr}</td>
     </tr>
@@ -2306,25 +2340,25 @@ function renderForecast() {
 
   html += `
   <div class="table-block" style="max-width:1200px; overflow-x:auto;">
-    <div class="table-title" style="color:#a78bfa">ðŸ“Š Báº£ng dá»¯ liá»‡u chi tiáº¿t so sÃ¡nh dá»± bÃ¡o vÃ  thá»±c xuáº¥t</div>
+    <div class="table-title" style="color:#a78bfa">📊 Bảng dữ liệu chi tiết so sánh booking và thực xuất</div>
     <table style="table-layout:auto; font-size:11.5px;">
       <thead>
         <tr>
-          <th rowspan="2" style="width:70px; text-align:center;">NgÃ y</th>
-          <th rowspan="2" style="width:40px; text-align:center;">Thá»©</th>
-          <th rowspan="2" style="width:40px; text-align:center;">Tuáº§n</th>
-          <th colspan="4" style="text-align:center; color:#22d3ee; border-bottom:2px solid #22d3ee;">ðŸ“¦ Sá»‘ lÆ°á»£ng (ITEM)</th>
-          <th colspan="4" style="text-align:center; color:#a78bfa; border-bottom:2px solid #a78bfa;">âš–ï¸ Trá»ng lÆ°á»£ng (kg)</th>
+          <th rowspan="2" style="width:70px; text-align:center;">Ngày</th>
+          <th rowspan="2" style="width:40px; text-align:center;">Thứ</th>
+          <th rowspan="2" style="width:40px; text-align:center;">Tuần</th>
+          <th colspan="4" style="text-align:center; color:#22d3ee; border-bottom:2px solid #22d3ee;">📦 Số lượng (ITEM)</th>
+          <th colspan="4" style="text-align:center; color:#a78bfa; border-bottom:2px solid #a78bfa;">⚖️ Trọng lượng (kg)</th>
         </tr>
         <tr>
-          <th style="color:#818cf8; text-align:right;">Dá»± bÃ¡o (FC)</th>
-          <th style="color:#22d3ee; text-align:right;">Thá»±c xuáº¥t</th>
-          <th style="text-align:right;">ChÃªnh lá»‡ch</th>
-          <th style="color:#10b981; text-align:right;">Äá»™ chÃ­nh xÃ¡c</th>
-          <th style="color:#818cf8; text-align:right;">Dá»± bÃ¡o (FC)</th>
-          <th style="color:#22d3ee; text-align:right;">Thá»±c xuáº¥t</th>
-          <th style="text-align:right;">ChÃªnh lá»‡ch</th>
-          <th style="color:#10b981; text-align:right;">Äá»™ chÃ­nh xÃ¡c</th>
+          <th style="color:#3b82f6; text-align:right;">Booking</th>
+          <th style="color:#a78bfa; text-align:right;">Thực xuất</th>
+          <th style="text-align:right;">Chênh lệch</th>
+          <th style="color:#10b981; text-align:right;">Tỷ lệ đáp ứng</th>
+          <th style="color:#3b82f6; text-align:right;">Booking</th>
+          <th style="color:#a78bfa; text-align:right;">Thực xuất</th>
+          <th style="text-align:right;">Chênh lệch</th>
+          <th style="color:#10b981; text-align:right;">Tỷ lệ đáp ứng</th>
         </tr>
       </thead>
       <tbody>
