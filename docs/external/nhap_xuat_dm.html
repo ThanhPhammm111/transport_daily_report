@@ -2154,9 +2154,9 @@ function renderForecast() {
   // Filter out off days and week/month summary rows
   const activeDA = DA.filter(r => !r.off && !r.wkTotal && !r.mTotal);
 
-  let totalBkTon = 0;
+  let totalFc = 0;
   let totalTx = 0;
-  let totalBkWeight = 0;
+  let totalFcWeight = 0;
   let totalTxWeight = 0;
   let maxTx = -1;
   let maxTxDate = '';
@@ -2165,11 +2165,13 @@ function renderForecast() {
   let exceededDaysCount = 0;
 
   activeDA.forEach(r => {
+    const fc = r.fc || 0;
     const bk = r.bkTon || 0;
     const tx = r.tx || 0;
-    totalBkTon += bk;
+    
+    totalFc += fc;
     totalTx += tx;
-    totalBkWeight += r.tlBkTon || 0;
+    totalFcWeight += r.tlFc || 0;
     totalTxWeight += r.tlTx || 0;
 
     if (tx > maxTx) {
@@ -2193,7 +2195,7 @@ function renderForecast() {
   });
 
   const count = activeDA.length;
-  const avgBkTon = count > 0 ? Math.round(totalBkTon / count) : 0;
+  const avgFc = count > 0 ? Math.round(totalFc / count) : 0;
   const avgTx = count > 0 ? Math.round(totalTx / count) : 0;
 
   let html = `
@@ -2202,7 +2204,7 @@ function renderForecast() {
     <div style="background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:15px; text-align:center;">
       <div style="color:var(--txt2); font-size:11px; font-weight:700; margin-bottom:5px; text-transform:uppercase;">Trung Bình Ngày (Thực Xuất)</div>
       <div style="color:#22d3ee; font-size:20px; font-weight:800; margin-bottom:5px;">\${fmt(avgTx)}</div>
-      <div style="color:#94a3b8; font-size:12px; font-weight:700;">Booking: \${fmt(avgBkTon)}</div>
+      <div style="color:#94a3b8; font-size:12px; font-weight:700;">Dự báo (FC): \${fmt(avgFc)}</div>
     </div>
     <div style="background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:15px; text-align:center;">
       <div style="color:var(--txt2); font-size:11px; font-weight:700; margin-bottom:5px; text-transform:uppercase;">Thực Xuất Cao Nhất</div>
@@ -2217,7 +2219,7 @@ function renderForecast() {
     <div style="background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:15px; text-align:center;">
       <div style="color:var(--txt2); font-size:11px; font-weight:700; margin-bottom:5px; text-transform:uppercase;">Số Ngày Lệch >= 10%</div>
       <div style="color:#ef4444; font-size:20px; font-weight:800; margin-bottom:5px;">\${exceededDaysCount} ngày</div>
-      <div style="color:#94a3b8; font-size:12px; font-weight:700;">Cần theo dõi dữ liệu</div>
+      <div style="color:#94a3b8; font-size:12px; font-weight:700;">So với Booking theo tồn</div>
     </div>
   </div>
   `;
@@ -2230,7 +2232,7 @@ function renderForecast() {
   const chartPaddingBottom = 30;
   const svgWidth = 1150;
   
-  const maxVal = Math.max(...activeDA.map(r => Math.max(r.bkTon || 0, r.tx || 0))) || 1;
+  const maxVal = Math.max(...activeDA.map(r => Math.max(r.fc || 0, r.tx || 0))) || 1;
   const scaleY = (chartHeight - chartPaddingTop - chartPaddingBottom) / maxVal;
   
   const colCount = activeDA.length;
@@ -2252,9 +2254,9 @@ function renderForecast() {
   activeDA.forEach((r, idx) => {
     const xCenter = chartPaddingLeft + (idx * stepX) + (stepX / 2);
     
-    const bkHeight = (r.bkTon || 0) * scaleY;
-    const bkY = chartHeight - chartPaddingBottom - bkHeight;
-    const bkX = xCenter - barWidth - 1;
+    const fcHeight = (r.fc || 0) * scaleY;
+    const fcY = chartHeight - chartPaddingBottom - fcHeight;
+    const fcX = xCenter - barWidth - 1;
 
     const txHeight = (r.tx || 0) * scaleY;
     const txY = chartHeight - chartPaddingBottom - txHeight;
@@ -2272,8 +2274,8 @@ function renderForecast() {
 
     bars += `
       <g>
-        <title>\${r.d}: Booking: \${fmt(r.bkTon)} | Thực xuất: \${fmt(r.tx)} (Lệch: \${exceeded ? '>=10%' : '<10%'})</title>
-        <rect x="\${bkX}" y="\${bkY}" width="\${barWidth}" height="\${bkHeight}" fill="#3b82f6" rx="2" opacity="0.85" />
+        <title>\${r.d}: Dự báo (FC): \${fmt(r.fc)} | Booking Tồn: \${fmt(r.bkTon)} | Thực xuất: \${fmt(r.tx)} \${exceeded ? '(Lệch Bk Tồn >=10%)' : ''}</title>
+        <rect x="\${fcX}" y="\${fcY}" width="\${barWidth}" height="\${fcHeight}" fill="#3b82f6" rx="2" opacity="0.85" />
         <rect x="\${txX}" y="\${txY}" width="\${barWidth}" height="\${txHeight}" fill="\${actualColor}" rx="2" opacity="0.85" />
         <text x="\${xCenter}" y="\${chartHeight - 10}" fill="#94a3b8" font-size="9" text-anchor="middle">\${r.d.split('-')[0]}</text>
       </g>
@@ -2283,11 +2285,11 @@ function renderForecast() {
   html += `
   <div class="table-block" style="max-width:1200px; padding:15px; margin-bottom:20px; overflow-x:auto;">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-      <div class="table-title" style="color:#a78bfa; margin-bottom:0; padding-bottom:0;">📊 Biểu đồ so sánh Booking theo tồn (ITEM) vs Thực xuất (ITEM)</div>
+      <div class="table-title" style="color:#a78bfa; margin-bottom:0; padding-bottom:0;">📊 Biểu đồ so sánh Dự báo (FC) (ITEM) vs Thực xuất (ITEM)</div>
       <div style="display:flex; gap:15px; font-size:11px;">
-        <span style="display:flex; align-items:center; gap:5px; color:#3b82f6;"><span style="display:inline-block; width:10px; height:10px; background:#3b82f6; border-radius:2px;"></span> Booking theo tồn</span>
+        <span style="display:flex; align-items:center; gap:5px; color:#3b82f6;"><span style="display:inline-block; width:10px; height:10px; background:#3b82f6; border-radius:2px;"></span> Dự báo (FC)</span>
         <span style="display:flex; align-items:center; gap:5px; color:#a78bfa;"><span style="display:inline-block; width:10px; height:10px; background:#a78bfa; border-radius:2px;"></span> Thực xuất (Khớp)</span>
-        <span style="display:flex; align-items:center; gap:5px; color:#ef4444;"><span style="display:inline-block; width:10px; height:10px; background:#ef4444; border-radius:2px;"></span> Thực xuất (Lệch >= 10%)</span>
+        <span style="display:flex; align-items:center; gap:5px; color:#ef4444;"><span style="display:inline-block; width:10px; height:10px; background:#ef4444; border-radius:2px;"></span> Thực xuất (Lệch Bk Tồn >= 10%)</span>
       </div>
     </div>
     <div style="min-width:1150px;">
@@ -2302,18 +2304,22 @@ function renderForecast() {
 
   let tableRows = '';
   activeDA.forEach(r => {
+    const fcVal = r.fc || 0;
     const bk = r.bkTon || 0;
     const tx = r.tx || 0;
-    const diffItem = tx - bk;
-    const accuracyItemVal = bk > 0 ? (tx / bk * 100) : 0;
-    const accuracyItemStr = bk > 0 ? accuracyItemVal.toFixed(1) + '%' : '0.0%';
+    const diffItem = tx - fcVal;
+    const accuracyItemVal = fcVal > 0 ? (tx / fcVal * 100) : 0;
+    const accuracyItemStr = fcVal > 0 ? accuracyItemVal.toFixed(1) + '%' : '0.0%';
+    
+    // Highlight based on bkTon chênh lệch
     const itemAccColor = bk > 0 && (Math.abs(tx - bk) / bk * 100) >= 10 ? '#ef4444' : '#10b981';
 
+    const tlFcVal = r.tlFc || 0;
     const tlBk = r.tlBkTon || 0;
     const tlTx = r.tlTx || 0;
-    const diffWeight = tlTx - tlBk;
-    const accuracyWeightVal = tlBk > 0 ? (tlTx / tlBk * 100) : 0;
-    const accuracyWeightStr = tlBk > 0 ? accuracyWeightVal.toFixed(1) + '%' : '0.0%';
+    const diffWeight = tlTx - tlFcVal;
+    const accuracyWeightVal = tlFcVal > 0 ? (tlTx / tlFcVal * 100) : 0;
+    const accuracyWeightStr = tlFcVal > 0 ? accuracyWeightVal.toFixed(1) + '%' : '0.0%';
     const weightAccColor = tlBk > 0 && (Math.abs(tlTx - tlBk) / tlBk * 100) >= 10 ? '#ef4444' : '#10b981';
 
     const diffItemSign = diffItem > 0 ? '+' : '';
@@ -2325,12 +2331,12 @@ function renderForecast() {
       <td style="color:#64748b; text-align:center; font-size:11px;">\${r.w}</td>
       <td style="color:#64748b; text-align:center; font-size:11px;">\${r.wk}</td>
       
-      <td style="text-align:right; color:#3b82f6;">\${fmt(bk)}</td>
+      <td style="text-align:right; color:#3b82f6;">\${fmt(fcVal)}</td>
       <td style="text-align:right; color:#a78bfa;">\${fmt(tx)}</td>
       <td style="text-align:right; color:\${diffItem >= 0 ? '#10b981' : '#f87171'}">\${diffItemSign}\${fmt(diffItem)}</td>
       <td style="text-align:right; font-weight:700; color:\${itemAccColor};">\${accuracyItemStr}</td>
 
-      <td style="text-align:right; color:#3b82f6;">\${fmt(Math.round(tlBk))}</td>
+      <td style="text-align:right; color:#3b82f6;">\${fmt(Math.round(tlFcVal))}</td>
       <td style="text-align:right; color:#a78bfa;">\${fmt(Math.round(tlTx))}</td>
       <td style="text-align:right; color:\${diffWeight >= 0 ? '#10b981' : '#f87171'}">\${diffWeightSign}\${fmt(Math.round(diffWeight))}</td>
       <td style="text-align:right; font-weight:700; color:\${weightAccColor};">\${accuracyWeightStr}</td>
@@ -2340,7 +2346,7 @@ function renderForecast() {
 
   html += `
   <div class="table-block" style="max-width:1200px; overflow-x:auto;">
-    <div class="table-title" style="color:#a78bfa">📊 Bảng dữ liệu chi tiết so sánh booking và thực xuất</div>
+    <div class="table-title" style="color:#a78bfa">📊 Bảng dữ liệu chi tiết so sánh dự báo (FC) và thực xuất</div>
     <table style="table-layout:auto; font-size:11.5px;">
       <thead>
         <tr>
@@ -2351,14 +2357,14 @@ function renderForecast() {
           <th colspan="4" style="text-align:center; color:#a78bfa; border-bottom:2px solid #a78bfa;">⚖️ Trọng lượng (kg)</th>
         </tr>
         <tr>
-          <th style="color:#3b82f6; text-align:right;">Booking</th>
+          <th style="color:#3b82f6; text-align:right;">Dự báo (FC)</th>
           <th style="color:#a78bfa; text-align:right;">Thực xuất</th>
           <th style="text-align:right;">Chênh lệch</th>
-          <th style="color:#10b981; text-align:right;">Tỷ lệ đáp ứng</th>
-          <th style="color:#3b82f6; text-align:right;">Booking</th>
+          <th style="color:#10b981; text-align:right;">Độ chính xác</th>
+          <th style="color:#3b82f6; text-align:right;">Dự báo (FC)</th>
           <th style="color:#a78bfa; text-align:right;">Thực xuất</th>
           <th style="text-align:right;">Chênh lệch</th>
-          <th style="color:#10b981; text-align:right;">Tỷ lệ đáp ứng</th>
+          <th style="color:#10b981; text-align:right;">Độ chính xác</th>
         </tr>
       </thead>
       <tbody>
