@@ -53,12 +53,74 @@ body {
   width:100%; flex:1; border:none; border-radius:10px; background:#0b0d12;
 }
 .bottom-footer { text-align:center; padding:4px 0 8px; color:#3a3e5e; font-size:0.65rem; }
+
+/* Light Theme overrides for parent wrapper */
+body.light-mode {
+  background:#f8fafc;
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(59,130,246,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(139,92,246,0.04) 0%, transparent 60%);
+  color:#0f172a;
+}
+body.light-mode .top-header h1 {
+  background:linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+body.light-mode .top-header .subtitle { color:#64748b; }
+body.light-mode .main-tab {
+  border-color: rgba(15,23,42,0.08); background:rgba(15,23,42,0.03);
+  color:#64748b;
+}
+body.light-mode .main-tab:hover { background:rgba(59,130,246,0.08); color:#1e40af; border-color:rgba(59,130,246,0.2); }
+body.light-mode .main-tab.active {
+  background:linear-gradient(135deg,rgba(59,130,246,0.1),rgba(139,92,246,0.1));
+  color:#1e40af; border-color:rgba(59,130,246,0.4);
+  box-shadow:0 4px 20px rgba(59,130,246,0.1);
+}
+body.light-mode .bottom-footer { color:#94a3b8; }
+body.light-mode .theme-toggle-btn {
+  border-color: rgba(15,23,42,0.12);
+  color: #64748b;
+}
+body.light-mode .theme-toggle-btn:hover {
+  background: rgba(15,23,42,0.04);
+  color: #0f172a;
+}
+
+.theme-toggle-btn {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #6b7094;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+.theme-toggle-btn:hover {
+  background: rgba(79,172,254,0.08);
+  color: #8bb8f0;
+  border-color: rgba(79,172,254,0.2);
+}
 </style>
 </head>
 <body>
-<div class="top-header">
+<div class="top-header" style="position: relative;">
   <h1>📊 Báo Cáo Sản Lượng Đông Mát</h1>
   <div class="subtitle">Tổng hợp báo cáo &nbsp;|&nbsp; Cập nhật: <span id="ud"></span></div>
+  <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Chuyển chế độ sáng/tối">
+    <!-- Sun icon -->
+    <svg id="sunIcon" style="display: none;" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+    <!-- Moon icon -->
+    <svg id="moonIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+  </button>
 </div>
 <div class="main-tabs">
   <button class="main-tab active" onclick="sw(0)">📦 Nhập / Xuất &amp; Đáp ứng</button>
@@ -79,6 +141,65 @@ body {
 const n=new Date(),p=x=>String(x).padStart(2,'0');
 document.getElementById('ud').textContent=p(n.getDate())+'/'+p(n.getMonth()+1)+'/'+n.getFullYear()+' '+p(n.getHours())+':'+p(n.getMinutes());
 document.getElementById('f0_iframe').src = 'external/nhap_xuat_dm.html?v=' + Date.now();
+
+// Theme state handling
+let isLight = localStorage.getItem("light_mode") === "true";
+if (isLight) {
+  document.body.classList.add("light-mode");
+  document.getElementById("sunIcon").style.display = "block";
+  document.getElementById("moonIcon").style.display = "none";
+}
+
+function toggleTheme() {
+  isLight = !isLight;
+  document.body.classList.toggle("light-mode", isLight);
+  localStorage.setItem("light_mode", isLight);
+  
+  document.getElementById("sunIcon").style.display = isLight ? "block" : "none";
+  document.getElementById("moonIcon").style.display = isLight ? "none" : "block";
+  
+  applyThemeToIframes(isLight);
+}
+
+function applyThemeToIframes(isLightVal) {
+  const iframes = ['f0_iframe', 'f1_iframe', 'f2_iframe'];
+  iframes.forEach(id => {
+    const iframe = document.getElementById(id);
+    if (!iframe || iframe.src === 'about:blank' || iframe.src === '') return;
+    
+    // 1. Direct toggle for same-origin
+    try {
+      if (iframe.contentDocument && iframe.contentDocument.body) {
+        iframe.contentDocument.body.classList.toggle('light-mode', isLightVal);
+        const win = iframe.contentWindow;
+        if (win && win.STATE && win.drawStoreChart) {
+          win.drawStoreChart();
+          win.drawCategoryChart();
+        }
+      }
+    } catch (e) {
+      // Cross-origin fallback
+    }
+    
+    // 2. postMessage communication
+    try {
+      if (iframe.contentWindow) {
+        iframe.contentWindow.postMessage({ action: 'setTheme', isLight: isLightVal }, '*');
+      }
+    } catch (e) {}
+  });
+}
+
+// Attach load event listeners to iframes to apply theme when they load
+document.querySelectorAll('iframe').forEach(iframe => {
+  iframe.addEventListener('load', () => {
+    // Send current theme state after a small delay to make sure the iframe scripts are initialized
+    setTimeout(() => {
+      applyThemeToIframes(isLight);
+    }, 150);
+  });
+});
+
 function sw(i){
   document.querySelectorAll('.main-tab').forEach((t,j)=>t.classList.toggle('active',j===i));
   document.querySelectorAll('.frame-wrap').forEach((f,j)=>f.classList.toggle('active',j===i));
@@ -95,7 +216,6 @@ function sw(i){
     }
   }
 }
-
 </script>
 </body>
 </html>

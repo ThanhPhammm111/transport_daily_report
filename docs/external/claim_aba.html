@@ -23,6 +23,50 @@
             color: #e0e0e0;
             padding: 30px 40px;
         }
+        body.light-mode {
+            background: #f8fafc;
+            background-image:
+                radial-gradient(ellipse at 20% 50%, rgba(59,130,246,0.03) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(139,92,246,0.03) 0%, transparent 60%);
+            color: #0f172a;
+        }
+        body.light-mode .header h1 {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        body.light-mode .header .subtitle { color: #64748b; }
+        body.light-mode .kpi-card {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        body.light-mode .kpi-card:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        body.light-mode .kpi-card .kpi-label { color: #64748b; }
+        body.light-mode .kpi-card .kpi-value { color: #0f172a; }
+        body.light-mode .kpi-card .kpi-sub { color: #94a3b8; }
+        body.light-mode .chart-panel {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        body.light-mode .chart-panel .panel-title h2 { color: #334155; }
+        body.light-mode .chart-panel .panel-title h2 small { color: #94a3b8; }
+        body.light-mode .legend-item { color: #64748b; }
+        body.light-mode .footer { color: #94a3b8; }
+        body.light-mode .filter-row label { color: #64748b; }
+        body.light-mode .filter-select {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            color: #0f172a;
+        }
+        body.light-mode .filter-select option {
+            background: #ffffff;
+            color: #0f172a;
+        }
 
         .dashboard {
             max-width: 1300px;
@@ -1754,6 +1798,20 @@ function resetItemTableFilter() {
     buildItemTable(daily);
 }
 
+
+// Parent theme listener
+window.addEventListener('message', (event) => {
+  if (event.data && event.data.action === 'setTheme') {
+    document.body.classList.toggle('light-mode', event.data.isLight);
+    
+    // Attempt to redraw charts with custom fonts/grid colors if needed
+    try {
+        if (typeof rebuildChartsWithTheme === 'function') {
+            rebuildChartsWithTheme(event.data.isLight);
+        }
+    } catch(e){}
+  }
+});
 </script>
 </body>
 </html>
