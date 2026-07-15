@@ -2020,66 +2020,147 @@ function monthLabel(m) { return m===3?'Tháng 3':m===4?'Tháng 4':m===5?'Tháng 
 function renderDapUng() {
   document.getElementById('btnPrev').style.display = 'none';
   document.getElementById('btnNext').style.display = 'none';
-  document.querySelector('.day-info .date').textContent = 'Tỷ lệ Đáp ứng';
-  document.querySelector('.day-info .dow').textContent = 'T4/2026';
-  document.querySelector('.day-info .week').textContent = 'Tổng hợp';
+  document.querySelector('.day-info .date').textContent = 'Tá»· lá»‡ ÄÃ¡p á»©ng';
+  document.querySelector('.day-info .dow').textContent = 'Tá»•ng há»£p';
+  document.querySelector('.day-info .week').textContent = 'ÄÃ¡p á»©ng';
 
   function duClr(v) { return v >= 99.5 ? '#10b981' : v >= 99 ? '#f59e0b' : '#ef4444'; }
   function diffClr(v) { return Math.abs(v) > 100 ? '#f87171' : '#10b981'; }
 
+  // Initialize filter state
+  if (window.daFilterDateFrom === undefined) {
+      window.daFilterDateFrom = 'all';
+      window.daFilterDateTo = 'all';
+      window.daFilterMonth = 0;
+      window.daFilterWkFrom = 0;
+      window.daFilterWkTo = 0;
+      window.daSummary = false;
+      window.daMSummary = false;
+  }
+
   // Filter out off days first
   const DAactive = DA.filter(r => !r.off);
 
-  const weeks = [...new Set(DAactive.map(r => r.wk))];
-  const weekNums = weeks.map(w => parseInt(w.replace('W','')));
+  // Compute unique weeks, months, and dates dynamically
+  const activeDays = DAactive.filter(r => !r.wkTotal && !r.mTotal);
+  const uniqueDates = activeDays.map(r => r.d);
+  const uniqueWeeks = [...new Set(activeDays.map(r => parseInt(r.wk.replace('W',''))))].sort((a,b)=>a-b);
+  const uniqueMonths = [...new Set(activeDays.map(r => getMonth(r.d)))].sort((a,b)=>a-b);
 
-  // Filter
+  // Filter logic
   let filtered = DAactive;
-  if (daSummary) {
-    filtered = DAactive.filter(r => {
-      if (!r.wkTotal) return false;
-      const wn = parseInt(r.wk.replace('W',''));
-      if (wn < daWkFrom || wn > daWkTo) return false;
-      if (daMonth > 0) {
-        const hasDay = DA.some(x => !x.wkTotal && x.wk === r.wk && getMonth(x.d) === daMonth);
-        if (!hasDay) return false;
-      }
-      return true;
-    });
-  } else if (daMSummary) {
-    filtered = DAactive.filter(r => {
-      const wn = parseInt(r.wk.replace('W',''));
-      if (wn < daWkFrom || wn > daWkTo) return false;
-      if (daMonth > 0) {
-        if (r.wkTotal) {
-          const hasDay = DAactive.some(x => !x.wkTotal && x.wk === r.wk && getMonth(x.d) === daMonth);
-          return hasDay;
-        }
-        const m = getMonth(r.d);
-        if (m > 0 && m !== daMonth) return false;
-      }
-      return true;
-    });
+
+  // Apply Month filter
+  if (window.daFilterMonth > 0) {
+      filtered = filtered.filter(r => getMonth(r.d) === window.daFilterMonth);
   }
 
-  // Monthly totals only shown when daMSummary is active (removed auto-insert)
+  // Apply Week range filter
+  if (window.daFilterWkFrom > 0) {
+      filtered = filtered.filter(r => {
+          const wn = parseInt(r.wk.replace('W',''));
+          return wn >= window.daFilterWkFrom;
+      });
+  }
+  if (window.daFilterWkTo > 0) {
+      filtered = filtered.filter(r => {
+          const wn = parseInt(r.wk.replace('W',''));
+          return wn <= window.daFilterWkTo;
+      });
+  }
+
+  // Apply Date range filter
+  if (window.daFilterDateFrom !== 'all') {
+      const fromIdx = uniqueDates.indexOf(window.daFilterDateFrom);
+      filtered = filtered.filter(r => {
+          if (r.wkTotal || r.mTotal) return true; // Keep totals
+          const idx = uniqueDates.indexOf(r.d);
+          return idx >= fromIdx;
+      });
+  }
+  if (window.daFilterDateTo !== 'all') {
+      const toIdx = uniqueDates.indexOf(window.daFilterDateTo);
+      filtered = filtered.filter(r => {
+          if (r.wkTotal || r.mTotal) return true; // Keep totals
+          const idx = uniqueDates.indexOf(r.d);
+          return idx <= toIdx;
+      });
+  }
+
+  // Apply summary toggle filters
+  if (window.daSummary) {
+      filtered = filtered.filter(r => r.wkTotal);
+  } else if (window.daMSummary) {
+      filtered = filtered.filter(r => r.mTotal || r.wkTotal);
+  }
 
   // Dropdown style
   const selStyle = `background:#141938;color:#e2e8f0;border:1px solid #1e293b;border-radius:6px;padding:5px 8px;font-size:12px;font-family:Inter;cursor:pointer`;
   const btnAct = (on) => `padding:6px 14px;border-radius:8px;border:1px solid ${on?'#10b981':'#1e293b'};background:${on?'rgba(16,185,129,0.15)':'#141938'};color:${on?'#10b981':'#94a3b8'};font-size:12px;font-weight:${on?'700':'500'};cursor:pointer;font-family:Inter`;
 
-  // Week range options
-  let wkOpts = (sel) => weekNums.map(n => `<option value="${n}" ${n===sel?'selected':''}>${n}</option>`).join('');
-
-  let filterHtml = `<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:center;padding:10px 16px;background:#0f1328;border-bottom:1px solid #1e293b">
-      <span style="color:#94a3b8;font-size:11px">đến</span>
-      <select style="${selStyle}" onchange="daWkTo=+this.value;daSummary=false;renderDapUng()">${wkOpts(daWkTo)}</select>
+  // HTML filter bar
+  const filterHtml = `
+  <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:20px; padding:15px; background:#0f1328; border:1px solid #1e293b; max-width:1200px; margin-left:auto; margin-right:auto; border-radius:10px;">
+    <!-- Row 1: Toggles and Reset -->
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span style="color:#94a3b8; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px;">ðŸ“Š Xem tá»•ng há»£p:</span>
+        <button style="${btnAct(window.daSummary)}" onclick="window.daSummary=!window.daSummary; window.daMSummary=false; renderDapUng();">ðŸ“Š Tá»•ng tuáº§n</button>
+        <button style="${btnAct(window.daMSummary)}" onclick="window.daMSummary=!window.daMSummary; window.daSummary=false; renderDapUng();">ðŸ“Š Tá»•ng thÃ¡ng</button>
+      </div>
+      
+      <button onclick="window.daFilterDateFrom='all'; window.daFilterDateTo='all'; window.daFilterMonth=0; window.daFilterWkFrom=0; window.daFilterWkTo=0; window.daSummary=false; window.daMSummary=false; renderDapUng();" style="padding:5px 12px; border-radius:6px; border:1px solid #ef4444; background:rgba(239,68,68,0.1); color:#f87171; font-size:11px; font-weight:700; cursor:pointer; font-family:Inter; transition: all 0.2s;">
+        ðŸ”„ Reset Bá»™ Lá»c
+      </button>
     </div>
-    <div style="width:1px;height:24px;background:#1e293b"></div>
-    <button style="${btnAct(daSummary)}" onclick="daSummary=!daSummary;daMSummary=false;renderDapUng()">📊 Tổng tuần</button>
-    <button style="${btnAct(daMSummary)}" onclick="daMSummary=!daMSummary;daSummary=false;renderDapUng()">📊 Tổng tháng</button>
-  </div>`;
 
+    <div style="height:1px; background:#1e293b;"></div>
+
+    <!-- Row 2: Date, Week, Month Filters -->
+    <div style="display:flex; gap:15px; flex-wrap:wrap; align-items:center;">
+      <!-- Lá»c theo ThÃ¡ng -->
+      <div style="display:flex; align-items:center; gap:5px;">
+        <span style="color:#94a3b8; font-size:11.5px; font-weight:600;">ðŸ“… ThÃ¡ng:</span>
+        <select style="${selStyle}" onchange="window.daFilterMonth=+this.value; renderDapUng();">
+          <option value="0" ${window.daFilterMonth===0?'selected':''}>â€” Táº¥t cáº£ â€”</option>
+          ${uniqueMonths.map(m => `<option value="${m}" ${window.daFilterMonth===m?'selected':''}>ThÃ¡ng ${m}</option>`).join('')}
+        </select>
+      </div>
+
+      <div style="width:1px; height:18px; background:#1e293b;"></div>
+
+      <!-- Lá»c theo Tuáº§n -->
+      <div style="display:flex; align-items:center; gap:5px;">
+        <span style="color:#94a3b8; font-size:11.5px; font-weight:600;">ðŸ“Š Tuáº§n tá»«:</span>
+        <select style="${selStyle}" onchange="window.daFilterWkFrom=+this.value; renderDapUng();">
+          <option value="0" ${window.daFilterWkFrom===0?'selected':''}>Báº¯t Ä‘áº§u</option>
+          ${uniqueWeeks.map(w => `<option value="${w}" ${window.daFilterWkFrom===w?'selected':''}>W${w}</option>`).join('')}
+        </select>
+        <span style="color:#94a3b8; font-size:11px;">Ä‘áº¿n</span>
+        <select style="${selStyle}" onchange="window.daFilterWkTo=+this.value; renderDapUng();">
+          <option value="0" ${window.daFilterWkTo===0?'selected':''}>Káº¿t thÃºc</option>
+          ${uniqueWeeks.map(w => `<option value="${w}" ${window.daFilterWkTo===w?'selected':''}>W${w}</option>`).join('')}
+        </select>
+      </div>
+
+      <div style="width:1px; height:18px; background:#1e293b;"></div>
+
+      <!-- Lá»c theo NgÃ y -->
+      <div style="display:flex; align-items:center; gap:5px;">
+        <span style="color:#94a3b8; font-size:11.5px; font-weight:600;">ðŸ—“ï¸ NgÃ y tá»«:</span>
+        <select style="${selStyle}" onchange="window.daFilterDateFrom=this.value; renderDapUng();">
+          <option value="all" ${window.daFilterDateFrom==='all'?'selected':''}>â€” Báº¯t Ä‘áº§u â€”</option>
+          ${uniqueDates.map(d => `<option value="${d}" ${window.daFilterDateFrom===d?'selected':''}>${d}</option>`).join('')}
+        </select>
+        <span style="color:#94a3b8; font-size:11px;">Ä‘áº¿n</span>
+        <select style="${selStyle}" onchange="window.daFilterDateTo=this.value; renderDapUng();">
+          <option value="all" ${window.daFilterDateTo==='all'?'selected':''}>â€” Káº¿t thÃºc â€”</option>
+          ${uniqueDates.map(d => `<option value="${d}" ${window.daFilterDateTo===d?'selected':''}>${d}</option>`).join('')}
+        </select>
+      </div>
+    </div>
+  </div>
+  `;
   // Table rows
   let rows = '';
   filtered.forEach((r, idx) => {
@@ -2140,12 +2221,14 @@ function renderDapUng() {
     </tr>`;
   });
   
-  let title = 'Tổng hợp';
-  if (daSummary) title = 'So sánh theo tuần';
-  else if (daMSummary) title = 'So sánh theo tháng';
-  else if (daMonth > 0) title = `Tháng ${daMonth}`;
-  else if (daWkFrom === daWkTo) title = `Tuần ${daWkFrom}`;
-  else title = `Tuần ${daWkFrom} đến ${daWkTo}`;
+  let title = 'Tá»•ng há»£p';
+  if (window.daSummary) title = 'So sÃ¡nh theo tuáº§n';
+  else if (window.daMSummary) title = 'So sÃ¡nh theo thÃ¡ng';
+  else if (window.daFilterMonth > 0) title = `ThÃ¡ng ${window.daFilterMonth}`;
+  else if (window.daFilterWkFrom > 0 && window.daFilterWkTo > 0) {
+      if (window.daFilterWkFrom === window.daFilterWkTo) title = `Tuáº§n ${window.daFilterWkFrom}`;
+      else title = `Tuáº§n ${window.daFilterWkFrom} Ä‘áº¿n ${window.daFilterWkTo}`;
+  }
 
   let html = `${filterHtml}
   <div class="table-block" style="max-width:1200px;overflow-x:auto">
