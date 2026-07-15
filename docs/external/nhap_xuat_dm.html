@@ -76,6 +76,8 @@ body.light-mode {
   --pick-bad: #dc2626;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
+body.in-iframe .header, body.in-iframe .tab-nav { display: none !important; }
+body.in-iframe { padding-bottom: 20px !important; }
 body {
   font-family:'Inter',sans-serif;
   background:var(--bg);
@@ -2617,12 +2619,23 @@ function renderForecast() {
 }
 
 
-// Parent theme listener
+
+// Parent theme & tab listener
 window.addEventListener('message', (event) => {
-  if (event.data && event.data.action === 'setTheme') {
-    document.body.classList.toggle('light-mode', event.data.isLight);
+  if (event.data) {
+    if (event.data.action === 'setTheme') {
+      document.body.classList.toggle('light-mode', event.data.isLight);
+    } else if (event.data.action === 'switchSubTab') {
+      if (typeof switchTab === 'function') {
+        switchTab(event.data.tab);
+      }
+    }
   }
 });
+
+if (window.self !== window.top) {
+  document.body.classList.add('in-iframe');
+}
 </script>
 </body>
 </html>
