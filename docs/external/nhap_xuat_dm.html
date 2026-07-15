@@ -77,7 +77,7 @@ body.light-mode {
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 body.in-iframe .header, body.in-iframe .tab-nav { display: none !important; }
-body.screenshot-mode-table3 .header, body.screenshot-mode-table3 .tab-nav,
+body.screenshot-mode .header, body.screenshot-mode .tab-nav { display: none !important; }
 body.screenshot-mode-table3 .filter-block, body.screenshot-mode-table3 #warning-section { display: none !important; }
 body.screenshot-mode-table3 { padding-bottom: 0 !important; }
 body.screenshot-mode-table3 .table-block { box-shadow: none !important; border: none !important; margin: 0 !important; padding: 0 !important; background: transparent !important; }
@@ -1682,8 +1682,12 @@ const WARN_EXCLUDE = ['9300658407505'];
 document.addEventListener('DOMContentLoaded', () => {
 try {
   const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.get('screenshot') === 'table3') {
-    document.body.classList.add('screenshot-mode-table3');
+  const shot = urlParams.get('screenshot');
+  if (shot) {
+    document.body.classList.add('screenshot-mode');
+    if (shot === 'table3') {
+      document.body.classList.add('screenshot-mode-table3');
+    }
   }
   const tabParam = urlParams.get('tab');
   if (tabParam) {
