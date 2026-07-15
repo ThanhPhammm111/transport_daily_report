@@ -2020,9 +2020,9 @@ function monthLabel(m) { return m===3?'Tháng 3':m===4?'Tháng 4':m===5?'Tháng 
 function renderDapUng() {
   document.getElementById('btnPrev').style.display = 'none';
   document.getElementById('btnNext').style.display = 'none';
-  document.querySelector('.day-info .date').textContent = 'Tá»· lá»‡ ÄÃ¡p á»©ng';
-  document.querySelector('.day-info .dow').textContent = 'Tá»•ng há»£p';
-  document.querySelector('.day-info .week').textContent = 'ÄÃ¡p á»©ng';
+  document.querySelector('.day-info .date').textContent = 'T\u1ef7 l\u1ec7 \u0110\u00e1p \u1ee9ng';
+  document.querySelector('.day-info .dow').textContent = 'T\u1ed5ng h\u1ee3p';
+  document.querySelector('.day-info .week').textContent = '\u0110\u00e1p \u1ee9ng';
 
   function duClr(v) { return v >= 99.5 ? '#10b981' : v >= 99 ? '#f59e0b' : '#ef4444'; }
   function diffClr(v) { return Math.abs(v) > 100 ? '#f87171' : '#10b981'; }
@@ -2098,19 +2098,19 @@ function renderDapUng() {
   const selStyle = `background:#141938;color:#e2e8f0;border:1px solid #1e293b;border-radius:6px;padding:5px 8px;font-size:12px;font-family:Inter;cursor:pointer`;
   const btnAct = (on) => `padding:6px 14px;border-radius:8px;border:1px solid ${on?'#10b981':'#1e293b'};background:${on?'rgba(16,185,129,0.15)':'#141938'};color:${on?'#10b981':'#94a3b8'};font-size:12px;font-weight:${on?'700':'500'};cursor:pointer;font-family:Inter`;
 
-  // HTML filter bar
+  // HTML filter bar (using Unicode escapes for Vietnamese labels)
   const filterHtml = `
   <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:20px; padding:15px; background:#0f1328; border:1px solid #1e293b; max-width:1200px; margin-left:auto; margin-right:auto; border-radius:10px;">
     <!-- Row 1: Toggles and Reset -->
     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
       <div style="display:flex; gap:10px; align-items:center;">
-        <span style="color:#94a3b8; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px;">ðŸ“Š Xem tá»•ng há»£p:</span>
-        <button style="${btnAct(window.daSummary)}" onclick="window.daSummary=!window.daSummary; window.daMSummary=false; renderDapUng();">ðŸ“Š Tá»•ng tuáº§n</button>
-        <button style="${btnAct(window.daMSummary)}" onclick="window.daMSummary=!window.daMSummary; window.daSummary=false; renderDapUng();">ðŸ“Š Tá»•ng thÃ¡ng</button>
+        <span style="color:#94a3b8; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px;">ðŸ“Š Xem t\u1ed5ng h\u1ee3p:</span>
+        <button style="${btnAct(window.daSummary)}" onclick="window.daSummary=!window.daSummary; window.daMSummary=false; renderDapUng();">ðŸ“Š T\u1ed5ng tu\u1ea7n</button>
+        <button style="${btnAct(window.daMSummary)}" onclick="window.daMSummary=!window.daMSummary; window.daSummary=false; renderDapUng();">ðŸ“Š T\u1ed5ng th\u00e1ng</button>
       </div>
       
       <button onclick="window.daFilterDateFrom='all'; window.daFilterDateTo='all'; window.daFilterMonth=0; window.daFilterWkFrom=0; window.daFilterWkTo=0; window.daSummary=false; window.daMSummary=false; renderDapUng();" style="padding:5px 12px; border-radius:6px; border:1px solid #ef4444; background:rgba(239,68,68,0.1); color:#f87171; font-size:11px; font-weight:700; cursor:pointer; font-family:Inter; transition: all 0.2s;">
-        ðŸ”„ Reset Bá»™ Lá»c
+        ðŸ”„ Reset B\u1ed9 L\u1ecdc
       </button>
     </div>
 
@@ -2118,43 +2118,43 @@ function renderDapUng() {
 
     <!-- Row 2: Date, Week, Month Filters -->
     <div style="display:flex; gap:15px; flex-wrap:wrap; align-items:center;">
-      <!-- Lá»c theo ThÃ¡ng -->
+      <!-- Month Filter -->
       <div style="display:flex; align-items:center; gap:5px;">
-        <span style="color:#94a3b8; font-size:11.5px; font-weight:600;">ðŸ“… ThÃ¡ng:</span>
+        <span style="color:#94a3b8; font-size:11.5px; font-weight:600;">ðŸ“… Th\u00e1ng:</span>
         <select style="${selStyle}" onchange="window.daFilterMonth=+this.value; renderDapUng();">
-          <option value="0" ${window.daFilterMonth===0?'selected':''}>â€” Táº¥t cáº£ â€”</option>
-          ${uniqueMonths.map(m => `<option value="${m}" ${window.daFilterMonth===m?'selected':''}>ThÃ¡ng ${m}</option>`).join('')}
+          <option value="0" ${window.daFilterMonth===0?'selected':''}>â€” T\u1ea5t c\u1ea3 â€”</option>
+          ${uniqueMonths.map(m => `<option value="${m}" ${window.daFilterMonth===m?'selected':''}>Th\u00e1ng ${m}</option>`).join('')}
         </select>
       </div>
 
       <div style="width:1px; height:18px; background:#1e293b;"></div>
 
-      <!-- Lá»c theo Tuáº§n -->
+      <!-- Week Range Filter -->
       <div style="display:flex; align-items:center; gap:5px;">
-        <span style="color:#94a3b8; font-size:11.5px; font-weight:600;">ðŸ“Š Tuáº§n tá»«:</span>
+        <span style="color:#94a3b8; font-size:11.5px; font-weight:600;">ðŸ“Š Tu\u1ea7n t\u1eeb:</span>
         <select style="${selStyle}" onchange="window.daFilterWkFrom=+this.value; renderDapUng();">
-          <option value="0" ${window.daFilterWkFrom===0?'selected':''}>Báº¯t Ä‘áº§u</option>
+          <option value="0" ${window.daFilterWkFrom===0?'selected':''}>B\u1ea5t \u0111\u1ea7u</option>
           ${uniqueWeeks.map(w => `<option value="${w}" ${window.daFilterWkFrom===w?'selected':''}>W${w}</option>`).join('')}
         </select>
-        <span style="color:#94a3b8; font-size:11px;">Ä‘áº¿n</span>
+        <span style="color:#94a3b8; font-size:11px;">\u0111\u1ebfn</span>
         <select style="${selStyle}" onchange="window.daFilterWkTo=+this.value; renderDapUng();">
-          <option value="0" ${window.daFilterWkTo===0?'selected':''}>Káº¿t thÃºc</option>
+          <option value="0" ${window.daFilterWkTo===0?'selected':''}>K\u1ebft th\u00fac</option>
           ${uniqueWeeks.map(w => `<option value="${w}" ${window.daFilterWkTo===w?'selected':''}>W${w}</option>`).join('')}
         </select>
       </div>
 
       <div style="width:1px; height:18px; background:#1e293b;"></div>
 
-      <!-- Lá»c theo NgÃ y -->
+      <!-- Date Range Filter -->
       <div style="display:flex; align-items:center; gap:5px;">
-        <span style="color:#94a3b8; font-size:11.5px; font-weight:600;">ðŸ—“ï¸ NgÃ y tá»«:</span>
+        <span style="color:#94a3b8; font-size:11.5px; font-weight:600;">ðŸ—“ï¸ Ng\u00e0y t\u1eeb:</span>
         <select style="${selStyle}" onchange="window.daFilterDateFrom=this.value; renderDapUng();">
-          <option value="all" ${window.daFilterDateFrom==='all'?'selected':''}>â€” Báº¯t Ä‘áº§u â€”</option>
+          <option value="all" ${window.daFilterDateFrom==='all'?'selected':''}>â€” B\u1ea5t \u0111\u1ea7u â€”</option>
           ${uniqueDates.map(d => `<option value="${d}" ${window.daFilterDateFrom===d?'selected':''}>${d}</option>`).join('')}
         </select>
-        <span style="color:#94a3b8; font-size:11px;">Ä‘áº¿n</span>
+        <span style="color:#94a3b8; font-size:11px;">\u0111\u1ebfn</span>
         <select style="${selStyle}" onchange="window.daFilterDateTo=this.value; renderDapUng();">
-          <option value="all" ${window.daFilterDateTo==='all'?'selected':''}>â€” Káº¿t thÃºc â€”</option>
+          <option value="all" ${window.daFilterDateTo==='all'?'selected':''}>â€” K\u1ebft th\u00fac â€”</option>
           ${uniqueDates.map(d => `<option value="${d}" ${window.daFilterDateTo===d?'selected':''}>${d}</option>`).join('')}
         </select>
       </div>
@@ -2221,13 +2221,13 @@ function renderDapUng() {
     </tr>`;
   });
   
-  let title = 'Tá»•ng há»£p';
-  if (window.daSummary) title = 'So sÃ¡nh theo tuáº§n';
-  else if (window.daMSummary) title = 'So sÃ¡nh theo thÃ¡ng';
-  else if (window.daFilterMonth > 0) title = `ThÃ¡ng ${window.daFilterMonth}`;
+  let title = 'T\u1ed5ng h\u1ee3p';
+  if (window.daSummary) title = 'So s\u00e1nh theo tu\u1ea7n';
+  else if (window.daMSummary) title = 'So s\u00e1nh theo th\u00e1ng';
+  else if (window.daFilterMonth > 0) title = `Th\u00e1ng ${window.daFilterMonth}`;
   else if (window.daFilterWkFrom > 0 && window.daFilterWkTo > 0) {
-      if (window.daFilterWkFrom === window.daFilterWkTo) title = `Tuáº§n ${window.daFilterWkFrom}`;
-      else title = `Tuáº§n ${window.daFilterWkFrom} Ä‘áº¿n ${window.daFilterWkTo}`;
+      if (window.daFilterWkFrom === window.daFilterWkTo) title = `Tu\u1ea7n ${window.daFilterWkFrom}`;
+      else title = `Tu\u1ea7n ${window.daFilterWkFrom} \u0111\u1ebfn ${window.daFilterWkTo}`;
   }
 
   let html = `${filterHtml}
@@ -2493,6 +2493,45 @@ function renderForecast() {
     </div>
   </div>
 
+  <!-- Bảng tổng hợp -->
+  <div class="table-block" style="max-width:1200px; margin-bottom:20px; overflow-x:auto; margin-left:auto; margin-right:auto;">
+    <div class="table-title" style="color:#10b981">📊 Bảng tổng hợp chỉ số đối soát (FC vs Thực xuất)</div>
+    <table style="table-layout:auto; font-size:12px; width:100%;">
+      <thead>
+        <tr>
+          <th style="text-align:left; padding: 10px;">Chỉ số</th>
+          <th style="text-align:right; padding: 10px; color:#3b82f6;">Dự báo (FC)</th>
+          <th style="text-align:right; padding: 10px; color:#a78bfa;">Thực xuất</th>
+          <th style="text-align:center; padding: 10px;">Chi tiết / Ngày xảy ra</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align:left; font-weight:700; padding: 8px 10px;">Trung bình ngày</td>
+          <td style="text-align:right; color:#3b82f6; padding: 8px 10px;">${formatKpi(avgFc)}</td>
+          <td style="text-align:right; color:#a78bfa; padding: 8px 10px;">${formatKpi(avgTx)}</td>
+          <td style="text-align:center; color:#94a3b8; padding: 8px 10px;">Tính trên ${count} ngày hoạt động</td>
+        </tr>
+        <tr class="row-2">
+          <td style="text-align:left; font-weight:700; padding: 8px 10px;">Giá trị cao nhất</td>
+          <td style="text-align:right; color:#3b82f6; padding: 8px 10px;">-</td>
+          <td style="text-align:right; color:#10b981; font-weight:800; padding: 8px 10px;">${formatKpi(maxTx)}</td>
+          <td style="text-align:center; color:#10b981; padding: 8px 10px;">Ngày ${maxTxDate}</td>
+        </tr>
+        <tr>
+          <td style="text-align:left; font-weight:700; padding: 8px 10px;">Giá trị thấp nhất</td>
+          <td style="text-align:right; color:#3b82f6; padding: 8px 10px;">-</td>
+          <td style="text-align:right; color:#f59e0b; font-weight:800; padding: 8px 10px;">${formatKpi(minTx)}</td>
+          <td style="text-align:center; color:#f59e0b; padding: 8px 10px;">Ngày ${minTxDate}</td>
+        </tr>
+        <tr class="row-2">
+          <td style="text-align:left; font-weight:700; padding: 8px 10px;">Số ngày chênh lệch &ge; 10%</td>
+          <td style="text-align:right; color:#ef4444; font-weight:800; padding: 8px 10px;" colspan="2">${exceededDaysCount} / ${count} ngày</td>
+          <td style="text-align:center; color:#ef4444; font-weight:700; padding: 8px 10px;">Tỷ lệ: ${count > 0 ? (exceededDaysCount / count * 100).toFixed(1) : 0}%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
   `;
 
   // Draw dynamically responsive chart using SVG
