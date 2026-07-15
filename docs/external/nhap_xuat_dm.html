@@ -76,7 +76,12 @@ body.light-mode {
   --pick-bad: #dc2626;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
-body.in-iframe .header, body.in-iframe .tab-nav { display: none !important; }
+body.in-iframe .header, body.in-iframe .tab-nav,
+body.screenshot-mode .header, body.screenshot-mode .tab-nav,
+body.screenshot-mode .filter-block, body.screenshot-mode #warning-section { display: none !important; }
+body.screenshot-mode { padding-bottom: 0 !important; }
+body.screenshot-mode .table-block { box-shadow: none !important; border: none !important; margin: 0 !important; padding: 0 !important; background: transparent !important; }
+body.screenshot-mode .detail-block { max-width: 100% !important; }
 body.in-iframe { padding-bottom: 20px !important; }
 body {
   font-family:'Inter',sans-serif;
@@ -1677,6 +1682,9 @@ const WARN_EXCLUDE = ['9300658407505'];
 document.addEventListener('DOMContentLoaded', () => {
 try {
   const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('screenshot')) {
+    document.body.classList.add('screenshot-mode');
+  }
   const tabParam = urlParams.get('tab');
   if (tabParam) {
     switchTab(tabParam);
