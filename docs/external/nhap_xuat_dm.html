@@ -2192,7 +2192,7 @@ function renderDapUng() {
 function renderForecast() {
   document.getElementById('btnPrev').style.display = 'none';
   document.getElementById('btnNext').style.display = 'none';
-  document.querySelector('.day-info .date').textContent = 'Dự báo & Thực tế';
+  document.querySelector('.day-info .date').textContent = 'Capacity Forecast';
   const latestMonth = D.length > 0 ? getMonth(D[D.length - 1].d) : 7;
   const mStr = latestMonth === 6 ? 'T6/2026' : latestMonth === 7 ? 'T7/2026' : 'T5/2026';
   document.querySelector('.day-info .dow').textContent = mStr;
@@ -2404,7 +2404,7 @@ function renderForecast() {
       <div style="color:#94a3b8; font-size:12px; font-weight:700;">Ngày: ${minTxDate}</div>
     </div>
     <div style="background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:15px; text-align:center;">
-      <div style="color:var(--txt2); font-size:11px; font-weight:700; margin-bottom:5px; text-transform:uppercase;">Số Ngày Lệch >= 10%</div>
+      <div style="color:var(--txt2); font-size:11px; font-weight:700; margin-bottom:5px; text-transform:uppercase;">Số Ngày Lệch 10%</div>
       <div style="color:#ef4444; font-size:20px; font-weight:800; margin-bottom:5px;">${exceededDaysCount} ngày</div>
       <div style="color:#94a3b8; font-size:12px; font-weight:700;">So với Dự báo (FC)</div>
     </div>
@@ -2469,12 +2469,12 @@ function renderForecast() {
     // Dynamic rotation and sizing of text values on top of bars
     let fcTextNode = '';
     let txTextNode = '';
-    if (colCount > 20) {
-      fcTextNode = `<text x="${fcX + barWidth/2}" y="${fcY - 4}" fill="#60a5fa" font-size="6.5" text-anchor="start" transform="rotate(-90, ${fcX + barWidth/2}, ${fcY - 4})">${Math.round(fcVal)}</text>`;
-      txTextNode = `<text x="${txX + barWidth/2}" y="${txY - 4}" fill="${actualColor}" font-size="6.5" text-anchor="start" transform="rotate(-90, ${txX + barWidth/2}, ${txY - 4})">${Math.round(txVal)}</text>`;
-    } else {
-      fcTextNode = `<text x="${fcX + barWidth/2}" y="${fcY - 4}" fill="#60a5fa" font-size="8" text-anchor="middle">${Math.round(fcVal)}</text>`;
-      txTextNode = `<text x="${txX + barWidth/2}" y="${txY - 4}" fill="${actualColor}" font-size="8" text-anchor="middle">${Math.round(txVal)}</text>`;
+    if (exceeded) {
+      if (colCount > 20) {
+        txTextNode = `<text x="${txX + barWidth/2}" y="${txY - 4}" fill="${actualColor}" font-size="6.5" font-weight="700" text-anchor="start" transform="rotate(-90, ${txX + barWidth/2}, ${txY - 4})">${Math.round(txVal)}</text>`;
+      } else {
+        txTextNode = `<text x="${txX + barWidth/2}" y="${txY - 4}" fill="${actualColor}" font-size="8.5" font-weight="700" text-anchor="middle">${Math.round(txVal)}</text>`;
+      }
     }
 
     bars += `
@@ -2484,7 +2484,7 @@ function renderForecast() {
         <rect x="${txX}" y="${txY}" width="${barWidth}" height="${txHeight}" fill="${actualColor}" rx="2" opacity="0.85" />
         ${fcTextNode}
         ${txTextNode}
-        <text x="${xCenter}" y="${chartHeight - 10}" fill="#94a3b8" font-size="9" text-anchor="middle">${r.d.split('-')[0]}</text>
+        <text x="${xCenter}" y="${chartHeight - 10}" fill="#94a3b8" font-size="9" text-anchor="middle">${r.d}</text>
       </g>
     `;
   });
@@ -2493,12 +2493,11 @@ function renderForecast() {
 
   html += `
   <div class="table-block" style="max-width:1200px; padding:15px; margin-bottom:20px; overflow-x:auto; margin-left:auto; margin-right:auto;">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-      <div class="table-title" style="color:#a78bfa; margin-bottom:0; padding-bottom:0;">${chartTitle}</div>
+    <div style="display:flex; justify-content:flex-end; align-items:center; margin-bottom:15px;">
       <div style="display:flex; gap:15px; font-size:11px;">
         <span style="display:flex; align-items:center; gap:5px; color:#3b82f6;"><span style="display:inline-block; width:10px; height:10px; background:#3b82f6; border-radius:2px;"></span> Dự báo (FC)</span>
         <span style="display:flex; align-items:center; gap:5px; color:#a78bfa;"><span style="display:inline-block; width:10px; height:10px; background:#a78bfa; border-radius:2px;"></span> Thực xuất (Bình thường)</span>
-        <span style="display:flex; align-items:center; gap:5px; color:#ef4444;"><span style="display:inline-block; width:10px; height:10px; background:#ef4444; border-radius:2px;"></span> Thực xuất (Lệch FC >= 10%)</span>
+        <span style="display:flex; align-items:center; gap:5px; color:#ef4444;"><span style="display:inline-block; width:10px; height:10px; background:#ef4444; border-radius:2px;"></span> Thực xuất (Lệch FC 10%)</span>
       </div>
     </div>
     <div style="min-width:1150px;">
