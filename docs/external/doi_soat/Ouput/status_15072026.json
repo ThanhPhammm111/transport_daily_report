@@ -1,0 +1,12 @@
+﻿{
+  "lastUpdated": "2026-07-15 10:24:16",
+  "kfmFile": "transfer_15072026-102316.xlsx",
+  "kfmDate": "15/07/2026",
+  "abaFile": "BCGH150726.xlsx",
+  "abaDate": "",
+  "mismatchCount": 9,
+  "participatingStores": 203,
+  "resultFile": "Result_15072026.csv",
+  "totalKfmQty": 96744.2,
+  "totalAbaQty": 101056.2000
+}
