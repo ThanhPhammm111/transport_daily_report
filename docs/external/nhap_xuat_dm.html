@@ -1035,7 +1035,7 @@ const D = [
 {d:'12-Jul',w:'CN',wk:'W28',qc:[152,150,0,39889,29000,137.55,39058,0,8862,5066,174.94,8690,0],lk:[364,361,0.82,68361,90000,75.96,68322,0.06,14921,16500,90.43,14912,0.06],tqc:[42,38,0,16635,8000,207.94,14784,0,11309,7000,161.56,10369,0],tlh:[8,8,0,2524,4000,63.09,2524,0,2083,4000,52.06,2083,0],ts:[566,557,0.54],ti:[127409,131000,97.26,124688,0.03],tQ:[56524,37000,152.77,43.17,53842,0],tL:[70885,94000,75.41,56.83,70846,0.06],tk:[37175,32566,114.15,36053,0.03],dong:[124,122,1.61,9794,12000,81.62,9772,0.22,2743,3000,91.43,2738,0.18],mat:[392,389,0.26,98456,119000,82.74,97608,0.02,21041,29566,71.16,20864,0.02],tcnk:[50,46,0,19159,12000,159.66,17308,0,13392,11000,121.74,12452,0]},
 {d:'13-Jul',w:'T2',wk:'W29',off:true},
 {d:'14-Jul',w:'T3',wk:'W29',qc:[143,143,0,35274,27000,130.64,34805,0,8869,4410,201.1,8665,0],lk:[378,374,1.06,107536,90800,118.43,107411,0.12,22010,17100,128.71,21995,0.07],tqc:[41,41,0,10128,5000,202.55,9944,0,6508,4200,154.95,6420,0],tlh:[7,7,0,1513,3000,50.42,1513,0,1236,3000,41.21,1236,0],ts:[569,565,0.7],ti:[154450,125800,122.77,153672,0.08],tQ:[45402,32000,141.88,29.1,44749,0],tL:[109049,93800,116.26,70.9,108924,0.11],tk:[38622,28710,134.53,38316,0.04],dong:[122,121,0.82,10579,13000,81.38,10546,0.31,3213,2700,119.01,3208,0.18],mat:[399,396,0.75,132231,112800,117.23,131670,0.07,27665,26010,106.36,27452,0.03],tcnk:[48,48,0,11640,8000,145.5,11456,0,7744,7200,107.56,7656,0]},
-{d:'15-Jul',w:'T4',wk:'W29',qc:[130,0,100,19056,21000,90.74,0,100,4860,3940,123.34,0,100],lk:[349,0,100,75327,79500,94.75,0,100,15904,16700,95.23,0,100],tqc:[40,0,100,6472,5000,129.44,0,100,4250,4200,101.2,0,100],tlh:[7,0,100,1129,3000,37.63,0,100,883,3000,29.42,0,100],ts:[526,0,100],ti:[101984,108500,93.99,0,100],tQ:[25528,26000,98.19,24.36,0,100],tL:[76456,82500,92.67,75.64,0,100],tk:[25897,27840,93.02,0,100],dong:[121,0,100,12861,12000,107.18,0,100,3787,3000,126.23,0,100],mat:[358,0,100,81522,96500,84.48,0,100,16977,24840,68.34,0,100],tcnk:[47,0,100,7601,8000,95.02,0,100,5133,7200,71.29,0,100]}
+{d:'15-Jul',w:'T4',wk:'W29',qc:[130,129,0,19056,21000,90.74,18807,0,4860,3940,123.34,4832,0],lk:[349,346,0.86,75327,79500,94.75,75307,0.03,15904,16700,95.23,15898,0.04],tqc:[40,38,0,6472,5000,129.44,5813,0,4250,4200,101.2,3980,0],tlh:[7,7,0,1129,3000,37.63,1129,0,883,3000,29.42,883,0],ts:[526,520,0.57],ti:[101984,108500,93.99,101056,0.02],tQ:[25528,26000,98.19,24.36,24620,0],tL:[76456,82500,92.67,75.64,76436,0.03],tk:[25897,27840,93.02,25593,0.02],dong:[121,120,0.83,12861,12000,107.18,12851,0.08,3787,3000,126.23,3785,0.05],mat:[358,355,0.56,81522,96500,84.48,81263,0.01,16977,24840,68.34,16945,0.03],tcnk:[47,45,0,7601,8000,95.02,6942,0,5133,7200,71.29,4863,0]}
 ];
 
 // === CHI TIẾT XUẤT HÀNG DATA ===
@@ -1213,16 +1213,19 @@ const CT = {
 '11-Jul': { totalBk:0, totalTx:0, totalDiff:0, items:[] },
 '12-Jul': { totalBk:0, totalTx:0, totalDiff:0, items:[] },
 '13-Jul': { totalBk:0, totalTx:0, totalDiff:0, items:[] },
-'14-Jul': { totalBk:481, totalTx:397, totalDiff:84, items:[
-  {cat:'Lưu Hàng',temp:'ĐÔNG',code:'5410376831972',name:'LUTOSA - KHOAI TÂY ĐÔNG LẠNH SỢI LỚN 450G',unit:'GÓI',bk:86,sx:85,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick thiếu',pct:98.84},
-  {cat:'Lưu Hàng',temp:'ĐÔNG',code:'8936083243350',name:'CP - CÁ VIÊN CAO CẤP 500G',unit:'GÓI',bk:108,sx:106,nqc:null,qcr:null,hold:null,diff:2,note:'ABA pick thiếu',pct:98.15},
-  {cat:'Lưu Hàng',temp:'ĐÔNG',code:'8936210481068',name:'OHAYO - BÁNH OPERA 130G',unit:'HỘP',bk:1,sx:0,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick thiếu',pct:0},
-  {cat:'Lưu Hàng',temp:'Mát',code:'8850329101863',name:'MEIJI - SỮA TƯƠI THANH TRÙNG LACTOSE FREE 200ML',unit:'HỘP',bk:91,sx:88,nqc:null,qcr:null,hold:null,diff:3,note:'ABA pick thiếu',pct:96.7},
-  {cat:'Lưu Hàng',temp:'Mát',code:'8938546762019',name:'TV - CHẢ CÁ CHIÊN 200G',unit:'GÓI',bk:60,sx:40,nqc:null,qcr:null,hold:null,diff:20,note:'ABA pick thiếu',pct:66.67},
-  {cat:'Lưu Hàng',temp:'Mát',code:'8938552425229',name:'ÚT MAU - TÔM KHÔ CANH ĐẶC BIỆT 35G',unit:'HŨ',bk:56,sx:0,nqc:null,qcr:null,hold:null,diff:56,note:'ABA pick thiếu',pct:0},
-  {cat:'Lưu Hàng',temp:'Mát',code:'93569750',name:'CHOBANI - SỮA CHUA HY LẠP VỊ SOCOLA BROWNIE 140G',unit:'HỘP',bk:79,sx:78,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick thiếu',pct:98.73}
-] },
-'15-Jul': { totalBk:0, totalTx:0, totalDiff:0, items:[] }
+'14-Jul': { totalBk:0, totalTx:0, totalDiff:0, items:[] },
+'15-Jul': { totalBk:467, totalTx:447, totalDiff:20, items:[
+  {cat:'Lưu Hàng',temp:'ĐÔNG',code:'3415581533187',name:'HAAGEN DAZS - KEM SÔ CÔ LA BỈ 100ML',unit:'HỘP',bk:6,sx:0,nqc:null,qcr:null,hold:null,diff:6,note:'ABA pick thiếu',pct:0},
+  {cat:'Lưu Hàng',temp:'ĐÔNG',code:'8936083243350',name:'CP - CÁ VIÊN CAO CẤP 500G',unit:'GÓI',bk:60,sx:59,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick thiếu',pct:98.33},
+  {cat:'Lưu Hàng',temp:'ĐÔNG',code:'8938521793090',name:'YFC - MỰC GHIM MINO 9/12 300G',unit:'GÓI',bk:49,sx:47,nqc:null,qcr:null,hold:null,diff:2,note:'ABA pick thiếu',pct:95.92},
+  {cat:'Lưu Hàng',temp:'ĐÔNG',code:'8938539773015',name:'HETORI - PIZZA HẢI SẢN 150G',unit:'HỘP',bk:102,sx:101,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick thiếu',pct:99.02},
+  {cat:'Lưu Hàng',temp:'Mát',code:'3412290040708',name:'PAYSAN BRETON - PHÔ MAI BRIE 125G',unit:'HỘP',bk:2,sx:0,nqc:null,qcr:null,hold:null,diff:2,note:'ABA pick thiếu',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8850329003624',name:'MEIJI - SỮA THANH TRÙNG LACTOSE FREE 946ML',unit:'HỘP',bk:120,sx:119,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick thiếu',pct:99.17},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8850329103003',name:'MEIJI - SỮA THANH TRÙNG 946ML',unit:'HỘP',bk:58,sx:55,nqc:null,qcr:null,hold:null,diff:3,note:'ABA pick thiếu',pct:94.83},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8934673501040',name:'VINAMILK - SCA GREEN FARM CAO ĐẠM CÀ PHÊ TỰ NHIÊN NGŨ CỐC 123G',unit:'HỘP',bk:2,sx:1,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick thiếu',pct:50},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8936219620178',name:'SAMHO - THANH SUMIRI JUMBO HƯƠNG CUA 45G',unit:'GÓI',bk:67,sx:65,nqc:null,qcr:null,hold:null,diff:2,note:'ABA pick thiếu',pct:97.01},
+  {cat:'Lưu Hàng',temp:'Mát',code:'93569750',name:'CHOBANI - SỮA CHUA HY LẠP VỊ SOCOLA BROWNIE 140G',unit:'HỘP',bk:1,sx:0,nqc:null,qcr:null,hold:null,diff:1,note:'ABA pick thiếu',pct:0}
+] }
 };
 
 // === HELPERS ===
@@ -1984,7 +1987,7 @@ const DA = [
 {d:'Tuần ',w:'',wk:'W28',wkTotal:true,wkRange:'06/07-12/07',fc:720800,bkTon:746947,tx:746649,diff:298,du:99.96,tlFc:172688,tlBkTon:204427,tlTx:204361,tlDiff:66,duTl:99.97},
 {d:'13-Jul',w:'T2',wk:'W29',off:true},
 {d:'14-Jul',w:'T3',wk:'W29',fc:125800,bkTon:153797,tx:153672,diff:125,du:99.92,tlFc:28710,tlBkTon:38331,tlTx:38316,tlDiff:15,duTl:99.96},
-{d:'15-Jul',w:'T4',wk:'W29',fc:108500,bkTon:101076,tx:0,diff:101076,du:0,tlFc:27840,tlBkTon:25599,tlTx:0,tlDiff:25599,duTl:0}
+{d:'15-Jul',w:'T4',wk:'W29',fc:108500,bkTon:101076,tx:101056,diff:20,du:99.98,tlFc:27840,tlBkTon:25599,tlTx:25593,tlDiff:6,duTl:99.98}
 ];
 
 let daIdx = DA.length - 1;
