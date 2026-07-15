@@ -2411,44 +2411,7 @@ function renderForecast() {
   </div>
 
   <!-- Bảng tổng hợp -->
-  <div class="table-block" style="max-width:1200px; margin-bottom:20px; overflow-x:auto; margin-left:auto; margin-right:auto;">
-    <div class="table-title" style="color:#10b981">📊 Bảng tổng hợp chỉ số đối soát (FC vs Thực xuất)</div>
-    <table style="table-layout:auto; font-size:12px; width:100%;">
-      <thead>
-        <tr>
-          <th style="text-align:left; padding: 10px;">Chỉ số</th>
-          <th style="text-align:right; padding: 10px; color:#3b82f6;">Dự báo (FC)</th>
-          <th style="text-align:right; padding: 10px; color:#a78bfa;">Thực xuất</th>
-          <th style="text-align:center; padding: 10px;">Chi tiết / Ngày xảy ra</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="text-align:left; font-weight:700; padding: 8px 10px;">Trung bình ngày</td>
-          <td style="text-align:right; color:#3b82f6; padding: 8px 10px;">${formatKpi(avgFc)}</td>
-          <td style="text-align:right; color:#a78bfa; padding: 8px 10px;">${formatKpi(avgTx)}</td>
-          <td style="text-align:center; color:#94a3b8; padding: 8px 10px;">Tính trên ${count} ngày hoạt động</td>
-        </tr>
-        <tr class="row-2">
-          <td style="text-align:left; font-weight:700; padding: 8px 10px;">Giá trị cao nhất</td>
-          <td style="text-align:right; color:#3b82f6; padding: 8px 10px;">-</td>
-          <td style="text-align:right; color:#10b981; font-weight:800; padding: 8px 10px;">${formatKpi(maxTx)}</td>
-          <td style="text-align:center; color:#10b981; padding: 8px 10px;">Ngày ${maxTxDate}</td>
-        </tr>
-        <tr>
-          <td style="text-align:left; font-weight:700; padding: 8px 10px;">Giá trị thấp nhất</td>
-          <td style="text-align:right; color:#3b82f6; padding: 8px 10px;">-</td>
-          <td style="text-align:right; color:#f59e0b; font-weight:800; padding: 8px 10px;">${formatKpi(minTx)}</td>
-          <td style="text-align:center; color:#f59e0b; padding: 8px 10px;">Ngày ${minTxDate}</td>
-        </tr>
-        <tr class="row-2">
-          <td style="text-align:left; font-weight:700; padding: 8px 10px;">Số ngày chênh lệch &ge; 10%</td>
-          <td style="text-align:right; color:#ef4444; font-weight:800; padding: 8px 10px;" colspan="2">${exceededDaysCount} / ${count} ngày</td>
-          <td style="text-align:center; color:#ef4444; font-weight:700; padding: 8px 10px;">Tỷ lệ: ${count > 0 ? (exceededDaysCount / count * 100).toFixed(1) : 0}%</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  
   `;
 
   // Draw dynamically responsive chart using SVG
@@ -2531,99 +2494,7 @@ function renderForecast() {
   const chartTitle = metric === 'item' ? '📊 Biểu đồ so sánh Dự báo (FC) (ITEM) vs Thực xuất (ITEM)' : '📊 Biểu đồ so sánh Dự báo (FC) (Trọng lượng) vs Thực xuất (Trọng lượng)';
 
   html += `
-  <div class="table-block" style="max-width:1200px; padding:15px; margin-bottom:20px; overflow-x:auto; margin-left:auto; margin-right:auto;">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-      <div class="table-title" style="color:#a78bfa; margin-bottom:0; padding-bottom:0;">${chartTitle}</div>
-      <div style="display:flex; gap:15px; font-size:11px;">
-        <span style="display:flex; align-items:center; gap:5px; color:#3b82f6;"><span style="display:inline-block; width:10px; height:10px; background:#3b82f6; border-radius:2px;"></span> Dự báo (FC)</span>
-        <span style="display:flex; align-items:center; gap:5px; color:#a78bfa;"><span style="display:inline-block; width:10px; height:10px; background:#a78bfa; border-radius:2px;"></span> Thực xuất (Bình thường)</span>
-        <span style="display:flex; align-items:center; gap:5px; color:#ef4444;"><span style="display:inline-block; width:10px; height:10px; background:#ef4444; border-radius:2px;"></span> Thực xuất (Lệch FC >= 10%)</span>
-      </div>
-    </div>
-    <div style="min-width:1150px;">
-      <svg width="100%" height="${chartHeight}" viewBox="0 0 ${svgWidth} ${chartHeight}" style="overflow:visible;">
-        ${gridLines}
-        ${bars}
-        <line x1="${chartPaddingLeft}" y1="${chartHeight - chartPaddingBottom}" x2="${svgWidth - chartPaddingRight}" y2="${chartHeight - chartPaddingBottom}" stroke="#334155" />
-      </svg>
-    </div>
-  </div>
-  `;
-
-  let tableRows = '';
-  filteredDA.forEach(r => {
-    const fcVal = r.fc || 0;
-    const tx = r.tx || 0;
-    const diffItem = tx - fcVal;
-    
-    // Check chênh lệch item
-    const itemDiffPct = fcVal > 0 ? (Math.abs(tx - fcVal) / fcVal * 100) : (tx > 0 ? 100 : 0);
-    const itemAccColor = itemDiffPct >= 10 ? '#ef4444' : '#10b981';
-    
-    const accuracyItemVal = fcVal > 0 ? (tx / fcVal * 100) : 0;
-    const accuracyItemStr = fcVal > 0 ? accuracyItemVal.toFixed(1) + '%' : '0.0%';
-
-    const tlFcVal = r.tlFc || 0;
-    const tlTx = r.tlTx || 0;
-    const diffWeight = tlTx - tlFcVal;
-    
-    // Check chênh lệch weight
-    const weightDiffPct = tlFcVal > 0 ? (Math.abs(tlTx - tlFcVal) / tlFcVal * 100) : (tlTx > 0 ? 100 : 0);
-    const weightAccColor = weightDiffPct >= 10 ? '#ef4444' : '#10b981';
-    
-    const accuracyWeightVal = tlFcVal > 0 ? (tlTx / tlFcVal * 100) : 0;
-    const accuracyWeightStr = tlFcVal > 0 ? accuracyWeightVal.toFixed(1) + '%' : '0.0%';
-
-    const diffItemSign = diffItem > 0 ? '+' : '';
-    const diffWeightSign = diffWeight > 0 ? '+' : '';
-
-    tableRows += `
-    <tr>
-      <td style="color:#e2e8f0; font-weight:700; white-space:nowrap; text-align:center;">${r.d}</td>
-      <td style="color:#64748b; text-align:center; font-size:11px;">${r.w}</td>
-      <td style="color:#64748b; text-align:center; font-size:11px;">${r.wk}</td>
-      
-      <td style="text-align:right; color:#3b82f6;">${fmt(fcVal)}</td>
-      <td style="text-align:right; color:#a78bfa;">${fmt(tx)}</td>
-      <td style="text-align:right; color:${diffItem >= 0 ? '#10b981' : '#f87171'}">${diffItemSign}${fmt(diffItem)}</td>
-      <td style="text-align:right; font-weight:700; color:${itemAccColor};">${accuracyItemStr}</td>
-
-      <td style="text-align:right; color:#3b82f6;">${fmt(Math.round(tlFcVal))}</td>
-      <td style="text-align:right; color:#a78bfa;">${fmt(Math.round(tlTx))}</td>
-      <td style="text-align:right; color:${diffWeight >= 0 ? '#10b981' : '#f87171'}">${diffWeightSign}${fmt(Math.round(diffWeight))}</td>
-      <td style="text-align:right; font-weight:700; color:${weightAccColor};">${accuracyWeightStr}</td>
-    </tr>
-    `;
-  });
-
-  html += `
-  <div class="table-block" style="max-width:1200px; overflow-x:auto; margin-left:auto; margin-right:auto;">
-    <div class="table-title" style="color:#a78bfa">📊 Bảng dữ liệu chi tiết so sánh dự báo (FC) và thực xuất</div>
-    <table style="table-layout:auto; font-size:11.5px;">
-      <thead>
-        <tr>
-          <th rowspan="2" style="width:70px; text-align:center;">Ngày</th>
-          <th rowspan="2" style="width:40px; text-align:center;">Thứ</th>
-          <th rowspan="2" style="width:40px; text-align:center;">Tuần</th>
-          <th colspan="4" style="text-align:center; color:#22d3ee; border-bottom:2px solid #22d3ee;">📦 Số lượng (ITEM)</th>
-          <th colspan="4" style="text-align:center; color:#a78bfa; border-bottom:2px solid #a78bfa;">⚖️ Trọng lượng (kg)</th>
-        </tr>
-        <tr>
-          <th style="color:#3b82f6; text-align:right;">Dự báo (FC)</th>
-          <th style="color:#a78bfa; text-align:right;">Thực xuất</th>
-          <th style="text-align:right;">Chênh lệch</th>
-          <th style="color:#10b981; text-align:right;">Độ chính xác</th>
-          <th style="color:#3b82f6; text-align:right;">Dự báo (FC)</th>
-          <th style="color:#a78bfa; text-align:right;">Thực xuất</th>
-          <th style="text-align:right;">Chênh lệch</th>
-          <th style="color:#10b981; text-align:right;">Độ chính xác</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${tableRows}
-      </tbody>
-    </table>
-  </div>
+  
   `;
 
   document.getElementById('content').innerHTML = html;
