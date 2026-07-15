@@ -66,7 +66,8 @@ body.light-mode {
 }
 
 .sidebar.collapsed {
-  --sidebar-width: 68px;
+  --sidebar-width: 0px;
+  border-right: none;
 }
 
 .sidebar-header {
@@ -382,6 +383,25 @@ body.light-mode .nav-group.active {
   color: var(--text-muted);
 }
 
+.hamburger-btn {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 1.25rem;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  margin-right: 8px;
+}
+.hamburger-btn:hover {
+  background: var(--sidebar-hover);
+}
+
 .frame-wrap {
   flex: 1;
   padding: 12px;
@@ -462,7 +482,10 @@ body.light-mode .frame-wrap iframe {
   <!-- Main Display Window -->
   <main class="main-content">
     <div class="content-header">
-      <h2 id="pageTitle">📦 Báo Cáo Sản Lượng Đông Mát — Xuất Hàng</h2>
+      <div style="display: flex; align-items: center;">
+        <button class="hamburger-btn" onclick="toggleSidebar()" title="Ẩn/Hiện Menu">☰</button>
+        <h2 id="pageTitle" style="margin-left: 10px;">📦 Báo Cáo Sản Lượng Đông Mát — Xuất Hàng</h2>
+      </div>
       <div class="header-right">
         <span class="version-tag">v2.1.0</span>
       </div>
