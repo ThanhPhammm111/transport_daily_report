@@ -77,7 +77,6 @@ body.light-mode {
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 body.in-iframe .header, body.in-iframe .tab-nav { display: none !important; }
-body.screenshot-mode-table3 .header, body.screenshot-mode-table3 .tab-nav,
 body.screenshot-mode-table3 .filter-block, body.screenshot-mode-table3 #warning-section { display: none !important; }
 body.screenshot-mode-table3 { padding-bottom: 0 !important; }
 body.screenshot-mode-table3 .table-block { box-shadow: none !important; border: none !important; margin: 0 !important; padding: 0 !important; background: transparent !important; }
@@ -2858,6 +2857,34 @@ function renderForecast() {
 
 
 // Parent theme & tab listener
+function toggleTheme() {
+  const isLight = document.body.classList.toggle('light-mode');
+  localStorage.setItem('kfm-dashboard-theme-override', isLight ? 'light' : 'dark');
+  updateThemeIcon(isLight);
+  // Sync wrapper if in iframe
+  try {
+    window.parent.postMessage({ action: 'themeChanged', isLight: isLight }, '*');
+  } catch(e) {}
+}
+
+function updateThemeIcon(isLight) {
+  const btn = document.getElementById('themeToggleBtn');
+  if (!btn) return;
+  if (isLight) {
+    btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`;
+  } else {
+    btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#fbbf24;"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`;
+  }
+}
+
+// Initial theme load
+(function() {
+  const saved = localStorage.getItem('kfm-dashboard-theme-override');
+  const isLight = saved === 'light';
+  document.body.classList.toggle('light-mode', isLight);
+  updateThemeIcon(isLight);
+})();
+
 function toggleTheme() {
   const isLight = document.body.classList.toggle('light-mode');
   localStorage.setItem('kfm-dashboard-theme-override', isLight ? 'light' : 'dark');
