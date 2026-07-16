@@ -438,22 +438,25 @@ tbody tr.summary td.c-tx { color:var(--cyan) !important; }
 }
 /* Tab navigation */
 .tab-nav {
-  display:flex; justify-content:center; gap:0;
-  padding:0; background:var(--bg2);
+  display:flex; justify-content:center; gap:8px;
+  padding:10px 16px; background:var(--bg2);
   border-bottom:1px solid var(--border);
+  overflow-x:auto; flex-wrap:nowrap;
 }
 .tab-btn {
-  padding:12px 36px; font-family:'Inter'; font-size:14px; font-weight:700;
+  padding:8px 16px; font-family:'Inter'; font-size:11px; font-weight:700;
   background:transparent; border:none; color:var(--txt2); cursor:pointer;
-  border-bottom:3px solid transparent; transition:all .2s;
-  letter-spacing:0.3px;
+  border-radius:8px; transition:all .2s;
+  letter-spacing:0.5px; text-transform:uppercase;
+  white-space:nowrap; display:flex; align-items:center; gap:6px;
 }
-.tab-btn:hover { color:var(--txt); background:rgba(255,255,255,0.03); }
-.tab-btn.active { color:var(--cyan); border-bottom-color:var(--cyan); }
-.tab-btn.active-nhap { color:#f59e0b; border-bottom-color:#f59e0b; }
-.tab-btn.active-ct { color:#fb923c; border-bottom-color:#fb923c; }
-.tab-btn.active-du { color:#10b981; border-bottom-color:#10b981; }
-.tab-btn.active-fc { color:#a78bfa; border-bottom-color:#a78bfa; }
+.tab-btn:hover { color:var(--txt); background:rgba(255,255,255,0.05); }
+body.light-mode .tab-btn:hover { background:rgba(0,0,0,0.04); }
+.tab-btn.active { color:var(--bg) !important; background:var(--cyan) !important; font-weight:800; }
+.tab-btn.active-nhap { color:var(--bg) !important; background:#f59e0b !important; font-weight:800; }
+.tab-btn.active-ct { color:var(--bg) !important; background:#fb923c !important; font-weight:800; }
+.tab-btn.active-du { color:var(--bg) !important; background:#10b981 !important; font-weight:800; }
+.tab-btn.active-fc { color:var(--bg) !important; background:#a78bfa !important; font-weight:800; }
 /* Import table header */
 .nh-head { background:linear-gradient(135deg,#3d2e0c,#2d2108) !important; color:#f59e0b !important; }
 .date-head-nh { background:linear-gradient(90deg,#3d2e0c,#2d2108) !important; color:#fbbf24 !important; }
