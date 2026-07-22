@@ -1890,20 +1890,23 @@ function renderWarning() {
 function switchTab(tab) {
   currentTab = tab;
   document.getElementById('tabXuat').className = tab==='xuat' ? 'tab-btn active' : 'tab-btn';
+  const tabTH = document.getElementById('tabTongHopXuat');
+  if (tabTH) tabTH.className = tab==='tonghop-xuat' ? 'tab-btn active' : 'tab-btn';
   document.getElementById('tabNhap').className = tab==='nhap' ? 'tab-btn active-nhap' : 'tab-btn';
   document.getElementById('tabChiTiet').className = tab==='chitiet' ? 'tab-btn active-ct' : 'tab-btn';
   document.getElementById('tabDapUng').className = tab==='dapung' ? 'tab-btn active-du' : 'tab-btn';
   document.getElementById('tabForecast').className = tab==='forecast' ? 'tab-btn active-fc' : 'tab-btn';
-  const labels = {xuat:'XUẤT HÀNG',nhap:'NHẬP HÀNG',chitiet:'CHI TIẾT RỚT HÀNG',dapung:'TỶ LỆ ĐÁP ỨNG',forecast:'DỰ BÁO & THỰC TẾ'};
-  const colors = {xuat:'#ef4444',nhap:'#f59e0b',chitiet:'#fb923c',dapung:'#10b981',forecast:'#a78bfa'};
+  const labels = {xuat:'XUẤT HÀNG','tonghop-xuat':'TỔNG HỢP XUẤT HÀNG',nhap:'NHẬP HÀNG',chitiet:'CHI TIẾT RỚT HÀNG',dapung:'TỶ LỆ ĐÁP ỨNG',forecast:'DỰ BÁO & THỰC TẾ'};
+  const colors = {xuat:'#ef4444','tonghop-xuat':'#3b82f6',nhap:'#f59e0b',chitiet:'#fb923c',dapung:'#10b981',forecast:'#a78bfa'};
   document.getElementById('headerSub').textContent = labels[tab];
   document.getElementById('headerSub').style.color = colors[tab];
   document.getElementById('warning-section').style.display = tab==='chitiet' ? '' : 'none';
   document.querySelector('.legend').style.display = tab==='xuat' ? '' : 'none';
-  const btnDisplay = (tab==='dapung' || tab==='forecast') ? 'none' : '';
+  const btnDisplay = (tab==='dapung' || tab==='forecast' || tab==='tonghop-xuat') ? 'none' : '';
   document.getElementById('btnPrev').style.display = btnDisplay;
   document.getElementById('btnNext').style.display = btnDisplay;
   if (tab === 'xuat') { render(); }
+  else if (tab === 'tonghop-xuat') { renderTongHopXuat(); }
   else if (tab === 'nhap') { renderNhap(); }
   else if (tab === 'chitiet') { renderChiTiet(); }
   else if (tab === 'forecast') { renderForecast(); }
