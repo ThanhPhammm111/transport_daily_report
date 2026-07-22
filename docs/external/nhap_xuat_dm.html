@@ -2157,13 +2157,13 @@ function renderTongHopXuat() {
   filteredRows.forEach(r => {
     const totalItem = r.item.quaCanh + r.item.mat + r.item.dong;
     const totalKg = r.kg.quaCanh + r.kg.mat + r.kg.dong;
-    const rowBg = r.isHighlight ? 'background: rgba(234, 179, 8, 0.08); font-weight: 700;' : (r.off ? 'opacity: 0.5;' : '');
+    const rowBg = r.isHighlight ? 'background: rgba(16, 185, 129, 0.15); border-top: 2px solid rgba(16, 185, 129, 0.4); border-bottom: 2px solid rgba(16, 185, 129, 0.4); font-weight: 800;' : (r.off ? 'opacity: 0.5;' : '');
     const fmtN = (v) => v ? v.toLocaleString('vi-VN') : '—';
     const fmtKg = (v) => v ? v.toLocaleString('vi-VN', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) : '—';
 
     h += `
       <tr style="border-bottom: 1px solid var(--sidebar-border, rgba(255,255,255,0.05)); ${rowBg}">
-        <td style="padding: 10px 12px; text-align: left; font-weight: 600;">${r.date}</td>
+        <td style="padding: 10px 12px; text-align: left; font-weight: 800; ${r.isHighlight ? 'color: #10b981;' : ''}">${r.date}${r.isHighlight && summaryViewMode === 'day' ? ' <span style="font-size: 10px; color: #34d399; font-weight: 700;">(Tổng tuần)</span>' : ''}</td>
         <td style="padding: 10px 12px; text-align: center; color: #94a3b8;">${r.dow}</td>
         <td style="padding: 10px 12px;">${fmtN(r.item.quaCanh)}</td>
         <td style="padding: 10px 12px;">${fmtN(r.item.mat)}</td>
