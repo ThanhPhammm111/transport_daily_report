@@ -528,6 +528,10 @@ body.light-mode .tab-btn:hover { background:rgba(0,0,0,0.04); }
     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
     <span>Xuất Hàng</span>
   </button>
+  <button class="tab-btn" id="tabTongHopXuat" onclick="switchTab('tonghop-xuat')">
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+    <span>Tổng Hợp Xuất Hàng</span>
+  </button>
   <button class="tab-btn" id="tabNhap" onclick="switchTab('nhap')">
     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
     <span>Nhập Hàng</span>
@@ -1904,6 +1908,280 @@ function switchTab(tab) {
   else if (tab === 'chitiet') { renderChiTiet(); }
   else if (tab === 'forecast') { renderForecast(); }
   else { renderDapUng(); }
+}
+
+
+let summaryViewMode = 'day';
+let sumStartIdx = 0;
+let sumEndIdx = 0;
+
+function setSummaryViewMode(mode) {
+  summaryViewMode = mode;
+  sumStartIdx = 0;
+  sumEndIdx = 0;
+  renderTongHopXuat();
+}
+
+function resetSummaryFilter() {
+  sumStartIdx = 0;
+  sumEndIdx = 0;
+  renderTongHopXuat();
+}
+
+function renderTongHopXuat() {
+  const container = document.getElementById('content');
+  if (!container) return;
+
+  let groupId = 0;
+  const rowsWithGroup = D.map((day, idx) => {
+    const isMon = day.w === 'Mon' || day.w === 'T2';
+    if (isMon && idx > 0) groupId++;
+    return { day, groupId };
+  });
+
+  const weeklySums = new Map();
+  rowsWithGroup.forEach(({ day, groupId }) => {
+    const isMon = day.w === 'Mon' || day.w === 'T2';
+    if (isMon) return;
+
+    if (!weeklySums.has(groupId)) {
+      const weekDays = rowsWithGroup.filter(g => g.groupId === groupId);
+      const monDay = weekDays.find(g => g.day.w === 'Mon' || g.day.w === 'T2');
+      const labelDay = monDay ? monDay.day : weekDays[0].day;
+      const label = 'Tuần ' + labelDay.d;
+      weeklySums.set(groupId, {
+        label,
+        item: { quaCanh: 0, mat: 0, dong: 0 },
+        kg: { quaCanh: 0, mat: 0, dong: 0 }
+      });
+    }
+
+    const qc = day.qc || Array(13).fill(0);
+    const tqc = day.tqc || Array(13).fill(0);
+    const mat = day.mat || Array(13).fill(0);
+    const tlh = day.tlh || Array(13).fill(0);
+    const dong = day.dong || Array(13).fill(0);
+
+    const qcItem = (qc[6] || 0) + (tqc[6] || 0);
+    const qcKg = (qc[11] || 0) + (tqc[11] || 0);
+    const matItem = ((mat[6] || 0) - (qc[6] || 0)) + (tlh[6] || 0);
+    const matKg = ((mat[11] || 0) - (qc[11] || 0)) + (tlh[11] || 0);
+    const dongItem = dong[6] || 0;
+    const dongKg = dong[11] || 0;
+
+    const cur = weeklySums.get(groupId);
+    cur.item.quaCanh += qcItem;
+    cur.item.mat += matItem;
+    cur.item.dong += dongItem;
+    cur.kg.quaCanh += qcKg;
+    cur.kg.mat += matKg;
+    cur.kg.dong += dongKg;
+  });
+
+  let displayRows = [];
+
+  if (summaryViewMode === 'day') {
+    displayRows = rowsWithGroup.map(({ day, groupId }) => {
+      const isMonday = day.w === 'Mon' || day.w === 'T2';
+      if (isMonday) {
+        const weekSum = weeklySums.get(groupId - 1) || {
+          item: { quaCanh: 0, mat: 0, dong: 0 },
+          kg: { quaCanh: 0, mat: 0, dong: 0 }
+        };
+        return {
+          date: day.d,
+          dow: 'T2',
+          off: false,
+          isHighlight: true,
+          item: weekSum.item,
+          kg: weekSum.kg
+        };
+      }
+      if (day.off) {
+        return {
+          date: day.d,
+          dow: day.w,
+          off: true,
+          isHighlight: false,
+          item: { quaCanh: 0, mat: 0, dong: 0 },
+          kg: { quaCanh: 0, mat: 0, dong: 0 }
+        };
+      }
+      const qc = day.qc || Array(13).fill(0);
+      const tqc = day.tqc || Array(13).fill(0);
+      const mat = day.mat || Array(13).fill(0);
+      const tlh = day.tlh || Array(13).fill(0);
+      const dong = day.dong || Array(13).fill(0);
+
+      const qcItem = (qc[6] || 0) + (tqc[6] || 0);
+      const qcKg = (qc[11] || 0) + (tqc[11] || 0);
+      const matItem = ((mat[6] || 0) - (qc[6] || 0)) + (tlh[6] || 0);
+      const matKg = ((mat[11] || 0) - (qc[11] || 0)) + (tlh[11] || 0);
+      const dongItem = dong[6] || 0;
+      const dongKg = dong[11] || 0;
+
+      return {
+        date: day.d,
+        dow: day.w,
+        off: false,
+        isHighlight: false,
+        item: { quaCanh: qcItem, mat: matItem, dong: dongItem },
+        kg: { quaCanh: qcKg, mat: matKg, dong: dongKg }
+      };
+    });
+  } else if (summaryViewMode === 'week') {
+    const sortedGroupIds = Array.from(weeklySums.keys()).sort((a, b) => a - b);
+    displayRows = sortedGroupIds.map(gId => {
+      const sum = weeklySums.get(gId);
+      return {
+        date: sum.label,
+        dow: '—',
+        off: false,
+        isHighlight: true,
+        item: sum.item,
+        kg: sum.kg
+      };
+    });
+  } else if (summaryViewMode === 'month') {
+    const monthlySums = new Map();
+    D.forEach(day => {
+      if (day.off || day.w === 'Mon' || day.w === 'T2') return;
+      const mKey = (day.d || '').split('-')[1] || 'Unknown';
+      if (!monthlySums.has(mKey)) {
+        monthlySums.set(mKey, {
+          item: { quaCanh: 0, mat: 0, dong: 0 },
+          kg: { quaCanh: 0, mat: 0, dong: 0 }
+        });
+      }
+      const qc = day.qc || Array(13).fill(0);
+      const tqc = day.tqc || Array(13).fill(0);
+      const mat = day.mat || Array(13).fill(0);
+      const tlh = day.tlh || Array(13).fill(0);
+      const dong = day.dong || Array(13).fill(0);
+
+      const qcItem = (qc[6] || 0) + (tqc[6] || 0);
+      const qcKg = (qc[11] || 0) + (tqc[11] || 0);
+      const matItem = ((mat[6] || 0) - (qc[6] || 0)) + (tlh[6] || 0);
+      const matKg = ((mat[11] || 0) - (qc[11] || 0)) + (tlh[11] || 0);
+      const dongItem = dong[6] || 0;
+      const dongKg = dong[11] || 0;
+
+      const cur = monthlySums.get(mKey);
+      cur.item.quaCanh += qcItem;
+      cur.item.mat += matItem;
+      cur.item.dong += dongItem;
+      cur.kg.quaCanh += qcKg;
+      cur.kg.mat += matKg;
+      cur.kg.dong += dongKg;
+    });
+
+    const uniqueMonths = [];
+    D.forEach(day => {
+      const mKey = (day.d || '').split('-')[1];
+      if (mKey && !uniqueMonths.includes(mKey) && monthlySums.has(mKey)) {
+        uniqueMonths.push(mKey);
+      }
+    });
+
+    displayRows = uniqueMonths.map(mKey => {
+      const sum = monthlySums.get(mKey);
+      const monthNames = { Jan:'Tháng 1', Feb:'Tháng 2', Mar:'Tháng 3', Apr:'Tháng 4', May:'Tháng 5', Jun:'Tháng 6', Jul:'Tháng 7', Aug:'Tháng 8', Sep:'Tháng 9', Oct:'Tháng 10', Nov:'Tháng 11', Dec:'Tháng 12' };
+      return {
+        date: monthNames[mKey] || ('Tháng ' + mKey),
+        dow: '—',
+        off: false,
+        isHighlight: true,
+        item: sum.item,
+        kg: sum.kg
+      };
+    });
+  }
+
+  let filteredRows = displayRows;
+  if (sumStartIdx > 0 || sumEndIdx > 0) {
+    const s = sumStartIdx > 0 ? sumStartIdx : 0;
+    const e = sumEndIdx > 0 ? sumEndIdx : displayRows.length - 1;
+    filteredRows = displayRows.slice(Math.min(s, e), Math.max(s, e) + 1);
+  }
+
+  let h = `
+  <div style="padding: 16px; font-family: sans-serif;">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; background: var(--sidebar-bg, #0d0d21); border: 1px solid var(--sidebar-border, rgba(255,255,255,0.1)); padding: 14px 18px; border-radius: 12px;">
+      <div style="display: flex; gap: 6px; background: rgba(0,0,0,0.2); padding: 4px; border-radius: 8px;">
+        <button onclick="setSummaryViewMode('day')" style="padding: 6px 14px; font-size: 12px; font-weight: 700; border-radius: 6px; border: none; cursor: pointer; transition: all 0.2s; ${summaryViewMode==='day' ? 'background: #3b82f6; color: #fff;' : 'background: transparent; color: #94a3b8;'}">Theo Ngày</button>
+        <button onclick="setSummaryViewMode('week')" style="padding: 6px 14px; font-size: 12px; font-weight: 700; border-radius: 6px; border: none; cursor: pointer; transition: all 0.2s; ${summaryViewMode==='week' ? 'background: #3b82f6; color: #fff;' : 'background: transparent; color: #94a3b8;'}">Theo Tuần</button>
+        <button onclick="setSummaryViewMode('month')" style="padding: 6px 14px; font-size: 12px; font-weight: 700; border-radius: 6px; border: none; cursor: pointer; transition: all 0.2s; ${summaryViewMode==='month' ? 'background: #3b82f6; color: #fff;' : 'background: transparent; color: #94a3b8;'}">Theo Tháng</button>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 6px; font-size: 12px;">
+          <span style="color: #94a3b8;">Từ:</span>
+          <select onchange="sumStartIdx=parseInt(this.value); renderTongHopXuat();" style="background: var(--bg-primary, #070714); color: var(--text-color, #e2e8f0); border: 1px solid var(--sidebar-border, #333); padding: 5px 8px; border-radius: 6px; font-size: 12px;">
+            ${displayRows.map((r, i) => `<option value="${i}" ${i===(sumStartIdx||0)?'selected':''}>${r.date}</option>`).join('')}
+          </select>
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px; font-size: 12px;">
+          <span style="color: #94a3b8;">Đến:</span>
+          <select onchange="sumEndIdx=parseInt(this.value); renderTongHopXuat();" style="background: var(--bg-primary, #070714); color: var(--text-color, #e2e8f0); border: 1px solid var(--sidebar-border, #333); padding: 5px 8px; border-radius: 6px; font-size: 12px;">
+            ${displayRows.map((r, i) => `<option value="${i}" ${i===(sumEndIdx||(displayRows.length-1))?'selected':''}>${r.date}</option>`).join('')}
+          </select>
+        </div>
+        <button onclick="resetSummaryFilter()" style="display: flex; align-items: center; gap: 4px; padding: 6px 12px; font-size: 12px; font-weight: 600; border-radius: 6px; border: 1px solid #475569; background: transparent; color: var(--text-color, #e2e8f0); cursor: pointer;">
+          ↺ Reset
+        </button>
+      </div>
+    </div>
+
+    <div style="overflow-x: auto; border: 1px solid var(--sidebar-border, rgba(255,255,255,0.1)); border-radius: 12px; background: var(--sidebar-bg, #0d0d21);">
+      <table style="width: 100%; border-collapse: collapse; text-align: right; font-size: 13px;">
+        <thead>
+          <tr style="background: rgba(255,255,255,0.04); border-bottom: 2px solid var(--sidebar-border, #333); font-weight: 700;">
+            <th style="padding: 10px 12px; text-align: left;">${summaryViewMode==='day'?'Ngày':summaryViewMode==='week'?'Tuần':'Tháng'}</th>
+            <th style="padding: 10px 12px; text-align: center; width: 60px;">Thứ</th>
+            <th style="padding: 10px 12px; color: #38bdf8;">Item Quá Cảnh</th>
+            <th style="padding: 10px 12px; color: #60a5fa;">Item Mát</th>
+            <th style="padding: 10px 12px; color: #818cf8;">Item Đông</th>
+            <th style="padding: 10px 12px; color: #38bdf8; background: rgba(56,189,248,0.08); font-weight: 800;">TỔNG ITEM</th>
+            <th style="padding: 10px 12px; color: #f472b6;">Kg Quá Cảnh</th>
+            <th style="padding: 10px 12px; color: #fb7185;">Kg Mát</th>
+            <th style="padding: 10px 12px; color: #f43f5e;">Kg Đông</th>
+            <th style="padding: 10px 12px; color: #f472b6; background: rgba(244,114,182,0.08); font-weight: 800;">TỔNG KG</th>
+          </tr>
+        </thead>
+        <tbody>
+  `;
+
+  filteredRows.forEach(r => {
+    const totalItem = r.item.quaCanh + r.item.mat + r.item.dong;
+    const totalKg = r.kg.quaCanh + r.kg.mat + r.kg.dong;
+    const rowBg = r.isHighlight ? 'background: rgba(234, 179, 8, 0.08); font-weight: 700;' : (r.off ? 'opacity: 0.5;' : '');
+    const fmtN = (v) => v ? v.toLocaleString('vi-VN') : '—';
+    const fmtKg = (v) => v ? v.toLocaleString('vi-VN', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) : '—';
+
+    h += `
+      <tr style="border-bottom: 1px solid var(--sidebar-border, rgba(255,255,255,0.05)); ${rowBg}">
+        <td style="padding: 10px 12px; text-align: left; font-weight: 600;">${r.date}</td>
+        <td style="padding: 10px 12px; text-align: center; color: #94a3b8;">${r.dow}</td>
+        <td style="padding: 10px 12px;">${fmtN(r.item.quaCanh)}</td>
+        <td style="padding: 10px 12px;">${fmtN(r.item.mat)}</td>
+        <td style="padding: 10px 12px;">${fmtN(r.item.dong)}</td>
+        <td style="padding: 10px 12px; background: rgba(56,189,248,0.05); font-weight: 800; color: #38bdf8;">${fmtN(totalItem)}</td>
+        <td style="padding: 10px 12px;">${fmtKg(r.kg.quaCanh)}</td>
+        <td style="padding: 10px 12px;">${fmtKg(r.kg.mat)}</td>
+        <td style="padding: 10px 12px;">${fmtKg(r.kg.dong)}</td>
+        <td style="padding: 10px 12px; background: rgba(244,114,182,0.05); font-weight: 800; color: #f472b6;">${fmtKg(totalKg)}</td>
+      </tr>
+    `;
+  });
+
+  h += `
+        </tbody>
+      </table>
+    </div>
+  </div>
+  `;
+
+  container.innerHTML = h;
 }
 
 function nhCatBlock(catLabel, arr, nccVal, isFirst) {

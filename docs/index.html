@@ -447,6 +447,7 @@ body.light-mode .frame-wrap iframe {
         </div>
         <div class="sub-nav-items">
           <div class="sub-nav-item active" onclick="switchSubTabParent('xuat', this)">📊 Xuất Hàng</div>
+          <div class="sub-nav-item" onclick="switchSubTabParent('tonghop-xuat', this)">📋 Tổng Hợp Xuất Hàng</div>
           <div class="sub-nav-item" onclick="switchSubTabParent('nhap', this)">📊 Nhập Hàng</div>
           <div class="sub-nav-item" onclick="switchSubTabParent('chitiet', this)">⚠️ Chi Tiết Rớt Hàng</div>
           <div class="sub-nav-item" onclick="switchSubTabParent('dapung', this)">📈 Tỷ Lệ Đáp Ứng</div>
@@ -650,6 +651,7 @@ function switchSubTabParent(subTabName, element) {
   // Title mapping
   const titles = {
     xuat: "📦 Báo Cáo Sản Lượng Đông Mát — Xuất Hàng",
+    'tonghop-xuat': "📋 Báo Cáo Sản Lượng Đông Mát — Tổng Hợp Xuất Hàng",
     nhap: "📦 Báo Cáo Sản Lượng Đông Mát — Nhập Hàng",
     chitiet: "⚠️ Báo Cáo Sản Lượng Đông Mát — Chi Tiết Rớt Hàng",
     dapung: "📊 Báo Cáo Sản Lượng Đông Mát — Tỷ Lệ Đáp Ứng",
