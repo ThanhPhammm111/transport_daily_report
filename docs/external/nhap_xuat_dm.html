@@ -1942,6 +1942,37 @@ function resetSummaryFilter() {
   renderTongHopXuat();
 }
 
+function exportTongHopXuatExcel() {
+  const headers = ['Ngày', 'Thứ', 'Item Quá Cảnh', 'Item Mát', 'Item Đông', 'TỔNG ITEM', 'Kg Quá Cảnh', 'Kg Mát', 'Kg Đông', 'TỔNG KG'];
+  const table = document.querySelector('table');
+  if (!table) return;
+  const rows = Array.from(table.querySelectorAll('tbody tr'));
+  
+  const exportRows = rows.map(tr => {
+    return Array.from(tr.querySelectorAll('td')).map(td => td.innerText.trim().replace(/\n/g, ' '));
+  });
+  
+  const modeName = summaryViewMode === 'day' ? 'Theo_Ngay' : summaryViewMode === 'week' ? 'Theo_Tuan' : 'Theo_Thang';
+  const filename = `Tong_Hop_Thuc_Xuat_${modeName}.csv`;
+  
+  let csv = '\uFEFF' + headers.join(',') + '\r\n';
+  exportRows.forEach(row => {
+    if (row.length >= 2) {
+      csv += row.map(v => typeof v === 'string' && (v.includes(',') || v.includes('"')) ? `"${v.replace(/"/g, '""')}"` : v).join(',') + '\r\n';
+    }
+  });
+  
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+}
+
 function renderTongHopXuat() {
   const container = document.getElementById('content');
   if (!container) return;
