@@ -1822,6 +1822,19 @@ function renderChiTiet() {
     dateOptions += `<option value="${d}" ${window.ctFilterDate === d ? 'selected' : ''}>${d}</option>`;
   });
 
+  const urlParams = new URLSearchParams(window.location.search);
+  const partParam = urlParams.get('part');
+  let itemsToRender = filteredItems;
+  let startIdx = 0;
+  if (urlParams.get('screenshot') === 'table3' && partParam) {
+    const part = parseInt(partParam, 10) || 1;
+    const pageSize = 15;
+    startIdx = (part - 1) * pageSize;
+    itemsToRender = filteredItems.slice(startIdx, startIdx + pageSize);
+    const partsCount = Math.ceil(filteredItems.length / pageSize);
+    document.querySelector('.day-info .dow').textContent = (window.ctFilterDate === 'all' ? 'T\u00e2\u0301t ca\u0309 ca\u0301c nga\u0300y' : 'NgÃ y ' + window.ctFilterDate) + ` (Ph\u1EA7n ${part}/${partsCount})`;
+  }
+
   let html = `
   <div class="table-block filter-block" style="padding:15px; margin-bottom:15px; background:var(--bg2); border:1px solid var(--border); border-radius:8px; animation:fadeIn 0.3s ease">
     <div style="display:flex; gap:15px; flex-wrap:wrap; align-items:center;">
@@ -1854,7 +1867,7 @@ function renderChiTiet() {
       </div>
     </div>`;
 
-  if (filteredItems.length === 0) {
+  if (itemsToRender.length === 0) {
     html += `
     <div class="off-msg" style="padding:40px; font-size:13px">\u2014 Kh\u00f4ng ti\u0300m th\u00e2\u0301y SKU r\u01a1\u0301t na\u0300o kh\u01a1\u0301p v\u01a1\u0301i b\u1ED9 l\u1ECDc \u2014</div>
     </div>`;
@@ -1869,11 +1882,11 @@ function renderChiTiet() {
         <th class="th-num">SL pick r\u01a1\u0301t</th><th class="th-note">Ghi chu\u0301</th><th class="th-tf">T/F</th><th class="th-pct">Ti\u0309 l\u00ea\u0323 Pick</th>
       </tr></thead><tbody>`;
     
-    filteredItems.forEach((it, idx) => {
+    itemsToRender.forEach((it, idx) => {
       const pc = it.pct === 0 ? 'd-pct-bad' : it.pct < 50 ? 'd-pct-warn' : 'd-pct-good';
       const fv = v => v === null ? '' : (v === 0 ? '0' : fmt(v));
       html += `<tr>
-        <td>${idx+1}</td>
+        <td>${startIdx+idx+1}</td>
         <td class="d-date" style="color:var(--cyan); font-weight:600; text-align:center;">${it.date}</td>
         <td class="d-cat">${it.cat}</td>
         <td class="d-temp" style="color:${it.temp==='\u0110\u00d4NG'?'var(--blue)':'var(--green)'}">${it.temp}</td>
