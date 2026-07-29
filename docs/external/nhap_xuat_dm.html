@@ -76,7 +76,12 @@ body.light-mode {
   --pick-bad: #dc2626;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
-body.in-iframe .header, body.in-iframe .tab-nav { display: none !important; }
+body.in-iframe .header-scm, body.in-iframe .tab-nav { display: none !important; }
+body.screenshot-mode-table1 .header-scm, body.screenshot-mode-table1 .tab-nav, body.screenshot-mode-table1 .day-nav,
+body.screenshot-mode-table2 .header-scm, body.screenshot-mode-table2 .tab-nav, body.screenshot-mode-table2 .day-nav { display: none !important; }
+body.screenshot-mode-table1, body.screenshot-mode-table2 { padding: 0 !important; margin: 0 !important; min-height: auto !important; background: var(--bg) !important; }
+body.screenshot-mode-table1 .container, body.screenshot-mode-table2 .container { max-width: 100% !important; padding: 0 !important; margin: 0 !important; }
+body.screenshot-mode-table1 .table-block, body.screenshot-mode-table2 .table-block { box-shadow: none !important; margin: 0 !important; padding: 0 !important; }
 body.screenshot-mode-table3 .filter-block, body.screenshot-mode-table3 #warning-section { display: none !important; }
 body.screenshot-mode-table3 { padding-bottom: 0 !important; }
 body.screenshot-mode-table3 .table-block { box-shadow: none !important; border: none !important; margin: 0 !important; padding: 0 !important; background: transparent !important; }
@@ -509,6 +514,16 @@ body.light-mode .tab-btn:hover { background:rgba(0,0,0,0.04); }
 </style>
 </head>
 <body>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const shot = urlParams.get('screenshot');
+  if (shot === 'table1' || shot === 'table2') {
+    document.body.classList.add('screenshot-mode-' + shot);
+    document.querySelectorAll('.header-scm, .tab-nav, .day-nav').forEach(el => el.style.setProperty('display', 'none', 'important'));
+  }
+});
+</script>
 
 <div class="header-scm">
   <div class="header-scm-left">
@@ -567,6 +582,18 @@ body.light-mode .tab-btn:hover { background:rgba(0,0,0,0.04); }
   </div>
   <button onclick="next()" id="btnNext">Sau ▶</button>
 </div>
+<script>
+(function() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const shot = urlParams.get('screenshot');
+  if (shot === 'table1' || shot === 'table2') {
+    document.body.classList.add('screenshot-mode-' + shot);
+    const h = document.querySelector('.header-scm'); if (h) h.style.display = 'none';
+    const t = document.querySelector('.tab-nav'); if (t) t.style.display = 'none';
+    const d = document.querySelector('.day-nav'); if (d) d.style.display = 'none';
+  }
+})();
+</script>
 
 <div id="content"></div>
 
@@ -1143,7 +1170,8 @@ const D = [
 {d:'25-Jul',w:'T7',wk:'W30',qc:[141,0,100,34466,29000,118.85,33612,0,9130,5223,174.81,0,100],lk:[371,0,100,82422,91000,90.57,80413,2.44,16814,16400,102.53,0,100],tqc:[37,0,100,16694,6000,278.23,16510,-0.02,9922,6000,165.37,0,100],tlh:[5,0,100,705,3000,23.5,705,0,654,3000,21.81,0,100],ts:[554,0,100],ti:[134287,129000,104.1,131240,1.5],tQ:[51160,35000,146.17,37.61,50122,-0.01],tL:[83127,94000,88.43,62.39,81118,2.42],tk:[36521,30623,119.26,0,100],dong:[116,0,100,11283,13000,86.79,0,100,3260,3000,108.67,0,100],mat:[394,0,100,105161,116000,90.66,-17215,116.43,22684,27623,82.12,0,100],tcnk:[42,0,100,17399,9000,193.32,17215,-0.02,10576,9000,117.52,0,100]},
 {d:'26-Jul',w:'CN',wk:'W30',qc:[153,0,100,38171,29000,131.62,0,100,8916,5066,175.99,0,100],lk:[336,0,100,62449,90000,69.39,0,100,15392,16500,93.29,0,100],tqc:[37,0,100,22874,8000,285.93,0,100,13488,7000,192.69,0,100],tlh:[5,0,100,970,4000,24.24,0,100,922,4000,23.05,0,100],ts:[531,0,100],ti:[124464,131000,95.01,0,100],tQ:[61045,37000,164.99,48.8,0,100],tL:[63419,94000,67.47,51.2,0,100],tk:[38718,32566,118.89,0,100],dong:[110,0,100,10394,12000,86.62,0,100,2920,3000,97.33,0,100],mat:[379,0,100,86279,119000,72.5,0,100,22151,29566,74.92,0,100],tcnk:[42,0,100,23844,12000,198.7,0,100,14410,11000,131,0,100]},
 {d:'27-Jul',w:'T2',wk:'W31',off:true},
-{d:'28-Jul',w:'T3',wk:'W31',qc:[145,145,0,35753,18000,198.63,34515,0.02,9691,3000,323.03,8696,0.01],lk:[338,270,20.12,87577,90800,96.45,70614,19.37,19319,100,19319.31,15530,19.62],tqc:[37,34,0,8452,5000,169.04,7984,-0.06,6494,4200,154.62,6070,-0.05],tlh:[5,0,100,2255,3000,75.15,0,100,1780,3000,59.32,0,100],ts:[525,449,13.98],ti:[134036,116800,114.76,113113,14.52],tQ:[44205,23000,192.19,32.12,42499,0.01],tL:[89832,93800,95.77,67.88,70614,21.39],tk:[37284,10300,361.98,30296,15.52],dong:[89,73,17.98,11724,13000,90.18,10588,9.69,3506,0,0,3192,8.97],mat:[392,340,13.71,111349,103800,107.27,94284,14.58,25504,10300,247.61,21034,14.18],tcnk:[42,34,12.82,10706,8000,133.83,7984,21.98,8274,7200,114.91,6070,22.64]}
+{d:'28-Jul',w:'T3',wk:'W31',qc:[145,145,0,35753,18000,198.63,34515,0.02,9691,3000,323.03,8696,0.01],lk:[338,270,20.12,87577,90800,96.45,70614,19.37,19319,100,19319.31,15530,19.62],tqc:[37,34,0,8452,5000,169.04,7984,-0.06,6494,4200,154.62,6070,-0.05],tlh:[5,0,100,2255,3000,75.15,0,100,1780,3000,59.32,0,100],ts:[525,449,13.98],ti:[134036,116800,114.76,113113,14.52],tQ:[44205,23000,192.19,32.12,42499,0.01],tL:[89832,93800,95.77,67.88,70614,21.39],tk:[37284,10300,361.98,30296,15.52],dong:[89,73,17.98,11724,13000,90.18,10588,9.69,3506,0,0,3192,8.97],mat:[392,340,13.71,111349,103800,107.27,94284,14.58,25504,10300,247.61,21034,14.18],tcnk:[42,34,12.82,10706,8000,133.83,7984,21.98,8274,7200,114.91,6070,22.64]},
+{d:'29-Jul',w:'T4',wk:'W31',qc:[128,127,0,19490,18000,108.28,18523,0.02,4989,3000,166.31,4235,0],lk:[297,182,38.72,85230,79500,107.21,67603,20.68,17275,200,8637.64,12760,26.14],tqc:[38,32,3.03,11056,5000,221.13,8879,3.22,7865,4200,187.25,6645,0.47],tlh:[4,4,0,900,3000,30,900,0,877,3000,29.24,877,0],ts:[467,345,25.16],ti:[116676,105500,110.59,95905,15.75],tQ:[30546,23000,132.81,24.34,27402,1.08],tL:[86130,82500,104.4,75.66,68503,20.47],tk:[31006,10400,298.14,24518,15.64],dong:[85,85,0,5909,12000,49.24,5897,0.2,1724,0,0,1720,0.19],mat:[340,224,33.92,98811,93500,105.68,80229,18.01,20541,10400,197.51,15275,22.8],tcnk:[42,36,2.7,11956,8000,149.46,9779,2.93,8742,7200,121.41,7522,0.42]}
 ];
 
 // === CHI TIẾT XUẤT HÀNG DATA ===
@@ -1534,7 +1562,144 @@ const CT = {
 ] },
 '26-Jul': { totalBk:0, totalTx:0, totalDiff:0, items:[] },
 '27-Jul': { totalBk:0, totalTx:0, totalDiff:0, items:[] },
-'28-Jul': { totalBk:0, totalTx:0, totalDiff:0, items:[] }
+'28-Jul': { totalBk:0, totalTx:0, totalDiff:0, items:[] },
+'29-Jul': { totalBk:27776, totalTx:9333, totalDiff:18443, items:[
+  {cat:'Lưu Hàng',temp:'ĐÔNG',code:'6938104600151',name:'NISSI - SÒ ĐIỆP ÉP ĐÔNG LẠNH 250G',unit:'HỘP',bk:434,sx:430,nqc:null,qcr:null,hold:null,diff:4,note:'Kho pick thiếu',pct:99.08},
+  {cat:'Lưu Hàng',temp:'ĐÔNG',code:'8935275600568',name:'OG BLUE - CÁ SABA BIỂN NAUY PHI LÊ 250G',unit:'GÓI',bk:49,sx:47,nqc:null,qcr:null,hold:null,diff:2,note:'Kho pick thiếu',pct:95.92},
+  {cat:'Lưu Hàng',temp:'ĐÔNG',code:'8936187610089',name:'CẦN GIỜ - CÁ ĐÙ MỘT NẮNG 9-12 CON/500G',unit:'GÓI',bk:46,sx:44,nqc:null,qcr:null,hold:null,diff:2,note:'Kho pick thiếu',pct:95.65},
+  {cat:'Lưu Hàng',temp:'ĐÔNG',code:'8938520657447',name:'RÂU BẠCH TUỘC CHẦN ĐÔNG LẠNH 200G',unit:'VỈ',bk:45,sx:41,nqc:null,qcr:null,hold:null,diff:4,note:'Kho pick thiếu',pct:91.11},
+  {cat:'Lưu Hàng',temp:'Mát',code:'3073781110685',name:'BELCUBE - PHÔ MAI VỊ SỮA GÓI 15 VIÊN - 78G',unit:'HỘP',bk:183,sx:0,nqc:null,qcr:null,hold:null,diff:183,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'3073781153859',name:'BELCUBE - PHÔ MAI VUÔNG VỊ DÂU 15 VIÊN -78G',unit:'HỘP',bk:192,sx:0,nqc:null,qcr:null,hold:null,diff:192,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'3073781154351',name:'CON BÒ CƯỜI - PHÔ MAI CON BÒ CƯỜI 8M 112G',unit:'HỘP',bk:132,sx:0,nqc:null,qcr:null,hold:null,diff:132,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'3073781154375',name:'CON BÒ CƯỜI - PHÔ MAI CON BÒ CƯỜI 16M 224G',unit:'HỘP',bk:336,sx:0,nqc:null,qcr:null,hold:null,diff:336,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'3073781203875',name:'BELCUBE - PHÔ MAI VỊ VIỆT QUẤT GÓI 15 VIÊN - 78G',unit:'HỘP',bk:204,sx:0,nqc:null,qcr:null,hold:null,diff:204,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'3073781225013',name:'CON BÒ CƯỜI - PHÔ MAI EXTRA CRÈME 112G',unit:'HỘP',bk:172,sx:0,nqc:null,qcr:null,hold:null,diff:172,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'3184030003617',name:'PAYSAN BRETON - PHÔ MAI SỢI EMMENTAL 70G',unit:'GÓI',bk:32,sx:0,nqc:null,qcr:null,hold:null,diff:32,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'3412290040715',name:'PAYSAN BRETON - PHÔ MAI CAMEMBERT 125G',unit:'HỘP',bk:24,sx:0,nqc:null,qcr:null,hold:null,diff:24,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'4903308014402',name:'QBB - PHÔ MAI NHẬT VỊ VANILLA 90G',unit:'HỘP',bk:166,sx:0,nqc:null,qcr:null,hold:null,diff:166,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'4903308014433',name:'QBB - PHÔ MAI NHẬT 3 LOẠI TRÁI CÂY 90G',unit:'HỘP',bk:116,sx:0,nqc:null,qcr:null,hold:null,diff:116,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'4903308014440',name:'QBB- PHÔ MAI NHẬT VỊ VIỆT QUẤT 90G',unit:'HỘP',bk:130,sx:0,nqc:null,qcr:null,hold:null,diff:130,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'4903308019001',name:'QBB - PHÔ MAI NHẬT VỊ DÂU 90G',unit:'HỘP',bk:80,sx:0,nqc:null,qcr:null,hold:null,diff:80,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'5021427906091',name:'WYKE FARMS - PHÔ MAI MATURE CHEDDAR 200G',unit:'CÁI',bk:2,sx:0,nqc:null,qcr:null,hold:null,diff:2,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'5021427906114',name:'WYKE FARMS - PHÔ MAI EXTRA MATURE CHEDDAR 200G',unit:'CÁI',bk:2,sx:0,nqc:null,qcr:null,hold:null,diff:2,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'5021427913075',name:'WYKE FARMS - PHÔ MAI LÁT CHEDDAR BLACK PEPPER 160G',unit:'CÁI',bk:6,sx:0,nqc:null,qcr:null,hold:null,diff:6,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'5704025027640',name:'EMBORG - BƠ LẠT COOK & BAKE 200G',unit:'GÓI',bk:58,sx:0,nqc:null,qcr:null,hold:null,diff:58,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'5704025037465',name:'EMBORG - PHÔ MAI QUE 84G',unit:'GÓI',bk:4,sx:0,nqc:null,qcr:null,hold:null,diff:4,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'6954463411658',name:'PULMUONE - MỲ UDON ĐẬU HŨ CHẢ CÁ 275G',unit:'GÓI',bk:736,sx:0,nqc:null,qcr:null,hold:null,diff:736,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'6954463412006',name:'PULMUONE - MÌ TƯƠNG ĐEN NGUYÊN BẢN KIỂU HÀN QUỐC 312.3G',unit:'GÓI',bk:246,sx:0,nqc:null,qcr:null,hold:null,diff:246,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8018896890218',name:'SIMONINI - THỊT LỢN MUỐI PROSCIUTTO CRUDO STAGIONATO 80G',unit:'GÓI',bk:6,sx:0,nqc:null,qcr:null,hold:null,diff:6,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8018896893585',name:'SIMONINI - XÚC XÍCH KHÔ ANTIPASTO MIX 3 LOẠI 120G',unit:'GÓI',bk:2,sx:0,nqc:null,qcr:null,hold:null,diff:2,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8801068038262',name:'SAMLIP - BÁNH PHÔ MAI MR.CHEF\'S 105G',unit:'CÁI',bk:18,sx:0,nqc:null,qcr:null,hold:null,diff:18,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8801068939842',name:'SAMLIP - BÁNH PHÔ MAI CAFE MR.CHEF\'S 105G',unit:'CÁI',bk:42,sx:0,nqc:null,qcr:null,hold:null,diff:42,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8850329003679',name:'MEIJI - SỮA THANH TRÙNG LACTOSE FREE VỊ SOCOLA ĐEN 946ML',unit:'HỘP',bk:19,sx:0,nqc:null,qcr:null,hold:null,diff:19,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8850329103003',name:'MEIJI - SỮA THANH TRÙNG 946ML',unit:'HỘP',bk:112,sx:0,nqc:null,qcr:null,hold:null,diff:112,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8850329310173',name:'MEIJI - SỮA CHUA ORIGINAL 90G',unit:'HỘP',bk:504,sx:0,nqc:null,qcr:null,hold:null,diff:504,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8850329344352',name:'MEIJI - SỮA CHUA ÍT BÉO VỊ TỰ NHIÊN KHÔNG ĐƯỜNG 500G',unit:'HỘP',bk:86,sx:0,nqc:null,qcr:null,hold:null,diff:86,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8850329527236',name:'MEIJI - SỮA CHUA DÂU 4X90G',unit:'LỐC',bk:102,sx:0,nqc:null,qcr:null,hold:null,diff:102,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8850329536511',name:'MEIJI - SỮA CHUA UỐNG VỊ CAM LỐC 4*85ML',unit:'LỐC',bk:10,sx:0,nqc:null,qcr:null,hold:null,diff:10,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8850329536658',name:'MEIJI - SỮA CHUA UỐNG ORIGINAL LỐC 4*85ML',unit:'LỐC',bk:38,sx:0,nqc:null,qcr:null,hold:null,diff:38,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8850329809837',name:'MEIJI - SỮA CHUA KIỂU HY LẠP VỊ TỰ NHIÊN 500G',unit:'HỘP',bk:33,sx:0,nqc:null,qcr:null,hold:null,diff:33,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8850329809844',name:'MEIJI - SỮA CHUA KIỂU HY LẠP VỊ 3 LOẠI QUẢ MỌNG 500G',unit:'HỘP',bk:10,sx:0,nqc:null,qcr:null,hold:null,diff:10,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8850393801379',name:'BETAGEN - SỮA CHUA UỐNG HƯƠNG DÂU 300ML',unit:'CHAI',bk:330,sx:0,nqc:null,qcr:null,hold:null,diff:330,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8850393919968',name:'BETAGEN - SỮA CHUA UỐNG HƯƠNG TỰ NHIÊN 700ML',unit:'CHAI',bk:64,sx:0,nqc:null,qcr:null,hold:null,diff:64,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8850393991940',name:'BETAGEN - SỮA CHUA UỐNG HỖN HỢP LỐC 6X85ML',unit:'LỐC',bk:12,sx:0,nqc:null,qcr:null,hold:null,diff:12,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8934572177469',name:'VISSAN - NEM CHUA 100G',unit:'GÓI',bk:40,sx:0,nqc:null,qcr:null,hold:null,diff:40,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8934572205544',name:'VISSAN - GIÒ LỤA ĐẶC BIỆT 500G',unit:'GÓI',bk:84,sx:0,nqc:null,qcr:null,hold:null,diff:84,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8934673300179',name:'VINAMILK - SCU PROBI NGHỆ MẬT ONG 4*130ML',unit:'LỐC',bk:84,sx:0,nqc:null,qcr:null,hold:null,diff:84,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8934673300742',name:'VINAMILK - SCU PROBI LỰU ĐỎ ÍT ĐƯỜNG 130ML*4',unit:'LỐC',bk:198,sx:0,nqc:null,qcr:null,hold:null,diff:198,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8934673303507',name:'VINAMILK - SCU PROBI ÍT ĐƯỜNG 5*65ML',unit:'LỐC',bk:750,sx:0,nqc:null,qcr:null,hold:null,diff:750,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8934673303521',name:'VINAMILK - SCU PROBI ÍT ĐƯỜNG 4*130ML',unit:'LỐC',bk:456,sx:0,nqc:null,qcr:null,hold:null,diff:456,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8934673304528',name:'VINAMILK - SCU PROBI CÓ ĐƯỜNG 4*130ML',unit:'LỐC',bk:6,sx:0,nqc:null,qcr:null,hold:null,diff:6,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8934673323512',name:'VINAMILK - SCU PROBI HƯƠNG DỨA 5*65ML',unit:'LỐC',bk:450,sx:0,nqc:null,qcr:null,hold:null,diff:450,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8934673400510',name:'VINAMILK - SCU PROBI ĐƯỜNG 65ML',unit:'LỐC',bk:160,sx:0,nqc:null,qcr:null,hold:null,diff:160,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8934673434508',name:'VINAMILK - SCU PROBI HƯƠNG DÂU 65ML.',unit:'LỐC',bk:470,sx:0,nqc:null,qcr:null,hold:null,diff:470,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8934673435505',name:'VINAMILK - SCU PROBI HƯƠNG DƯA GANG 65ML.',unit:'LỐC',bk:1080,sx:800,nqc:null,qcr:null,hold:null,diff:280,note:'Kho pick thiếu',pct:74.07},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8934673500432',name:'VINAMILK - SCA TRÂN CHÂU ĐƯỜNG ĐEN 100G',unit:'HỘP',bk:304,sx:0,nqc:null,qcr:null,hold:null,diff:304,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8934673501040',name:'VINAMILK - SCA GREEN FARM CAO ĐẠM CÀ PHÊ TỰ NHIÊN NGŨ CỐC 123G',unit:'HỘP',bk:16,sx:0,nqc:null,qcr:null,hold:null,diff:16,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8934673501057',name:'VINAMILK - SCA 9 LOẠI HẠT 100G',unit:'HỘP',bk:264,sx:0,nqc:null,qcr:null,hold:null,diff:264,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8934673607827',name:'VINAMILK - SCA DÂU 100G',unit:'HỘP',bk:532,sx:0,nqc:null,qcr:null,hold:null,diff:532,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8934717600784',name:'CJ CẦU TRE - XÚC XÍCH ỨC GÀ COCKTAIL PHÔ MAI 200G',unit:'GÓI',bk:266,sx:0,nqc:null,qcr:null,hold:null,diff:266,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8935007147132',name:'LOTHAMILK - SCU CHAI 1760ML',unit:'CHAI',bk:34,sx:0,nqc:null,qcr:null,hold:null,diff:34,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8935007147156',name:'LOTHAMILK - SCU THANH TRÙNG CÓ ĐƯỜNG CHAI 473ML',unit:'CHAI',bk:400,sx:0,nqc:null,qcr:null,hold:null,diff:400,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8935007147200',name:'LOTHAMILK - SCA CÓ ĐƯỜNG 95G',unit:'HỘP',bk:1120,sx:0,nqc:null,qcr:null,hold:null,diff:1120,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8935019503216',name:'LEGOURMET - XÚC XÍCH VƯỜN BIA 10CM, 200G',unit:'GÓI',bk:62,sx:0,nqc:null,qcr:null,hold:null,diff:62,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8935019599783',name:'LEGOURMET - XÚC XÍCH DELI SUMO 500G',unit:'GÓI',bk:28,sx:0,nqc:null,qcr:null,hold:null,diff:28,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8935049005407',name:'NUTIMILK - SỮA CHUA CÓ ĐƯỜNG HŨ 100G',unit:'HŨ',bk:68,sx:0,nqc:null,qcr:null,hold:null,diff:68,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8935058921422',name:'CP - XÚC XÍCH PHÔ MAI TAN CHẢY 200G',unit:'GÓI',bk:534,sx:0,nqc:null,qcr:null,hold:null,diff:534,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8935058921446',name:'CP - XÚC XÍCH MEISTERS WURST PREMIUM 200G',unit:'GÓI',bk:380,sx:293,nqc:null,qcr:null,hold:null,diff:87,note:'Kho pick thiếu',pct:77.11},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8935101607938',name:'ĐỨC VIỆT - XÚC XÍCH PHÔ MAI CHEESY 250G',unit:'GÓI',bk:94,sx:0,nqc:null,qcr:null,hold:null,diff:94,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8935101608072',name:'ĐỨC VIỆT - XÚC XÍCH SỤN NƯỚNG BULGOGI 450G',unit:'GÓI',bk:84,sx:0,nqc:null,qcr:null,hold:null,diff:84,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8935117700036',name:'ÁNH HỒNG - BÁNH FLAN 6*54G',unit:'LỐC',bk:154,sx:0,nqc:null,qcr:null,hold:null,diff:154,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8935117700104',name:'ÁNH HỒNG - BÁNH FLAN CARAMEL 6*100G',unit:'LỐC',bk:126,sx:0,nqc:null,qcr:null,hold:null,diff:126,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8935117700128',name:'ÁNH HỒNG - BÁNH FLAN CARAMEL CAO CẤP 2*80G',unit:'LỐC',bk:60,sx:0,nqc:null,qcr:null,hold:null,diff:60,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8935217410309',name:'TH TRUE MILK - SC MEN SỐNG TRÁI CÂY TỰ NHIÊN 100G',unit:'HỘP',bk:1088,sx:870,nqc:null,qcr:null,hold:null,diff:218,note:'Kho pick thiếu',pct:79.96},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8935217411542',name:'TH TRUE MILK - SCU HƯƠNG DÂU 85*4 ML',unit:'LỐC',bk:126,sx:0,nqc:null,qcr:null,hold:null,diff:126,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8935217413003',name:'TH TRUE MILK - SC CÓ ĐƯỜNG 100G',unit:'HỘP',bk:1308,sx:956,nqc:null,qcr:null,hold:null,diff:352,note:'Kho pick thiếu',pct:73.09},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8935217413508',name:'TH TRUE MILK - SC ÍT ĐƯỜNG 100G',unit:'HỘP',bk:4056,sx:3792,nqc:null,qcr:null,hold:null,diff:264,note:'Kho pick thiếu',pct:93.49},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8935217430109',name:'TH TRUE MILK - BƠ LẠT TỰ NHIÊN VỈ 10X10G',unit:'GÓI',bk:544,sx:382,nqc:null,qcr:null,hold:null,diff:162,note:'Kho pick thiếu',pct:70.22},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8935217450015',name:'TH TRUE MILK - SCA NẾP CẨM 110G',unit:'HỘP',bk:546,sx:0,nqc:null,qcr:null,hold:null,diff:546,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8935304205849',name:'O\'FOOD - BÁNH GẠO CHẢ CÁ 340G',unit:'GÓI',bk:242,sx:0,nqc:null,qcr:null,hold:null,diff:242,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8935335402811',name:'THỌ PHÁT - BÁNH BAO GẠO LỨT NHÂN NẤM HẠT SEN 400G (4x100G)',unit:'GÓI',bk:64,sx:0,nqc:null,qcr:null,hold:null,diff:64,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8936000751012',name:'ICHIBAN - SỮA ĐẬU NÀNH 350ML',unit:'CHAI',bk:18,sx:0,nqc:null,qcr:null,hold:null,diff:18,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8936009793358',name:'MORINAGA - SỮA CHUA KHÔNG BÉO ĐÀO NHA ĐAM 100G',unit:'HỘP',bk:60,sx:0,nqc:null,qcr:null,hold:null,diff:60,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8936034876200',name:'MEAT DELI - GIÒ LỤA HẢO HẠNG NGỰ BẢO 300G',unit:'GÓI',bk:130,sx:0,nqc:null,qcr:null,hold:null,diff:130,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8936034876576',name:'MEAT DELI - CHẢ CHIÊN 300G',unit:'GÓI',bk:88,sx:0,nqc:null,qcr:null,hold:null,diff:88,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8936034877856',name:'MEATDELI - MỠ HEO SẠCH NGUYÊN CHẤT 330G',unit:'HŨ',bk:106,sx:0,nqc:null,qcr:null,hold:null,diff:106,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8936034878006',name:'PONNIE - XÚC XÍCH ỚT 50G',unit:'CÁI',bk:84,sx:0,nqc:null,qcr:null,hold:null,diff:84,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8936034878037',name:'PONNIE - XIÊN XÚC XÍCH PHÔ MAI 50G',unit:'CÁI',bk:109,sx:0,nqc:null,qcr:null,hold:null,diff:109,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8936039541233',name:'HỒNG HƯƠNG - KHÔ MỰC NHỎ 100G',unit:'GÓI',bk:42,sx:30,nqc:null,qcr:null,hold:null,diff:12,note:'Kho pick thiếu',pct:71.43},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8936045450451',name:'NIPPON CHV - XÚC XÍCH KHÔ BATON 100G',unit:'GÓI',bk:14,sx:0,nqc:null,qcr:null,hold:null,diff:14,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8936045450956',name:'NIPPON CHV - JAMBON XÔNG KHÓI 200G',unit:'GÓI',bk:578,sx:0,nqc:null,qcr:null,hold:null,diff:578,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8936077114345',name:'BAMBOO - BÁNH BAO GẠO LỨT NHÂN THỊT BÒ PHÔ MAI 220G (110Gx2)',unit:'GÓI',bk:56,sx:0,nqc:null,qcr:null,hold:null,diff:56,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8936077114352',name:'BAMBOO - BÁNH BAO KIM SA THAN TRE 240G (40Gx6)',unit:'GÓI',bk:22,sx:0,nqc:null,qcr:null,hold:null,diff:22,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8936077114369',name:'BAMBOO - BÁNH BAO NGUYÊN CÁM NHÂN XÁ XÍU PHÔ MAI 220G (2x110G)',unit:'GÓI',bk:58,sx:0,nqc:null,qcr:null,hold:null,diff:58,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8936146440467',name:'G - CHẢ LỤA BÌ ỚT XIÊM XANH 500G',unit:'GÓI',bk:54,sx:0,nqc:null,qcr:null,hold:null,diff:54,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8936146446728',name:'G - CHẢ LỤA 200G',unit:'GÓI',bk:88,sx:0,nqc:null,qcr:null,hold:null,diff:88,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8936183060734',name:'GFU - XOÀI NGÂM CHUA NGỌT 300G',unit:'HỘP',bk:108,sx:0,nqc:null,qcr:null,hold:null,diff:108,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8936195181700',name:'HAHA - CHẢ ỚT XIÊM XANH 500G',unit:'GÓI',bk:2,sx:0,nqc:null,qcr:null,hold:null,diff:2,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8936199380345',name:'FAMILY MEALS - BÁNH GIÒ NHÂN THỊT TRỨNG MUỐI 175G',unit:'GÓI',bk:102,sx:0,nqc:null,qcr:null,hold:null,diff:102,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8936210411591',name:'KITKOOL - BÁNH BAO BÍ ĐỎ NHÂN THỊT BÒ PHÔ MAI MOZZARELLA 300G',unit:'GÓI',bk:44,sx:0,nqc:null,qcr:null,hold:null,diff:44,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8936219620161',name:'SAMHO - THANH SUMIRI HƯƠNG CUA NHÂN PHÔ MAI 30G',unit:'GÓI',bk:36,sx:0,nqc:null,qcr:null,hold:null,diff:36,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8936219620178',name:'SAMHO - THANH SUMIRI JUMBO HƯƠNG CUA 45G',unit:'GÓI',bk:159,sx:0,nqc:null,qcr:null,hold:null,diff:159,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8936219620192',name:'SAMHO - SUMIRI CÀNG CUA HOÀNG ĐẾ 70G',unit:'GÓI',bk:268,sx:0,nqc:null,qcr:null,hold:null,diff:268,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8938500810770',name:'VS - CÁ SABA NAUY HẤP NƯỚNG 300G',unit:'VỈ',bk:323,sx:0,nqc:null,qcr:null,hold:null,diff:323,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8938500844317',name:'VỊ NGUYÊN - BÚN NƯA SHIRATAKI 240G',unit:'HỘP',bk:96,sx:0,nqc:null,qcr:null,hold:null,diff:96,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8938500844430',name:'VỊ NGUYÊN - ĐẬU HŨ KY CUỘN TƯƠI 200G',unit:'HỘP',bk:266,sx:0,nqc:null,qcr:null,hold:null,diff:266,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8938502525016',name:'THỌ PHÁT - BÁNH BAO NHÂN THỊT TRỨNG CÚT 250G',unit:'GÓI',bk:236,sx:0,nqc:null,qcr:null,hold:null,diff:236,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8938502525054',name:'THỌ PHÁT - BÁNH BAO KHÔNG NHÂN 300G',unit:'GÓI',bk:90,sx:0,nqc:null,qcr:null,hold:null,diff:90,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8938502525078',name:'THỌ PHÁT - BÁNH BAO NHÂN THỊT HEO TRỨNG MUỐI 400G',unit:'GÓI',bk:18,sx:0,nqc:null,qcr:null,hold:null,diff:18,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8938502525092',name:'THỌ PHÁT - BÁNH BAO CADE 240G',unit:'GÓI',bk:38,sx:0,nqc:null,qcr:null,hold:null,diff:38,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8938502525337',name:'THỌ PHÁT - BÁNH BAO NHÂN THỊT HEO TRỨNG CÚT 480G (4x120G)',unit:'GÓI',bk:94,sx:0,nqc:null,qcr:null,hold:null,diff:94,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8938502525481',name:'THỌ PHÁT - XÔI GÀ NẤM ĐÔNG CÔ 160G',unit:'CÁI',bk:42,sx:0,nqc:null,qcr:null,hold:null,diff:42,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8938504823073',name:'TIẾN TẤN ĐẠT - LẠP XƯỞNG TƯƠI VỊ TIÊU 250G',unit:'GÓI',bk:66,sx:0,nqc:null,qcr:null,hold:null,diff:66,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8938508547579',name:'BIBIGO - KIM CHI CẢI THẢO CẮT LÁT 500G',unit:'HỘP',bk:302,sx:0,nqc:null,qcr:null,hold:null,diff:302,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8938512932026',name:'SG MILK - SỮA CHUA NẾP CẨM SÀI GÒN 120G',unit:'HỘP',bk:58,sx:0,nqc:null,qcr:null,hold:null,diff:58,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8938512932033',name:'SG MILK - BÁNH FLAN 100G',unit:'HỘP',bk:8,sx:0,nqc:null,qcr:null,hold:null,diff:8,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8938512932071',name:'SG MILK - SỮA CHUA PHÔ MAI 100G',unit:'HỘP',bk:18,sx:0,nqc:null,qcr:null,hold:null,diff:18,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8938529045856',name:'NGỌC THƠM - CHÂN GIÒ HEO MUỐI 300G',unit:'GÓI',bk:38,sx:0,nqc:null,qcr:null,hold:null,diff:38,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8938529045924',name:'NGỌC THƠM - GÀ MUỐI 500G',unit:'GÓI',bk:35,sx:0,nqc:null,qcr:null,hold:null,diff:35,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8938531579059',name:'DELIFRES - SỮA TƯƠI THANH TRÙNG ÍT ĐƯỜNG CHAI 1.8L',unit:'CHAI',bk:470,sx:466,nqc:null,qcr:null,hold:null,diff:4,note:'Kho pick thiếu',pct:99.15},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8938532089991',name:'VĨ LÂM - CẢI SẬY CHUA NGỌT CẮT SẴN 500G',unit:'GÓI',bk:46,sx:0,nqc:null,qcr:null,hold:null,diff:46,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8938546855032',name:'BEANY - ĐẬU HŨ CHIÊN 280G',unit:'GÓI',bk:48,sx:0,nqc:null,qcr:null,hold:null,diff:48,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'8938546855148',name:'BEANY - ĐẬU HŨ VIÊN CHIÊN 500G',unit:'GÓI',bk:42,sx:0,nqc:null,qcr:null,hold:null,diff:42,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'9300650431812',name:'PHILADELPHIA - PHÔ MAI KEM NGUYÊN BẢN DẠNG PHẾT 250G',unit:'HỘP',bk:10,sx:0,nqc:null,qcr:null,hold:null,diff:10,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'9300658114663',name:'FARMERS UNION - SỮA CHUA KIỂU HY LẠP NGUYÊN CHẤT 500G',unit:'HỘP',bk:90,sx:0,nqc:null,qcr:null,hold:null,diff:90,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'9300658228537',name:'FARMERS UNION - SỮA CHUA KIỂU HY LẠP NGUYÊN CHẤT 1KG',unit:'HỘP',bk:88,sx:0,nqc:null,qcr:null,hold:null,diff:88,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'9300658407840',name:'FARMERS UNION - SỮA CHUA HY LẠP HIGH PROTEIN 500G',unit:'HỘP',bk:284,sx:0,nqc:null,qcr:null,hold:null,diff:284,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'9300658409066',name:'FARMERS UNION - SỮA CHUA KIỂU HY LẠP KHÔNG LACTOSE 500G',unit:'HỘP',bk:22,sx:0,nqc:null,qcr:null,hold:null,diff:22,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'93355421',name:'CHOBANI - SỮA CHUA HY LẠP VỊ BẠC HÀ SOCOLA CHIP 140G',unit:'HỘP',bk:14,sx:0,nqc:null,qcr:null,hold:null,diff:14,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'9336243005030',name:'ROKEBY FARMS - THỨC UỐNG SMOOTHIE PROTEIN VỊ CÀ PHÊ ESPRESSO CHAI 425ML',unit:'CHAI',bk:58,sx:0,nqc:null,qcr:null,hold:null,diff:58,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'9415007303510',name:'ANCHOR - KEM SỮA 1L',unit:'HỘP',bk:68,sx:0,nqc:null,qcr:null,hold:null,diff:68,note:'Kho không pick hàng',pct:0},
+  {cat:'Lưu Hàng',temp:'Mát',code:'9421016151325',name:'WESTGOLD - BƠ MẶN 250G',unit:'KHỐI',bk:28,sx:0,nqc:null,qcr:null,hold:null,diff:28,note:'Kho không pick hàng',pct:0},
+  {cat:'Quá Cảnh',temp:'Mát',code:'8936076278758',name:'SAVOURE - BÁNH SU KEM SỮA CÀ PHÊ MUỐI 75G',unit:'HỘP',bk:90,sx:89,nqc:null,qcr:null,hold:null,diff:1,note:'Kho pick thiếu',pct:98.89},
+  {cat:'Quá Cảnh',temp:'Mát',code:'8936076278765',name:'SAVOURE - BÁNH SU KEM SỮA CHANH DÂY 75G',unit:'HỘP',bk:100,sx:98,nqc:null,qcr:null,hold:null,diff:2,note:'Kho pick thiếu',pct:98},
+  {cat:'Quá Cảnh',temp:'Mát',code:'8936176750017',name:'TNT - RAU CÂU NƯỚC DỪA 140G',unit:'LY',bk:80,sx:78,nqc:null,qcr:null,hold:null,diff:2,note:'Kho pick thiếu',pct:97.5},
+  {cat:'Quá Cảnh',temp:'Mát',code:'8938525186072',name:'TIÊN TIẾN- MĂNG TÂY XANH VIETGAP LOẠI 2 250G',unit:'GÓI',bk:181,sx:179,nqc:null,qcr:null,hold:null,diff:2,note:'Kho pick thiếu',pct:98.9},
+  {cat:'Quá Cảnh',temp:'Mát',code:'SP001578',name:'BBANG HOUSE - BÁNH KEM CỐT SOCOLA 120G',unit:'HỘP',bk:192,sx:190,nqc:null,qcr:null,hold:null,diff:2,note:'Kho pick thiếu',pct:98.96},
+  {cat:'TCNK Quá Cảnh',temp:'MÁT',code:'10094',name:'BLUEBERRY MỸ HỘP 125G',unit:'HỘP',bk:300,sx:0,nqc:null,qcr:null,hold:null,diff:300,note:'Kho không pick hàng',pct:0},
+  {cat:'TCNK Quá Cảnh',temp:'MÁT',code:'8935360200260',name:'LÊ NÂU NỘI ĐỊA TRUNG HỘP 2 TRÁI',unit:'HỘP',bk:150,sx:149,nqc:null,qcr:null,hold:null,diff:1,note:'Kho pick thiếu',pct:99.33},
+  {cat:'TCNK Quá Cảnh',temp:'MÁT',code:'8938541439817',name:'TÁO TÚI 1.5KG',unit:'TÚI',bk:400,sx:399,nqc:null,qcr:null,hold:null,diff:1,note:'Kho pick thiếu',pct:99.75}
+] }
 };
 
 // === HELPERS ===
@@ -1749,12 +1914,13 @@ function render() {
   document.getElementById('content').innerHTML = html;
   const urlParams = new URLSearchParams(window.location.search);
   const shot = urlParams.get('screenshot');
-  if (shot === 'table1') {
-    const b2 = document.getElementById('blockTable2');
-    if (b2) b2.style.display = 'none';
-  } else if (shot === 'table2') {
-    const b1 = document.getElementById('blockTable1');
-    if (b1) b1.style.display = 'none';
+  if (shot === 'table1' || shot === 'table2') {
+    document.body.classList.add('screenshot-mode-' + shot);
+    if (shot === 'table1') {
+      const b2 = document.getElementById('blockTable2'); if (b2) b2.style.display = 'none';
+    } else {
+      const b1 = document.getElementById('blockTable1'); if (b1) b1.style.display = 'none';
+    }
   }
 }
 
@@ -2432,12 +2598,13 @@ function renderNhap() {
   document.getElementById('content').innerHTML = html;
   const urlParams = new URLSearchParams(window.location.search);
   const shot = urlParams.get('screenshot');
-  if (shot === 'table1') {
-    const b2 = document.getElementById('blockTable2');
-    if (b2) b2.style.display = 'none';
-  } else if (shot === 'table2') {
-    const b1 = document.getElementById('blockTable1');
-    if (b1) b1.style.display = 'none';
+  if (shot === 'table1' || shot === 'table2') {
+    document.body.classList.add('screenshot-mode-' + shot);
+    if (shot === 'table1') {
+      const b2 = document.getElementById('blockTable2'); if (b2) b2.style.display = 'none';
+    } else {
+      const b1 = document.getElementById('blockTable1'); if (b1) b1.style.display = 'none';
+    }
   }
 }
 
@@ -2554,11 +2721,12 @@ const DN = [
 {d:'21-Jul',w:'T3',wk:'W30',po:78,qcN:18,qc:[128,127,18958,18502,4758,4468],lkN:23,lk:[152,148,103388,100997,30434,28942],tqcN:6,tqc:[39,38,6761,6626,4512,4394],tlhN:3,tlh:[4,4,2262,2262,1827,1827],ti:[131368,128386],ts:[323,317],tk:[41531,39631],dongN:3,dong:[19,19,7622,7619,2637,2635],matN:22,mat:[136,132,97948,95560,29624,28133],qc2N:24,qc2:[167,165,25719,25128,9270,8863]},
 {d:'22-Jul',w:'T4',wk:'W30',po:83,qcN:19,qc:[143,142,30807,30556,8465,8431],lkN:26,lk:[129,125,83307,80977,14265,13882],tqcN:6,tqc:[38,37,10194,9962,6096,6021],tlhN:2,tlh:[3,3,2520,2520,2160,2160],ti:[126828,124015],ts:[313,307],tk:[30985,30495],dongN:0,dong:[0,0,0,0,0,0],matN:28,mat:[132,128,85827,83497,16425,16042],qc2N:25,qc2:[181,179,41001,40518,14561,14452]},
 {d:'23-Jul',w:'T5',wk:'W30',po:48,qcN:18,qc:[130,128,19831,18976,5168,4400],lkN:0,lk:[0,0,0,0,0,0],tqcN:6,tqc:[36,36,13116,13002,7194,7144],tlhN:0,tlh:[0,0,0,0,0,0],ti:[32947,31978],ts:[166,164],tk:[12362,11544],dongN:0,dong:[0,0,0,0,0,0],matN:0,mat:[0,0,0,0,0,0],qc2N:24,qc2:[166,164,32947,31978,12362,11544]},
-{d:'24-Jul',w:'T6',wk:'W30',po:46,qcN:18,qc:[141,140,34466,33612,9130,8510],lkN:1,lk:[4,4,1418,1427,213,214],tqcN:5,tqc:[36,36,16574,16506,9877,9838],tlhN:0,tlh:[0,0,0,0,0,0],ti:[52458,51545],ts:[181,180],tk:[19220,18562],dongN:0,dong:[0,0,0,0,0,0],matN:1,mat:[3,3,998,1007,212,214],qc2N:23,qc2:[177,176,51040,50118,19007,18348]},
-{d:'25-Jul',w:'T7',wk:'W30',po:49,qcN:23,qc:[153,153,38171,38063,8916,8897],lkN:0,lk:[0,0,0,0,0,0],tqcN:4,tqc:[36,35,22554,22393,13369,13215],tlhN:1,tlh:[3,3,1300,1300,1240,1240],ti:[62025,61756],ts:[192,191],tk:[23525,23352],dongN:0,dong:[0,0,0,0,0,0],matN:1,mat:[2,2,-2997,-2997,1653,1653],qc2N:27,qc2:[189,188,60725,60456,22285,22112]},
+{d:'24-Jul',w:'T6',wk:'W30',po:46,qcN:18,qc:[141,140,34466,33612,9181,8560],lkN:1,lk:[4,4,1418,1427,213,214],tqcN:5,tqc:[36,36,16574,16506,9877,9838],tlhN:0,tlh:[0,0,0,0,0,0],ti:[52458,51545],ts:[181,180],tk:[19270,18612],dongN:0,dong:[0,0,0,0,0,0],matN:1,mat:[4,4,1418,1427,213,214],qc2N:23,qc2:[177,176,51040,50118,19058,18398]},
+{d:'25-Jul',w:'T7',wk:'W30',po:49,qcN:23,qc:[153,153,38171,38063,8941,8922],lkN:0,lk:[0,0,0,0,0,0],tqcN:4,tqc:[36,35,22554,22393,17869,17715],tlhN:1,tlh:[3,3,1300,1300,1240,1240],ti:[62025,61756],ts:[192,191],tk:[28050,27877],dongN:0,dong:[0,0,0,0,0,0],matN:1,mat:[4,4,1713,1713,1653,1653],qc2N:27,qc2:[189,188,60725,60456,26810,26637]},
 {d:'26-Jul',w:'CN',wk:'W30',po:0,qcN:0,qc:[0,0,0,0,0,0],lkN:0,lk:[0,0,0,0,0,0],tqcN:0,tqc:[0,0,0,0,0,0],tlhN:0,tlh:[0,0,0,0,0,0],ti:[0,0],ts:[0,0],tk:[0,0],dongN:0,dong:[0,0,0,0,0,0],matN:0,mat:[0,0,0,0,0,0],qc2N:0,qc2:[0,0,0,0,0,0]},
-{d:'27-Jul',w:'T2',wk:'W31',po:81,qcN:20,qc:[145,145,35753,34523,9691,8697],lkN:33,lk:[117,117,40746,40408,8122,8034],tqcN:5,tqc:[37,34,8452,7979,6494,6067],tlhN:0,tlh:[0,0,0,0,0,0],ti:[84951,82910],ts:[299,296],tk:[24307,22798],dongN:19,dong:[46,46,7248,6920,1651,1581],matN:14,mat:[69,69,33241,33231,6471,6453],qc2N:25,qc2:[182,179,44205,42502,16185,14764]},
-{d:'28-Jul',w:'T3',wk:'W31',po:0,qcN:0,qc:[0,0,0,0,0,0],lkN:0,lk:[0,0,0,0,0,0],tqcN:0,tqc:[0,0,0,0,0,0],tlhN:0,tlh:[0,0,0,0,0,0],ti:[0,0],ts:[0,0],tk:[0,0],dongN:0,dong:[0,0,0,0,0,0],matN:0,mat:[0,0,0,0,0,0],qc2N:0,qc2:[0,0,0,0,0,0]}
+{d:'27-Jul',w:'T2',wk:'W31',po:81,qcN:20,qc:[145,145,35753,34523,9716,8722],lkN:33,lk:[117,117,40746,40408,8122,8034],tqcN:5,tqc:[37,34,8452,7979,6544,6117],tlhN:0,tlh:[0,0,0,0,0,0],ti:[84951,82910],ts:[299,296],tk:[24382,22873],dongN:19,dong:[47,47,7398,7060,1678,1606],matN:14,mat:[71,71,33498,33488,6471,6453],qc2N:25,qc2:[182,179,44205,42502,16260,14839]},
+{d:'28-Jul',w:'T3',wk:'W31',po:72,qcN:17,qc:[128,127,19618,18655,5026,4272],lkN:24,lk:[134,122,73022,69030,21549,20303],tqcN:6,tqc:[38,33,11056,9174,7865,6676],tlhN:3,tlh:[3,3,2370,2353,2220,2203],ti:[106066,99212],ts:[303,285],tk:[36659,33454],dongN:5,dong:[17,16,4953,4913,1729,1713],matN:22,mat:[119,108,70289,66320,22039,20792],qc2N:23,qc2:[166,160,30674,27829,12890,10948]},
+{d:'29-Jul',w:'T4',wk:'W31',po:0,qcN:0,qc:[0,0,0,0,0,0],lkN:0,lk:[0,0,0,0,0,0],tqcN:0,tqc:[0,0,0,0,0,0],tlhN:0,tlh:[0,0,0,0,0,0],ti:[0,0],ts:[0,0],tk:[0,0],dongN:0,dong:[0,0,0,0,0,0],matN:0,mat:[0,0,0,0,0,0],qc2N:0,qc2:[0,0,0,0,0,0]}
 ];
 
 const DA = [
@@ -2682,7 +2850,8 @@ const DA = [
 {d:'25-Jul',w:'T7',wk:'W30',fc:129000,bkTon:133245,tx:131240,diff:2005,du:98.5,tlFc:30623,tlBkTon:35817,tlTx:0,tlDiff:35817,duTl:0},
 {d:'26-Jul',w:'CN',wk:'W30',fc:131000,bkTon:123875,tx:0,diff:123875,du:0,tlFc:32566,tlBkTon:38426,tlTx:0,tlDiff:38426,duTl:0},
 {d:'27-Jul',w:'T2',wk:'W31',fc:720800,bkTon:750254,tx:533750,diff:216504,du:71.14,tlFc:172688,tlBkTon:203983,tlTx:0,tlDiff:203983,duTl:0,wkTotal:true},
-{d:'28-Jul',w:'T3',wk:'W31',fc:116800,bkTon:132333,tx:113113,diff:19220,du:85.48,tlFc:10300,tlBkTon:35863,tlTx:30296,tlDiff:5567,duTl:84.48}
+{d:'28-Jul',w:'T3',wk:'W31',fc:116800,bkTon:132333,tx:113113,diff:19220,du:85.48,tlFc:10300,tlBkTon:35863,tlTx:30296,tlDiff:5567,duTl:84.48},
+{d:'29-Jul',w:'T4',wk:'W31',fc:105500,bkTon:113831,tx:95905,diff:17926,du:84.25,tlFc:10400,tlBkTon:29064,tlTx:24518,tlDiff:4546,duTl:84.36}
 ];
 
 let daIdx = DA.length - 1;
@@ -2950,12 +3119,13 @@ function renderDapUng() {
   document.getElementById('content').innerHTML = html;
   const urlParams = new URLSearchParams(window.location.search);
   const shot = urlParams.get('screenshot');
-  if (shot === 'table1') {
-    const b2 = document.getElementById('blockTable2');
-    if (b2) b2.style.display = 'none';
-  } else if (shot === 'table2') {
-    const b1 = document.getElementById('blockTable1');
-    if (b1) b1.style.display = 'none';
+  if (shot === 'table1' || shot === 'table2') {
+    document.body.classList.add('screenshot-mode-' + shot);
+    if (shot === 'table1') {
+      const b2 = document.getElementById('blockTable2'); if (b2) b2.style.display = 'none';
+    } else {
+      const b1 = document.getElementById('blockTable1'); if (b1) b1.style.display = 'none';
+    }
   }
 }
 
