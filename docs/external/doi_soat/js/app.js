@@ -859,8 +859,12 @@ function convertSheetsUrlToCsv(url, forceGid) {
   const id = match[1];
   
   const gidMatch = url.match(/gid=([0-9]+)/);
-  let gid = gidMatch ? gidMatch[1] : "0";
-  if (forceGid) gid = forceGid;
+  let gid = "0";
+  if (gidMatch) {
+    gid = gidMatch[1]; // Ưu tiên GID có trong link mà người dùng dán
+  } else if (forceGid) {
+    gid = forceGid; // Nếu không có GID trong link, mới dùng GID mặc định
+  }
   
   return `https://docs.google.com/spreadsheets/d/${id}/export?format=csv&gid=${gid}`;
 }
