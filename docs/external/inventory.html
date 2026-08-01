@@ -340,13 +340,13 @@
         for (let j = 0; j < r.length; j++) {
           const h = (r[j] || "").trim().toLowerCase().normalize('NFC');
           if (!h) continue;
-          if (h.includes('m\xe3') || h.includes('ma ') || h === 'sku' || h.includes('item code')) { currentMap.id = j; score++; }
-          else if (h.includes('t\xean') || h.includes('ten ') || h.includes('name') || h.includes('s\u1ea3n ph\u1ea9m') || h.includes('sp')) { currentMap.name = j; score++; }
-          else if (h.includes('\u0111vt') || h.includes('\u0111\u01a1n v\u1ecb') || h.includes('dvt') || h === 'unit') { currentMap.unit = j; score++; }
-          else if (h.includes('lo\u1ea1i') || h.includes('nh\xf3m') || h.includes('ng\xe0nh') || h.includes('category') || h.includes('loai') || h.includes('nhom') || h.includes('nganh')) { currentMap.type = j; score++; }
-          else if (h.includes('t\u1ed3n') || h.includes('ton ') || h.includes('s\u1ed1 l\u01b0\u1ee3ng') || h.includes('qty')) { currentMap.kdb = j; score++; }
-          else if (h.includes('net') || h === 'nw' || h.includes('t\u1ecbnh')) { currentMap.nw = j; score++; }
-          else if (h.includes('tr\u1ecdng l\u01b0\u1ee3ng') || h.includes('trong luong') || h.includes('weight') || h.includes('tl') || h.includes('kg')) { currentMap.weight = j; score++; }
+                    if (currentMap.id === undefined && (h === 'm\xe3 h\xe0ng' || h === 'm\xe3' || h === 'm\xe3 sp' || h === 'm\xe3 v\u1eadt t\u01b0' || h === 'sku' || h === 'item code')) { currentMap.id = j; score++; }
+          else if (currentMap.name === undefined && (h === 't\xean h\xe0ng' || h === 't\xean s\u1ea3n ph\u1ea9m' || h === 't\xean sp' || h === 'name' || h === 't\xean' || h === 's\u1ea3n ph\u1ea9m')) { currentMap.name = j; score++; }
+          else if (currentMap.unit === undefined && (h === '\u0111vt' || h === 'unit' || h === '\u0111\u01a1n v\u1ecb t\xednh' || h === '\u0111\u01a1n v\u1ecb')) { currentMap.unit = j; score++; }
+          else if (currentMap.type === undefined && (h === 'lo\u1ea1i h\xe0ng' || h === 'lo\u1ea1i' || h === 'category' || h === 'nh\xf3m h\xe0ng' || h === 'nh\xf3m')) { currentMap.type = j; score++; }
+          else if (currentMap.kdb === undefined && (h === 't\u1ed3n kdb' || h === 't\u1ed3n' || h === 't\u1ed3n kho' || h === 's\u1ed1 l\u01b0\u1ee3ng' || h === 'qty' || h === 't\u1ed3n cu\u1ed1i')) { currentMap.kdb = j; score++; }
+          else if (currentMap.nw === undefined && (h === 'netweight' || h === 'nw' || h === 'net weight' || h === 'tr\u1ecdng l\u01b0\u1ee3ng t\u1ecbnh')) { currentMap.nw = j; score++; }
+          else if (currentMap.weight === undefined && (h === 'tr\u1ecdng l\u01b0\u1ee3ng' || h === 'weight' || h === 'total weight' || h === 'tl' || h === 'kg')) { currentMap.weight = j; score++; }
         }
         if (score > bestScore) {
           bestScore = score;
@@ -566,13 +566,13 @@
         for (let j = 0; j < r.length; j++) {
           const h = (r[j] || "").trim().toLowerCase().normalize('NFC');
           if (!h) continue;
-          if (h.includes('m\xe3') || h.includes('ma ') || h === 'sku' || h.includes('item code')) { currentMap.id = j; score++; }
-          else if (h.includes('t\xean') || h.includes('ten ') || h.includes('name') || h.includes('s\u1ea3n ph\u1ea9m') || h.includes('sp')) { currentMap.name = j; score++; }
-          else if (h.includes('\u0111vt') || h.includes('\u0111\u01a1n v\u1ecb') || h.includes('dvt') || h === 'unit') { currentMap.unit = j; score++; }
-          else if (h.includes('lo\u1ea1i') || h.includes('nh\xf3m') || h.includes('ng\xe0nh') || h.includes('category') || h.includes('loai') || h.includes('nhom') || h.includes('nganh')) { currentMap.type = j; score++; }
-          else if (h.includes('t\u1ed3n') || h.includes('ton ') || h.includes('s\u1ed1 l\u01b0\u1ee3ng') || h.includes('qty')) { currentMap.kdb = j; score++; }
-          else if (h.includes('net') || h === 'nw' || h.includes('t\u1ecbnh')) { currentMap.nw = j; score++; }
-          else if (h.includes('tr\u1ecdng l\u01b0\u1ee3ng') || h.includes('trong luong') || h.includes('weight') || h.includes('tl') || h.includes('kg')) { currentMap.weight = j; score++; }
+                    if (currentMap.id === undefined && (h === 'm\xe3 h\xe0ng' || h === 'm\xe3' || h === 'm\xe3 sp' || h === 'm\xe3 v\u1eadt t\u01b0' || h === 'sku' || h === 'item code')) { currentMap.id = j; score++; }
+          else if (currentMap.name === undefined && (h === 't\xean h\xe0ng' || h === 't\xean s\u1ea3n ph\u1ea9m' || h === 't\xean sp' || h === 'name' || h === 't\xean' || h === 's\u1ea3n ph\u1ea9m')) { currentMap.name = j; score++; }
+          else if (currentMap.unit === undefined && (h === '\u0111vt' || h === 'unit' || h === '\u0111\u01a1n v\u1ecb t\xednh' || h === '\u0111\u01a1n v\u1ecb')) { currentMap.unit = j; score++; }
+          else if (currentMap.type === undefined && (h === 'lo\u1ea1i h\xe0ng' || h === 'lo\u1ea1i' || h === 'category' || h === 'nh\xf3m h\xe0ng' || h === 'nh\xf3m')) { currentMap.type = j; score++; }
+          else if (currentMap.kdb === undefined && (h === 't\u1ed3n kdb' || h === 't\u1ed3n' || h === 't\u1ed3n kho' || h === 's\u1ed1 l\u01b0\u1ee3ng' || h === 'qty' || h === 't\u1ed3n cu\u1ed1i')) { currentMap.kdb = j; score++; }
+          else if (currentMap.nw === undefined && (h === 'netweight' || h === 'nw' || h === 'net weight' || h === 'tr\u1ecdng l\u01b0\u1ee3ng t\u1ecbnh')) { currentMap.nw = j; score++; }
+          else if (currentMap.weight === undefined && (h === 'tr\u1ecdng l\u01b0\u1ee3ng' || h === 'weight' || h === 'total weight' || h === 'tl' || h === 'kg')) { currentMap.weight = j; score++; }
         }
         if (score > bestScore) {
           bestScore = score;
