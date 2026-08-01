@@ -333,13 +333,13 @@
           const h = (r[j] || "").trim().toLowerCase();
           if (!h) continue;
           
-          if (h.includes('mã') || h.includes('ma ') || h === 'sku' || h.includes('item code')) { currentMap.id = j; score++; }
-          else if (h.includes('tên') || h.includes('ten ') || h.includes('name') || h.includes('sản phẩm') || h.includes('sp')) { currentMap.name = j; score++; }
-          else if (h.includes('đvt') || h.includes('đơn vị') || h.includes('dvt') || h === 'unit') { currentMap.unit = j; score++; }
-          else if (h.includes('loại') || h.includes('nhóm') || h.includes('ngành') || h.includes('category') || h.includes('loai') || h.includes('nhom') || h.includes('nganh')) { currentMap.type = j; score++; }
-          else if (h.includes('tồn') || h.includes('ton ') || h.includes('số lượng') || h.includes('qty')) { currentMap.kdb = j; score++; }
-          else if (h.includes('net') || h === 'nw' || h.includes('tịnh')) { currentMap.nw = j; score++; }
-          else if (h.includes('trọng lượng') || h.includes('trong luong') || h.includes('weight') || h.includes('tl') || h.includes('kg')) { currentMap.weight = j; score++; }
+          if (h === 'mã hàng' || h === 'mã' || h === 'mã sp' || h === 'mã vật tư') { currentMap.id = j; score++; }
+          else if (h === 'tên hàng' || h === 'tên sản phẩm' || h === 'tên sp' || h === 'name' || h === 'tên') { currentMap.name = j; score++; }
+          else if (h === 'đvt' || h === 'unit' || h === 'đơn vị tính' || h === 'đơn vị') { currentMap.unit = j; score++; }
+          else if (h === 'loại hàng' || h === 'loại' || h === 'category' || h === 'nhóm hàng') { currentMap.type = j; score++; }
+          else if (h.includes('tồn kdb') || h === 'tồn' || h.includes('tồn kho') || h === 'số lượng' || h === 'qty' || h.includes('tồn cuối')) { currentMap.kdb = j; score++; }
+          else if (h === 'netweight' || h === 'nw' || h === 'net weight' || h === 'trọng lượng tịnh') { currentMap.nw = j; score++; }
+          else if (h === 'trọng lượng' || h.includes('trọng lượng') || h === 'weight' || h === 'total weight') { currentMap.weight = j; score++; }
         }
         if (score > bestScore) {
           bestScore = score;
@@ -386,7 +386,7 @@
       document.getElementById('content').classList.remove('hidden');
     }
 
-    function updateKPIs() {
+        function updateKPIs() {
       let uniqueSKUs = new Set();
       let sumQty = 0;
       let sumWt = 0;
@@ -398,14 +398,13 @@
       });
       
       let sumSKU = uniqueSKUs.size;
-      // Nếu không có mã hàng nào nhận diện được, nhưng có dòng dữ liệu, thì fallback về đếm dòng (tạm thời)
       if (sumSKU === 0 && allData.length > 0) {
          sumSKU = allData.length;
       }
       
       document.getElementById('kpiTotalSKU').textContent = sumSKU.toLocaleString('vi-VN');
       document.getElementById('kpiTotalQty').textContent = sumQty.toLocaleString('vi-VN');
-      document.getElementById('kpiTotalWeight').textContent = sumWt.toLocaleString('vi-VN', { maximumFractionDigits: 1 });
+      document.getElementById('kipiTotalWeight').textContent = sumWt.toLocaleString('vi-VN', { maximumFractionDigits: 1 });
     }
 
     function handleSearch() {
@@ -422,7 +421,7 @@
     }
 
     
-    function renderSummaryTable() {
+        function renderSummaryTable() {
       let sumDong = { skuSet: new Set(), items: 0, weight: 0 };
       let sumMat = { skuSet: new Set(), items: 0, weight: 0 };
       let sumTcnk = { skuSet: new Set(), items: 0, weight: 0 };
@@ -447,7 +446,6 @@
       const tbody = document.getElementById('summaryTableBody');
       if (!tbody) return;
       
-      // Fallback cho truong hop count(Mã hàng) = 0 => đếm theo dòng
       const getSkuCount = (skuSet, typeKeyword) => {
          if (skuSet.size > 0) return skuSet.size;
          return allData.filter(x => (x.type || "").toLowerCase().includes(typeKeyword)).length;
@@ -466,7 +464,7 @@
           <td class="py-2 px-3 border-b border-[var(--border)] font-semibold text-center text-[var(--text-main)]">${sumMat.items.toLocaleString('vi-VN')}</td>
           <td class="py-2 px-3 border-b border-[var(--border)] text-rose-400 font-semibold text-center">${sumMat.weight.toLocaleString('vi-VN')}</td>
         </tr>
-        <tr class="hover:bg-[rgba(255,255,255,0.02)] transition">
+        <tr class="hover*bg-[rgba(255,255,255,0.02)] transition">
           <td class="py-2 px-3 font-semibold text-center text-[var(--text-main)]">TCNK</td>
           <td class="py-2 px-3 font-semibold text-center text-[var(--text-main)]">${getSkuCount(sumTcnk.skuSet, 'tcnk')}</td>
           <td class="py-2 px-3 font-semibold text-center text-[var(--text-main)]">${sumTcnk.items.toLocaleString('vi-VN')}</td>
