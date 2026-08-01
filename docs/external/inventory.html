@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventory Tab</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070714;
+      --card-bg: #111420;
+      --text: #e2e8f0;
+      --text-muted: #6b7094;
+      --border: rgba(255, 255, 255, 0.06);
+    }
+    body.light-mode {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+    }
+    /* Simple table styles */
+    th, td { border-bottom: 1px solid var(--border); }
+    tr:last-child td { border-bottom: none; }
+    th { color: var(--text-muted); font-weight: 600; text-align: left; padding: 12px 16px; }
+    td { padding: 12px 16px; font-size: 0.875rem; }
+    
+    /* Dialog Overlay */
+    #settingsDialog {
+      display: none;
+    }
+    #settingsDialog.open {
+      display: flex;
+    }
+  </style>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {}
+      }
+    }
+  </script>
+</head>
+<body class="p-4 md:p-6">
+
+  <!-- Header & Config -->
+  <div class="flex justify-between items-center mb-6">
+    <h2 class="text-xl font-bold">Quản lý Inventory</h2>
+    <button onclick="openSettings()" class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium border border-[var(--border)] rounded-md hover:bg-opacity-80 transition bg-[var(--card-bg)] text-[var(--text)] shadow-sm">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+      Cấu hình
+    </button>
+  </div>
+
+  <div id="loading" class="text-center py-10 hidden">
+    <p class="text-[var(--text-muted)] animate-pulse">Đang tải dữ liệu từ Google Sheets...</p>
+  </div>
+
+  <div id="noData" class="text-center py-10 hidden">
+    <p class="text-[var(--text-muted)]">Chưa có dữ liệu. Vui lòng bấm vào nút <b class="text-[var(--text)]">Cấu hình</b> để dán link Google Sheet có chứa Sheet <b>Data</b>.</p>
+  </div>
+
+  <div id="content" class="hidden">
+    <!-- KPI Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+      <div class="card p-5 rounded-xl shadow-sm">
+        <h3 class="text-sm font-medium text-[var(--text-muted)]">Tổng số mã hàng (SKU)</h3>
+        <p class="text-3xl font-bold mt-2 text-indigo-400" id="kpiTotalSKU">0</p>
+      </div>
+      <div class="card p-5 rounded-xl shadow-sm">
+        <h3 class="text-sm font-medium text-[var(--text-muted)]">Tổng Tồn (KDB)</h3>
+        <p class="text-3xl font-bold mt-2 text-cyan-400" id="kpiTotalQty">0</p>
+      </div>
+      <div class="card p-5 rounded-xl shadow-sm">
+        <h3 class="text-sm font-medium text-[var(--text-muted)]">Tổng Trọng lượng (KG)</h3>
+        <p class="text-3xl font-bold mt-2 text-rose-400" id="kpiTotalWeight">0</p>
+      </div>
+    </div>
+
+    <!-- Main Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      
+      <!-- Chart Area -->
+      <div class="card p-5 rounded-xl shadow-sm lg:col-span-1">
+        <h3 class="text-base font-semibold mb-4 text-[var(--text)]">Top 10 Mã hàng có trọng lượng lớn nhất</h3>
+        <div style="height: 380px; position: relative;">
+          <canvas id="weightChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Table Area -->
+      <div class="card p-0 rounded-xl shadow-sm lg:col-span-2 flex flex-col" style="height: 445px;">
+        <div class="p-4 border-b border-[var(--border)] flex justify-between items-center bg-[var(--card-bg)] rounded-t-xl">
+          <h3 class="text-base font-semibold text-[var(--text)]">Bảng dữ liệu Inventory</h3>
+          <div class="relative">
+            <svg class="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-muted)]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+            <input type="text" id="searchInput" placeholder="Tìm tên, mã hàng..." class="pl-8 pr-3 py-1.5 border border-[var(--border)] rounded bg-transparent text-sm text-[var(--text)] focus:outline-none focus:border-cyan-500 w-48 sm:w-64" oninput="handleSearch()">
+          </div>
+        </div>
+        <div class="flex-1 overflow-auto">
+          <table class="w-full text-left border-collapse">
+            <thead class="sticky top-0 bg-[var(--card-bg)] shadow-sm z-10">
+              <tr>
+                <th class="w-[80px]">Mã hàng</th>
+                <th>Tên hàng</th>
+                <th class="w-[60px]">ĐVT</th>
+                <th class="w-[80px] text-right">Tồn KDB</th>
+                <th class="w-[80px] text-right">Netweight</th>
+                <th class="w-[100px] text-right">Trọng lượng</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody">
+              <!-- JS rendered rows -->
+            </tbody>
+          </table>
+        </div>
+        <div class="p-3 border-t border-[var(--border)] flex justify-between items-center text-sm text-[var(--text-muted)] bg-[var(--card-bg)] rounded-b-xl">
+          <span id="pageInfo">Showing 0 of 0</span>
+          <div class="flex gap-1.5">
+            <button onclick="prevPage()" class="px-3 py-1 border border-[var(--border)] rounded hover:bg-gray-100 hover:text-gray-900 disabled:opacity-50 transition" id="btnPrev">Trước</button>
+            <button onclick="nextPage()" class="px-3 py-1 border border-[var(--border)] rounded hover:bg-gray-100 hover:text-gray-900 disabled:opacity-50 transition" id="btnNext">Tiếp</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings Dialog -->
+  <div id="settingsDialog" class="fixed inset-0 bg-black/60 z-50 items-center justify-center p-4 backdrop-blur-sm transition-opacity">
+    <div class="bg-[var(--card-bg)] rounded-xl border border-[var(--border)] shadow-2xl w-full max-w-lg overflow-hidden transform transition-all">
+      <div class="px-5 py-4 border-b border-[var(--border)] flex justify-between items-center">
+        <h2 class="text-lg font-bold text-[var(--text)]">Cấu hình link Database</h2>
+        <button onclick="closeSettings()" class="text-[var(--text-muted)] hover:text-[var(--text)] text-xl leading-none">&times;</button>
+      </div>
+      <div class="p-5 flex flex-col gap-4">
+        <div class="flex flex-col gap-2">
+          <label class="text-sm font-semibold text-[var(--text)]">Đường dẫn Google Sheet (Chứa sheet Data)</label>
+          <div class="flex gap-2">
+            <input type="text" id="sheetUrlInput" placeholder="https://docs.google.com/spreadsheets/d/..." class="flex-1 px-3 py-2 border border-[var(--border)] rounded-md bg-transparent text-[var(--text)] text-sm focus:outline-none focus:border-cyan-500">
+            <button onclick="saveSettings()" id="btnSaveConfig" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium rounded-md transition shadow-sm">Lưu</button>
+          </div>
+          <p class="text-xs text-[var(--text-muted)] mt-1">
+            Ứng dụng sẽ tự động trích xuất dữ liệu từ link bạn cung cấp để hiển thị Bảng và Biểu đồ.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Theme handler from parent postMessage
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.action === 'setTheme') {
+        if (e.data.isLight) {
+          document.body.classList.add('light-mode');
+        } else {
+          document.body.classList.remove('light-mode');
+        }
+        updateChartTheme();
+      }
+    });
+
+    // Detect initial theme from parent class if possible
+    try {
+      if (window.parent && window.parent.document && window.parent.document.body.classList.contains('light-mode')) {
+        document.body.classList.add('light-mode');
+      }
+    } catch (e) {}
+
+    const SETTINGS_KEY = 'inventory_settings';
+    let allData = [];
+    let filteredData = [];
+    let currentPage = 1;
+    const pageSize = 15;
+    let chartInstance = null;
+
+    function getSettings() {
+      try {
+        const raw = localStorage.getItem(SETTINGS_KEY);
+        return raw ? JSON.parse(raw) : { sheetUrl: '' };
+      } catch {
+        return { sheetUrl: '' };
+      }
+    }
+
+    function setSettings(url) {
+      localStorage.setItem(SETTINGS_KEY, JSON.stringify({ sheetUrl: url }));
+    }
+
+    function openSettings() {
+      const s = getSettings();
+      document.getElementById('sheetUrlInput').value = s.sheetUrl || '';
+      document.getElementById('settingsDialog').classList.add('open');
+    }
+
+    function closeSettings() {
+      document.getElementById('settingsDialog').classList.remove('open');
+    }
+
+    function saveSettings() {
+      const url = document.getElementById('sheetUrlInput').value.trim();
+      setSettings(url);
+      const btn = document.getElementById('btnSaveConfig');
+      btn.textContent = "Đã lưu!";
+      setTimeout(() => {
+        btn.textContent = "Lưu";
+        closeSettings();
+        fetchData();
+      }, 1000);
+    }
+
+    function getCsvExportUrl(url) {
+      if (!url) return null;
+      try {
+        if (url.includes("/export?format=csv")) return url;
+        const match = url.match(/\/d\/([a-zA-Z0-9-_]+)/);
+        if (!match) return url;
+        const sheetId = match[1];
+        let gid = "0";
+        const gidMatch = url.match(/gid=([0-9]+)/);
+        if (gidMatch) gid = gidMatch[1];
+        return `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv&gid=${gid}`;
+      } catch (e) {
+        return url;
+      }
+    }
+
+    function parseNum(str) {
+      if (!str) return 0;
+      const clean = String(str).replace(/[$,]/g, '').trim();
+      const n = parseFloat(clean);
+      return isNaN(n) ? 0 : n;
+    }
+
+    function fetchData() {
+      const s = getSettings();
+      if (!s.sheetUrl) {
+        document.getElementById('noData').classList.remove('hidden');
+        document.getElementById('content').classList.add('hidden');
+        document.getElementById('loading').classList.add('hidden');
+        return;
+      }
+
+      const csvUrl = getCsvExportUrl(s.sheetUrl);
+      
+      document.getElementById('noData').classList.add('hidden');
+      document.getElementById('content').classList.add('hidden');
+      document.getElementById('loading').classList.remove('hidden');
+
+      Papa.parse(csvUrl, {
+        download: true,
+        header: true,
+        skipEmptyLines: true,
+        complete: function(results) {
+          processData(results.data);
+        },
+        error: function(err) {
+          console.error("PapaParse error:", err);
+          alert("Lỗi tải dữ liệu. Vui lòng đảm bảo link chia sẻ là 'Bất kỳ ai có liên kết' (Share with anyone).");
+          document.getElementById('loading').classList.add('hidden');
+          document.getElementById('noData').classList.remove('hidden');
+        }
+      });
+    }
+
+    function processData(rows) {
+      allData = rows.map(r => {
+        const id = (r["Mã hàng"] || r["Mã Hàng"] || r["Mã"] || "").trim();
+        const name = (r["Tên hàng"] || r["Tên Sản Phẩm"] || r["Name"] || "").trim();
+        const unit = (r["ĐVT"] || r["Unit"] || "").trim();
+        const kdb = parseNum(r["Tồn KDB"] || r["Tồn"]);
+        const nw = parseNum(r["Netweight"] || r["NW"]);
+        const weight = parseNum(r["Trọng lượng"] || r["Trọng lượng (KG)"] || r["Weight"] || r["Total Weight"]);
+        
+        if (!id && !name) return null;
+        
+        return { id, name, unit, kdb, nw, weight };
+      }).filter(Boolean);
+
+      // Sort by weight DESC
+      allData.sort((a, b) => b.weight - a.weight);
+
+      updateKPIs();
+      drawChart();
+      
+      filteredData = [...allData];
+      currentPage = 1;
+      document.getElementById('searchInput').value = "";
+      renderTable();
+      
+      document.getElementById('loading').classList.add('hidden');
+      document.getElementById('content').classList.remove('hidden');
+    }
+
+    function updateKPIs() {
+      let sumSKU = allData.length;
+      let sumQty = allData.reduce((acc, c) => acc + c.kdb, 0);
+      let sumWt = allData.reduce((acc, c) => acc + c.weight, 0);
+      
+      document.getElementById('kpiTotalSKU').textContent = sumSKU.toLocaleString('vi-VN');
+      document.getElementById('kpiTotalQty').textContent = sumQty.toLocaleString('vi-VN');
+      document.getElementById('kpiTotalWeight').textContent = sumWt.toLocaleString('vi-VN', { maximumFractionDigits: 1 });
+    }
+
+    function handleSearch() {
+      const q = document.getElementById('searchInput').value.toLowerCase();
+      filteredData = allData.filter(x => 
+        x.id.toLowerCase().includes(q) || x.name.toLowerCase().includes(q)
+      );
+      currentPage = 1;
+      renderTable();
+    }
+
+    function formatNumber(num) {
+      return num.toLocaleString('vi-VN', { maximumFractionDigits: 2 });
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('tableBody');
+      tbody.innerHTML = "";
+      
+      const totalPages = Math.ceil(filteredData.length / pageSize) || 1;
+      if (currentPage > totalPages) currentPage = totalPages;
+      if (currentPage < 1) currentPage = 1;
+      
+      const start = (currentPage - 1) * pageSize;
+      const end = start + pageSize;
+      const pageData = filteredData.slice(start, end);
+      
+      if (pageData.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="text-center py-6 text-[var(--text-muted)]">Không tìm thấy kết quả</td></tr>`;
+      } else {
+        pageData.forEach(item => {
+          const tr = document.createElement('tr');
+          tr.className = "hover:bg-[rgba(255,255,255,0.02)] transition";
+          tr.innerHTML = `
+            <td class="font-medium text-[var(--text)]">${item.id}</td>
+            <td><div class="truncate max-w-[150px] sm:max-w-[200px]" title="${item.name}">${item.name}</div></td>
+            <td><span class="px-2 py-0.5 bg-gray-500 bg-opacity-20 rounded text-xs text-[var(--text-muted)]">${item.unit}</span></td>
+            <td class="text-right text-cyan-400 font-medium">${formatNumber(item.kdb)}</td>
+            <td class="text-right text-[var(--text-muted)]">${formatNumber(item.nw)}</td>
+            <td class="text-right text-rose-400 font-bold">${formatNumber(item.weight)}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+      
+      document.getElementById('pageInfo').textContent = `Hiển thị ${pageData.length > 0 ? start + 1 : 0} - ${Math.min(end, filteredData.length)} / ${filteredData.length}`;
+      document.getElementById('btnPrev').disabled = currentPage === 1;
+      document.getElementById('btnNext').disabled = currentPage === totalPages;
+    }
+
+    function prevPage() {
+      if (currentPage > 1) {
+        currentPage--;
+        renderTable();
+      }
+    }
+    
+    function nextPage() {
+      const totalPages = Math.ceil(filteredData.length / pageSize);
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderTable();
+      }
+    }
+
+    function drawChart() {
+      const top10 = allData.slice(0, 10);
+      const labels = top10.map(x => x.name.length > 18 ? x.name.substring(0, 18) + "..." : x.name);
+      const dataWeights = top10.map(x => x.weight);
+      
+      const isLight = document.body.classList.contains('light-mode');
+      const textColor = isLight ? '#475569' : '#94a3b8';
+      const gridColor = isLight ? '#e2e8f0' : 'rgba(255,255,255,0.05)';
+      const barColor = isLight ? '#3b82f6' : '#22d3ee';
+
+      const ctx = document.getElementById('weightChart').getContext('2d');
+      
+      if (chartInstance) {
+        chartInstance.destroy();
+      }
+      
+      chartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Trọng lượng (KG)',
+            data: dataWeights,
+            backgroundColor: barColor,
+            borderRadius: 4,
+            barThickness: 16
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                title: function(ctxArr) { return top10[ctxArr[0].dataIndex].name; },
+                label: function(ctx) { return ' ' + formatNumber(ctx.raw) + ' KG'; }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { color: gridColor, drawBorder: false },
+              ticks: { color: textColor }
+            },
+            y: {
+              grid: { display: false },
+              ticks: { color: textColor, font: { size: 11, family: 'Inter' } }
+            }
+          }
+        }
+      });
+    }
+
+    function updateChartTheme() {
+      if (!chartInstance) return;
+      const isLight = document.body.classList.contains('light-mode');
+      const textColor = isLight ? '#475569' : '#94a3b8';
+      const gridColor = isLight ? '#e2e8f0' : 'rgba(255,255,255,0.05)';
+      const barColor = isLight ? '#3b82f6' : '#22d3ee';
+      
+      chartInstance.data.datasets[0].backgroundColor = barColor;
+      chartInstance.options.scales.x.grid.color = gridColor;
+      chartInstance.options.scales.x.ticks.color = textColor;
+      chartInstance.options.scales.y.ticks.color = textColor;
+      chartInstance.update();
+    }
+
+    // Init
+    fetchData();
+  </script>
+</body>
+</html>

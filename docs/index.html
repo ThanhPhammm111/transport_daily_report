@@ -467,6 +467,12 @@ body.light-mode .frame-wrap iframe {
         <span class="nav-icon">🔍</span>
         <span class="nav-text">Đối Soát Xuất Hàng</span>
       </div>
+      
+      <!-- Group 4: Inventory -->
+      <div class="nav-item" id="menuInventory" onclick="switchMainTabParent(3)">
+        <span class="nav-icon">📦</span>
+        <span class="nav-text">Inventory</span>
+      </div>
     </nav>
     
     <div class="sidebar-footer">
@@ -501,6 +507,9 @@ body.light-mode .frame-wrap iframe {
     </div>
     <div class="frame-wrap" id="f2">
       <iframe id="f2_iframe" src="about:blank" loading="lazy"></iframe>
+    </div>
+    <div class="frame-wrap" id="f3">
+      <iframe id="f3_iframe" src="about:blank" loading="lazy"></iframe>
     </div>
   </main>
 </div>
@@ -551,7 +560,7 @@ function toggleTheme() {
 }
 
 function applyThemeToIframes(isLightVal) {
-  const iframes = ['f0_iframe', 'f1_iframe', 'f2_iframe'];
+  const iframes = ['f0_iframe', 'f1_iframe', 'f2_iframe', 'f3_iframe'];
   iframes.forEach(id => {
     const iframe = document.getElementById(id);
     if (!iframe || iframe.src === 'about:blank' || iframe.src === '') return;
@@ -622,6 +631,9 @@ function switchMainTabParent(index) {
     } else if (index === 2) {
       document.getElementById('menuDoiSoat').classList.add('active');
       document.getElementById('pageTitle').textContent = "🔍 Đối Soát Xuất Hàng";
+    } else if (index === 3) {
+      document.getElementById('menuInventory').classList.add('active');
+      document.getElementById('pageTitle').textContent = "📦 Quản lý Inventory";
     }
   }
   
@@ -641,6 +653,12 @@ function switchMainTabParent(index) {
     const f2 = document.getElementById('f2_iframe');
     if (f2.src === 'about:blank' || f2.src === '') {
       f2.src = 'external/doi_soat/index.html?v=' + Date.now();
+    }
+  }
+  if (index === 3) {
+    const f3 = document.getElementById('f3_iframe');
+    if (f3.src === 'about:blank' || f3.src === '') {
+      f3.src = 'external/inventory.html?v=' + Date.now();
     }
   }
 }
