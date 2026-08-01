@@ -566,6 +566,68 @@ body.light-mode select[style*="background: var(--bg-primary, #070714)"] {
   color: #0f172a !important;
   border-color: #cbd5e1 !important;
 }
+
+/* FIX S-CARD BACKGROUNDS */
+body.light-mode .s-card {
+  background: linear-gradient(135deg, #ffffff, #f8fafc) !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05) !important;
+}
+body.light-mode .s-card .s-label { color: #64748b !important; }
+body.light-mode .s-card.sc-sku .s-val { color: #7c3aed !important; text-shadow: none !important; }
+body.light-mode .s-card.sc-bk .s-val { color: #0284c7 !important; text-shadow: none !important; }
+body.light-mode .s-card.sc-tx .s-val { color: #16a34a !important; text-shadow: none !important; }
+body.light-mode .s-card.sc-diff .s-val { color: #ea580c !important; text-shadow: none !important; }
+body.light-mode .s-card.sc-pct .s-val { color: #ca8a04 !important; text-shadow: none !important; }
+
+/* FIX TABLE HIGHLIGHT COLORS (Yellow/Cyan on White) */
+body.light-mode .hl-yellow,
+body.light-mode .pct-warn,
+body.light-mode .pick-warn { 
+  background: rgba(202,138,4,0.1) !important; 
+  color: #ca8a04 !important; 
+}
+body.light-mode .hl-cyan { 
+  background: rgba(2,132,199,0.1) !important; 
+  color: #0284c7 !important; 
+}
+body.light-mode .pct-normal,
+body.light-mode .pick-ok { 
+  color: #0284c7 !important; 
+}
+body.light-mode .pick-bad { 
+  color: #dc2626 !important; 
+}
+
+/* FIX FILTER BLOCKS AND OTHER TABLE HEADERS */
+body.light-mode .filter-block,
+body.light-mode .warn-title-bar,
+body.light-mode .table-title,
+body.light-mode .day-nav {
+  background: #f8fafc !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+body.light-mode .filter-block label,
+body.light-mode .filter-block span {
+  color: #475569 !important;
+}
+body.light-mode .filter-block select,
+body.light-mode .filter-block input {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+body.light-mode table thead th {
+  background: #e2e8f0 !important;
+  color: #0f172a !important;
+  border-bottom: 2px solid #94a3b8 !important;
+  text-shadow: none !important;
+}
+body.light-mode th.date-head {
+  background: #cbd5e1 !important;
+  color: #0f172a !important;
+}
 </style>
 </head>
 <body>
