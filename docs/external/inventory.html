@@ -333,13 +333,13 @@
           const h = (r[j] || "").trim().toLowerCase();
           if (!h) continue;
           
-          if (h === 'mã hàng' || h === 'mã' || h === 'mã sp' || h === 'mã vật tư') { currentMap.id = j; score++; }
-          else if (h === 'tên hàng' || h === 'tên sản phẩm' || h === 'tên sp' || h === 'name' || h === 'tên') { currentMap.name = j; score++; }
-          else if (h === 'đvt' || h === 'unit' || h === 'đơn vị tính' || h === 'đơn vị') { currentMap.unit = j; score++; }
-          else if (h === 'loại hàng' || h === 'loại' || h === 'category' || h === 'nhóm hàng') { currentMap.type = j; score++; }
-          else if (h.includes('tồn kdb') || h === 'tồn' || h.includes('tồn kho') || h === 'số lượng' || h === 'qty' || h.includes('tồn cuối')) { currentMap.kdb = j; score++; }
-          else if (h === 'netweight' || h === 'nw' || h === 'net weight' || h === 'trọng lượng tịnh') { currentMap.nw = j; score++; }
-          else if (h === 'trọng lượng' || h.includes('trọng lượng') || h === 'weight' || h === 'total weight') { currentMap.weight = j; score++; }
+          if (h.includes('mã') || h.includes('ma ') || h === 'sku' || h.includes('item code')) { currentMap.id = j; score++; }
+          else if (h.includes('tên') || h.includes('ten ') || h.includes('name') || h.includes('sản phẩm') || h.includes('sp')) { currentMap.name = j; score++; }
+          else if (h.includes('đvt') || h.includes('đơn vị') || h.includes('dvt') || h === 'unit') { currentMap.unit = j; score++; }
+          else if (h.includes('loại') || h.includes('nhóm') || h.includes('ngành') || h.includes('category') || h.includes('loai') || h.includes('nhom') || h.includes('nganh')) { currentMap.type = j; score++; }
+          else if (h.includes('tồn') || h.includes('ton ') || h.includes('số lượng') || h.includes('qty')) { currentMap.kdb = j; score++; }
+          else if (h.includes('net') || h === 'nw' || h.includes('tịnh')) { currentMap.nw = j; score++; }
+          else if (h.includes('trọng lượng') || h.includes('trong luong') || h.includes('weight') || h.includes('tl') || h.includes('kg')) { currentMap.weight = j; score++; }
         }
         if (score > bestScore) {
           bestScore = score;
