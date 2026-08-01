@@ -98,6 +98,11 @@
     </div>
 
     <!-- Main Grid -->
+    <div class="grid grid-cols-1 gap-6">
+      
+      <!-- Table Area -->
+      
+    <!-- Main Grid -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
       
       <!-- Left Column (Summary Table) -->
@@ -108,7 +113,8 @@
           <table class="w-full text-left border-collapse text-sm">
             <thead class="bg-[var(--bg)]">
               <tr>
-                <th class="py-2 px-3 font-semibold border-b border-[var(--border)] text-[var(--text-muted)]">Loại hàng</th>
+                <th class="py-2 px-3 text-center border-b border-[var(--border)] text-[var(--text-muted)] font-medium">Hàng</th>
+                <th class="py-2 px-3 text-center border-b border-[var(--border)] text-[var(--text-muted)] font-medium">SKU</th>
                 <th class="py-2 px-3 font-semibold border-b border-[var(--border)] text-[var(--text-muted)] text-right">Tồn KDB</th>
                 <th class="py-2 px-3 font-semibold border-b border-[var(--border)] text-[var(--text-muted)] text-right">TL (KG)</th>
               </tr>
@@ -122,6 +128,7 @@
 
       <!-- Table Area -->
       <div class="card p-0 rounded-xl shadow-sm lg:col-span-2 flex flex-col" style="height: 560px;">
+
         <div class="p-4 border-b border-[var(--border)] flex justify-between items-center bg-[var(--card-bg)] rounded-t-xl">
           <h3 class="text-base font-semibold text-[var(--text)]">Bảng dữ liệu Inventory</h3>
           <div class="relative">
@@ -154,6 +161,9 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
     </div>
   </div>
 
@@ -326,7 +336,7 @@
           if (h === 'mã hàng' || h === 'mã' || h === 'mã sp' || h === 'mã vật tư') { currentMap.id = j; score++; }
           else if (h === 'tên hàng' || h === 'tên sản phẩm' || h === 'tên sp' || h === 'name' || h === 'tên') { currentMap.name = j; score++; }
           else if (h === 'đvt' || h === 'unit' || h === 'đơn vị tính' || h === 'đơn vị') { currentMap.unit = j; score++; }
-          else if (h.includes('loại') || h.includes('nhóm') || h.includes('ngành') || h === 'category' || h.includes('loai') || h.includes('nhom') || h.includes('nganh') || h.includes('loáº¡i') || h.includes('loA')) { currentMap.type = j; score++; }
+          else if (h === 'loại hàng' || h === 'loại' || h === 'category' || h === 'nhóm hàng') { currentMap.type = j; score++; }
           else if (h.includes('tồn kdb') || h === 'tồn' || h.includes('tồn kho') || h === 'số lượng' || h === 'qty' || h.includes('tồn cuối')) { currentMap.kdb = j; score++; }
           else if (h === 'netweight' || h === 'nw' || h === 'net weight' || h === 'trọng lượng tịnh') { currentMap.nw = j; score++; }
           else if (h === 'trọng lượng' || h.includes('trọng lượng') || h === 'weight' || h === 'total weight') { currentMap.weight = j; score++; }
@@ -365,7 +375,6 @@
       // Sort by weight DESC
       allData.sort((a, b) => b.weight - a.weight);
 
-      renderSummaryTable();
       updateKPIs();
       
       document.getElementById('loading').classList.add('hidden');
@@ -375,46 +384,6 @@
       
       document.getElementById('loading').classList.add('hidden');
       document.getElementById('content').classList.remove('hidden');
-    }
-
-    function renderSummaryTable() {
-      let sumDong = { sku: 0, items: 0, weight: 0 };
-      let sumMat = { sku: 0, items: 0, weight: 0 };
-      let sumTcnk = { sku: 0, items: 0, weight: 0 };
-
-      allData.forEach(item => {
-        const typeStr = (item.type || "").toLowerCase();
-        if (typeStr.includes("đông")) {
-          sumDong.sku++; sumDong.items += item.kdb;
-          sumDong.weight += item.weight;
-        } else if (typeStr.includes("mát") || typeStr.includes("mat")) {
-          sumMat.sku++; sumMat.items += item.kdb;
-          sumMat.weight += item.weight;
-        } else if (typeStr.includes("tcnk") || typeStr.includes("nhập khẩu") || typeStr.includes("nhap khau")) {
-          sumTcnk.sku++; sumTcnk.items += item.kdb;
-          sumTcnk.weight += item.weight;
-        }
-      });
-
-      const tbody = document.getElementById('summaryTableBody');
-      if (!tbody) return;
-      tbody.innerHTML = `
-        <tr class="hover:bg-[rgba(255,255,255,0.02)] transition">
-          <td class="py-2 px-3 border-b border-[var(--border)] font-semibold text-[var(--text)]">Đông</td>
-          <td class="py-2 px-3 border-b border-[var(--border)] text-right font-medium text-cyan-400">${formatNumber(sumDong.items)}</td>
-          <td class="py-2 px-3 border-b border-[var(--border)] text-right font-bold text-rose-400">${formatNumber(sumDong.weight)}</td>
-        </tr>
-        <tr class="hover:bg-[rgba(255,255,255,0.02)] transition">
-          <td class="py-2 px-3 border-b border-[var(--border)] font-semibold text-[var(--text)]">Mát</td>
-          <td class="py-2 px-3 border-b border-[var(--border)] text-right font-medium text-cyan-400">${formatNumber(sumMat.items)}</td>
-          <td class="py-2 px-3 border-b border-[var(--border)] text-right font-bold text-rose-400">${formatNumber(sumMat.weight)}</td>
-        </tr>
-        <tr class="hover:bg-[rgba(255,255,255,0.02)] transition">
-          <td class="py-2 px-3 border-b border-[var(--border)] font-semibold text-[var(--text)]">TCNK</td>
-          <td class="py-2 px-3 border-b border-[var(--border)] text-right font-medium text-cyan-400">${formatNumber(sumTcnk.items)}</td>
-          <td class="py-2 px-3 border-b border-[var(--border)] text-right font-bold text-rose-400">${formatNumber(sumTcnk.weight)}</td>
-        </tr>
-      `;
     }
 
     function updateKPIs() {
@@ -438,6 +407,53 @@
 
     function formatNumber(num) {
       return num.toLocaleString('vi-VN', { maximumFractionDigits: 2 });
+    }
+
+    
+    function renderSummaryTable() {
+      let sumDong = { sku: 0, items: 0, weight: 0 };
+      let sumMat = { sku: 0, items: 0, weight: 0 };
+      let sumTcnk = { sku: 0, items: 0, weight: 0 };
+
+      allData.forEach(item => {
+        const typeStr = (item.type || "").toLowerCase();
+        if (typeStr.includes("đông")) {
+          sumDong.sku++;
+          sumDong.items += item.kdb;
+          sumDong.weight += item.weight;
+        } else if (typeStr.includes("mát") || typeStr.includes("mat")) {
+          sumMat.sku++;
+          sumMat.items += item.kdb;
+          sumMat.weight += item.weight;
+        } else if (typeStr.includes("tcnk") || typeStr.includes("nhập khẩu") || typeStr.includes("nhap khau")) {
+          sumTcnk.sku++;
+          sumTcnk.items += item.kdb;
+          sumTcnk.weight += item.weight;
+        }
+      });
+
+      const tbody = document.getElementById('summaryTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = `
+        <tr class="hover:bg-[rgba(255,255,255,0.02)] transition">
+          <td class="py-2 px-3 border-b border-[var(--border)] font-semibold text-center text-[var(--text-main)]">Đông</td>
+          <td class="py-2 px-3 border-b border-[var(--border)] font-semibold text-center text-[var(--text-main)]">${sumDong.sku}</td>
+          <td class="py-2 px-3 border-b border-[var(--border)] font-semibold text-center text-[var(--text-main)]">${sumDong.items.toLocaleString('vi-VN')}</td>
+          <td class="py-2 px-3 border-b border-[var(--border)] text-rose-400 font-semibold text-center">${sumDong.weight.toLocaleString('vi-VN')}</td>
+        </tr>
+        <tr class="hover:bg-[rgba(255,255,255,0.02)] transition">
+          <td class="py-2 px-3 border-b border-[var(--border)] font-semibold text-center text-[var(--text-main)]">Mát</td>
+          <td class="py-2 px-3 border-b border-[var(--border)] font-semibold text-center text-[var(--text-main)]">${sumMat.sku}</td>
+          <td class="py-2 px-3 border-b border-[var(--border)] font-semibold text-center text-[var(--text-main)]">${sumMat.items.toLocaleString('vi-VN')}</td>
+          <td class="py-2 px-3 border-b border-[var(--border)] text-rose-400 font-semibold text-center">${sumMat.weight.toLocaleString('vi-VN')}</td>
+        </tr>
+        <tr class="hover:bg-[rgba(255,255,255,0.02)] transition">
+          <td class="py-2 px-3 font-semibold text-center text-[var(--text-main)]">TCNK</td>
+          <td class="py-2 px-3 font-semibold text-center text-[var(--text-main)]">${sumTcnk.sku}</td>
+          <td class="py-2 px-3 font-semibold text-center text-[var(--text-main)]">${sumTcnk.items.toLocaleString('vi-VN')}</td>
+          <td class="py-2 px-3 text-rose-400 font-semibold text-center">${sumTcnk.weight.toLocaleString('vi-VN')}</td>
+        </tr>
+      `;
     }
 
     function renderTable() {
