@@ -231,18 +231,25 @@
 
     function getCsvExportUrl(url) {
       if (!url) return null;
+      let csvUrl = url;
       try {
-        if (url.includes("/export?format=csv")) return url;
-        const match = url.match(/\/d\/([a-zA-Z0-9-_]+)/);
-        if (!match) return url;
-        const sheetId = match[1];
-        let gid = "0";
-        const gidMatch = url.match(/gid=([0-9]+)/);
-        if (gidMatch) gid = gidMatch[1];
-        return `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv&gid=${gid}`;
+        if (url.includes("/export?format=csv")) {
+          csvUrl = url;
+        } else {
+          const match = url.match(/\/d\/([a-zA-Z0-9-_]+)/);
+          if (match) {
+            const sheetId = match[1];
+            let gid = "0";
+            const gidMatch = url.match(/gid=([0-9]+)/);
+            if (gidMatch) gid = gidMatch[1];
+            csvUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv&gid=${gid}`;
+          }
+        }
       } catch (e) {
-        return url;
+        csvUrl = url;
       }
+      const separator = csvUrl.includes('?') ? '&' : '?';
+      return csvUrl + separator + '_nocache=' + Date.now();
     }
 
     function parseNum(str) {
@@ -269,7 +276,7 @@
 
       Papa.parse(csvUrl, {
         download: true,
-        header: true,
+        header: false,
         skipEmptyLines: true,
         complete: function(results) {
           processData(results.data);
@@ -284,18 +291,60 @@
     }
 
     function processData(rows) {
-      allData = rows.map(r => {
-        const id = (r["Mã hàng"] || r["Mã Hàng"] || r["Mã"] || "").trim();
-        const name = (r["Tên hàng"] || r["Tên Sản Phẩm"] || r["Name"] || "").trim();
-        const unit = (r["ĐVT"] || r["Unit"] || "").trim();
-        const kdb = parseNum(r["Tồn KDB"] || r["Tồn"]);
-        const nw = parseNum(r["Netweight"] || r["NW"]);
-        const weight = parseNum(r["Trọng lượng"] || r["Trọng lượng (KG)"] || r["Weight"] || r["Total Weight"]);
+      if (!rows || rows.length === 0) {
+        alert("Dữ liệu trống hoặc không thể đọc được.");
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('noData').classList.remove('hidden');
+        return;
+      }
+
+      // 1. Find the header row (look for "Mã", "Tên", "Trọng lượng")
+      let headerIdx = -1;
+      let colMap = {};
+      
+      for (let i = 0; i < Math.min(30, rows.length); i++) {
+        const r = rows[i];
+        const rowStr = r.join(' ').toLowerCase();
+        if (rowStr.includes('mã') || rowStr.includes('tên') || rowStr.includes('name')) {
+          headerIdx = i;
+          // Build column index map
+          for (let j = 0; j < r.length; j++) {
+            const h = (r[j] || "").trim().toLowerCase();
+            if (!h) continue;
+            
+            if (h === 'mã hàng' || h === 'mã' || h === 'mã sp' || h === 'mã vật tư') colMap.id = j;
+            else if (h === 'tên hàng' || h === 'tên sản phẩm' || h === 'tên sp' || h === 'name' || h === 'tên') colMap.name = j;
+            else if (h === 'đvt' || h === 'unit' || h === 'đơn vị tính' || h === 'đơn vị') colMap.unit = j;
+            else if (h === 'tồn kdb' || h === 'tồn' || h === 'tồn kho' || h === 'số lượng' || h === 'qty' || h === 'tồn cuối kỳ') colMap.kdb = j;
+            else if (h === 'netweight' || h === 'nw' || h === 'net weight' || h === 'trọng lượng tịnh') colMap.nw = j;
+            else if (h === 'trọng lượng' || h === 'trọng lượng (kg)' || h === 'weight' || h === 'total weight' || h === 'tổng trọng lượng') colMap.weight = j;
+          }
+          break;
+        }
+      }
+
+      if (headerIdx === -1 || (colMap.id === undefined && colMap.name === undefined)) {
+        alert("Đã tải được file nhưng không tìm thấy dòng tiêu đề. Hãy đảm bảo Sheet có các cột như 'Mã hàng', 'Tên hàng', 'Tồn KDB'...");
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('noData').classList.remove('hidden');
+        return;
+      }
+
+      allData = [];
+      for (let i = headerIdx + 1; i < rows.length; i++) {
+        const r = rows[i];
+        const id = colMap.id !== undefined ? (r[colMap.id] || "").trim() : "";
+        const name = colMap.name !== undefined ? (r[colMap.name] || "").trim() : "";
         
-        if (!id && !name) return null;
-        
-        return { id, name, unit, kdb, nw, weight };
-      }).filter(Boolean);
+        if (!id && !name) continue; // skip empty rows
+
+        const unit = colMap.unit !== undefined ? (r[colMap.unit] || "").trim() : "";
+        const kdb = colMap.kdb !== undefined ? parseNum(r[colMap.kdb]) : 0;
+        const nw = colMap.nw !== undefined ? parseNum(r[colMap.nw]) : 0;
+        const weight = colMap.weight !== undefined ? parseNum(r[colMap.weight]) : 0;
+
+        allData.push({ id, name, unit, kdb, nw, weight });
+      }
 
       // Sort by weight DESC
       allData.sort((a, b) => b.weight - a.weight);
@@ -454,7 +503,73 @@
       chartInstance.update();
     }
 
-    // Init
+    // Auto refresh every 60 seconds for real-time updates
+    setInterval(() => {
+      const s = getSettings();
+      if (s.sheetUrl && !document.getElementById('loading').classList.contains('hidden') === false) {
+        // Only refresh silently if it's already showing data (not currently loading)
+        fetchDataSilently();
+      }
+    }, 60000);
+
+    function fetchDataSilently() {
+      const s = getSettings();
+      if (!s.sheetUrl) return;
+      const csvUrl = getCsvExportUrl(s.sheetUrl);
+      Papa.parse(csvUrl, {
+        download: true,
+        header: false,
+        skipEmptyLines: true,
+        complete: function(results) {
+          processDataSilently(results.data);
+        }
+      });
+    }
+
+    function processDataSilently(rows) {
+      if (!rows || rows.length === 0) return;
+      let headerIdx = -1;
+      let colMap = {};
+      for (let i = 0; i < Math.min(30, rows.length); i++) {
+        const r = rows[i];
+        const rowStr = r.join(' ').toLowerCase();
+        if (rowStr.includes('mã') || rowStr.includes('tên') || rowStr.includes('name')) {
+          headerIdx = i;
+          for (let j = 0; j < r.length; j++) {
+            const h = (r[j] || "").trim().toLowerCase();
+            if (!h) continue;
+            if (h === 'mã hàng' || h === 'mã' || h === 'mã sp' || h === 'mã vật tư') colMap.id = j;
+            else if (h === 'tên hàng' || h === 'tên sản phẩm' || h === 'tên sp' || h === 'name' || h === 'tên') colMap.name = j;
+            else if (h === 'đvt' || h === 'unit' || h === 'đơn vị tính' || h === 'đơn vị') colMap.unit = j;
+            else if (h === 'tồn kdb' || h === 'tồn' || h === 'tồn kho' || h === 'số lượng' || h === 'qty' || h === 'tồn cuối kỳ') colMap.kdb = j;
+            else if (h === 'netweight' || h === 'nw' || h === 'net weight' || h === 'trọng lượng tịnh') colMap.nw = j;
+            else if (h === 'trọng lượng' || h === 'trọng lượng (kg)' || h === 'weight' || h === 'total weight' || h === 'tổng trọng lượng') colMap.weight = j;
+          }
+          break;
+        }
+      }
+
+      if (headerIdx === -1 || (colMap.id === undefined && colMap.name === undefined)) return;
+
+      const newData = [];
+      for (let i = headerIdx + 1; i < rows.length; i++) {
+        const r = rows[i];
+        const id = colMap.id !== undefined ? (r[colMap.id] || "").trim() : "";
+        const name = colMap.name !== undefined ? (r[colMap.name] || "").trim() : "";
+        if (!id && !name) continue;
+        const unit = colMap.unit !== undefined ? (r[colMap.unit] || "").trim() : "";
+        const kdb = colMap.kdb !== undefined ? parseNum(r[colMap.kdb]) : 0;
+        const nw = colMap.nw !== undefined ? parseNum(r[colMap.nw]) : 0;
+        const weight = colMap.weight !== undefined ? parseNum(r[colMap.weight]) : 0;
+        newData.push({ id, name, unit, kdb, nw, weight });
+      }
+
+      newData.sort((a, b) => b.weight - a.weight);
+      allData = newData;
+      handleSearch(); // re-applies current filter, updates KPIs, and redraws table & chart
+    }
+
+    // Initial load
     fetchData();
   </script>
 </body>
