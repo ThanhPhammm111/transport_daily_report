@@ -100,16 +100,36 @@
     <!-- Main Grid -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
       
-      <!-- Chart Area -->
-      <div class="card p-5 rounded-xl shadow-sm lg:col-span-1">
-        <h3 class="text-base font-semibold mb-4 text-[var(--text)]">Top 10 Mã hàng có trọng lượng lớn nhất</h3>
-        <div style="height: 380px; position: relative;">
-          <canvas id="weightChart"></canvas>
+      <!-- Left Column (Summary + Chart) -->
+      <div class="flex flex-col gap-6 lg:col-span-1">
+        <!-- Summary Table Area -->
+        <div class="card p-4 rounded-xl shadow-sm">
+          <h3 class="text-base font-semibold mb-3 text-[var(--text)]">Tổng hợp theo Loại hàng</h3>
+          <table class="w-full text-left border-collapse text-sm">
+            <thead class="bg-[var(--bg)]">
+              <tr>
+                <th class="py-2 px-3 font-semibold border-b border-[var(--border)] text-[var(--text-muted)]">Loại hàng</th>
+                <th class="py-2 px-3 font-semibold border-b border-[var(--border)] text-[var(--text-muted)] text-right">Tồn KDB</th>
+                <th class="py-2 px-3 font-semibold border-b border-[var(--border)] text-[var(--text-muted)] text-right">TL (KG)</th>
+              </tr>
+            </thead>
+            <tbody id="summaryTableBody">
+              <!-- JS rendered summary rows -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Chart Area -->
+        <div class="card p-4 rounded-xl shadow-sm">
+          <h3 class="text-base font-semibold mb-3 text-[var(--text)]">Top 10 Mã hàng có trọng lượng lớn nhất</h3>
+          <div style="height: 300px; position: relative;">
+            <canvas id="weightChart"></canvas>
+          </div>
         </div>
       </div>
 
       <!-- Table Area -->
-      <div class="card p-0 rounded-xl shadow-sm lg:col-span-2 flex flex-col" style="height: 445px;">
+      <div class="card p-0 rounded-xl shadow-sm lg:col-span-2 flex flex-col" style="height: 560px;">
         <div class="p-4 border-b border-[var(--border)] flex justify-between items-center bg-[var(--card-bg)] rounded-t-xl">
           <h3 class="text-base font-semibold text-[var(--text)]">Bảng dữ liệu Inventory</h3>
           <div class="relative">
@@ -315,6 +335,7 @@
             if (h === 'mã hàng' || h === 'mã' || h === 'mã sp' || h === 'mã vật tư') colMap.id = j;
             else if (h === 'tên hàng' || h === 'tên sản phẩm' || h === 'tên sp' || h === 'name' || h === 'tên') colMap.name = j;
             else if (h === 'đvt' || h === 'unit' || h === 'đơn vị tính' || h === 'đơn vị') colMap.unit = j;
+            else if (h === 'loại hàng' || h === 'loại' || h === 'category' || h === 'nhóm hàng') colMap.type = j;
             else if (h === 'tồn kdb' || h === 'tồn' || h === 'tồn kho' || h === 'số lượng' || h === 'qty' || h === 'tồn cuối kỳ') colMap.kdb = j;
             else if (h === 'netweight' || h === 'nw' || h === 'net weight' || h === 'trọng lượng tịnh') colMap.nw = j;
             else if (h === 'trọng lượng' || h === 'trọng lượng (kg)' || h === 'weight' || h === 'total weight' || h === 'tổng trọng lượng') colMap.weight = j;
@@ -339,16 +360,18 @@
         if (!id && !name) continue; // skip empty rows
 
         const unit = colMap.unit !== undefined ? (r[colMap.unit] || "").trim() : "";
+        const type = colMap.type !== undefined ? (r[colMap.type] || "").trim() : "";
         const kdb = colMap.kdb !== undefined ? parseNum(r[colMap.kdb]) : 0;
         const nw = colMap.nw !== undefined ? parseNum(r[colMap.nw]) : 0;
         const weight = colMap.weight !== undefined ? parseNum(r[colMap.weight]) : 0;
 
-        allData.push({ id, name, unit, kdb, nw, weight });
+        allData.push({ id, name, unit, type, kdb, nw, weight });
       }
 
       // Sort by weight DESC
       allData.sort((a, b) => b.weight - a.weight);
 
+      renderSummaryTable();
       updateKPIs();
       drawChart();
       
@@ -359,6 +382,55 @@
       
       document.getElementById('loading').classList.add('hidden');
       document.getElementById('content').classList.remove('hidden');
+    }
+
+    function renderSummaryTable() {
+      let sumDong = { items: 0, weight: 0 };
+      let sumMat = { items: 0, weight: 0 };
+      let sumTcnk = { items: 0, weight: 0 };
+      let sumOther = { items: 0, weight: 0 };
+
+      allData.forEach(item => {
+        const typeStr = (item.type || "").toLowerCase();
+        if (typeStr.includes("đông")) {
+          sumDong.items += item.kdb;
+          sumDong.weight += item.weight;
+        } else if (typeStr.includes("mát") || typeStr.includes("mat")) {
+          sumMat.items += item.kdb;
+          sumMat.weight += item.weight;
+        } else if (typeStr.includes("tcnk") || typeStr.includes("nhập khẩu") || typeStr.includes("nhap khau")) {
+          sumTcnk.items += item.kdb;
+          sumTcnk.weight += item.weight;
+        } else {
+          sumOther.items += item.kdb;
+          sumOther.weight += item.weight;
+        }
+      });
+
+      const tbody = document.getElementById('summaryTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = `
+        <tr class="hover:bg-[rgba(255,255,255,0.02)] transition">
+          <td class="py-2 px-3 border-b border-[var(--border)] font-semibold text-[var(--text)]">Đông</td>
+          <td class="py-2 px-3 border-b border-[var(--border)] text-right font-medium text-cyan-400">${formatNumber(sumDong.items)}</td>
+          <td class="py-2 px-3 border-b border-[var(--border)] text-right font-bold text-rose-400">${formatNumber(sumDong.weight)}</td>
+        </tr>
+        <tr class="hover:bg-[rgba(255,255,255,0.02)] transition">
+          <td class="py-2 px-3 border-b border-[var(--border)] font-semibold text-[var(--text)]">Mát</td>
+          <td class="py-2 px-3 border-b border-[var(--border)] text-right font-medium text-cyan-400">${formatNumber(sumMat.items)}</td>
+          <td class="py-2 px-3 border-b border-[var(--border)] text-right font-bold text-rose-400">${formatNumber(sumMat.weight)}</td>
+        </tr>
+        <tr class="hover:bg-[rgba(255,255,255,0.02)] transition">
+          <td class="py-2 px-3 border-b border-[var(--border)] font-semibold text-[var(--text)]">TCNK</td>
+          <td class="py-2 px-3 border-b border-[var(--border)] text-right font-medium text-cyan-400">${formatNumber(sumTcnk.items)}</td>
+          <td class="py-2 px-3 border-b border-[var(--border)] text-right font-bold text-rose-400">${formatNumber(sumTcnk.weight)}</td>
+        </tr>
+        <tr class="hover:bg-[rgba(255,255,255,0.02)] transition">
+          <td class="py-2 px-3 font-medium text-[var(--text-muted)]">Khác</td>
+          <td class="py-2 px-3 text-right font-medium text-cyan-400">${formatNumber(sumOther.items)}</td>
+          <td class="py-2 px-3 text-right font-bold text-rose-400">${formatNumber(sumOther.weight)}</td>
+        </tr>
+      `;
     }
 
     function updateKPIs() {
@@ -541,6 +613,7 @@
             if (h === 'mã hàng' || h === 'mã' || h === 'mã sp' || h === 'mã vật tư') colMap.id = j;
             else if (h === 'tên hàng' || h === 'tên sản phẩm' || h === 'tên sp' || h === 'name' || h === 'tên') colMap.name = j;
             else if (h === 'đvt' || h === 'unit' || h === 'đơn vị tính' || h === 'đơn vị') colMap.unit = j;
+            else if (h === 'loại hàng' || h === 'loại' || h === 'category' || h === 'nhóm hàng') colMap.type = j;
             else if (h === 'tồn kdb' || h === 'tồn' || h === 'tồn kho' || h === 'số lượng' || h === 'qty' || h === 'tồn cuối kỳ') colMap.kdb = j;
             else if (h === 'netweight' || h === 'nw' || h === 'net weight' || h === 'trọng lượng tịnh') colMap.nw = j;
             else if (h === 'trọng lượng' || h === 'trọng lượng (kg)' || h === 'weight' || h === 'total weight' || h === 'tổng trọng lượng') colMap.weight = j;
@@ -558,14 +631,16 @@
         const name = colMap.name !== undefined ? (r[colMap.name] || "").trim() : "";
         if (!id && !name) continue;
         const unit = colMap.unit !== undefined ? (r[colMap.unit] || "").trim() : "";
+        const type = colMap.type !== undefined ? (r[colMap.type] || "").trim() : "";
         const kdb = colMap.kdb !== undefined ? parseNum(r[colMap.kdb]) : 0;
         const nw = colMap.nw !== undefined ? parseNum(r[colMap.nw]) : 0;
         const weight = colMap.weight !== undefined ? parseNum(r[colMap.weight]) : 0;
-        newData.push({ id, name, unit, kdb, nw, weight });
+        newData.push({ id, name, unit, type, kdb, nw, weight });
       }
 
       newData.sort((a, b) => b.weight - a.weight);
       allData = newData;
+      renderSummaryTable();
       handleSearch(); // re-applies current filter, updates KPIs, and redraws table & chart
     }
 
