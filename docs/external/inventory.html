@@ -387,9 +387,21 @@
     }
 
     function updateKPIs() {
-      let sumSKU = allData.length;
-      let sumQty = allData.reduce((acc, c) => acc + c.kdb, 0);
-      let sumWt = allData.reduce((acc, c) => acc + c.weight, 0);
+      let uniqueSKUs = new Set();
+      let sumQty = 0;
+      let sumWt = 0;
+      
+      allData.forEach(c => {
+        if (c.id) uniqueSKUs.add(c.id);
+        sumQty += c.kdb;
+        sumWt += c.weight;
+      });
+      
+      let sumSKU = uniqueSKUs.size;
+      // Nếu không có mã hàng nào nhận diện được, nhưng có dòng dữ liệu, thì fallback về đếm dòng (tạm thời)
+      if (sumSKU === 0 && allData.length > 0) {
+         sumSKU = allData.length;
+      }
       
       document.getElementById('kpiTotalSKU').textContent = sumSKU.toLocaleString('vi-VN');
       document.getElementById('kpiTotalQty').textContent = sumQty.toLocaleString('vi-VN');
@@ -411,22 +423,22 @@
 
     
     function renderSummaryTable() {
-      let sumDong = { sku: 0, items: 0, weight: 0 };
-      let sumMat = { sku: 0, items: 0, weight: 0 };
-      let sumTcnk = { sku: 0, items: 0, weight: 0 };
+      let sumDong = { skuSet: new Set(), items: 0, weight: 0 };
+      let sumMat = { skuSet: new Set(), items: 0, weight: 0 };
+      let sumTcnk = { skuSet: new Set(), items: 0, weight: 0 };
 
       allData.forEach(item => {
         const typeStr = (item.type || "").toLowerCase();
         if (typeStr.includes("đông")) {
-          sumDong.sku++;
+          if (item.id) sumDong.skuSet.add(item.id);
           sumDong.items += item.kdb;
           sumDong.weight += item.weight;
         } else if (typeStr.includes("mát") || typeStr.includes("mat")) {
-          sumMat.sku++;
+          if (item.id) sumMat.skuSet.add(item.id);
           sumMat.items += item.kdb;
           sumMat.weight += item.weight;
         } else if (typeStr.includes("tcnk") || typeStr.includes("nhập khẩu") || typeStr.includes("nhap khau")) {
-          sumTcnk.sku++;
+          if (item.id) sumTcnk.skuSet.add(item.id);
           sumTcnk.items += item.kdb;
           sumTcnk.weight += item.weight;
         }
@@ -434,22 +446,29 @@
 
       const tbody = document.getElementById('summaryTableBody');
       if (!tbody) return;
+      
+      // Fallback cho truong hop count(Mã hàng) = 0 => đếm theo dòng
+      const getSkuCount = (skuSet, typeKeyword) => {
+         if (skuSet.size > 0) return skuSet.size;
+         return allData.filter(x => (x.type || "").toLowerCase().includes(typeKeyword)).length;
+      };
+
       tbody.innerHTML = `
         <tr class="hover:bg-[rgba(255,255,255,0.02)] transition">
           <td class="py-2 px-3 border-b border-[var(--border)] font-semibold text-center text-[var(--text-main)]">Đông</td>
-          <td class="py-2 px-3 border-b border-[var(--border)] font-semibold text-center text-[var(--text-main)]">${sumDong.sku}</td>
+          <td class="py-2 px-3 border-b border-[var(--border)] font-semibold text-center text-[var(--text-main)]">${getSkuCount(sumDong.skuSet, 'đông')}</td>
           <td class="py-2 px-3 border-b border-[var(--border)] font-semibold text-center text-[var(--text-main)]">${sumDong.items.toLocaleString('vi-VN')}</td>
           <td class="py-2 px-3 border-b border-[var(--border)] text-rose-400 font-semibold text-center">${sumDong.weight.toLocaleString('vi-VN')}</td>
         </tr>
         <tr class="hover:bg-[rgba(255,255,255,0.02)] transition">
           <td class="py-2 px-3 border-b border-[var(--border)] font-semibold text-center text-[var(--text-main)]">Mát</td>
-          <td class="py-2 px-3 border-b border-[var(--border)] font-semibold text-center text-[var(--text-main)]">${sumMat.sku}</td>
+          <td class="py-2 px-3 border-b border-[var(--border)] font-semibold text-center text-[var(--text-main)]">${getSkuCount(sumMat.skuSet, 'mát')}</td>
           <td class="py-2 px-3 border-b border-[var(--border)] font-semibold text-center text-[var(--text-main)]">${sumMat.items.toLocaleString('vi-VN')}</td>
           <td class="py-2 px-3 border-b border-[var(--border)] text-rose-400 font-semibold text-center">${sumMat.weight.toLocaleString('vi-VN')}</td>
         </tr>
         <tr class="hover:bg-[rgba(255,255,255,0.02)] transition">
           <td class="py-2 px-3 font-semibold text-center text-[var(--text-main)]">TCNK</td>
-          <td class="py-2 px-3 font-semibold text-center text-[var(--text-main)]">${sumTcnk.sku}</td>
+          <td class="py-2 px-3 font-semibold text-center text-[var(--text-main)]">${getSkuCount(sumTcnk.skuSet, 'tcnk')}</td>
           <td class="py-2 px-3 font-semibold text-center text-[var(--text-main)]">${sumTcnk.items.toLocaleString('vi-VN')}</td>
           <td class="py-2 px-3 text-rose-400 font-semibold text-center">${sumTcnk.weight.toLocaleString('vi-VN')}</td>
         </tr>
