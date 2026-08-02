@@ -1305198,6 +1305198,9 @@ function renderChiTiet() {
     const latestDate = D.length > 0 ? D[D.length - 1].d : 'all';
     window.ctFilterDate = latestDate;
   }
+  if (window.ctActiveSubTab === undefined) {
+    window.ctActiveSubTab = 'chi-tiet';
+  }
 
   document.getElementById('btnPrev').style.display = 'none';
   document.getElementById('btnNext').style.display = 'none';
