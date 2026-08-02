@@ -1305281,7 +1305281,7 @@ function renderChiTiet() {
   let html = `
   <div class="table-block filter-block" style="padding:15px; margin-bottom:15px; background:var(--bg2); border:1px solid var(--border); border-radius:8px; animation:fadeIn 0.3s ease">
     <div style="display:flex; gap:15px; flex-wrap:wrap; align-items:center;">
-      <div style="flex:1; min-width:200px; display:${window.ctActiveSubTab === 'chi-tiet' ? 'block' : 'none'}">
+      <div style="flex:1; min-width:200px;">
         <label style="display:block; font-size:11px; color:var(--txt2); margin-bottom:5px; font-weight:700;">L\u1ECCc THEO MA\u0303 SA\u0309N PH\u00c2\u0309M (CODE)</label>
         <input type="text" id="ctSearchCode" value="${window.ctFilterCode}" oninput="onCtCodeFilterChange(this.value)" placeholder="Nh\u00e2\u0323p ma\u0303 sa\u0309n ph\u00e2\u0309m..." style="width:100%; padding:8px 12px; background:var(--bg3); border:1px solid var(--border); border-radius:6px; color:var(--txt); font-family:inherit; font-size:13px; box-sizing:border-box; outline:none; transition:all 0.2s;" onfocus="this.style.borderColor='var(--cyan)'" onblur="this.style.borderColor='var(--border)'">
       </div>
@@ -1305292,141 +1305292,67 @@ function renderChiTiet() {
         </select>
       </div>
       <div style="display:flex; align-items:flex-end; height:100%; min-width:120px; padding-top:16px;">
-        <button onclick="exportCtToExcel()" style="display:${window.ctActiveSubTab === 'chi-tiet' ? 'flex' : 'none'}; padding:8px 16px; background:var(--cyan-bg); border:1px solid var(--cyan); border-radius:6px; color:var(--cyan); font-weight:700; font-family:inherit; font-size:13px; cursor:pointer; align-items:center; justify-content:center; gap:6px; transition:all 0.2s;" onmouseover="this.style.background='rgba(34,211,238,0.15)'" onmouseout="this.style.background='var(--cyan-bg)'">
+        <button onclick="exportCtToExcel()" style="padding:8px 16px; background:var(--cyan-bg); border:1px solid var(--cyan); border-radius:6px; color:var(--cyan); font-weight:700; font-family:inherit; font-size:13px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; transition:all 0.2s;" onmouseover="this.style.background='rgba(34,211,238,0.15)'" onmouseout="this.style.background='var(--cyan-bg)'">
           \u23EC Xu\u00e2\u0301t Excel
         </button>
       </div>
     </div>
   </div>
 
-  <div style="display:flex; margin-bottom: 15px; border-bottom: 1px solid var(--border);">
-    <button onclick="window.ctActiveSubTab='chi-tiet'; renderChiTiet()" style="padding: 10px 20px; background: ${window.ctActiveSubTab === 'chi-tiet' ? 'var(--cyan)' : 'transparent'}; color: ${window.ctActiveSubTab === 'chi-tiet' ? '#000' : 'var(--txt)'}; border: none; font-weight: bold; cursor: pointer; border-radius: 6px 6px 0 0; transition: all 0.2s;">Chi Ti\u1ebft R\u1edbt H\u00e0ng</button>
-    <button onclick="window.ctActiveSubTab='tong-hop'; renderChiTiet()" style="padding: 10px 20px; background: ${window.ctActiveSubTab === 'tong-hop' ? 'var(--cyan)' : 'transparent'}; color: ${window.ctActiveSubTab === 'tong-hop' ? '#000' : 'var(--txt)'}; border: none; font-weight: bold; cursor: pointer; border-radius: 6px 6px 0 0; transition: all 0.2s;">T\u1ed5ng H\u1ee3p Theo Category</button>
-  </div>
-  `;
-
-  if (window.ctActiveSubTab === 'chi-tiet') {
-    html += `
-    <div class="table-block detail-block" style="animation:fadeIn 0.3s ease">
-      <div class="table-title" style="color:var(--cyan)">📦 L\u01b0u tr\u01b0\u0303 chi ti\u00ea\u0301t SKU pick r\u01a1\u0301t</div>
-      <div style="padding:0 12px">
-        <div class="summary-cards">
-          <div class="s-card sc-sku"><div class="s-label">SKU r\u01a1\u0301t</div><div class="s-val">${filteredItems.length}</div></div>
-          <div class="s-card sc-bk"><div class="s-label">Booking</div><div class="s-val">${fmt(totalBk)}</div></div>
-          <div class="s-card sc-tx"><div class="s-label">Th\u01b0\u0323c xu\u00e2\u0301t</div><div class="s-val">${fmt(totalTx)}</div></div>
-          <div class="s-card sc-diff"><div class="s-label">Ch\u00eanh l\u00ea\u0323ch</div><div class="s-val">${fmt(totalDiff)}</div></div>
-        </div>
-      </div>`;
-
-    if (itemsToRender.length === 0) {
-      html += `
-      <div class="off-msg" style="padding:40px; font-size:13px">\u2014 Kh\u00f4ng ti\u0300m th\u00e2\u0301y SKU r\u01a1\u0301t na\u0300o kh\u01a1\u0301p v\u01a1\u0301i b\u1ED9 l\u1ECDc \u2014</div>
-      </div>`;
-    } else {
-      html += `
-      <div class="detail-wrap">
-      <table class="detail-table">
-        <thead><tr>
-          <th>#</th><th class="th-date">Nga\u0300y</th><th class="th-cat">Loa\u0323i ha\u0300ng</th><th class="th-temp">Ha\u0300ng</th>
-          <th class="th-code">Code</th><th class="th-name">T\u00ean sa\u0309n ph\u00e2\u0309m</th><th class="th-unit">\u0110VT</th>
-          <th class="th-num">Booking</th><th class="th-num">S\u1ED1 Xu\u00e2\u0301t</th><th class="th-num">Nh\u00e2\u0323p QC</th><th class="th-num">Ha\u0300ng QC r\u01a1\u0301t</th><th class="th-num">Hold</th>
-          <th class="th-num">SL pick r\u01a1\u0301t</th><th class="th-note">Ghi chu\u0301</th><th class="th-tf">T/F</th><th class="th-pct">Ti\u0309 l\u00ea\u0323 Pick</th>
-        </tr></thead><tbody>`;
-      
-      itemsToRender.forEach((it, idx) => {
-        const pc = it.pct === 0 ? 'd-pct-bad' : it.pct < 50 ? 'd-pct-warn' : 'd-pct-good';
-        const fv = v => v === null ? '' : (v === 0 ? '0' : fmt(v));
-        html += `<tr>
-          <td>${startIdx+idx+1}</td>
-          <td class="d-date" style="color:var(--cyan); font-weight:600; text-align:center;">${it.date}</td>
-          <td class="d-cat">${it.cat}</td>
-          <td class="d-temp" style="color:${it.temp==='\u0110\u00d4NG'?'var(--blue)':'var(--green)'}">${it.temp}</td>
-          <td class="d-code">${it.code}</td><td class="d-name">${it.name}</td><td class="d-unit">${it.unit}</td>
-          <td class="d-bk">${fmt(it.bk)}</td>
-          <td class="d-tx">${fv(it.sx)}</td>
-          <td class="d-qcr">${fv(it.nqc)}</td>
-          <td class="d-qcr">${fv(it.qcr)}</td>
-          <td class="d-hold">${fv(it.hold)}</td>
-          <td class="d-diff">${fmt(it.diff)}</td>
-          <td class="d-note">${it.note||''}</td>
-          <td class="d-tf">${it.diff > 0 ? 'FALSE' : 'TRUE'}</td>
-          <td class="${pc}">${it.pct > 0 ? it.pct.toFixed(2)+'%' : '0.00%'}</td>
-        </tr>`;
-      });
-      
-      html += `</tbody></table>
+  <div class="table-block detail-block" style="animation:fadeIn 0.3s ease">
+    <div class="table-title" style="color:var(--cyan)">ðŸ“¦ L\u01b0u tr\u01b0\u0303 chi ti\u00ea\u0301t SKU pick r\u01a1\u0301t</div>
+    <div style="padding:0 12px">
+      <div class="summary-cards">
+        <div class="s-card sc-sku"><div class="s-label">SKU r\u01a1\u0301t</div><div class="s-val">${filteredItems.length}</div></div>
+        <div class="s-card sc-bk"><div class="s-label">Booking</div><div class="s-val">${fmt(totalBk)}</div></div>
+        <div class="s-card sc-tx"><div class="s-label">Th\u01b0\u0323c xu\u00e2\u0301t</div><div class="s-val">${fmt(totalTx)}</div></div>
+        <div class="s-card sc-diff"><div class="s-label">Ch\u00eanh l\u00ea\u0323ch</div><div class="s-val">${fmt(totalDiff)}</div></div>
       </div>
-      </div>`;
-    }
-  } else {
-    const catMap = {};
-    filteredItems.forEach(it => {
-      const cat = it.cat || 'Kh\u00e1c';
-      if (!catMap[cat]) catMap[cat] = { cat, bk: 0, tx: 0, diff: 0 };
-      catMap[cat].bk += (it.bk || 0);
-      catMap[cat].tx += (it.sx || 0);
-      catMap[cat].diff += (it.diff || 0);
-    });
-    const catArr = Object.values(catMap).sort((a,b) => b.diff - a.diff);
+    </div>`;
 
-    let prevBk = 0; let prevTx = 0; let prevDiff = 0;
-    let hasPrev = false;
-    if (window.ctFilterDate !== 'all') {
-      const cIdx = uniqueDates.indexOf(window.ctFilterDate);
-      if (cIdx >= 0 && cIdx + 1 < uniqueDates.length) {
-         hasPrev = true;
-         const pDate = uniqueDates[cIdx + 1];
-         const pItems = allItems.filter(it => it.date === pDate);
-         pItems.forEach(it => { prevBk += (it.bk||0); prevTx += (it.sx||0); prevDiff += (it.diff||0); });
-      }
-    }
-
-    const renderDelta = (curr, prev) => {
-      if (!hasPrev) return '';
-      const d = curr - prev;
-      if (d === 0) return '<div style="font-size:11px; margin-top:4px; color:var(--txt2)">Kh\u00f4ng \u0111\u1ed5i so v\u1edbi ng\u00e0y tr\u01b0\u1edbc</div>';
-      if (d > 0) return `<div style="font-size:11px; margin-top:4px; color:#ef4444">T\u0103ng ${fmt(d)} so v\u1edbi ng\u00e0y tr\u01b0\u1edbc</div>`;
-      return `<div style="font-size:11px; margin-top:4px; color:var(--green)">Gi\u1ea3m ${fmt(Math.abs(d))} so v\u1edbi ng\u00e0y tr\u01b0\u1edbc</div>`;
-    };
-
+  if (itemsToRender.length === 0) {
     html += `
-    <div class="table-block detail-block" style="animation:fadeIn 0.3s ease">
-      <div class="table-title" style="color:var(--cyan)">📦 T\u1ed5ng H\u1ee3p Theo Ng\u00e0nh H\u00e0ng</div>
-      <div style="padding:0 12px">
-        <div class="summary-cards" style="grid-template-columns: repeat(3, 1fr);">
-          <div class="s-card sc-bk"><div class="s-label">T\u1ed5ng Booking</div><div class="s-val">${fmt(totalBk)}</div>${renderDelta(totalBk, prevBk)}</div>
-          <div class="s-card sc-tx"><div class="s-label">T\u1ed5ng Th\u1ef1c xu\u1ea5t</div><div class="s-val">${fmt(totalTx)}</div>${renderDelta(totalTx, prevTx)}</div>
-          <div class="s-card sc-diff" style="color:#f59e0b"><div class="s-label">T\u1ed5ng Pick r\u1edbt</div><div class="s-val">${fmt(totalDiff)}</div>${renderDelta(totalDiff, prevDiff)}</div>
-        </div>
-      </div>`;
-
-    if (catArr.length === 0) {
-      html += `<div class="off-msg" style="padding:40px; font-size:13px">\u2014 Kh\u00f4ng c\u00f3 d\u1eef li\u1ec7u \u2014</div></div>`;
-    } else {
-      html += `
-      <div class="detail-wrap">
-      <table class="detail-table">
-        <thead><tr>
-          <th style="text-align:left">Ng\u00e0nh H\u00e0ng</th>
-          <th class="th-num">S\u1ed1 y\u00eau c\u1ea7u (Booking)</th>
-          <th class="th-num">S\u1ed1 xu\u1ea5t</th>
-          <th class="th-num" style="color:#f59e0b">S\u1ed1 l\u01b0\u1ee3ng pick r\u1edbt</th>
-        </tr></thead><tbody>`;
-      catArr.forEach(c => {
-         html += `<tr>
-           <td style="font-weight:bold">${c.cat}</td>
-           <td class="d-num">${fmt(c.bk)}</td>
-           <td class="d-num">${fmt(c.tx)}</td>
-           <td class="d-num" style="color:#f59e0b; font-weight:bold">${fmt(c.diff)}</td>
-         </tr>`;
-      });
-      html += `</tbody></table></div></div>`;
-    }
+    <div class="off-msg" style="padding:40px; font-size:13px">\u2014 Kh\u00f4ng ti\u0300m th\u00e2\u0301y SKU r\u01a1\u0301t na\u0300o kh\u01a1\u0301p v\u01a1\u0301i b\u1ED9 l\u1ECDc \u2014</div>
+    </div>`;
+  } else {
+    html += `
+    <div class="detail-wrap">
+    <table class="detail-table">
+      <thead><tr>
+        <th>#</th><th class="th-date">Nga\u0300y</th><th class="th-cat">Loa\u0323i ha\u0300ng</th><th class="th-temp">Ha\u0300ng</th>
+        <th class="th-code">Code</th><th class="th-name">T\u00ean sa\u0309n ph\u00e2\u0309m</th><th class="th-unit">\u0110VT</th>
+        <th class="th-num">Booking</th><th class="th-num">S\u1ED1 Xu\u00e2\u0301t</th><th class="th-num">Nh\u00e2\u0323p QC</th><th class="th-num">Ha\u0300ng QC r\u01a1\u0301t</th><th class="th-num">Hold</th>
+        <th class="th-num">SL pick r\u01a1\u0301t</th><th class="th-note">Ghi chu\u0301</th><th class="th-tf">T/F</th><th class="th-pct">Ti\u0309 l\u00ea\u0323 Pick</th>
+      </tr></thead><tbody>`;
+    
+    itemsToRender.forEach((it, idx) => {
+      const pc = it.pct === 0 ? 'd-pct-bad' : it.pct < 50 ? 'd-pct-warn' : 'd-pct-good';
+      const fv = v => v === null ? '' : (v === 0 ? '0' : fmt(v));
+      html += `<tr>
+        <td>${startIdx+idx+1}</td>
+        <td class="d-date" style="color:var(--cyan); font-weight:600; text-align:center;">${it.date}</td>
+        <td class="d-cat">${it.cat}</td>
+        <td class="d-temp" style="color:${it.temp==='\u0110\u00d4NG'?'var(--blue)':'var(--green)'}">${it.temp}</td>
+        <td class="d-code">${it.code}</td><td class="d-name">${it.name}</td><td class="d-unit">${it.unit}</td>
+        <td class="d-bk">${fmt(it.bk)}</td>
+        <td class="d-tx">${fv(it.sx)}</td>
+        <td class="d-qcr">${fv(it.nqc)}</td>
+        <td class="d-qcr">${fv(it.qcr)}</td>
+        <td class="d-hold">${fv(it.hold)}</td>
+        <td class="d-diff">${fmt(it.diff)}</td>
+        <td class="d-note">${it.note||''}</td>
+        <td class="d-tf">${it.diff > 0 ? 'FALSE' : 'TRUE'}</td>
+        <td class="${pc}">${it.pct > 0 ? it.pct.toFixed(2)+'%' : '0.00%'}</td>
+      </tr>`;
+    });
+    
+    html += `</tbody></table>
+    </div>
+    </div>`;
   }
 
   document.getElementById('content').innerHTML = html;
-}
-const searchInput = document.getElementById('ctSearchCode');
+  const searchInput = document.getElementById('ctSearchCode');
   if (searchInput) {
     searchInput.focus();
     const len = searchInput.value.length;
