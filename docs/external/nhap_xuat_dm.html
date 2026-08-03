@@ -529,12 +529,12 @@ body.light-mode .detail-table tbody td.d-code { color: #475569 !important; }
 body.light-mode .detail-table tbody td.d-date { color: #0284c7 !important; }
 
 /* Force readable colors for hardcoded style attributes */
-body.light-mode [style*="color:#e2e8f0"],
-body.light-mode [style*="color: #e2e8f0"] { color: #0f172a !important; }
+body.light-mode [style*="color:var(--txt)"],
+body.light-mode [style*="color:var(--txt)"] { color: #0f172a !important; }
 body.light-mode [style*="color:#94a3b8"],
 body.light-mode [style*="color: #94a3b8"],
-body.light-mode [style*="color:#64748b"],
-body.light-mode [style*="color: #64748b"],
+body.light-mode [style*="color:var(--txt2)"],
+body.light-mode [style*="color:var(--txt2)"],
 body.light-mode [style*="color:#9aa0b0"] { color: #475569 !important; }
 body.light-mode [style*="color:#a78bfa"],
 body.light-mode [style*="color: #a78bfa"] { color: #7c3aed !important; }
@@ -557,12 +557,12 @@ body.light-mode th[style*="background: rgba(244,114,182,0.08)"] { background: rg
 body.light-mode td[style*="background: rgba(56,189,248,0.05)"] { background: rgba(2,132,199,0.05) !important; color: #0284c7 !important; }
 body.light-mode td[style*="background: rgba(244,114,182,0.05)"] { background: rgba(219,39,119,0.05) !important; color: #be185d !important; }
 body.light-mode [style*="background: var(--sidebar-bg, #0d0d21)"] {
-  background: #ffffff !important;
+  background:var(--bg2)fff !important;
   border-color: #cbd5e1 !important;
 }
 body.light-mode [style*="background: rgba(0,0,0,0.2)"] { background: #f1f5f9 !important; }
 body.light-mode select[style*="background: var(--bg-primary, #070714)"] {
-  background: #ffffff !important;
+  background:var(--bg2)fff !important;
   color: #0f172a !important;
   border-color: #cbd5e1 !important;
 }
@@ -573,7 +573,7 @@ body.light-mode .s-card {
   border-color: #cbd5e1 !important;
   box-shadow: 0 4px 6px rgba(0,0,0,0.05) !important;
 }
-body.light-mode .s-card .s-label { color: #64748b !important; }
+body.light-mode .s-card .s-label { color:var(--txt2) !important; }
 body.light-mode .s-card.sc-sku .s-val { color: #7c3aed !important; text-shadow: none !important; }
 body.light-mode .s-card.sc-bk .s-val { color: #0284c7 !important; text-shadow: none !important; }
 body.light-mode .s-card.sc-tx .s-val { color: #16a34a !important; text-shadow: none !important; }
@@ -614,7 +614,7 @@ body.light-mode .filter-block span {
 }
 body.light-mode .filter-block select,
 body.light-mode .filter-block input {
-  background: #ffffff !important;
+  background:var(--bg2)fff !important;
   color: #0f172a !important;
   border-color: #cbd5e1 !important;
 }
@@ -635,13 +635,13 @@ body.light-mode [style*="background:#0f1328"] {
   border-color: #cbd5e1 !important;
 }
 body.light-mode [style*="background:#141938"] {
-  background: #ffffff !important;
+  background:var(--bg2)fff !important;
   color: #0f172a !important;
   border-color: #cbd5e1 !important;
 }
 body.light-mode select[style*="background:#141938"],
 body.light-mode button[style*="background:#141938"] {
-  background: #ffffff !important;
+  background:var(--bg2)fff !important;
   color: #475569 !important;
   border-color: #cbd5e1 !important;
 }
@@ -21818,9 +21818,9 @@ function renderTongHopNhap() {
     <div style="padding-bottom: 30px;">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
       <div style="display: flex; gap: 8px; background: rgba(255,255,255,0.03); padding: 4px; border-radius: 8px; border: 1px solid var(--sidebar-border, #333);">
-        <button onclick="setSummaryViewMode('day')" style="padding: 6px 14px; font-size: 12px; font-weight: 700; border-radius: 6px; border: none; cursor: pointer; transition: all 0.2s; ${summaryViewMode==='day' ? 'background: #3b82f6; color: #fff;' : 'background: transparent; color: #94a3b8;'}">Theo Ng&#224;y</button>
-        <button onclick="setSummaryViewMode('week')" style="padding: 6px 14px; font-size: 12px; font-weight: 700; border-radius: 6px; border: none; cursor: pointer; transition: all 0.2s; ${summaryViewMode==='week' ? 'background: #3b82f6; color: #fff;' : 'background: transparent; color: #94a3b8;'}">Theo Tu&#7847;n</button>
-        <button onclick="setSummaryViewMode('month')" style="padding: 6px 14px; font-size: 12px; font-weight: 700; border-radius: 6px; border: none; cursor: pointer; transition: all 0.2s; ${summaryViewMode==='month' ? 'background: #3b82f6; color: #fff;' : 'background: transparent; color: #94a3b8;'}">Theo Th&#225;ng</button>
+        <button onclick="setSummaryViewMode('day')" style="padding: 6px 14px; font-size: 12px; font-weight: 700; border-radius: 6px; border: none; cursor: pointer; transition: all 0.2s; ${summaryViewMode==='day' ? 'background: #3b82f6; color:var(--txt);' : 'background: transparent; color: #94a3b8;'}">Theo Ng&#224;y</button>
+        <button onclick="setSummaryViewMode('week')" style="padding: 6px 14px; font-size: 12px; font-weight: 700; border-radius: 6px; border: none; cursor: pointer; transition: all 0.2s; ${summaryViewMode==='week' ? 'background: #3b82f6; color:var(--txt);' : 'background: transparent; color: #94a3b8;'}">Theo Tu&#7847;n</button>
+        <button onclick="setSummaryViewMode('month')" style="padding: 6px 14px; font-size: 12px; font-weight: 700; border-radius: 6px; border: none; cursor: pointer; transition: all 0.2s; ${summaryViewMode==='month' ? 'background: #3b82f6; color:var(--txt);' : 'background: transparent; color: #94a3b8;'}">Theo Th&#225;ng</button>
       </div>
 
       <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
@@ -21839,7 +21839,7 @@ function renderTongHopNhap() {
         <button onclick="resetSummaryFilter()" style="display: flex; align-items: center; gap: 4px; padding: 6px 12px; font-size: 12px; font-weight: 600; border-radius: 6px; border: 1px solid #475569; background: transparent; color: var(--text-color, #e2e8f0); cursor: pointer;">
           &#8634; Reset
         </button>
-        <button onclick="exportTongHopNhapExcel()" style="display: flex; align-items: center; gap: 6px; padding: 6px 14px; font-size: 12px; font-weight: 700; border-radius: 6px; border: 1px solid #059669; background: #10b981; color: #ffffff; cursor: pointer; transition: all 0.2s;">
+        <button onclick="exportTongHopNhapExcel()" style="display: flex; align-items: center; gap: 6px; padding: 6px 14px; font-size: 12px; font-weight: 700; border-radius: 6px; border: 1px solid #059669; background: #10b981; color:var(--txt)fff; cursor: pointer; transition: all 0.2s;">
           <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           <span>Xu&#7845;t Excel</span>
         </button>
@@ -22079,9 +22079,9 @@ function renderTongHopXuat() {
   <div style="padding: 16px; font-family: sans-serif;">
     <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; background: var(--sidebar-bg, #0d0d21); border: 1px solid var(--sidebar-border, rgba(255,255,255,0.1)); padding: 14px 18px; border-radius: 12px;">
       <div style="display: flex; gap: 6px; background: rgba(0,0,0,0.2); padding: 4px; border-radius: 8px;">
-        <button onclick="setSummaryViewMode('day')" style="padding: 6px 14px; font-size: 12px; font-weight: 700; border-radius: 6px; border: none; cursor: pointer; transition: all 0.2s; ${summaryViewMode==='day' ? 'background: #3b82f6; color: #fff;' : 'background: transparent; color: #94a3b8;'}">Theo Ngày</button>
-        <button onclick="setSummaryViewMode('week')" style="padding: 6px 14px; font-size: 12px; font-weight: 700; border-radius: 6px; border: none; cursor: pointer; transition: all 0.2s; ${summaryViewMode==='week' ? 'background: #3b82f6; color: #fff;' : 'background: transparent; color: #94a3b8;'}">Theo Tuần</button>
-        <button onclick="setSummaryViewMode('month')" style="padding: 6px 14px; font-size: 12px; font-weight: 700; border-radius: 6px; border: none; cursor: pointer; transition: all 0.2s; ${summaryViewMode==='month' ? 'background: #3b82f6; color: #fff;' : 'background: transparent; color: #94a3b8;'}">Theo Tháng</button>
+        <button onclick="setSummaryViewMode('day')" style="padding: 6px 14px; font-size: 12px; font-weight: 700; border-radius: 6px; border: none; cursor: pointer; transition: all 0.2s; ${summaryViewMode==='day' ? 'background: #3b82f6; color:var(--txt);' : 'background: transparent; color: #94a3b8;'}">Theo Ngày</button>
+        <button onclick="setSummaryViewMode('week')" style="padding: 6px 14px; font-size: 12px; font-weight: 700; border-radius: 6px; border: none; cursor: pointer; transition: all 0.2s; ${summaryViewMode==='week' ? 'background: #3b82f6; color:var(--txt);' : 'background: transparent; color: #94a3b8;'}">Theo Tuần</button>
+        <button onclick="setSummaryViewMode('month')" style="padding: 6px 14px; font-size: 12px; font-weight: 700; border-radius: 6px; border: none; cursor: pointer; transition: all 0.2s; ${summaryViewMode==='month' ? 'background: #3b82f6; color:var(--txt);' : 'background: transparent; color: #94a3b8;'}">Theo Tháng</button>
       </div>
 
       <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
@@ -22100,7 +22100,7 @@ function renderTongHopXuat() {
         <button onclick="resetSummaryFilter()" style="display: flex; align-items: center; gap: 4px; padding: 6px 12px; font-size: 12px; font-weight: 600; border-radius: 6px; border: 1px solid #475569; background: transparent; color: var(--text-color, #e2e8f0); cursor: pointer;">
           ↺ Reset
         </button>
-        <button onclick="exportTongHopXuatExcel()" style="display: flex; align-items: center; gap: 6px; padding: 6px 14px; font-size: 12px; font-weight: 700; border-radius: 6px; border: 1px solid #059669; background: #10b981; color: #ffffff; cursor: pointer; transition: all 0.2s;">
+        <button onclick="exportTongHopXuatExcel()" style="display: flex; align-items: center; gap: 6px; padding: 6px 14px; font-size: 12px; font-weight: 700; border-radius: 6px; border: 1px solid #059669; background: #10b981; color:var(--txt)fff; cursor: pointer; transition: all 0.2s;">
           <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           <span>Xu&#7845;t Excel</span>
         </button>
@@ -24175,7 +24175,7 @@ function renderDapUng() {
   }
 
   // Dropdown style
-  const selStyle = `background:#141938;color:#e2e8f0;border:1px solid #1e293b;border-radius:6px;padding:5px 8px;font-size:12px;font-family:Inter;cursor:pointer`;
+  const selStyle = `background:#141938;color:var(--txt);border:1px solid #1e293b;border-radius:6px;padding:5px 8px;font-size:12px;font-family:Inter;cursor:pointer`;
   const btnAct = (on) => `padding:6px 14px;border-radius:8px;border:1px solid ${on?'#10b981':'#1e293b'};background:${on?'rgba(16,185,129,0.15)':'#141938'};color:${on?'#10b981':'#94a3b8'};font-size:12px;font-weight:${on?'700':'500'};cursor:pointer;font-family:Inter`;
 
   // HTML filter bar (using Unicode escapes for ALL non-ASCII characters, including emojis and dashes)
@@ -24284,7 +24284,7 @@ function renderDapUng() {
     }
 
     rows += `<tr style="${bg}${bdr}">
-      <td style="${fw}color:#e2e8f0;white-space:nowrap">${label}</td>
+      <td style="${fw}color:var(--txt);white-space:nowrap">${label}</td>
       <td style="${dayCol}${fw}text-align:center;font-size:10px">${isWk ? r.wkRange||'' : isMt ? 'Tổng' : r.w||''}</td>
       <td style="text-align:center;color:#10b981;font-size:10px;${fw}">${isSpecial ? '' : r.wk||''}</td>
       <td style="text-align:center;color:#f59e0b;font-size:10px;${fw}">${mLabel}</td>
@@ -24465,7 +24465,7 @@ function renderForecast() {
   }
 
   // Styles
-  const selStyle = 'background:#141938;color:#e2e8f0;border:1px solid #1e293b;border-radius:6px;padding:5px 8px;font-size:12px;font-family:Inter;cursor:pointer';
+  const selStyle = 'background:#141938;color:var(--txt);border:1px solid #1e293b;border-radius:6px;padding:5px 8px;font-size:12px;font-family:Inter;cursor:pointer';
 
   // Metric Toggle and Dropdown Filters HTML
   const filterHtml = `
@@ -24742,9 +24742,9 @@ function renderForecast() {
 
     tableRows += `
     <tr>
-      <td style="color:#e2e8f0; font-weight:700; white-space:nowrap; text-align:center;">${r.d}</td>
-      <td style="color:#64748b; text-align:center; font-size:11px;">${r.w}</td>
-      <td style="color:#64748b; text-align:center; font-size:11px;">${r.wk}</td>
+      <td style="color:var(--txt); font-weight:700; white-space:nowrap; text-align:center;">${r.d}</td>
+      <td style="color:var(--txt2); text-align:center; font-size:11px;">${r.w}</td>
+      <td style="color:var(--txt2); text-align:center; font-size:11px;">${r.wk}</td>
       
       <td style="text-align:right; color:#3b82f6;">${fmt(fcVal)}</td>
       <td style="text-align:right; color:#a78bfa;">${fmt(tx)}</td>
