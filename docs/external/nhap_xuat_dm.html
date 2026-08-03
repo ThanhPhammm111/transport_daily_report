@@ -1313085,7 +1313085,7 @@ function renderChiTiet() {
       <div class="detail-wrap">
       <table class="detail-table">
         <thead><tr>
-          <th style="text-align:left">Ng\u00e0nh H\u00e0ng</th>
+          <th style="text-align:left; min-width: 200px;">Ng\u00e0nh H\u00e0ng</th>
           <th class="th-num">S\u1ed1 y\u00eau c\u1ea7u (Booking)</th>
           <th class="th-num">S\u1ed1 xu\u1ea5t</th>
           <th class="th-num" style="color:#f59e0b">S\u1ed1 l\u01b0\u1ee3ng pick r\u1edbt</th>
@@ -1313094,7 +1313094,7 @@ function renderChiTiet() {
       catArr.forEach(c => {
          const avgPct = c.bk > 0 ? (c.tx / c.bk * 100).toFixed(2) : '0.00';
          html += `<tr>
-           <td style="font-weight:bold">${c.cat}</td>
+           <td style="font-weight:bold; white-space:nowrap;">${c.cat}</td>
            <td class="d-num">${fmt(c.bk)}</td>
            <td class="d-num">${fmt(c.tx)}</td>
            <td class="d-num" style="color:#f59e0b; font-weight:bold">${fmt(c.diff)}</td>
@@ -1313296,6 +1313296,39 @@ function exportTongHopNhapExcel() {
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+}
+
+function exportTongHopCatExcel() {
+  const headers = ['Ng\u00e0nh H\u00e0ng', 'S\u1ed1 y\u00eau c\u1ea7u (Booking)', 'S\u1ed1 xu\u1ea5t', 'S\u1ed1 l\u01b0\u1ee3ng pick r\u1edbt', 'Trung b\u00ecnh t\u1ec9 l\u1ec7 pick'];
+  
+  // Find the detail table
+  const detailTables = document.querySelectorAll('.detail-table');
+  const table = detailTables[detailTables.length - 1]; // The grouped one is the last detail table rendered
+  if (!table) return;
+  const rows = Array.from(table.querySelectorAll('tbody tr'));
+  
+  const exportRows = rows.map(tr => {
+    return Array.from(tr.querySelectorAll('td')).map(td => td.innerText.trim().replace(/\n/g, ' '));
+  });
+  
+  const filename = Tong_Hop_Nganh_Hang_.csv;
+  
+  let csv = '\uFEFF' + headers.join(',') + '\r\n';
+  exportRows.forEach(row => {
+    if (row.length >= 2) {
+      csv += row.map(v => typeof v === 'string' && (v.includes(',') || v.includes('"')) ? "" : v).join(',') + '\r\n';
+    }
+  });
+  
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
 
