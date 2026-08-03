@@ -18641,116 +18641,225 @@ function renderNhap() {
 }
 
 // ===================== NHẬP HÀNG =====================
-const DNH = [
-{d:'28-Apr',w:'T3',wk:'W18',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},
-{d:'29-Apr',w:'T4',wk:'W18',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},
-{d:'30-Apr',w:'T5',wk:'W18',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},
-{d:'1-May',w:'T6',wk:'W18',qc:15213,mat:333,dong:null,kgQc:2736,kgMat:181,kgDong:null},
-{d:'2-May',w:'T7',wk:'W18',qc:41088,mat:78418,dong:6123,kgQc:13697,kgMat:14141,kgDong:1337},
-{d:'3-May',w:'CN',wk:'W18',qc:56301,mat:78751,dong:6123,kgQc:16433,kgMat:14322,kgDong:1337},
-{d:'4-May',w:'T2',wk:'W19',qc:35459,mat:32716,dong:12328,kgQc:11694,kgMat:6226,kgDong:3389},
-{d:'5-May',w:'T3',wk:'W19',qc:23053,mat:54301,dong:8144,kgQc:9206,kgMat:15522,kgDong:2467},
-{d:'6-May',w:'T4',wk:'W19',qc:44676,mat:59815,dong:13572,kgQc:17626,kgMat:18789,kgDong:3904},
-{d:'7-May',w:'T5',wk:'W19',qc:30398,mat:95055,dong:10475,kgQc:12303,kgMat:18500,kgDong:2346},
-{d:'8-May',w:'T6',wk:'W19',qc:42997,mat:82623,dong:15467,kgQc:15888,kgMat:17083,kgDong:4678},
-{d:'9-May',w:'T7',wk:'W19',qc:54132,mat:91084,dong:13482,kgQc:21854,kgMat:19820,kgDong:2944},
-{d:'10-May',w:'CN',wk:'W19',qc:230715,mat:415594,dong:73468,kgQc:88571,kgMat:95939,kgDong:19729},
-{d:'11-May',w:'T2',wk:'W20',qc:34155,mat:63482,dong:29209,kgQc:10187,kgMat:15990,kgDong:7196},
-{d:'12-May',w:'T3',wk:'W20',qc:24894,mat:75152,dong:9422,kgQc:7926,kgMat:19657,kgDong:2375},
-{d:'13-May',w:'T4',wk:'W20',qc:40475,mat:94826,dong:12433,kgQc:15861,kgMat:20366,kgDong:3557},
-{d:'14-May',w:'T5',wk:'W20',qc:29403,mat:92504,dong:10748,kgQc:12052,kgMat:19823,kgDong:4526},
-{d:'15-May',w:'T6',wk:'W20',qc:38279,mat:95608,dong:14575,kgQc:15189,kgMat:21413,kgDong:4084},
-{d:'16-May',w:'T7',wk:'W20',qc:46513,mat:97259,dong:7248,kgQc:17305,kgMat:22914,kgDong:2341},
-{d:'17-May',w:'CN',wk:'W20',qc:213719,mat:518831,dong:83635,kgQc:78520,kgMat:120162,kgDong:24079},
-{d:'18-May',w:'T2',wk:'W21',qc:32152,mat:67918,dong:12371,kgQc:10176,kgMat:13618,kgDong:3109},
-{d:'19-May',w:'T3',wk:'W21',qc:21670,mat:75378,dong:8468,kgQc:7935,kgMat:19770,kgDong:2059},
-{d:'20-May',w:'T4',wk:'W21',qc:32337,mat:97691,dong:10971,kgQc:11334,kgMat:16949,kgDong:3418},
-{d:'21-May',w:'T5',wk:'W21',qc:21751,mat:49413,dong:9283,kgQc:6815,kgMat:11150,kgDong:2791},
-{d:'22-May',w:'T6',wk:'W21',qc:34265,mat:74912,dong:15622,kgQc:11077,kgMat:14200,kgDong:4349},
-{d:'23-May',w:'T7',wk:'W21',qc:40610,mat:76446,dong:8452,kgQc:12599,kgMat:18708,kgDong:1894},
-{d:'24-May',w:'CN',wk:'W21',qc:182785,mat:441758,dong:65167,kgQc:59935,kgMat:94395,kgDong:17620},
-{d:'25-May',w:'T2',wk:'W22',qc:31435,mat:51044,dong:20422,kgQc:9593,kgMat:8468,kgDong:6481},
-{d:'26-May',w:'T3',wk:'W22',qc:21157,mat:97863,dong:8426,kgQc:6271,kgMat:23472,kgDong:2351},
-{d:'27-May',w:'T4',wk:'W22',qc:34948,mat:87899,dong:11654,kgQc:11450,kgMat:16384,kgDong:3691},
-{d:'28-May',w:'T5',wk:'W22',qc:25667,mat:91450,dong:10982,kgQc:9408,kgMat:21369,kgDong:3692},
-{d:'29-May',w:'T6',wk:'W22',qc:38457,mat:72092,dong:12970,kgQc:13921,kgMat:12262,kgDong:3549},
-{d:'30-May',w:'T7',wk:'W22',qc:42777,mat:66037,dong:3517,kgQc:15809,kgMat:15283,kgDong:1031},
-{d:'31-May',w:'CN',wk:'W22',qc:194441,mat:466385,dong:67971,kgQc:66452,kgMat:97238,kgDong:20795},
-{d:'1-Jun',w:'T2',wk:'W23',qc:33988,mat:57563,dong:9276,kgQc:10897,kgMat:9943,kgDong:2744},
-{d:'2-Jun',w:'T3',wk:'W23',qc:26026,mat:52835,dong:4392,kgQc:9694,kgMat:19488,kgDong:1298},
-{d:'3-Jun',w:'T4',wk:'W23',qc:32296,mat:53098,dong:16395,kgQc:10745,kgMat:11378,kgDong:3907},
-{d:'4-Jun',w:'T5',wk:'W23',qc:21836,mat:39854,dong:16137,kgQc:7631,kgMat:14644,kgDong:5113},
-{d:'5-Jun',w:'T6',wk:'W23',qc:35868,mat:92773,dong:13071,kgQc:12111,kgMat:20716,kgDong:3524},
-{d:'6-Jun',w:'T7',wk:'W23',qc:46535,mat:91880,dong:11448,kgQc:17190,kgMat:20134,kgDong:3812},
-{d:'7-Jun',w:'CN',wk:'W23',qc:196549,mat:388003,dong:70719,kgQc:68268,kgMat:96303,kgDong:20398},
-{d:'8-Jun',w:'T2',wk:'W24',qc:36121,mat:62732,dong:11649,kgQc:12063,kgMat:13062,kgDong:2912},
-{d:'9-Jun',w:'T3',wk:'W24',qc:25462,mat:82610,dong:12654,kgQc:9416,kgMat:21890,kgDong:4242},
-{d:'10-Jun',w:'T4',wk:'W24',qc:35787,mat:85981,dong:9916,kgQc:11967,kgMat:13497,kgDong:2912},
-{d:'11-Jun',w:'T5',wk:'W24',qc:29203,mat:55030,dong:9407,kgQc:11294,kgMat:15614,kgDong:2562},
-{d:'12-Jun',w:'T6',wk:'W24',qc:43563,mat:90818,dong:23701,kgQc:15695,kgMat:18987,kgDong:6531},
-{d:'13-Jun',w:'T7',wk:'W24',qc:50840,mat:52966,dong:4122,kgQc:19656,kgMat:11569,kgDong:1674},
-{d:'14-Jun',w:'CN',wk:'W24',qc:220976,mat:430137,dong:71449,kgQc:80091,kgMat:94619,kgDong:20833},
-{d:'15-Jun',w:'T2',wk:'W25',qc:39748,mat:33418,dong:17007,kgQc:12834,kgMat:6243,kgDong:4349},
-{d:'16-Jun',w:'T3',wk:'W25',qc:26386,mat:101213,dong:8479,kgQc:9012,kgMat:23700,kgDong:2644},
-{d:'17-Jun',w:'T4',wk:'W25',qc:39449,mat:74504,dong:13079,kgQc:12351,kgMat:12855,kgDong:4034},
-{d:'18-Jun',w:'T5',wk:'W25',qc:30481,mat:54443,dong:8784,kgQc:9152,kgMat:13571,kgDong:2433},
-{d:'19-Jun',w:'T6',wk:'W25',qc:44016,mat:81090,dong:10094,kgQc:12878,kgMat:15445,kgDong:2914},
-{d:'20-Jun',w:'T7',wk:'W25',qc:50355,mat:100052,dong:12282,kgQc:16289,kgMat:17222,kgDong:2460},
-{d:'21-Jun',w:'CN',wk:'W25',qc:230435,mat:444720,dong:69725,kgQc:72516,kgMat:89036,kgDong:18834},
-{d:'22-Jun',w:'T2',wk:'W26',qc:39717,mat:60005,dong:16182,kgQc:12576,kgMat:14883,kgDong:4294},
-{d:'23-Jun',w:'T3',wk:'W26',qc:26507,mat:74567,dong:6134,kgQc:9165,kgMat:18734,kgDong:2036},
-{d:'24-Jun',w:'T4',wk:'W26',qc:40155,mat:77087,dong:16726,kgQc:13256,kgMat:16298,kgDong:5257},
-{d:'25-Jun',w:'T5',wk:'W26',qc:31240,mat:55544,dong:13423,kgQc:11272,kgMat:16139,kgDong:4724},
-{d:'26-Jun',w:'T6',wk:'W26',qc:42875,mat:75110,dong:9676,kgQc:16669,kgMat:14059,kgDong:2699},
-{d:'27-Jun',w:'T7',wk:'W26',qc:45737,mat:70499,dong:3108,kgQc:14943,kgMat:16008,kgDong:852},
-{d:'28-Jun',w:'CN',wk:'W26',qc:226231,mat:412812,dong:65249,kgQc:77881,kgMat:96121,kgDong:19862},
-{d:'29-Jun',w:'T2',wk:'W27',qc:38366,mat:80948,dong:11066,kgQc:11742,kgMat:14672,kgDong:3417},
-{d:'30-Jun',w:'T3',wk:'W27',qc:26810,mat:74684,dong:5191,kgQc:8280,kgMat:19927,kgDong:1295},
-{d:'1-Jul',w:'T4',wk:'W27',qc:41653,mat:115968,dong:16931,kgQc:14524,kgMat:20396,kgDong:4328},
-{d:'2-Jul',w:'T5',wk:'W27',qc:32308,mat:25532,dong:11645,kgQc:12540,kgMat:9718,kgDong:4091},
-{d:'3-Jul',w:'T6',wk:'W27',qc:44560,mat:72488,dong:8017,kgQc:16177,kgMat:13985,kgDong:2086},
-{d:'4-Jul',w:'T7',wk:'W27',qc:49280,mat:34207,dong:6550,kgQc:16396,kgMat:11122,kgDong:1773},
-{d:'5-Jul',w:'CN',wk:'W27',qc:232977,mat:403827,dong:59400,kgQc:79659,kgMat:89819,kgDong:16991},
-{d:'6-Jul',w:'T2',wk:'W28',qc:44055,mat:49048,dong:6688,kgQc:13797,kgMat:9754,kgDong:2412},
-{d:'7-Jul',w:'T3',wk:'W28',qc:30700,mat:101301,dong:10253,kgQc:10353,kgMat:25561,kgDong:3040},
-{d:'8-Jul',w:'T4',wk:'W28',qc:42450,mat:73281,dong:21124,kgQc:14670,kgMat:15976,kgDong:6421},
-{d:'9-Jul',w:'T5',wk:'W28',qc:30667,mat:71831,dong:10219,kgQc:11103,kgMat:14236,kgDong:3567},
-{d:'10-Jul',w:'T6',wk:'W28',qc:44902,mat:82068,dong:10447,kgQc:16603,kgMat:16535,kgDong:2739},
-{d:'11-Jul',w:'T7',wk:'W28',qc:53842,mat:30006,dong:25428,kgQc:19059,kgMat:8476,kgDong:4523},
-{d:'12-Jul',w:'CN',wk:'W28',qc:246616,mat:407535,dong:84159,kgQc:85586,kgMat:90538,kgDong:22702},
-{d:'13-Jul',w:'T2',wk:'W29',qc:44749,mat:40840,dong:11637,kgQc:15085,kgMat:7419,kgDong:3063},
-{d:'14-Jul',w:'T3',wk:'W29',qc:24620,mat:84061,dong:10106,kgQc:8812,kgMat:23047,kgDong:3058},
-{d:'15-Jul',w:'T4',wk:'W29',qc:39091,mat:72708,dong:14076,kgQc:14551,kgMat:13640,kgDong:3634},
-{d:'16-Jul',w:'T5',wk:'W29',qc:30154,mat:107937,dong:14251,kgQc:11391,kgMat:21862,kgDong:4189},
-{d:'17-Jul',w:'T6',wk:'W29',qc:41968,mat:81716,dong:21068,kgQc:14225,kgMat:13700,kgDong:6578},
-{d:'18-Jul',w:'T7',wk:'W29',qc:50762,mat:77506,dong:3798,kgQc:18660,kgMat:15979,kgDong:1132},
-{d:'19-Jul',w:'CN',wk:'W29',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},
-{d:'20-Jul',w:'T2',wk:'W30',qc:38695,mat:57863,dong:15853,kgQc:13137,kgMat:10173,kgDong:4197},
-{d:'21-Jul',w:'T3',wk:'W30',qc:25128,mat:95220,dong:7959,kgQc:8863,kgMat:27980,kgDong:2788},
-{d:'22-Jul',w:'T4',wk:'W30',qc:40518,mat:83497,dong:null,kgQc:14452,kgMat:16042,kgDong:null},
-{d:'23-Jul',w:'T5',wk:'W30',qc:31978,mat:null,dong:null,kgQc:11544,kgMat:null,kgDong:null},
-{d:'24-Jul',w:'T6',wk:'W30',qc:51545,mat:null,dong:null,kgQc:18612,kgMat:null,kgDong:null},
-{d:'25-Jul',w:'T7',wk:'W30',qc:60869,mat:1300,dong:null,kgQc:27050,kgMat:1240,kgDong:null},
-{d:'26-Jul',w:'CN',wk:'W30',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},
-{d:'27-Jul',w:'T2',wk:'W31',qc:42502,mat:32998,dong:7550,kgQc:14839,kgMat:6357,kgDong:1702},
-{d:'28-Jul',w:'T3',wk:'W31',qc:27829,mat:66020,dong:5363,kgQc:10948,kgMat:20657,kgDong:1886},
-{d:'29-Jul',w:'T4',wk:'W31',qc:42705,mat:36033,dong:9982,kgQc:16012,kgMat:7416,kgDong:2728},
-{d:'30-Jul',w:'T5',wk:'W31',qc:31610,mat:84369,dong:4922,kgQc:13489,kgMat:20299,kgDong:1631},
-{d:'31-Jul',w:'T6',wk:'W31',qc:46798,mat:73114,dong:8923,kgQc:16899,kgMat:14074,kgDong:2591},
-{d:'1-Aug',w:'T7',wk:'W31',qc:50154,mat:77849,dong:908,kgQc:18806,kgMat:16529,kgDong:334},
-{d:'2-Aug',w:'CN',wk:'W31',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},
-{d:'3-Aug',w:'T2',wk:'W32',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},
-{d:'4-Aug',w:'T3',wk:'W32',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},
-{d:'5-Aug',w:'T4',wk:'W32',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},
-{d:'6-Aug',w:'T5',wk:'W32',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},
-{d:'7-Aug',w:'T6',wk:'W32',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},
-{d:'8-Aug',w:'T7',wk:'W32',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},
-{d:'9-Aug',w:'CN',wk:'W32',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},
-{d:'10-Aug',w:'T2',wk:'W33',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},
-{d:'11-Aug',w:'T3',wk:'W33',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},
-{d:'12-Aug',w:'T4',wk:'W33',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},
-{d:'13-Aug',w:'T5',wk:'W33',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},
-{d:'14-Aug',w:'T6',wk:'W33',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null}
+const DNH = [{
+    d: '28-Apr', w: 'T3', wk: 'W18', qc: null, mat: null, dong: null, kgQc: null, kgMat: null, kgDong: null
+  }, {
+    d: '29-Apr', w: 'T4', wk: 'W18', qc: null, mat: null, dong: null, kgQc: null, kgMat: null, kgDong: null
+  }, {
+    d: '30-Apr', w: 'T5', wk: 'W18', qc: null, mat: null, dong: null, kgQc: null, kgMat: null, kgDong: null
+  }, {
+    d: '1-May', w: 'T6', wk: 'W18', qc: 15213, mat: 333, dong: null, kgQc: 2736, kgMat: 181, kgDong: null
+  }, {
+    d: '2-May', w: 'T7', wk: 'W18', qc: 41088, mat: 78418, dong: 6123, kgQc: 13697, kgMat: 14141, kgDong: 1337
+  }, {
+    d: '3-May', w: 'CN', wk: 'W18', qc: 56301, mat: 78751, dong: 6123, kgQc: 16433, kgMat: 14322, kgDong: 1337
+  }, {
+    d: '4-May', w: 'T2', wk: 'W19', qc: 35459, mat: 32716, dong: 12328, kgQc: 11694, kgMat: 6226, kgDong: 3389
+  }, {
+    d: '5-May', w: 'T3', wk: 'W19', qc: 23053, mat: 54301, dong: 8144, kgQc: 9206, kgMat: 15522, kgDong: 2467
+  }, {
+    d: '6-May', w: 'T4', wk: 'W19', qc: 44676, mat: 59815, dong: 13572, kgQc: 17626, kgMat: 18789, kgDong: 3904
+  }, {
+    d: '7-May', w: 'T5', wk: 'W19', qc: 30398, mat: 95055, dong: 10475, kgQc: 12303, kgMat: 18500, kgDong: 2346
+  }, {
+    d: '8-May', w: 'T6', wk: 'W19', qc: 42997, mat: 82623, dong: 15467, kgQc: 15888, kgMat: 17083, kgDong: 4678
+  }, {
+    d: '9-May', w: 'T7', wk: 'W19', qc: 54132, mat: 91084, dong: 13482, kgQc: 21854, kgMat: 19820, kgDong: 2944
+  }, {
+    d: '10-May', w: 'CN', wk: 'W19', qc: 230715, mat: 415594, dong: 73468, kgQc: 88571, kgMat: 95939, kgDong: 19729
+  }, {
+    d: '11-May', w: 'T2', wk: 'W20', qc: 34155, mat: 63482, dong: 29209, kgQc: 10187, kgMat: 15990, kgDong: 7196
+  }, {
+    d: '12-May', w: 'T3', wk: 'W20', qc: 24894, mat: 75152, dong: 9422, kgQc: 7926, kgMat: 19657, kgDong: 2375
+  }, {
+    d: '13-May', w: 'T4', wk: 'W20', qc: 40475, mat: 94826, dong: 12433, kgQc: 15861, kgMat: 20366, kgDong: 3557
+  }, {
+    d: '14-May', w: 'T5', wk: 'W20', qc: 29403, mat: 92504, dong: 10748, kgQc: 12052, kgMat: 19823, kgDong: 4526
+  }, {
+    d: '15-May', w: 'T6', wk: 'W20', qc: 38279, mat: 95608, dong: 14575, kgQc: 15189, kgMat: 21413, kgDong: 4084
+  }, {
+    d: '16-May', w: 'T7', wk: 'W20', qc: 46513, mat: 97259, dong: 7248, kgQc: 17305, kgMat: 22914, kgDong: 2341
+  }, {
+    d: '17-May', w: 'CN', wk: 'W20', qc: 213719, mat: 518831, dong: 83635, kgQc: 78520, kgMat: 120162, kgDong: 24079
+  }, {
+    d: '18-May', w: 'T2', wk: 'W21', qc: 32152, mat: 67918, dong: 12371, kgQc: 10176, kgMat: 13618, kgDong: 3109
+  }, {
+    d: '19-May', w: 'T3', wk: 'W21', qc: 21670, mat: 75378, dong: 8468, kgQc: 7935, kgMat: 19770, kgDong: 2059
+  }, {
+    d: '20-May', w: 'T4', wk: 'W21', qc: 32337, mat: 97691, dong: 10971, kgQc: 11334, kgMat: 16949, kgDong: 3418
+  }, {
+    d: '21-May', w: 'T5', wk: 'W21', qc: 21751, mat: 49413, dong: 9283, kgQc: 6815, kgMat: 11150, kgDong: 2791
+  }, {
+    d: '22-May', w: 'T6', wk: 'W21', qc: 34265, mat: 74912, dong: 15622, kgQc: 11077, kgMat: 14200, kgDong: 4349
+  }, {
+    d: '23-May', w: 'T7', wk: 'W21', qc: 40610, mat: 76446, dong: 8452, kgQc: 12599, kgMat: 18708, kgDong: 1894
+  }, {
+    d: '24-May', w: 'CN', wk: 'W21', qc: 182785, mat: 441758, dong: 65167, kgQc: 59935, kgMat: 94395, kgDong: 17620
+  }, {
+    d: '25-May', w: 'T2', wk: 'W22', qc: 31435, mat: 51044, dong: 20422, kgQc: 9593, kgMat: 8468, kgDong: 6481
+  }, {
+    d: '26-May', w: 'T3', wk: 'W22', qc: 21157, mat: 97863, dong: 8426, kgQc: 6271, kgMat: 23472, kgDong: 2351
+  }, {
+    d: '27-May', w: 'T4', wk: 'W22', qc: 34948, mat: 87899, dong: 11654, kgQc: 11450, kgMat: 16384, kgDong: 3691
+  }, {
+    d: '28-May', w: 'T5', wk: 'W22', qc: 25667, mat: 91450, dong: 10982, kgQc: 9408, kgMat: 21369, kgDong: 3692
+  }, {
+    d: '29-May', w: 'T6', wk: 'W22', qc: 38457, mat: 72092, dong: 12970, kgQc: 13921, kgMat: 12262, kgDong: 3549
+  }, {
+    d: '30-May', w: 'T7', wk: 'W22', qc: 42777, mat: 66037, dong: 3517, kgQc: 15809, kgMat: 15283, kgDong: 1031
+  }, {
+    d: '31-May', w: 'CN', wk: 'W22', qc: 194441, mat: 466385, dong: 67971, kgQc: 66452, kgMat: 97238, kgDong: 20795
+  }, {
+    d: '1-Jun', w: 'T2', wk: 'W23', qc: 33988, mat: 57563, dong: 9276, kgQc: 10897, kgMat: 9943, kgDong: 2744
+  }, {
+    d: '2-Jun', w: 'T3', wk: 'W23', qc: 26026, mat: 52835, dong: 4392, kgQc: 9694, kgMat: 19488, kgDong: 1298
+  }, {
+    d: '3-Jun', w: 'T4', wk: 'W23', qc: 32296, mat: 53098, dong: 16395, kgQc: 10745, kgMat: 11378, kgDong: 3907
+  }, {
+    d: '4-Jun', w: 'T5', wk: 'W23', qc: 21836, mat: 39854, dong: 16137, kgQc: 7631, kgMat: 14644, kgDong: 5113
+  }, {
+    d: '5-Jun', w: 'T6', wk: 'W23', qc: 35868, mat: 92773, dong: 13071, kgQc: 12111, kgMat: 20716, kgDong: 3524
+  }, {
+    d: '6-Jun', w: 'T7', wk: 'W23', qc: 46535, mat: 91880, dong: 11448, kgQc: 17190, kgMat: 20134, kgDong: 3812
+  }, {
+    d: '7-Jun', w: 'CN', wk: 'W23', qc: 196549, mat: 388003, dong: 70719, kgQc: 68268, kgMat: 96303, kgDong: 20398
+  }, {
+    d: '8-Jun', w: 'T2', wk: 'W24', qc: 36121, mat: 62732, dong: 11649, kgQc: 12063, kgMat: 13062, kgDong: 2912
+  }, {
+    d: '9-Jun', w: 'T3', wk: 'W24', qc: 25462, mat: 82610, dong: 12654, kgQc: 9416, kgMat: 21890, kgDong: 4242
+  }, {
+    d: '10-Jun', w: 'T4', wk: 'W24', qc: 35787, mat: 85981, dong: 9916, kgQc: 11967, kgMat: 13497, kgDong: 2912
+  }, {
+    d: '11-Jun', w: 'T5', wk: 'W24', qc: 29203, mat: 55030, dong: 9407, kgQc: 11294, kgMat: 15614, kgDong: 2562
+  }, {
+    d: '12-Jun', w: 'T6', wk: 'W24', qc: 43563, mat: 90818, dong: 23701, kgQc: 15695, kgMat: 18987, kgDong: 6531
+  }, {
+    d: '13-Jun', w: 'T7', wk: 'W24', qc: 50840, mat: 52966, dong: 4122, kgQc: 19656, kgMat: 11569, kgDong: 1674
+  }, {
+    d: '14-Jun', w: 'CN', wk: 'W24', qc: 220976, mat: 430137, dong: 71449, kgQc: 80091, kgMat: 94619, kgDong: 20833
+  }, {
+    d: '15-Jun', w: 'T2', wk: 'W25', qc: 39748, mat: 33418, dong: 17007, kgQc: 12834, kgMat: 6243, kgDong: 4349
+  }, {
+    d: '16-Jun', w: 'T3', wk: 'W25', qc: 26386, mat: 101213, dong: 8479, kgQc: 9012, kgMat: 23700, kgDong: 2644
+  }, {
+    d: '17-Jun', w: 'T4', wk: 'W25', qc: 39449, mat: 74504, dong: 13079, kgQc: 12351, kgMat: 12855, kgDong: 4034
+  }, {
+    d: '18-Jun', w: 'T5', wk: 'W25', qc: 30481, mat: 54443, dong: 8784, kgQc: 9152, kgMat: 13571, kgDong: 2433
+  }, {
+    d: '19-Jun', w: 'T6', wk: 'W25', qc: 44016, mat: 81090, dong: 10094, kgQc: 12878, kgMat: 15445, kgDong: 2914
+  }, {
+    d: '20-Jun', w: 'T7', wk: 'W25', qc: 50355, mat: 100052, dong: 12282, kgQc: 16289, kgMat: 17222, kgDong: 2460
+  }, {
+    d: '21-Jun', w: 'CN', wk: 'W25', qc: 230435, mat: 444720, dong: 69725, kgQc: 72516, kgMat: 89036, kgDong: 18834
+  }, {
+    d: '22-Jun', w: 'T2', wk: 'W26', qc: 39717, mat: 60005, dong: 16182, kgQc: 12576, kgMat: 14883, kgDong: 4294
+  }, {
+    d: '23-Jun', w: 'T3', wk: 'W26', qc: 26507, mat: 74567, dong: 6134, kgQc: 9165, kgMat: 18734, kgDong: 2036
+  }, {
+    d: '24-Jun', w: 'T4', wk: 'W26', qc: 40155, mat: 77087, dong: 16726, kgQc: 13256, kgMat: 16298, kgDong: 5257
+  }, {
+    d: '25-Jun', w: 'T5', wk: 'W26', qc: 31240, mat: 55544, dong: 13423, kgQc: 11272, kgMat: 16139, kgDong: 4724
+  }, {
+    d: '26-Jun', w: 'T6', wk: 'W26', qc: 42875, mat: 75110, dong: 9676, kgQc: 16669, kgMat: 14059, kgDong: 2699
+  }, {
+    d: '27-Jun', w: 'T7', wk: 'W26', qc: 45737, mat: 70499, dong: 3108, kgQc: 14943, kgMat: 16008, kgDong: 852
+  }, {
+    d: '28-Jun', w: 'CN', wk: 'W26', qc: 226231, mat: 412812, dong: 65249, kgQc: 77881, kgMat: 96121, kgDong: 19862
+  }, {
+    d: '29-Jun', w: 'T2', wk: 'W27', qc: 38366, mat: 80948, dong: 11066, kgQc: 11742, kgMat: 14672, kgDong: 3417
+  }, {
+    d: '30-Jun', w: 'T3', wk: 'W27', qc: 26810, mat: 74684, dong: 5191, kgQc: 8280, kgMat: 19927, kgDong: 1295
+  }, {
+    d: '1-Jul', w: 'T4', wk: 'W27', qc: 41653, mat: 115968, dong: 16931, kgQc: 14524, kgMat: 20396, kgDong: 4328
+  }, {
+    d: '2-Jul', w: 'T5', wk: 'W27', qc: 32308, mat: 25532, dong: 11645, kgQc: 12540, kgMat: 9718, kgDong: 4091
+  }, {
+    d: '3-Jul', w: 'T6', wk: 'W27', qc: 44560, mat: 72488, dong: 8017, kgQc: 16177, kgMat: 13985, kgDong: 2086
+  }, {
+    d: '4-Jul', w: 'T7', wk: 'W27', qc: 49280, mat: 34207, dong: 6550, kgQc: 16396, kgMat: 11122, kgDong: 1773
+  }, {
+    d: '5-Jul', w: 'CN', wk: 'W27', qc: 232977, mat: 403827, dong: 59400, kgQc: 79659, kgMat: 89819, kgDong: 16991
+  }, {
+    d: '6-Jul', w: 'T2', wk: 'W28', qc: 44055, mat: 49048, dong: 6688, kgQc: 13797, kgMat: 9754, kgDong: 2412
+  }, {
+    d: '7-Jul', w: 'T3', wk: 'W28', qc: 30700, mat: 101301, dong: 10253, kgQc: 10353, kgMat: 25561, kgDong: 3040
+  }, {
+    d: '8-Jul', w: 'T4', wk: 'W28', qc: 42450, mat: 73281, dong: 21124, kgQc: 14670, kgMat: 15976, kgDong: 6421
+  }, {
+    d: '9-Jul', w: 'T5', wk: 'W28', qc: 30667, mat: 71831, dong: 10219, kgQc: 11103, kgMat: 14236, kgDong: 3567
+  }, {
+    d: '10-Jul', w: 'T6', wk: 'W28', qc: 44902, mat: 82068, dong: 10447, kgQc: 16603, kgMat: 16535, kgDong: 2739
+  }, {
+    d: '11-Jul', w: 'T7', wk: 'W28', qc: 53842, mat: 30006, dong: 25428, kgQc: 19059, kgMat: 8476, kgDong: 4523
+  }, {
+    d: '12-Jul', w: 'CN', wk: 'W28', qc: 246616, mat: 407535, dong: 84159, kgQc: 85586, kgMat: 90538, kgDong: 22702
+  }, {
+    d: '13-Jul', w: 'T2', wk: 'W29', qc: 44749, mat: 40840, dong: 11637, kgQc: 15085, kgMat: 7419, kgDong: 3063
+  }, {
+    d: '14-Jul', w: 'T3', wk: 'W29', qc: 24620, mat: 84061, dong: 10106, kgQc: 8812, kgMat: 23047, kgDong: 3058
+  }, {
+    d: '15-Jul', w: 'T4', wk: 'W29', qc: 39091, mat: 72708, dong: 14076, kgQc: 14551, kgMat: 13640, kgDong: 3634
+  }, {
+    d: '16-Jul', w: 'T5', wk: 'W29', qc: 30154, mat: 107937, dong: 14251, kgQc: 11391, kgMat: 21862, kgDong: 4189
+  }, {
+    d: '17-Jul', w: 'T6', wk: 'W29', qc: 41968, mat: 81716, dong: 21068, kgQc: 14225, kgMat: 13700, kgDong: 6578
+  }, {
+    d: '18-Jul', w: 'T7', wk: 'W29', qc: 50762, mat: 77506, dong: 3798, kgQc: 18660, kgMat: 15979, kgDong: 1132
+  }, {
+    d: '19-Jul', w: 'CN', wk: 'W29', qc: null, mat: null, dong: null, kgQc: null, kgMat: null, kgDong: null
+  }, {
+    d: '20-Jul', w: 'T2', wk: 'W30', qc: 38695, mat: 57863, dong: 15853, kgQc: 13137, kgMat: 10173, kgDong: 4197
+  }, {
+    d: '21-Jul', w: 'T3', wk: 'W30', qc: 25128, mat: 95220, dong: 7959, kgQc: 8863, kgMat: 27980, kgDong: 2788
+  }, {
+    d: '22-Jul', w: 'T4', wk: 'W30', qc: 40518, mat: 83497, dong: null, kgQc: 14452, kgMat: 16042, kgDong: null
+  }, {
+    d: '23-Jul', w: 'T5', wk: 'W30', qc: 31978, mat: null, dong: null, kgQc: 11544, kgMat: null, kgDong: null
+  }, {
+    d: '24-Jul', w: 'T6', wk: 'W30', qc: 51545, mat: null, dong: null, kgQc: 18612, kgMat: null, kgDong: null
+  }, {
+    d: '25-Jul', w: 'T7', wk: 'W30', qc: 60869, mat: 1300, dong: null, kgQc: 27050, kgMat: 1240, kgDong: null
+  }, {
+    d: '26-Jul', w: 'CN', wk: 'W30', qc: null, mat: null, dong: null, kgQc: null, kgMat: null, kgDong: null
+  }, {
+    d: '27-Jul', w: 'T2', wk: 'W31', qc: 42502, mat: 32998, dong: 7550, kgQc: 14839, kgMat: 6357, kgDong: 1702
+  }, {
+    d: '28-Jul', w: 'T3', wk: 'W31', qc: 27829, mat: 66020, dong: 5363, kgQc: 10948, kgMat: 20657, kgDong: 1886
+  }, {
+    d: '29-Jul', w: 'T4', wk: 'W31', qc: 42705, mat: 36033, dong: 9982, kgQc: 16012, kgMat: 7416, kgDong: 2728
+  }, {
+    d: '30-Jul', w: 'T5', wk: 'W31', qc: 31610, mat: 84369, dong: 4922, kgQc: 13489, kgMat: 20299, kgDong: 1631
+  }, {
+    d: '31-Jul', w: 'T6', wk: 'W31', qc: 46798, mat: 73114, dong: 8923, kgQc: 16899, kgMat: 14074, kgDong: 2591
+  }, {
+    d: '1-Aug', w: 'T7', wk: 'W31', qc: 50154, mat: 77849, dong: 908, kgQc: 18806, kgMat: 16529, kgDong: 334
+  }, {
+    d: '2-Aug', w: 'CN', wk: 'W31', qc: null, mat: null, dong: null, kgQc: null, kgMat: null, kgDong: null
+  }, {
+    d: '3-Aug', w: 'T2', wk: 'W32', qc: null, mat: null, dong: null, kgQc: null, kgMat: null, kgDong: null
+  }, {
+    d: '4-Aug', w: 'T3', wk: 'W32', qc: null, mat: null, dong: null, kgQc: null, kgMat: null, kgDong: null
+  }, {
+    d: '5-Aug', w: 'T4', wk: 'W32', qc: null, mat: null, dong: null, kgQc: null, kgMat: null, kgDong: null
+  }, {
+    d: '6-Aug', w: 'T5', wk: 'W32', qc: null, mat: null, dong: null, kgQc: null, kgMat: null, kgDong: null
+  }, {
+    d: '7-Aug', w: 'T6', wk: 'W32', qc: null, mat: null, dong: null, kgQc: null, kgMat: null, kgDong: null
+  }, {
+    d: '8-Aug', w: 'T7', wk: 'W32', qc: null, mat: null, dong: null, kgQc: null, kgMat: null, kgDong: null
+  }, {
+    d: '9-Aug', w: 'CN', wk: 'W32', qc: null, mat: null, dong: null, kgQc: null, kgMat: null, kgDong: null
+  }, {
+    d: '10-Aug', w: 'T2', wk: 'W33', qc: null, mat: null, dong: null, kgQc: null, kgMat: null, kgDong: null
+  }, {
+    d: '11-Aug', w: 'T3', wk: 'W33', qc: null, mat: null, dong: null, kgQc: null, kgMat: null, kgDong: null
+  }, {
+    d: '12-Aug', w: 'T4', wk: 'W33', qc: null, mat: null, dong: null, kgQc: null, kgMat: null, kgDong: null
+  }, {
+    d: '13-Aug', w: 'T5', wk: 'W33', qc: null, mat: null, dong: null, kgQc: null, kgMat: null, kgDong: null
+  }, {
+    d: '14-Aug', w: 'T6', wk: 'W33', qc: null, mat: null, dong: null, kgQc: null, kgMat: null, kgDong: null
+  }
 ];
 const DN = [
   {
