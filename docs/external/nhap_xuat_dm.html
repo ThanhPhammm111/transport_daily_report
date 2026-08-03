@@ -71497,11 +71497,23 @@ function renderChiTiet() {
   let totalBk = 0;
   let totalTx = 0;
   let totalDiff = 0;
-  filteredItems.forEach(it => {
-    totalBk += it.bk || 0;
-    totalTx += it.sx || 0;
-    totalDiff += it.diff || 0;
-  });
+  if (window.ctFilterDate !== 'all') {
+    const dEntry = D.find(d => d.d === window.ctFilterDate);
+    if (dEntry && !dEntry.off && dEntry.ti) {
+      totalBk = dEntry.ti[0] || 0;
+      totalTx = dEntry.ti[3] || 0;
+    }
+  } else {
+    D.forEach(dEntry => {
+      if (!dEntry.off && !dEntry.wkTotal && !dEntry.mTotal && dEntry.ti) {
+        totalBk += dEntry.ti[0] || 0;
+        totalTx += dEntry.ti[3] || 0;
+      }
+    });
+  }
+  totalDiff = totalBk - totalTx;
+  const pickRate = totalBk > 0 ? ((totalTx / totalBk) * 100).toFixed(2) : '0.00';
+  const pickRotRate = totalBk > 0 ? ((totalDiff / totalBk) * 100).toFixed(2) : '0.00';
 
   const uniqueDates = [...new Set(allItems.map(it => it.date))];
   const monthOrder = { 'Jan':1, 'Feb':2, 'Mar':3, 'Apr':4, 'May':5, 'Jun':6, 'Jul':7, 'Aug':8, 'Sep':9, 'Oct':10, 'Nov':11, 'Dec':12 };
@@ -71571,6 +71583,8 @@ function renderChiTiet() {
           <div class="s-card sc-bk"><div class="s-label">Booking</div><div class="s-val">${fmt(totalBk)}</div></div>
           <div class="s-card sc-tx"><div class="s-label">Th\u01b0\u0323c xu\u00e2\u0301t</div><div class="s-val">${fmt(totalTx)}</div></div>
           <div class="s-card sc-diff"><div class="s-label">Ch\u00eanh l\u00ea\u0323ch</div><div class="s-val">${fmt(totalDiff)}</div></div>
+          <div class="s-card sc-pct" style="border-color:rgba(16,185,129,0.5); box-shadow:0 0 12px rgba(16,185,129,0.15);"><div class="s-label">Ti\u0309 l\u00ea\u0323 pick</div><div class="s-val" style="color:#10b981;">${pickRate}%</div></div>
+          <div class="s-card sc-pct" style="border-color:rgba(239,68,68,0.5); box-shadow:0 0 12px rgba(239,68,68,0.15);"><div class="s-label">Ti\u0309 l\u00ea\u0323 pick r\u01a1\u0301t</div><div class="s-val" style="color:#ef4444;">${pickRotRate}%</div></div>
         </div>
       </div>`;
 
@@ -71632,8 +71646,12 @@ function renderChiTiet() {
       if (cIdx >= 0 && cIdx + 1 < uniqueDates.length) {
          hasPrev = true;
          const pDate = uniqueDates[cIdx + 1];
-         const pItems = allItems.filter(it => it.date === pDate);
-         pItems.forEach(it => { prevBk += (it.bk||0); prevTx += (it.sx||0); prevDiff += (it.diff||0); });
+         const pdEntry = D.find(d => d.d === pDate);
+         if (pdEntry && !pdEntry.off && pdEntry.ti) {
+           prevBk = pdEntry.ti[0] || 0;
+           prevTx = pdEntry.ti[3] || 0;
+           prevDiff = prevBk - prevTx;
+         }
       }
     }
 
@@ -71649,10 +71667,12 @@ function renderChiTiet() {
     <div class="table-block detail-block" style="animation:fadeIn 0.3s ease">
       <div class="table-title" style="color:var(--cyan)">📦 T\u1ed5ng H\u1ee3p Theo Ng\u00e0nh H\u00e0ng</div>
       <div style="padding:0 12px">
-        <div class="summary-cards" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="summary-cards">
           <div class="s-card sc-bk"><div class="s-label">T\u1ed5ng Booking</div><div class="s-val">${fmt(totalBk)}</div>${renderDelta(totalBk, prevBk)}</div>
           <div class="s-card sc-tx"><div class="s-label">T\u1ed5ng Th\u1ef1c xu\u1ea5t</div><div class="s-val">${fmt(totalTx)}</div>${renderDelta(totalTx, prevTx)}</div>
           <div class="s-card sc-diff" style="color:#f59e0b"><div class="s-label">T\u1ed5ng Pick r\u1edbt</div><div class="s-val">${fmt(totalDiff)}</div>${renderDelta(totalDiff, prevDiff)}</div>
+          <div class="s-card sc-pct" style="border-color:rgba(16,185,129,0.5); box-shadow:0 0 12px rgba(16,185,129,0.15);"><div class="s-label">Ti\u0309 l\u00ea\u0323 pick</div><div class="s-val" style="color:#10b981;">${pickRate}%</div></div>
+          <div class="s-card sc-pct" style="border-color:rgba(239,68,68,0.5); box-shadow:0 0 12px rgba(239,68,68,0.15);"><div class="s-label">Ti\u0309 l\u00ea\u0323 pick r\u01a1\u0301t</div><div class="s-val" style="color:#ef4444;">${pickRotRate}%</div></div>
         </div>
       </div>`;
 
