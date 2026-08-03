@@ -679,11 +679,11 @@ document.addEventListener("DOMContentLoaded", function() {
 <div class="tab-nav">
   <button class="tab-btn active" id="tabXuat" onclick="switchTab('xuat')">
     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-    <span>Xuáº¥t HÃ ng</span>
+    <span>Xuất Hàng</span>
   </button>
   <button class="tab-btn" id="tabTongHopXuat" onclick="switchTab('tonghop-xuat')">
     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-    <span>Tá»•ng Há»£p Xuáº¥t HÃ ng</span>
+    <span>Tổng Hợp Xuất Hàng</span>
   </button>
       <button class="tab-btn" id="tabTongHopNhap" onclick="switchTab('tonghop-nhap')">
       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
@@ -691,15 +691,19 @@ document.addEventListener("DOMContentLoaded", function() {
     </button>
 <button class="tab-btn" id="tabNhap" onclick="switchTab('nhap')">
     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-    <span>Nháº­p HÃ ng</span>
+    <span>Nhập Hàng</span>
   </button>
   <button class="tab-btn" id="tabChiTiet" onclick="switchTab('chitiet')">
     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
-    <span>Chi Tiáº¿t Rá»›t HÃ ng</span>
+    <span>Chi Tiết Rớt Hàng</span>
+  </button>
+  <button class="tab-btn" id="tabRotHangCate" onclick="switchTab('rothang-cate')">
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+    <span>Rớt Hàng (Cate)</span>
   </button>
   <button class="tab-btn" id="tabDapUng" onclick="switchTab('dapung')">
     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-    <span>Tá»· Lá»‡ ÄÃ¡p á»¨ng</span>
+    <span>Tỷ Lệ Đáp Ứng</span>
   </button>
   <button class="tab-btn" id="tabForecast" onclick="switchTab('forecast')">
     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
@@ -711,12 +715,12 @@ document.addEventListener("DOMContentLoaded", function() {
   </button>
   <button class="tab-btn" id="tabDoiSoat" onclick="window.location.href='doi_soat/index.html'">
     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-    <span>Äá»‘i SoÃ¡t Xuáº¥t HÃ ng</span>
+    <span>Đối Soát Xuất Hàng</span>
   </button>
 </div>
 
 <div class="day-nav">
-  <button onclick="prev()" id="btnPrev">â—€ TrÆ°á»›c</button>
+  <button onclick="prev()" id="btnPrev">◀ Trước</button>
   <div class="day-info">
     <div class="date" id="navDate"></div>
     <div class="dow" id="navDow"></div>
@@ -1304736,7 +1304740,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'5410376831972',name:'LUTOSA - KHOAI TÃ‚Y ÄÃ”NG Láº NH Sá»¢I Lá»šN 450G',unit:'GÃ“I',bk:228,sx:0,nqc:null,qcr:null,hold:null,diff:228,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:0,cate_hang:'3.PASTRY AND DESSERTS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1304752,7 +1304772,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8801114164730',name:'PULMUONE - BÃNH HOTTEOK NHÃ‚N PHÃ” MAI 300G',unit:'GÃ“I',bk:140,sx:5,nqc:null,qcr:null,hold:null,diff:135,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:3.57,cate_hang:'3.PIZZA - READY MEALS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1304768,7 +1304804,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8888003652400',name:'SPRING HOME - BÃNH PARATHA Vá»Š TRUYá»€N THá»NG 325G (5x65G)',unit:'GÃ“I',bk:156,sx:74,nqc:null,qcr:null,hold:null,diff:82,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:47.44,cate_hang:'3.PASTRY AND DESSERTS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1304784,7 +1304836,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8934717261282',name:'CJ Cáº¦U TRE - CHáº¢ GIÃ’ REAL THá»ŠT 400G',unit:'GÃ“I',bk:4,sx:0,nqc:null,qcr:null,hold:null,diff:4,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:0,cate_hang:'3.HOTPOT AND FRIED'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1304800,7 +1304868,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8934717262005',name:'CJ Cáº¦U TRE - CHáº¢ GIÃ’ BÃNH TRÃNG Äáº¶C BIá»†T Háº¢I Sáº¢N 500G',unit:'GÃ“I',bk:70,sx:2,nqc:null,qcr:null,hold:null,diff:68,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:2.86,cate_hang:'3.HOTPOT AND FRIED'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1304816,7 +1304900,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8934717264474',name:'CJ Cáº¦U TRE - CHáº¢ GIÃ’ DA Xá»P NHÃ‚N TÃ”M & THá»ŠT 400G',unit:'GÃ“I',bk:270,sx:176,nqc:null,qcr:null,hold:null,diff:94,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:65.19,cate_hang:'3.HOTPOT AND FRIED'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1304832,7 +1304932,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8934717266713',name:'CJ Cáº¦U TRE - CHáº¢ GIÃ’ DA Gáº O Háº¢I Sáº¢N 400G',unit:'GÃ“I',bk:56,sx:12,nqc:null,qcr:null,hold:null,diff:44,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:21.43,cate_hang:'3.HOTPOT AND FRIED'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1304848,7 +1304964,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8934717275081',name:'CJ Cáº¦U TRE - HÃ Cáº¢O NHÃ‚N TÃ”M Cáº¢I BÃ“ XÃ”I 300G',unit:'GÃ“I',bk:186,sx:134,nqc:null,qcr:null,hold:null,diff:52,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:72.04,cate_hang:'3.DUMPLINGS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1304864,7 +1304996,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8934717401343',name:'BIBIGO - BÃNH Xáº¾P MANDU NHÃ‚N Háº¢I Sáº¢N 175G',unit:'GÃ“I',bk:118,sx:0,nqc:null,qcr:null,hold:null,diff:118,note:'Kho pick thiáº¿u',pct:0,cate_hang:'3.DUMPLINGS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1304880,7 +1305028,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8934717402432',name:'BIBIGO - BÃNH Xáº¾P KIá»‚U HÃ€N QUá»C 365 Háº¢I Sáº¢N THáº¬P Cáº¨M 250G (COMBO 1+1)',unit:'GÃ“I',bk:90,sx:8,nqc:null,qcr:null,hold:null,diff:82,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:8.89,cate_hang:'3.DUMPLINGS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1304896,7 +1305060,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8935039571028',name:'AJINOMOTO - BÃNH Xáº¾P KIá»‚U NHáº¬T GYOZA NHÃ‚N THá»ŠT HEO VÃ€ GÃ€ 114G',unit:'GÃ“I',bk:16,sx:0,nqc:null,qcr:null,hold:null,diff:16,note:'Kho pick thiáº¿u',pct:0,cate_hang:'3.DUMPLINGS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1304912,7 +1305092,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8935101607211',name:'O\'FOOD - Sá»¦I Cáº¢O NHÃ‚N THá»ŠT HEO RAU Cá»¦ 450G',unit:'GÃ“I',bk:280,sx:184,nqc:null,qcr:null,hold:null,diff:96,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:65.71,cate_hang:'3.DUMPLINGS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1304928,7 +1305124,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8935275600100',name:'OG PARTY - CHáº¢ Má»°C 240G',unit:'GÃ“I',bk:124,sx:3,nqc:null,qcr:null,hold:null,diff:121,note:'Kho pick thiáº¿u',pct:2.42,cate_hang:'3.HOTPOT AND FRIED'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1304944,7 +1305156,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8935275600797',name:'OG PARTY - Má»°C VÃ’NG XÃ™ 200G',unit:'GÃ“I',bk:66,sx:0,nqc:null,qcr:null,hold:null,diff:66,note:'Kho pick thiáº¿u',pct:0,cate_hang:'3.HOTPOT AND FRIED'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1304960,7 +1305188,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8935297102972',name:'CJ Cáº¦U TRE - CÆ M RANG DÆ¯A BÃ’ 210G',unit:'GÃ“I',bk:36,sx:0,nqc:null,qcr:null,hold:null,diff:36,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:0,cate_hang:'3.PIZZA - READY MEALS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1304976,7 +1305220,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8935297105409',name:'BIBIGO - BÃNH RÃN KIá»‚U HÃ€N QUá»C HOTTEOK NHÃ‚N PIZZA 300G',unit:'GÃ“I',bk:58,sx:12,nqc:null,qcr:null,hold:null,diff:46,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:20.69,cate_hang:'3.PIZZA - READY MEALS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1304992,7 +1305252,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8935319710499',name:'CP - GÃ€ KARAAGE CHIÃŠN GIÃ’N 300G',unit:'GÃ“I',bk:126,sx:98,nqc:null,qcr:null,hold:null,diff:28,note:'Kho pick thiáº¿u',pct:77.78,cate_hang:'3.HOTPOT AND FRIED'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305008,7 +1305284,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8935360200598',name:'SAVORA - THÄ‚N NGOáº I BÃ’ HOKUBEE ÃšC ÄL - 200G',unit:'KHAY',bk:128,sx:8,nqc:null,qcr:null,hold:null,diff:120,note:'Kho pick dÆ°',pct:6.25,cate_hang:'3.FROZEN MEAT'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305024,7 +1305316,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8936013231631',name:'SG FOOD - CÆ M Gáº O Lá»¨T GÃ€ NÆ¯á»šNG LÃ CHANH 200G',unit:'Há»˜P',bk:8,sx:0,nqc:null,qcr:null,hold:null,diff:8,note:'Kho pick thiáº¿u',pct:0,cate_hang:'3.PIZZA - READY MEALS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305040,7 +1305348,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8936013238333',name:'SG FOOD - CÆ M CHIÃŠN Háº¢I Sáº¢N NGÅ¨ Sáº®C 200G',unit:'GÃ“I',bk:18,sx:0,nqc:null,qcr:null,hold:null,diff:18,note:'Kho pick thiáº¿u',pct:0,cate_hang:'3.PIZZA - READY MEALS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305056,7 +1305380,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8936013238791',name:'SG FOOD - Má»² Ã Xá»T BÃ’ Báº°M 250G',unit:'Há»˜P',bk:362,sx:254,nqc:null,qcr:null,hold:null,diff:108,note:'Kho pick thiáº¿u',pct:70.17,cate_hang:'3.PIZZA - READY MEALS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305072,7 +1305412,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8936076279731',name:'SUNDO - BÃNH MÃŒ QUE XÃ XÃU THá»ŠT XÃ”NG KHÃ“I 189G',unit:'GÃ“I',bk:26,sx:0,nqc:null,qcr:null,hold:null,diff:26,note:'Kho pick thiáº¿u',pct:0,cate_hang:'3.PASTRY AND DESSERTS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305088,7 +1305444,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8936077110071',name:'BAMBOO - XÃU Máº I TÃ”M 300G',unit:'GÃ“I',bk:52,sx:14,nqc:null,qcr:null,hold:null,diff:38,note:'Kho pick thiáº¿u',pct:26.92,cate_hang:'3.DUMPLINGS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305104,7 +1305476,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8936077110149',name:'BAMBOO - HÃ Cáº¢O SÃ’ ÄIá»†P 300G',unit:'GÃ“I',bk:96,sx:66,nqc:null,qcr:null,hold:null,diff:30,note:'Kho pick thiáº¿u',pct:68.75,cate_hang:'3.DUMPLINGS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305120,7 +1305508,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8936077110262',name:'BAMBOO - BÃNH BAO KIM SA 240G',unit:'GÃ“I',bk:114,sx:36,nqc:null,qcr:null,hold:null,diff:78,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:31.58,cate_hang:'3.DUMPLINGS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305136,7 +1305540,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8936077110286',name:'BAMBOO - HÃ Cáº¢O BABY 300G',unit:'GÃ“I',bk:36,sx:0,nqc:null,qcr:null,hold:null,diff:36,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:0,cate_hang:'3.DUMPLINGS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305152,7 +1305572,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8936077113232',name:'KINGxBON - PIZZA Háº¢I Sáº¢N 220G',unit:'CÃI',bk:180,sx:3,nqc:null,qcr:null,hold:null,diff:177,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:1.67,cate_hang:'3.PIZZA - READY MEALS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305168,7 +1305604,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8936077113263',name:'KINGxBON - PIZZA THáº¬P Cáº¨M 210G',unit:'CÃI',bk:58,sx:0,nqc:null,qcr:null,hold:null,diff:58,note:'Kho pick dÆ°',pct:0,cate_hang:'3.PIZZA - READY MEALS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305184,7 +1305636,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8936077113676',name:'BON - CALZONE - PIZZA Gáº¬P PHÃ” MAI CÃ€ CHUA (100G*2)',unit:'Há»˜P',bk:64,sx:0,nqc:null,qcr:null,hold:null,diff:64,note:'',pct:0,cate_hang:'3.PIZZA - READY MEALS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305200,7 +1305668,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8936077113713',name:'BAMBOO - BÃNH BAO NGUYÃŠN CÃM NHÃ‚N GÃ€ XÃ‰ SA Táº¾ 110G*6',unit:'GÃ“I',bk:4,sx:0,nqc:null,qcr:null,hold:null,diff:4,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:0,cate_hang:'3.DUMPLINGS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305216,7 +1305700,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8936083243350',name:'CP - CÃ VIÃŠN CAO Cáº¤P 500G',unit:'GÃ“I',bk:422,sx:9,nqc:null,qcr:null,hold:null,diff:413,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:2.13,cate_hang:'3.HOTPOT AND FRIED'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305232,7 +1305732,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8936144012529',name:'TVP - NEM NÆ¯á»šNG 250G',unit:'GÃ“I',bk:12,sx:0,nqc:null,qcr:null,hold:null,diff:12,note:'Kho pick thiáº¿u',pct:0,cate_hang:'3.HOTPOT AND FRIED'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305248,7 +1305764,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8936144012970',name:'TVP - BÃNH MÃŒ QUE PATE CHÃ€ BÃ”NG 201G',unit:'GÃ“I',bk:18,sx:0,nqc:null,qcr:null,hold:null,diff:18,note:'Kho pick thiáº¿u',pct:0,cate_hang:'3.PASTRY AND DESSERTS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305264,7 +1305796,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8936190860716',name:'FRESHFOCO-BA CHá»ˆ BÃ’ ÃšC NGÅ¨ Cá»C 200G ÄÃ”NG Láº NH',unit:'Vá»ˆ',bk:630,sx:1926,nqc:null,qcr:null,hold:null,diff:-1296,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:305.71,cate_hang:'3.FROZEN MEAT'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305280,7 +1305828,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8936202460316',name:'SP - CÃ THU 1 Náº®NG 500G',unit:'GÃ“I',bk:4,sx:0,nqc:null,qcr:null,hold:null,diff:4,note:'Kho pick thiáº¿u',pct:0,cate_hang:'3.FROZEN FISH AND SEAFOOD'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305296,7 +1305860,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8936207132034',name:'AUKOBE - THÄ‚N NGOáº I BÃ’ TUYáº¾T 200G',unit:'Há»˜P',bk:102,sx:14,nqc:null,qcr:null,hold:null,diff:88,note:'Kho pick dÆ°',pct:13.73,cate_hang:'3.FROZEN MEAT'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305312,7 +1305892,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8936219600002',name:'HOA DOANH - CÃ VIÃŠN 200G',unit:'GÃ“I',bk:196,sx:122,nqc:null,qcr:null,hold:null,diff:74,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:62.24,cate_hang:'3.HOTPOT AND FRIED'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305328,7 +1305924,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8936220300274',name:'JIN YANG - CHáº¢ TÃ”M PHá»ˆ THÃšY 130G',unit:'GÃ“I',bk:168,sx:112,nqc:null,qcr:null,hold:null,diff:56,note:'',pct:66.67,cate_hang:'3.HOTPOT AND FRIED'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305344,7 +1305956,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8936239090050',name:'365 FRESH FOODS - BA CHá»ˆ BÃ’ Má»¸ TÃšI ZIP 500G',unit:'TÃšI',bk:254,sx:174,nqc:null,qcr:null,hold:null,diff:80,note:'Kho pick thiáº¿u',pct:68.5,cate_hang:'3.FROZEN MEAT'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305360,7 +1305988,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8938508228850',name:'4P\'s - PIZZA GÃ€ TERIYAKI 150G',unit:'Há»˜P',bk:80,sx:58,nqc:null,qcr:null,hold:null,diff:22,note:'Kho pick dÆ°',pct:72.5,cate_hang:'3.PIZZA - READY MEALS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305376,7 +1306020,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8938521793090',name:'YFC - Má»°C GHIM MINO 9/12 300G',unit:'GÃ“I',bk:10,sx:0,nqc:null,qcr:null,hold:null,diff:10,note:'Kho pick dÆ°',pct:0,cate_hang:'3.FROZEN FISH AND SEAFOOD'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305392,7 +1306052,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8938521793335',name:'YFC - THá»ŠT Bá»€ Bá»€ 250G',unit:'GÃ“I',bk:36,sx:0,nqc:null,qcr:null,hold:null,diff:36,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:0,cate_hang:'3.FROZEN FISH AND SEAFOOD'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305408,7 +1306084,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8938527710374',name:'SEAPRODEX - Má»°C á»NG NGUYÃŠN CON 425G',unit:'GÃ“I',bk:42,sx:0,nqc:null,qcr:null,hold:null,diff:42,note:'Kho pick thiáº¿u',pct:0,cate_hang:'3.FROZEN FISH AND SEAFOOD'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305424,7 +1306116,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8938532826008',name:'O\'SMILES - BÃNH MÃŒ TÆ¯Æ I ÄL 350G (5x70G)',unit:'GÃ“I',bk:496,sx:382,nqc:null,qcr:null,hold:null,diff:114,note:'Kho pick thiáº¿u',pct:77.02,cate_hang:'3.PASTRY AND DESSERTS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305440,7 +1306148,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8938532826183',name:'O\'SMILES - BÃNH MÃŒ Lá»¢I KHUáº¨N ÄA Háº T PROBIOTIC 50Gx4',unit:'GÃ“I',bk:82,sx:66,nqc:null,qcr:null,hold:null,diff:16,note:'Kho pick dÆ°',pct:80.49,cate_hang:'3.PASTRY AND DESSERTS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305456,7 +1306180,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8938535604238',name:'TPN - CÃ Há»’I PHI LÃŠ Cáº®T KHÃšC ÄÃ”NG Láº NH 200G',unit:'KHAY',bk:24,sx:0,nqc:null,qcr:null,hold:null,diff:24,note:'',pct:0,cate_hang:'3.FROZEN FISH AND SEAFOOD'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305472,7 +1306212,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8938535604597',name:'TPN - CÃ TRá»¨NG CANADA 400G',unit:'Vá»ˆ',bk:190,sx:148,nqc:null,qcr:null,hold:null,diff:42,note:'Kho pick thiáº¿u',pct:77.89,cate_hang:'3.FROZEN FISH AND SEAFOOD'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305488,7 +1306244,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8938539773015',name:'HETORI - PIZZA Háº¢I Sáº¢N 150G',unit:'Há»˜P',bk:30,sx:28,nqc:null,qcr:null,hold:null,diff:2,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:93.33,cate_hang:'3.PIZZA - READY MEALS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305504,7 +1306276,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8938555386015',name:'OPLANT - BÃNH MÃŒ TÆ¯Æ I VIá»†T NAM ÄL (10X30G)',unit:'GÃ“I',bk:150,sx:126,nqc:null,qcr:null,hold:null,diff:24,note:'Kho pick thiáº¿u',pct:84,cate_hang:'3.PASTRY AND DESSERTS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305520,7 +1306308,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8938559140002',name:'MELTIQUE BEEF - Äáº¦U THÄ‚N NGOáº I BÃ’ ÃšC HOKUBEE 200G',unit:'Há»˜P',bk:2,sx:0,nqc:null,qcr:null,hold:null,diff:2,note:'Kho pick dÆ°',pct:0,cate_hang:'3.FROZEN MEAT'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305536,7 +1306340,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'8938562334023',name:'BE\'S - BÃNH HOTDOG TAM GIÃC PHÃ” MAI BÃ’ CÆ¯á»œI 208G (52G*4)',unit:'Há»˜P',bk:44,sx:25,nqc:null,qcr:null,hold:null,diff:19,note:'Kho pick thiáº¿u',pct:56.82,cate_hang:'3.PIZZA - READY MEALS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305552,7 +1306372,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'9555715202061',name:'CB - COMBO CÃ VIÃŠN LUCKY 5 TRONG 1 500G',unit:'GÃ“I',bk:4,sx:0,nqc:null,qcr:null,hold:null,diff:4,note:'Kho pick dÆ°',pct:0,cate_hang:'3.HOTPOT AND FRIED'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305568,7 +1306404,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'ÄÃ”NG',code:'9555894504567',name:'EB - Äáº¬U HÅ¨ CÃ PHÃ” MAI 500G',unit:'GÃ“I',bk:212,sx:160,nqc:null,qcr:null,hold:null,diff:52,note:'Kho pick dÆ°',pct:75.47,cate_hang:'3.HOTPOT AND FRIED'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305584,7 +1306436,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'3073780970150',name:'CON BÃ’ CÆ¯á»œI - PHÃ” MAI 8M LIGHT EXP 120G',unit:'Há»˜P',bk:120,sx:0,nqc:null,qcr:null,hold:null,diff:120,note:'Kho pick thiáº¿u',pct:0,cate_hang:'3.BUTTER AND CHEESE'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305600,7 +1306468,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'3073781110685',name:'BELCUBE - PHÃ” MAI Vá»Š Sá»®A GÃ“I 15 VIÃŠN - 78G',unit:'Há»˜P',bk:99,sx:0,nqc:null,qcr:null,hold:null,diff:99,note:'',pct:0,cate_hang:'3.BUTTER AND CHEESE'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305616,7 +1306500,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'3073781154351',name:'CON BÃ’ CÆ¯á»œI - PHÃ” MAI CON BÃ’ CÆ¯á»œI 8M 112G',unit:'Há»˜P',bk:274,sx:0,nqc:null,qcr:null,hold:null,diff:274,note:'',pct:0,cate_hang:'3.BUTTER AND CHEESE'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305632,7 +1306532,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'3073781203875',name:'BELCUBE - PHÃ” MAI Vá»Š VIá»†T QUáº¤T GÃ“I 15 VIÃŠN - 78G',unit:'Há»˜P',bk:162,sx:0,nqc:null,qcr:null,hold:null,diff:162,note:'',pct:0,cate_hang:'3.BUTTER AND CHEESE'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305648,7 +1306564,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'3073781214673',name:'KIRI - PHÃ” MAI Vá»Š ÄÃ€O HOA NHÃ€I 15 VIÃŠN GÃ“I 78G',unit:'GÃ“I',bk:36,sx:0,nqc:null,qcr:null,hold:null,diff:36,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:0,cate_hang:'3.BUTTER AND CHEESE'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305664,7 +1306596,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'3184030003617',name:'PAYSAN BRETON - PHÃ” MAI Sá»¢I EMMENTAL 70G',unit:'GÃ“I',bk:108,sx:0,nqc:null,qcr:null,hold:null,diff:108,note:'Kho pick dÆ°',pct:0,cate_hang:'3.BUTTER AND CHEESE'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305680,7 +1306628,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'3412290032291',name:'PAYSAN BRETON - KEM Xá»ŠT 250G',unit:'CHAI',bk:22,sx:0,nqc:null,qcr:null,hold:null,diff:22,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:0,cate_hang:'3.BUTTER AND CHEESE'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305696,7 +1306660,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'4014500028835',name:'ZOTT - PHÃ” MAI LÃT SANDWICH 200G',unit:'CÃI',bk:24,sx:20,nqc:null,qcr:null,hold:null,diff:4,note:'Kho pick dÆ°',pct:83.33,cate_hang:'3.BUTTER AND CHEESE'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305712,7 +1306692,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'40338736',name:'MONTE - VÃNG Sá»®A VANI Lá»C 4 X 55G',unit:'Lá»C',bk:194,sx:192,nqc:null,qcr:null,hold:null,diff:2,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:98.97,cate_hang:'3.BUTTER AND CHEESE'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305728,7 +1306724,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'5704025027640',name:'EMBORG - BÆ  Láº T COOK & BAKE 200G',unit:'GÃ“I',bk:190,sx:0,nqc:null,qcr:null,hold:null,diff:190,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:0,cate_hang:'3.BUTTER AND CHEESE'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305744,7 +1306756,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'6954463411658',name:'PULMUONE - Má»² UDON Äáº¬U HÅ¨ CHáº¢ CÃ 275G',unit:'GÃ“I',bk:34,sx:0,nqc:null,qcr:null,hold:null,diff:34,note:'Kho pick thiáº¿u',pct:0,cate_hang:'3.OTHER CHILLED PRODUCTS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305760,7 +1306788,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'7033352319134',name:'LEROY - CÃ Há»’I NAUY XÃ”NG KHÃ“I 100G',unit:'GÃ“I',bk:16,sx:0,nqc:null,qcr:null,hold:null,diff:16,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:0,cate_hang:'3.HAM AND SAUSAGES'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305776,7 +1306820,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8716605001022',name:'GRAND\'OR - PHÃ” MAI XANH DANABLUE 100G',unit:'Há»˜P',bk:4,sx:0,nqc:null,qcr:null,hold:null,diff:4,note:'Kho pick thiáº¿u',pct:0,cate_hang:'3.BUTTER AND CHEESE'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305792,7 +1306852,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8850329003624',name:'MEIJI - Sá»®A THANH TRÃ™NG LACTOSE FREE 946ML',unit:'Há»˜P',bk:47,sx:0,nqc:null,qcr:null,hold:null,diff:47,note:'',pct:0,cate_hang:'3.FRESH MILK'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305808,7 +1306884,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8850329103034',name:'MEIJI - Sá»®A THANH TRÃ™NG Vá»Š SOCOLA 946ML',unit:'CHAI',bk:157,sx:172,nqc:null,qcr:null,hold:null,diff:-15,note:'',pct:109.55,cate_hang:'3.FRESH MILK'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305824,7 +1306916,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8850329310173',name:'MEIJI - Sá»®A CHUA ORIGINAL 90G',unit:'Há»˜P',bk:320,sx:0,nqc:null,qcr:null,hold:null,diff:320,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:0,cate_hang:'3.YOGURT'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305840,7 +1306948,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8850329536511',name:'MEIJI - Sá»®A CHUA Uá»NG Vá»Š CAM Lá»C 4*85ML',unit:'Lá»C',bk:84,sx:0,nqc:null,qcr:null,hold:null,diff:84,note:'Kho pick thiáº¿u',pct:0,cate_hang:'3.DRINKING YOGURT'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305856,7 +1306980,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8850329809837',name:'MEIJI - Sá»®A CHUA KIá»‚U HY Láº P Vá»Š Tá»° NHIÃŠN 500G',unit:'Há»˜P',bk:12,sx:0,nqc:null,qcr:null,hold:null,diff:12,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:0,cate_hang:'3.YOGURT'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305872,7 +1307012,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8850393919968',name:'BETAGEN - Sá»®A CHUA Uá»NG HÆ¯Æ NG Tá»° NHIÃŠN 700ML',unit:'CHAI',bk:216,sx:210,nqc:null,qcr:null,hold:null,diff:6,note:'',pct:97.22,cate_hang:'3.DRINKING YOGURT'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305888,7 +1307044,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8934572205544',name:'VISSAN - GIÃ’ Lá»¤A Äáº¶C BIá»†T 500G',unit:'GÃ“I',bk:140,sx:142,nqc:null,qcr:null,hold:null,diff:-2,note:'Kho pick dÆ°',pct:101.43,cate_hang:'3.HAM AND SAUSAGES'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305904,7 +1307076,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8934673300964',name:'VINAMILK - SCU GREEN FARM 200ML',unit:'Há»˜P',bk:58,sx:46,nqc:null,qcr:null,hold:null,diff:12,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:79.31,cate_hang:'3.DRINKING YOGURT'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305920,7 +1307108,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8934673400510',name:'VINAMILK - SCU PROBI ÄÆ¯á»œNG 65ML',unit:'Lá»C',bk:75,sx:0,nqc:null,qcr:null,hold:null,diff:75,note:'',pct:0,cate_hang:'3.DRINKING YOGURT'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305936,7 +1307140,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8934673500432',name:'VINAMILK - SCA TRÃ‚N CHÃ‚U ÄÆ¯á»œNG ÄEN 100G',unit:'Há»˜P',bk:92,sx:88,nqc:null,qcr:null,hold:null,diff:4,note:'Kho pick thiáº¿u',pct:95.65,cate_hang:'3.YOGURT'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305952,7 +1307172,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8934673500944',name:'VINAMILK - SCA VIá»†T QUáº¤T ÃT ÄÆ¯á»œNG 100G',unit:'Há»˜P',bk:624,sx:504,nqc:null,qcr:null,hold:null,diff:120,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:80.77,cate_hang:'3.YOGURT'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305968,7 +1307204,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8934673538824',name:'VINAMILK - SCA Náº¾P Cáº¨M 100G',unit:'Há»˜P',bk:568,sx:272,nqc:null,qcr:null,hold:null,diff:296,note:'Kho pick dÆ°',pct:47.89,cate_hang:'3.YOGURT'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1305984,7 +1307236,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8934673606820',name:'VINAMILK - SCA CÃ“ ÄÆ¯á»œNG 100G',unit:'Há»˜P',bk:1224,sx:1248,nqc:null,qcr:null,hold:null,diff:-24,note:'Kho pick dÆ°',pct:101.96,cate_hang:'3.YOGURT'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306000,7 +1307268,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8934673608824',name:'VINAMILK - SCA TRÃI CÃ‚Y 100G',unit:'Há»˜P',bk:468,sx:480,nqc:null,qcr:null,hold:null,diff:-12,note:'Kho pick thiáº¿u',pct:102.56,cate_hang:'3.YOGURT'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306016,7 +1307300,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8935007110457',name:'LOTHAMILK - SCA NHA ÄAM 95G',unit:'Há»˜P',bk:840,sx:864,nqc:null,qcr:null,hold:null,diff:-24,note:'Kho pick dÆ°',pct:102.86,cate_hang:'3.YOGURT'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306032,7 +1307332,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8935007147132',name:'LOTHAMILK - SCU CHAI 1760ML',unit:'CHAI',bk:12,sx:0,nqc:null,qcr:null,hold:null,diff:12,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:0,cate_hang:'3.DRINKING YOGURT'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306048,7 +1307364,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8935007147200',name:'LOTHAMILK - SCA CÃ“ ÄÆ¯á»œNG 95G',unit:'Há»˜P',bk:1244,sx:1008,nqc:null,qcr:null,hold:null,diff:236,note:'Kho pick thiáº¿u',pct:81.03,cate_hang:'3.YOGURT'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306064,7 +1307396,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8935058911645',name:'CP - XÃšC XÃCH COCKTAIL XÃ”NG KHÃ“I 250G',unit:'GÃ“I',bk:320,sx:328,nqc:null,qcr:null,hold:null,diff:-8,note:'Kho pick thiáº¿u',pct:102.5,cate_hang:'3.HAM AND SAUSAGES'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306080,7 +1307428,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8935058950927',name:'CP - TÃ€U HÅ¨ TRá»¨NG 220G',unit:'CÃI',bk:144,sx:0,nqc:null,qcr:null,hold:null,diff:144,note:'',pct:0,cate_hang:'3.OTHER CHILLED PRODUCTS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306096,7 +1307460,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8935101608102',name:'JONGGA - KIM CHI Cáº¢I THáº¢O Cáº®T LÃT 450G',unit:'Há»˜P',bk:208,sx:206,nqc:null,qcr:null,hold:null,diff:2,note:'',pct:99.04,cate_hang:'3.OTHER CHILLED PRODUCTS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306112,7 +1307492,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8935128710093',name:'BOTTEGA ZELACHI - PHÃ” MAI MOZZARELLA KHá»I 200G',unit:'GÃ“I',bk:12,sx:0,nqc:null,qcr:null,hold:null,diff:12,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:0,cate_hang:'3.BUTTER AND CHEESE'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306128,7 +1307524,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8935217410309',name:'TH TRUE MILK - SC MEN Sá»NG TRÃI CÃ‚Y Tá»° NHIÃŠN 100G',unit:'Há»˜P',bk:724,sx:0,nqc:null,qcr:null,hold:null,diff:724,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:0,cate_hang:'3.YOGURT'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306144,7 +1307556,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8935217411542',name:'TH TRUE MILK - SCU HÆ¯Æ NG DÃ‚U 85*4 ML',unit:'Lá»C',bk:95,sx:114,nqc:null,qcr:null,hold:null,diff:-19,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:120,cate_hang:'3.DRINKING YOGURT'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306160,7 +1307588,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8935217413102',name:'TH TRUE MILK - SCA Dá»ªA',unit:'Há»˜P',bk:1020,sx:520,nqc:null,qcr:null,hold:null,diff:500,note:'Kho pick rá»›t nguyÃªn mÃ£',pct:50.98,cate_hang:'3.YOGURT'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306176,7 +1307620,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8935217413508',name:'TH TRUE MILK - SC ÃT ÄÆ¯á»œNG 100G',unit:'Há»˜P',bk:2904,sx:2928,nqc:null,qcr:null,hold:null,diff:-24,note:'Kho pick dÆ°',pct:100.83,cate_hang:'3.YOGURT'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306192,7 +1307652,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8935217430109',name:'TH TRUE MILK - BÆ  Láº T Tá»° NHIÃŠN Vá»ˆ 10X10G',unit:'GÃ“I',bk:536,sx:0,nqc:null,qcr:null,hold:null,diff:536,note:'Kho pick thiáº¿u',pct:0,cate_hang:'3.BUTTER AND CHEESE'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306208,7 +1307684,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8935297104693',name:'BIBIGO - KIM CHI Cáº¢I THáº¢O CÃ‚Y 500G',unit:'GÃ“I',bk:4,sx:0,nqc:null,qcr:null,hold:null,diff:4,note:'Kho pick thiáº¿u',pct:0,cate_hang:'3.OTHER CHILLED PRODUCTS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306224,7 +1307716,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8936000750077',name:'ICHIBAN - Äáº¬U HÅ¨ Má»€M OME 330G',unit:'Há»˜P',bk:326,sx:329,nqc:null,qcr:null,hold:null,diff:-3,note:'',pct:100.92,cate_hang:'3.OTHER CHILLED PRODUCTS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306240,7 +1307748,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8936000750220',name:'ICHIBAN - Äáº¬U HÅ¨ TRá»¨NG ICHI - SAKURA 160G',unit:'GÃ“I',bk:444,sx:394,nqc:null,qcr:null,hold:null,diff:50,note:'Kho pick thiáº¿u',pct:88.74,cate_hang:'3.OTHER CHILLED PRODUCTS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306256,7 +1307780,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8936000750855',name:'ICHIBAN - Sá»®A Äáº¬U NÃ€NH 800ML',unit:'CHAI',bk:228,sx:143,nqc:null,qcr:null,hold:null,diff:85,note:'NCC giao thiáº¿u',pct:62.72,cate_hang:'3.DRINKS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306272,7 +1307812,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8936000751050',name:'ICHIBAN - Äáº¬U HÅ¨ CHIÃŠN ICHI - SAKURA 500G',unit:'GÃ“I',bk:368,sx:182,nqc:null,qcr:null,hold:null,diff:186,note:'',pct:49.46,cate_hang:'3.OTHER CHILLED PRODUCTS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306288,7 +1307844,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8936009793174',name:'MORINAGA - Sá»®A CHUA KHÃ”NG BÃ‰O NHA ÄAM 100G',unit:'Há»˜P',bk:496,sx:508,nqc:null,qcr:null,hold:null,diff:-12,note:'NCC giao thiáº¿u',pct:102.42,cate_hang:'3.YOGURT'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306304,7 +1307876,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8936012063028',name:'Má»˜C CHÃ‚U CREAMERY - SCA KHÃ”NG ÄÆ¯á»œNG 100G',unit:'Há»˜P',bk:180,sx:152,nqc:null,qcr:null,hold:null,diff:28,note:'',pct:84.44,cate_hang:'3.YOGURT'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306320,7 +1307908,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8936012063127',name:'Má»˜C CHÃ‚U CREAMERY - Sá»®A THANH TRÃ™NG NGUYÃŠN CHáº¤T HÃ”P 450ML',unit:'Há»˜P',bk:729,sx:601,nqc:null,qcr:null,hold:null,diff:128,note:'',pct:82.44,cate_hang:'3.FRESH MILK'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306336,7 +1307940,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8936034876767',name:'PONNIE - XÃšC XÃCH VÃ’NG PHÃ” MAI 200G',unit:'GÃ“I',bk:236,sx:245,nqc:null,qcr:null,hold:null,diff:-9,note:'',pct:103.81,cate_hang:'3.HAM AND SAUSAGES'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306352,7 +1307972,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8936034877856',name:'MEATDELI - Má»  HEO Sáº CH NGUYÃŠN CHáº¤T 330G',unit:'HÅ¨',bk:116,sx:118,nqc:null,qcr:null,hold:null,diff:-2,note:'',pct:101.72,cate_hang:'3.OTHER CHILLED PRODUCTS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306368,7 +1308004,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8936045450130',name:'NIPPON CHV - BA Rá»ŒI XÃ”NG KHÃ“I 200G',unit:'GÃ“I',bk:200,sx:6,nqc:null,qcr:null,hold:null,diff:194,note:'',pct:3,cate_hang:'3.HAM AND SAUSAGES'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306384,7 +1308036,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8936077114345',name:'BAMBOO - BÃNH BAO Gáº O Lá»¨T NHÃ‚N THá»ŠT BÃ’ PHÃ” MAI 220G (110Gx2)',unit:'GÃ“I',bk:150,sx:152,nqc:null,qcr:null,hold:null,diff:-2,note:'NCC giao thiáº¿u',pct:101.33,cate_hang:'3.OTHER CHILLED PRODUCTS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306400,7 +1308068,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8936146447305',name:'G - NEM CHUA BÃŒ á»šT XIÃŠM XANH 180G',unit:'GÃ“I',bk:140,sx:146,nqc:null,qcr:null,hold:null,diff:-6,note:'',pct:104.29,cate_hang:'3.HAM AND SAUSAGES'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306416,7 +1308100,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8936195181700',name:'HAHA - CHáº¢ á»šT XIÃŠM XANH 500G',unit:'GÃ“I',bk:66,sx:0,nqc:null,qcr:null,hold:null,diff:66,note:'',pct:0,cate_hang:'3.HAM AND SAUSAGES'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306432,7 +1308132,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8936202460286',name:'SP - KHÃ” CÃ CÆ M 200G',unit:'GÃ“I',bk:14,sx:0,nqc:null,qcr:null,hold:null,diff:14,note:'',pct:0,cate_hang:'3.DRIED & PROCESSED FISH AND SEAFOOD'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306448,7 +1308164,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8936210411591',name:'KITKOOL - BÃNH BAO BÃ Äá»Ž NHÃ‚N THá»ŠT BÃ’ PHÃ” MAI MOZZARELLA 300G',unit:'GÃ“I',bk:36,sx:0,nqc:null,qcr:null,hold:null,diff:36,note:'',pct:0,cate_hang:'3.OTHER CHILLED PRODUCTS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306464,7 +1308196,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8938500490989',name:'IKA - CHÃ‚N GIÃ’ á»¦ XÃŒ Dáº¦U 250G',unit:'GÃ“I',bk:74,sx:0,nqc:null,qcr:null,hold:null,diff:74,note:'',pct:0,cate_hang:'3.HAM AND SAUSAGES'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306480,7 +1308228,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8938500844027',name:'Vá»Š NGUYÃŠN - Äáº¬U HÅ¨ TA 280G',unit:'Há»˜P',bk:1052,sx:1084,nqc:null,qcr:null,hold:null,diff:-32,note:'',pct:103.04,cate_hang:'3.OTHER CHILLED PRODUCTS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306496,7 +1308260,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8938500844157',name:'Vá»Š NGUYÃŠN - Äáº¬U HÅ¨ CHIÃŠN LÆ¯á»šT VÃN 300G',unit:'Há»˜P',bk:244,sx:0,nqc:null,qcr:null,hold:null,diff:244,note:'',pct:0,cate_hang:'3.OTHER CHILLED PRODUCTS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306512,7 +1308292,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8938500844430',name:'Vá»Š NGUYÃŠN - Äáº¬U HÅ¨ KY CUá»˜N TÆ¯Æ I 200G',unit:'Há»˜P',bk:98,sx:2,nqc:null,qcr:null,hold:null,diff:96,note:'',pct:2.04,cate_hang:'3.OTHER CHILLED PRODUCTS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306528,7 +1308324,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8938504823189',name:'TIáº¾N Táº¤N Äáº T - Láº P XÆ¯á»žNG Vá»Š MAI QUáº¾ Lá»˜ 500G',unit:'GÃ“I',bk:14,sx:0,nqc:null,qcr:null,hold:null,diff:14,note:'',pct:0,cate_hang:'3.HAM AND SAUSAGES'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306544,7 +1308356,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8938508547579',name:'BIBIGO - KIM CHI Cáº¢I THáº¢O Cáº®T LÃT 500G',unit:'Há»˜P',bk:210,sx:224,nqc:null,qcr:null,hold:null,diff:-14,note:'',pct:106.67,cate_hang:'3.OTHER CHILLED PRODUCTS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306560,7 +1308388,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8938508547616',name:'BIBIGO - KIM CHI Cáº¢I THáº¢O NGÃ’ 500G',unit:'Há»˜P',bk:28,sx:31,nqc:null,qcr:null,hold:null,diff:-3,note:'',pct:110.71,cate_hang:'3.OTHER CHILLED PRODUCTS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306576,7 +1308420,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8938527710398',name:'SEAPRODEX - TÃ”M Äáº¤T SINH THÃI SIZE L 250G',unit:'Há»˜P',bk:8,sx:0,nqc:null,qcr:null,hold:null,diff:8,note:'',pct:0,cate_hang:'3.FROZEN FISH AND SEAFOOD'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306592,7 +1308452,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8938529045030',name:'NGá»ŒC THÆ M - GIÃ’ TAI LÆ¯á» I XÃ€O 250G',unit:'GÃ“I',bk:56,sx:64,nqc:null,qcr:null,hold:null,diff:-8,note:'',pct:114.29,cate_hang:'3.HAM AND SAUSAGES'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306608,7 +1308484,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8938529045924',name:'NGá»ŒC THÆ M - GÃ€ MUá»I 500G',unit:'GÃ“I',bk:29,sx:36,nqc:null,qcr:null,hold:null,diff:-7,note:'',pct:124.14,cate_hang:'3.HAM AND SAUSAGES'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306624,7 +1308516,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8938531579059',name:'DELIFRES - Sá»®A TÆ¯Æ I THANH TRÃ™NG ÃT ÄÆ¯á»œNG CHAI 1.8L',unit:'CHAI',bk:62,sx:66,nqc:null,qcr:null,hold:null,diff:-4,note:'',pct:106.45,cate_hang:'3.FRESH MILK'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306640,7 +1308548,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8938546855032',name:'BEANY - Äáº¬U HÅ¨ CHIÃŠN 280G',unit:'GÃ“I',bk:82,sx:0,nqc:null,qcr:null,hold:null,diff:82,note:'',pct:0,cate_hang:'3.OTHER CHILLED PRODUCTS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306656,7 +1308580,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'8938552425229',name:'ÃšT MAU - TÃ”M KHÃ” CANH Äáº¶C BIá»†T 35G',unit:'HÅ¨',bk:90,sx:98,nqc:null,qcr:null,hold:null,diff:-8,note:'',pct:108.89,cate_hang:'3.DRIED & PROCESSED FISH AND SEAFOOD'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306672,7 +1308612,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'9300650431812',name:'PHILADELPHIA - PHÃ” MAI KEM NGUYÃŠN Báº¢N Dáº NG PHáº¾T 250G',unit:'Há»˜P',bk:4,sx:0,nqc:null,qcr:null,hold:null,diff:4,note:'',pct:0,cate_hang:'3.BUTTER AND CHEESE'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306688,7 +1308644,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'9310653105597',name:'CHOBANI - Sá»®A CHUA HY Láº P Vá»Š VIá»†T QUáº¤T 160G',unit:'Há»˜P',bk:82,sx:84,nqc:null,qcr:null,hold:null,diff:-2,note:'',pct:102.44,cate_hang:'3.YOGURT'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306704,7 +1308676,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'93355421',name:'CHOBANI - Sá»®A CHUA HY Láº P Vá»Š Báº C HÃ€ SOCOLA CHIP 140G',unit:'Há»˜P',bk:22,sx:47,nqc:null,qcr:null,hold:null,diff:-25,note:'',pct:213.64,cate_hang:'3.YOGURT'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306720,7 +1308708,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'LÆ°u HÃ ng',temp:'MÃ¡t',code:'9421016151325',name:'WESTGOLD - BÆ  Máº¶N 250G',unit:'KHá»I',bk:80,sx:0,nqc:null,qcr:null,hold:null,diff:80,note:'',pct:0,cate_hang:'3.BUTTER AND CHEESE'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306736,7 +1308740,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'QuÃ¡ Cáº£nh',temp:'MÃ¡t',code:'11395',name:'Náº¤M LINH CHI TRáº®NG HÃ€N QUá»C 150G',unit:'GÃ“I',bk:30,sx:0,nqc:null,qcr:null,hold:null,diff:30,note:'',pct:0,cate_hang:'3.MUSHROOM'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306752,7 +1308772,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'QuÃ¡ Cáº£nh',temp:'MÃ¡t',code:'11550',name:'Tá»ŽI Háº¢I DÆ¯Æ NG XAY 50G',unit:'Há»˜P',bk:1950,sx:1949,nqc:null,qcr:null,hold:null,diff:1,note:'',pct:99.95,cate_hang:'3.PROCESSED VEGGIES'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306768,7 +1308804,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'QuÃ¡ Cáº£nh',temp:'MÃ¡t',code:'11681',name:'Há»–N Há»¢P MÄ‚NG TÃ‚Y, Báº®P NON, CÃ€ Rá»T 300G',unit:'Vá»ˆ',bk:90,sx:0,nqc:null,qcr:null,hold:null,diff:90,note:'',pct:0,cate_hang:'3.PROCESSED VEGGIES'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306784,7 +1308836,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'QuÃ¡ Cáº£nh',temp:'MÃ¡t',code:'8935007101059',name:'LOTHAMILK - Sá»®A THANH TRÃ™NG KHÃ”NG ÄÆ¯á»œNG 946ML',unit:'Há»˜P',bk:521,sx:160,nqc:null,qcr:null,hold:null,diff:361,note:'',pct:30.71,cate_hang:'3.FRESH MILK'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306800,7 +1308868,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'QuÃ¡ Cáº£nh',temp:'MÃ¡t',code:'8935318100093',name:'ÄÃ€ Láº T MILK -  Sá»®A TÆ¯Æ I THANH TRÃ™NG CHUá»I Há»˜P 180ML',unit:'Há»˜P',bk:774,sx:772,nqc:null,qcr:null,hold:null,diff:2,note:'',pct:99.74,cate_hang:'3.FRESH MILK'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306816,7 +1308900,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'QuÃ¡ Cáº£nh',temp:'MÃ¡t',code:'8936076279328',name:'SAVOURE - BÃNH SU KEM 150G',unit:'Há»˜P',bk:600,sx:597,nqc:null,qcr:null,hold:null,diff:3,note:'Kho pick dÆ°',pct:99.5,cate_hang:'3.CAKES'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306832,7 +1308932,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'QuÃ¡ Cáº£nh',temp:'MÃ¡t',code:'8936204030265',name:'AN Láº C - NGUYÃŠN LIá»†U TÆ¯Æ I KHO TIÃŠU XANH 60G',unit:'GÃ“I',bk:80,sx:78,nqc:null,qcr:null,hold:null,diff:2,note:'',pct:97.5,cate_hang:'3.PROCESSED VEGGIES'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306848,7 +1308964,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'QuÃ¡ Cáº£nh',temp:'MÃ¡t',code:'8936243700204',name:'Háº¢I ÄÄ‚NG - SANDWICH HÃ€N QUá»C GÃ€ NÆ¯á»šNG TRUYá»€N THá»NG 157G',unit:'CÃI',bk:51,sx:0,nqc:null,qcr:null,hold:null,diff:51,note:'',pct:0,cate_hang:'3.COLD AND HOT DELICA'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306864,7 +1308996,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'QuÃ¡ Cáº£nh',temp:'MÃ¡t',code:'8938503131742',name:'ÄÃ€ Láº T MILK - Sá»®A TÆ¯Æ I THANH TRÃ™NG 450ML',unit:'Há»˜P',bk:630,sx:632,nqc:null,qcr:null,hold:null,diff:-2,note:'',pct:100.32,cate_hang:'3.FRESH MILK'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306880,7 +1309028,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'QuÃ¡ Cáº£nh',temp:'MÃ¡t',code:'8938505512044',name:'SENTA - Cá»¦ SEN TÆ¯Æ I Cáº®T LÃT 250G',unit:'GÃ“I',bk:140,sx:141,nqc:null,qcr:null,hold:null,diff:-1,note:'',pct:100.71,cate_hang:'3.PROCESSED VEGGIES'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306896,7 +1309060,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'QuÃ¡ Cáº£nh',temp:'MÃ¡t',code:'8938509645021',name:'HOKTO - Náº¤M LINH CHI NÃ‚U MALAYSIA 125G',unit:'GÃ“I',bk:120,sx:119,nqc:null,qcr:null,hold:null,diff:1,note:'',pct:99.17,cate_hang:'3.MUSHROOM'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306912,7 +1309092,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'QuÃ¡ Cáº£nh',temp:'MÃ¡t',code:'8938562884023',name:'MINH NHáº¬T - RAU CÃ‚U 3 MÃ€U 120G',unit:'Há»˜P',bk:350,sx:346,nqc:null,qcr:null,hold:null,diff:4,note:'',pct:98.86,cate_hang:'3.DESSERTS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306928,7 +1309124,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'TCNK LÆ°u HÃ ng',temp:'MÃT',code:'1100609',name:'TÃO QUEEN NEWZEALAND (5-6 QUáº¢/KG)',unit:'KG',bk:1575,sx:1558,nqc:null,qcr:null,hold:null,diff:18,note:'',pct:98.89,cate_hang:'3.IMPORT FRUITS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306944,7 +1309156,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'TCNK LÆ°u HÃ ng',temp:'MÃT',code:'1102736',name:'TÃO RED FUJI NAM PHI',unit:'KG',bk:3780,sx:3762,nqc:null,qcr:null,hold:null,diff:18,note:'',pct:99.52,cate_hang:'3.IMPORT FRUITS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306960,7 +1309188,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'TCNK QuÃ¡ Cáº£nh',temp:'MÃT',code:'10140',name:'CAM ÃšC TÃšI 1KG',unit:'TÃšI',bk:100,sx:98,nqc:null,qcr:null,hold:null,diff:2,note:'',pct:98,cate_hang:'3.IMPORT FRUITS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306976,7 +1309220,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'TCNK QuÃ¡ Cáº£nh',temp:'MÃT',code:'10610',name:'ZESPRI - Há»˜P KIWI VÃ€NG CHÃN 4 QUáº¢',unit:'Há»˜P',bk:950,sx:940,nqc:null,qcr:null,hold:null,diff:10,note:'',pct:98.95,cate_hang:'3.IMPORT FRUITS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1306992,7 +1309252,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'TCNK QuÃ¡ Cáº£nh',temp:'MÃT',code:'11122',name:'THÆ M TRÃI Cáº®T Sáº´N 350G',unit:'LY',bk:270,sx:146,nqc:null,qcr:null,hold:null,diff:124,note:'',pct:54.07,cate_hang:'3.CUTTING FRUITS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1307008,7 +1309284,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'TCNK QuÃ¡ Cáº£nh',temp:'MÃT',code:'11532',name:'TÃO XANH Má»¸ TÃšI 900G UP',unit:'TÃšI',bk:200,sx:201,nqc:null,qcr:null,hold:null,diff:-1,note:'',pct:100.5,cate_hang:'3.IMPORT FRUITS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1307024,7 +1309316,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'TCNK QuÃ¡ Cáº£nh',temp:'MÃT',code:'11589',name:'MÃT GIá»NG THÃI Lá»˜T Sáº´N Há»˜P 350G',unit:'Há»˜P',bk:90,sx:82,nqc:null,qcr:null,hold:null,diff:8,note:'',pct:91.11,cate_hang:'3.CUTTING FRUITS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1307040,7 +1309348,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'TCNK QuÃ¡ Cáº£nh',temp:'MÃT',code:'11593',name:'BÆ¯á»žI DA XANH Lá»˜T Sáº´N 350G',unit:'Há»˜P',bk:50,sx:18,nqc:null,qcr:null,hold:null,diff:32,note:'',pct:36,cate_hang:'3.CUTTING FRUITS'},
+
+
+
+
+
+
+
+
 
 
 
@@ -1307056,6 +1309380,14 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'TCNK QuÃ¡ Cáº£nh',temp:'MÃT',code:'8935360200260',name:'LÃŠ NÃ‚U Ná»˜I Äá»ŠA TRUNG Há»˜P 2 TRÃI',unit:'Há»˜P',bk:90,sx:89,nqc:null,qcr:null,hold:null,diff:1,note:'',pct:98.89,cate_hang:'3.IMPORT FRUITS'},
 
 
@@ -1307064,7 +1309396,23 @@ const CT = {
 
 
 
+
+
+
+
+
+
+
+
   {cat:'TCNK QuÃ¡ Cáº£nh',temp:'MÃT',code:'8936052004869',name:'TÃO ORGANIC JULIET PHÃP TÃšI 1KG',unit:'TÃšI',bk:504,sx:500,nqc:null,qcr:null,hold:null,diff:4,note:'',pct:99.21,cate_hang:'3.IMPORT FRUITS'}
+
+
+
+
+
+
+
+
 
 
 
@@ -1307533,6 +1309881,120 @@ function render() {
   }
 }
 
+function renderRotHangCate() {
+  const container = document.getElementById('content');
+  if (!container) return;
+  const allItems = [];
+  if (typeof CT !== 'undefined') {
+    CT.forEach(it => {
+      const [d, m, y] = it.date.split('-');
+      it.jsDate = new Date(${m} , );
+      allItems.push(it);
+    });
+  }
+
+  const filteredItems = allItems.filter(it => {
+    if (window.ctFilterDate !== 'all' && window.ctFilterDate && it.date !== window.ctFilterDate) return false;
+    return true;
+  });
+
+  const grouped = {};
+  filteredItems.forEach(it => {
+    const cate = it.cate_hang || 'KHÁC';
+    if (!grouped[cate]) {
+      grouped[cate] = { bk: 0, tx: 0, diff: 0 };
+    }
+    grouped[cate].bk += (it.bk || 0);
+    grouped[cate].tx += (it.sx || 0);
+    grouped[cate].diff += (it.diff || 0);
+  });
+
+  const sortedCates = Object.keys(grouped).sort();
+  let tableRows = '';
+  let totalBk = 0, totalTx = 0, totalDiff = 0;
+
+  sortedCates.forEach(cate => {
+    const data = grouped[cate];
+    totalBk += data.bk;
+    totalTx += data.tx;
+    totalDiff += data.diff;
+    const pct = data.bk > 0 ? (data.diff / data.bk * 100).toFixed(1) + '%' : '0%';
+    const pctColor = data.diff > 0 ? 'var(--pick-bad)' : 'var(--txt2)';
+
+    tableRows += 
+      <tr>
+        <td style="font-weight:600; color:var(--cyan);">\</td>
+        <td style="text-align:right;">\</td>
+        <td style="text-align:right;">\</td>
+        <td style="text-align:right; font-weight:700; color:\">\</td>
+        <td style="text-align:right; font-weight:700; color:\;">\</td>
+      </tr>
+    ;
+  });
+
+  const totalPct = totalBk > 0 ? (totalDiff / totalBk * 100).toFixed(1) + '%' : '0%';
+
+  const uniqueDates = [...new Set(allItems.map(it => it.date))];
+  const monthOrder = { 'Jan':1, 'Feb':2, 'Mar':3, 'Apr':4, 'May':5, 'Jun':6, 'Jul':7, 'Aug':8, 'Sep':9, 'Oct':10, 'Nov':11, 'Dec':12 };
+  uniqueDates.sort((a, b) => {
+    const partsA = a.split('-');
+    const partsB = b.split('-');
+    const dayA = parseInt(partsA[0]);
+    const dayB = parseInt(partsB[0]);
+    const monthA = monthOrder[partsA[1]] || 0;
+    const monthB = monthOrder[partsB[1]] || 0;
+    if (monthA !== monthB) return monthB - monthA;
+    return dayB - dayA;
+  });
+
+  let dateOptions = <option value="all" \>\u2014 T\u00E2\u0301t ca\u0309 ca\u0301c nga\u0300y \u2014</option>;
+  uniqueDates.forEach(d => {
+    dateOptions += <option value="\" \>\</option>;
+  });
+
+  let html = 
+  <div class="table-block filter-block" style="padding:15px; margin-bottom:15px; background:var(--bg2); border:1px solid var(--border); border-radius:8px; animation:fadeIn 0.3s ease">
+    <div style="display:flex; gap:15px; flex-wrap:wrap; align-items:center;">
+      <div style="flex:1; min-width:180px;">
+        <label style="display:block; font-size:11px; color:var(--txt2); margin-bottom:5px; font-weight:700;">L\u1ECCc THEO NGA\u0300Y</label>
+        <select id="cateSearchDate" onchange="window.ctFilterDate = this.value; renderRotHangCate();" style="width:100%; padding:8px 12px; background:var(--bg3); border:1px solid var(--border); border-radius:6px; color:var(--txt); font-family:inherit; font-size:13px; cursor:pointer; box-sizing:border-box; outline:none; transition:all 0.2s;">
+          \
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-block detail-block" style="animation:fadeInUp 0.3s ease;">
+    <div class="table-title">Tổng Hợp Rớt Hàng Theo Ngành Hàng</div>
+    <div style="overflow-x:auto;">
+      <table>
+        <thead>
+          <tr>
+            <th style="text-align:left;">Ngành Hàng</th>
+            <th style="text-align:right;">Yêu Cầu (FC/BK)</th>
+            <th style="text-align:right;">Thực Pick</th>
+            <th style="text-align:right;">Rớt Hàng</th>
+            <th style="text-align:right;">Tỷ Lệ Rớt</th>
+          </tr>
+        </thead>
+        <tbody>
+          \
+        </tbody>
+        <tfoot>
+          <tr style="background:var(--bg3);">
+            <td style="font-weight:800; color:var(--txt);">TỔNG CỘNG</td>
+            <td style="text-align:right; font-weight:800; color:var(--txt);">\</td>
+            <td style="text-align:right; font-weight:800; color:var(--txt);">\</td>
+            <td style="text-align:right; font-weight:800; color:var(--red);">\</td>
+            <td style="text-align:right; font-weight:800; color:var(--pick-bad);">\</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+  ;
+  container.innerHTML = html;
+}
 function renderChiTiet() {
   if (window.ctFilterCode === undefined) {
     window.ctFilterCode = '';
@@ -1307890,13 +1310352,14 @@ function switchTab(tab) {
     const tabTHNhap = document.getElementById('tabTongHopNhap');
     if (tabTHNhap) tabTHNhap.className = tab==='tonghop-nhap' ? 'tab-btn active' : 'tab-btn';
   document.getElementById('tabChiTiet').className = tab==='chitiet' ? 'tab-btn active-ct' : 'tab-btn';
+  const tabCate = document.getElementById('tabRotHangCate'); if(tabCate) tabCate.className = tab==='rothang-cate' ? 'tab-btn active-ct' : 'tab-btn';
   document.getElementById('tabDapUng').className = tab==='dapung' ? 'tab-btn active-du' : 'tab-btn';
   document.getElementById('tabForecast').className = tab==='forecast' ? 'tab-btn active-fc' : 'tab-btn';
-  const labels = {xuat:'XUáº¤T HÃ€NG','tonghop-xuat':'Tá»”NG Há»¢P XUáº¤T HÃ€NG',nhap:'NHáº¬P HÃ€NG',chitiet:'CHI TIáº¾T Rá»šT HÃ€NG',dapung:'Tá»¶ Lá»† ÄÃP á»¨NG',forecast:'Dá»° BÃO & THá»°C Táº¾'};
-  const colors = {xuat:'#ef4444','tonghop-xuat':'#3b82f6',nhap:'#f59e0b',chitiet:'#fb923c',dapung:'#10b981',forecast:'#a78bfa'};
+  const labels = {xuat:'XUẤT HÀNG','tonghop-xuat':'TỔNG HỢP XUẤT HÀNG',nhap:'NHẬP HÀNG',chitiet:'CHI TIẾT RỚT HÀNG',dapung:'TỶ LỆ ĐÁP ỨNG',forecast:'DỰ BÁO & THỰC TẾ','rothang-cate':'RỚT HÀNG THEO CATE', 'rothang-cate':'R\u1EDAT H\u00C0NG THEO NG\u00C0NH H\u00C0NG'};
+  const colors = {xuat:'#ef4444','tonghop-xuat':'#3b82f6',nhap:'#f59e0b',chitiet:'#fb923c',dapung:'#10b981',forecast:'#a78bfa', 'rothang-cate':'#f43f5e'};
   document.getElementById('headerSub').textContent = labels[tab];
   document.getElementById('headerSub').style.color = colors[tab];
-  document.getElementById('warning-section').style.display = tab==='chitiet' ? '' : 'none';
+  document.getElementById('warning-section').style.display = (tab==='chitiet' || tab==='rothang-cate') ? '' : 'none';
   document.querySelector('.legend').style.display = tab==='xuat' ? '' : 'none';
   const btnDisplay = (tab==='dapung' || tab==='forecast' || tab==='tonghop-xuat' || tab==='tonghop-nhap') ? 'none' : '';
   document.getElementById('btnPrev').style.display = btnDisplay;
@@ -1307906,6 +1310369,7 @@ function switchTab(tab) {
     else if (tab === 'tonghop-nhap') { renderTongHopNhap(); }
   else if (tab === 'nhap') { renderNhap(); }
   else if (tab === 'chitiet') { renderChiTiet(); }
+  else if (tab === 'rothang-cate') { renderRotHangCate(); }
   else if (tab === 'forecast') { renderForecast(); }
   else { renderDapUng(); }
 }
@@ -1309123,12 +1311587,12 @@ function renderDapUng() {
     <table style="table-layout:auto;font-size:11.5px">
     <thead>
       <tr>
-        <th rowspan="2" style="width:70px;position:sticky;left:0;background:#141938;z-index:2">NgÃ y</th>
-        <th rowspan="2" style="width:45px">Thá»©</th>
-        <th rowspan="2" style="width:40px;color:#10b981">Tuáº§n</th>
-        <th rowspan="2" style="width:30px;color:#f59e0b">ThÃ¡ng</th>
-        <th colspan="5" style="text-align:center;color:#22d3ee;border-bottom:2px solid #22d3ee">ðŸ“¦ ITEM</th>
-        <th colspan="5" style="text-align:center;color:#a78bfa;border-bottom:2px solid #a78bfa">âš–ï¸ Trá»ng lÆ°á»£ng (kg)</th>
+        <th rowspan="2" style="width:70px;position:sticky;left:0;background:#141938;z-index:2">Ngày</th>
+        <th rowspan="2" style="width:45px">Thứ</th>
+        <th rowspan="2" style="width:40px;color:#10b981">Tuần</th>
+        <th rowspan="2" style="width:30px;color:#f59e0b">Tháng</th>
+        <th colspan="5" style="text-align:center;color:#22d3ee;border-bottom:2px solid #22d3ee">TỔNG ITEM</th>
+        <th colspan="5" style="text-align:center;color:#a78bfa;border-bottom:2px solid #a78bfa">TỔNG Trọng lượng (kg)</th>
       </tr>
       <tr>
         <th style="color:#818cf8">FC</th>
@@ -1309572,11 +1312036,11 @@ function renderForecast() {
     <table style="table-layout:auto; font-size:11.5px;">
       <thead>
         <tr>
-          <th rowspan="2" style="width:70px; text-align:center;">NgÃ y</th>
+          <th rowspan="2" style="width:70px;position:sticky;left:0;background:#141938;z-index:2">Ngày</th>
           <th rowspan="2" style="width:40px; text-align:center;">Thá»©</th>
           <th rowspan="2" style="width:40px; text-align:center;">Tuáº§n</th>
           <th colspan="4" style="text-align:center; color:#22d3ee; border-bottom:2px solid #22d3ee;">ðŸ“¦ Sá»‘ lÆ°á»£ng (ITEM)</th>
-          <th colspan="4" style="text-align:center; color:#a78bfa; border-bottom:2px solid #a78bfa;">âš–ï¸ Trá»ng lÆ°á»£ng (kg)</th>
+          <th colspan="4" style="text-align:center; color:#a78bfa; border-bottom:2px solid #a78bfa;">Trọng lượng (kg)</th>
         </tr>
         <tr>
           <th style="color:#3b82f6; text-align:right;">Dá»± bÃ¡o (FC)</th>
