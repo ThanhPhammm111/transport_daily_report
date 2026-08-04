@@ -517,7 +517,7 @@ body.light-mode .frame-wrap iframe {
 <script>
 const n=new Date(),p=x=>String(x).padStart(2,'0');
 document.getElementById('ud').textContent=p(n.getDate())+'/'+p(n.getMonth()+1)+'/'+n.getFullYear()+' '+p(n.getHours())+':'+p(n.getMinutes());
-document.getElementById('f0_iframe').src = 'external/san_luong_xuat.html?v=' + Date.now();
+document.getElementById('f0_iframe').src = 'external/nhap_xuat_dm.html?v=' + Date.now();
 
 // 1. Sidebar Collapse Handling
 let isSidebarCollapsed = localStorage.getItem("sidebar_collapsed") === "true";
@@ -696,26 +696,17 @@ function switchSubTabParent(subTabName, element) {
     f.classList.toggle('active', j === 0);
   });
   
-  // Load iframe 1 based on tab
+  // Load iframe 1 if empty
   const f0 = document.getElementById('f0_iframe');
-  if (subTabName === 'xuat') {
-      f0.src = 'external/san_luong_xuat.html?v=' + Date.now();
+  if (f0.src === 'about:blank' || f0.src === '') {
+    f0.src = 'external/nhap_xuat_dm.html?v=' + Date.now();
   } else {
-      // If currently on san_luong_xuat, need to switch back to nhap_xuat_dm
-      if (f0.src.includes('san_luong_xuat.html') || f0.src === 'about:blank' || f0.src === '') {
-          f0.src = 'external/nhap_xuat_dm.html?v=' + Date.now();
-          // Wait for load before switching tab
-          f0.onload = function() {
-              f0.contentWindow.postMessage({ action: 'switchSubTab', tab: subTabName }, '*');
-          };
-      } else {
-          // Send postMessage to sub-tab directly if already loaded
-          try {
-            if (f0.contentWindow) {
-              f0.contentWindow.postMessage({ action: 'switchSubTab', tab: subTabName }, '*');
-            }
-          } catch (e) {}
+    // Send postMessage to sub-tab
+    try {
+      if (f0.contentWindow) {
+        f0.contentWindow.postMessage({ action: 'switchSubTab', tab: subTabName }, '*');
       }
+    } catch (e) {}
   }
 }
 </script>
