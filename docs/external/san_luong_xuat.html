@@ -110,9 +110,6 @@ body.light-mode tbody td:nth-child(2) { color: #475569; }
         <th>FC</th>
         <th>%Booking/FC</th>
         <th>%QC & LH</th>
-        <th>Bk theo tồn</th>
-        <th>Thực xuất</th>
-        <th>Tỉ lệ pick rớt</th>
       </tr>
     </thead>
     <tbody>
@@ -125,6 +122,8 @@ body.light-mode tbody td:nth-child(2) { color: #475569; }
 let dates = [];
 let currentDayIndex = 0;
 let parsedData = {}; 
+let metricNames = [];
+let dataStartRowIndex = 0;
 
 window.addEventListener('message', (event) => {
   if (event.data && event.data.action === 'setTheme') {
@@ -138,34 +137,88 @@ async function loadData() {
     const response = await fetch('../data/san_luong_xuat.json?t=' + Date.now());
     if (!response.ok) throw new Error('Không thể tải file san_luong_xuat.json');
     const rows = await response.json();
+    window.sheetRows = rows;
     
-    // Process JSON (Google Sheet 2D Array)
-    const dateRow = rows[1]; // Row index 1 has "1-Aug", "2-Aug"...
+    const dateMap = {}; 
     
-    let currentTempDate = "";
-    for (let i = 2; i < dateRow.length; i++) {
-        const val = dateRow[i].trim();
-        if (val !== "") {
-            currentTempDate = val;
-            if (!dates.includes(val)) {
-                dates.push(val);
-                parsedData[val] = { startCol: i, endCol: i };
+    // Find all dates by scanning first 5 rows
+    for (let r = 0; r < Math.min(5, rows.length); r++) {
+        const row = rows[r];
+        if (!row) continue;
+        for (let c = 2; c < row.length; c++) {
+            const val = row[c] ? row[c].trim() : "";
+            if (val.match(/^\d{1,2}-[a-zA-Z]{3}$/)) {
+                if (!dateMap[c]) {
+                    dateMap[c] = val;
+                }
             }
         }
-        if (currentTempDate !== "") {
-            parsedData[currentTempDate].endCol = i;
+    }
+
+    const cols = Object.keys(dateMap).map(Number).sort((a,b) => a - b);
+    if (cols.length === 0) throw new Error("Không tìm thấy hàng ngày tháng");
+    
+    const firstDateCol = cols[0];
+    let metricsPerDay = 6; // Default new layout
+    if (cols.length >= 2) {
+        metricsPerDay = cols[1] - cols[0];
+    }
+    
+    for (let c of cols) {
+        const dateStr = dateMap[c];
+        if (!dates.includes(dateStr)) {
+            dates.push(dateStr);
+            parsedData[dateStr] = { startCol: c };
+        }
+    }
+    
+    // Extract metrics headers (they are usually in row 0)
+    metricNames = [];
+    const headerRow = rows[0] || [];
+    for (let c = 0; c < metricsPerDay; c++) {
+        let name = headerRow[firstDateCol + c] || "";
+        name = name.replace(/\d{5}$/, '').trim(); // Remove Excel date serial
+        if (name === "") name = "Chỉ số " + (c+1);
+        if (name.toLowerCase() === "tỉ lệ đáp ứng") name = "Tỉ lệ đáp ứng";
+        metricNames.push(name);
+    }
+    
+    // Fallback if headers are empty
+    if (metricsPerDay === 6 && metricNames[0].startsWith("Chỉ số")) {
+        metricNames = ["Booking", "FC", "%Booking/FC", "Bk theo tồn", "Thực xuất", "Tỉ lệ đáp ứng"];
+    } else if (metricsPerDay === 7 && metricNames[0].startsWith("Chỉ số")) {
+        metricNames = ["Booking", "FC", "%Booking/FC", "%QC & LH", "Bk theo tồn", "Thực xuất", "Tỉ lệ pick rớt"];
+    }
+    
+    // Render HTML Table headers
+    const theadTr = document.querySelector('#dataTable thead tr');
+    let thHtml = '<th>Loại hàng</th><th>Thông tin</th>';
+    for (let m of metricNames) {
+        thHtml += `<th>${m}</th>`;
+    }
+    theadTr.innerHTML = thHtml;
+    
+    // Find data start row
+    dataStartRowIndex = 4; // Default
+    for (let r = 2; r < Math.min(10, rows.length); r++) {
+        const row = rows[r];
+        if (!row) continue;
+        const cat = (row[0] || "").toLowerCase();
+        // Skip header rows
+        if (cat.includes("báo cáo") || cat.includes("xuất hàng") || cat.includes("loại hàng")) {
+            continue;
+        }
+        if (cat !== "") {
+            dataStartRowIndex = r;
+            break;
         }
     }
 
     // Default to the latest date
     currentDayIndex = dates.length - 1;
-    
-    // Save raw rows for rendering
-    window.sheetRows = rows;
-    
     renderTable();
   } catch (err) {
-    document.getElementById('navDate').textContent = "Lỗi tải dữ liệu";
+    document.getElementById('navDate').textContent = "Lỗi: " + err.message;
     console.error(err);
   }
 }
@@ -187,16 +240,16 @@ function renderTable() {
   const tbody = document.querySelector('#dataTable tbody');
   tbody.innerHTML = "";
   
-  // Rows 3 to end are data rows
-  for (let i = 3; i < window.sheetRows.length; i++) {
+  for (let i = dataStartRowIndex; i < window.sheetRows.length; i++) {
       const row = window.sheetRows[i];
       if (!row || row.length === 0) continue;
       
-      const catName = row[0] || "";
-      const infoName = row[1] || "";
+      const catName = (row[0] || "").trim();
+      const infoName = (row[1] || "").trim();
       
       // Skip empty filler rows
       if (catName === "" && infoName === "") continue;
+      if (catName.toLowerCase().includes("loại hàng")) continue;
       
       const tr = document.createElement('tr');
       if (catName.toLowerCase().includes('tổng hợp') || catName.toLowerCase().includes('tổng cộng')) {
@@ -205,17 +258,19 @@ function renderTable() {
       
       let html = `<td>${catName}</td><td>${infoName}</td>`;
       
-      // We expect 7 metric columns (from startCol to startCol + 6)
-      for (let c = 0; c < 7; c++) {
+      for (let c = 0; c < metricNames.length; c++) {
           const val = row[startCol + c] || "-";
           
           let colorStyle = "";
           if (val.includes('%')) {
              const num = parseFloat(val.replace('%', '').replace(/,/g, ''));
              if (!isNaN(num)) {
-                 if (c === 6) { // Pick rot
+                 const mName = metricNames[c].toLowerCase();
+                 if (mName.includes("rớt")) {
                      colorStyle = num > 1 ? "color: var(--red); font-weight: bold;" : "color: var(--green);";
-                 } else { // Booking/FC
+                 } else if (mName.includes("đáp ứng")) {
+                     colorStyle = num < 95 ? "color: var(--red); font-weight: bold;" : "color: var(--green);";
+                 } else { 
                      colorStyle = "color: var(--cyan); font-weight: bold;";
                  }
              }
