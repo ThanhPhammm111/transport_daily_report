@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Báo Cáo Sản Lượng Xuất Hàng</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0b0d12;
+  --bg2: #111420;
+  --bg-head: #0d1020;
+  --bg-row2: rgba(255,255,255,0.015);
+  --border: #1e2236;
+  --border-cat: #2a2f48;
+  --txt: #d8dce6;
+  --txt2: #7d849c;
+  --cyan: #22d3ee;
+  --blue: #60a5fa;
+  --green: #10b981;
+  --red: #ef4444;
+  --yellow: #fde047;
+}
+
+body.light-mode {
+  --bg: #f8fafc;
+  --bg2: #ffffff;
+  --bg-head: #e2e8f0;
+  --bg-row2: rgba(0,0,0,0.015);
+  --border: #cbd5e1;
+  --border-cat: #94a3b8;
+  --txt: #0f172a;
+  --txt2: #475569;
+  --cyan: #0284c7;
+  --blue: #2563eb;
+  --green: #16a34a;
+  --red: #dc2626;
+  --yellow: #ca8a04;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--txt);
+  min-height: 100vh;
+  margin: 0;
+  padding-bottom: 20px;
+}
+
+.day-nav {
+  display: flex; align-items: center; justify-content: center; gap: 20px;
+  padding: 14px 28px; background: var(--bg2); border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 50; backdrop-filter: blur(8px);
+}
+.day-nav button {
+  background: var(--bg); border: 1px solid var(--border); color: var(--txt);
+  padding: 9px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s;
+}
+.day-nav button:hover { border-color: var(--cyan); color: var(--cyan); }
+.day-info { text-align: center; min-width: 150px; }
+.day-info .date { font-size: 22px; font-weight: 800; color: var(--cyan); }
+
+.table-block {
+  margin: 16px auto; max-width: 1200px; background: var(--bg2);
+  border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.25); animation: fadeIn 0.3s ease;
+}
+table { width: 100%; border-collapse: collapse; font-size: 12px; }
+thead th {
+  background: var(--bg-head); color: var(--txt2); font-weight: 600; font-size: 11px;
+  text-transform: uppercase; padding: 10px 8px; text-align: right;
+  border-bottom: 2px solid var(--border-cat); white-space: nowrap;
+}
+thead th:nth-child(1), thead th:nth-child(2) { text-align: left; padding-left: 12px; }
+tbody td {
+  padding: 8px 12px; border-bottom: 1px solid rgba(30,34,54,0.6);
+  text-align: right; white-space: nowrap; vertical-align: middle;
+}
+tbody td:nth-child(1) { text-align: left; font-weight: 700; color: var(--txt); font-size: 11.5px; }
+tbody td:nth-child(2) { text-align: left; font-weight: 500; color: var(--txt2); font-size: 11px; }
+
+tbody tr:hover td { background: rgba(34,211,238,0.04); }
+.summary td { background: rgba(96,165,250,0.05); font-weight: 700; color: var(--cyan); }
+
+@keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+
+/* Light mode overrides */
+body.light-mode table thead th { border-bottom: 2px solid #94a3b8; }
+body.light-mode tbody td { border-bottom: 1px solid #e2e8f0; }
+body.light-mode tbody td:nth-child(2) { color: #475569; }
+</style>
+</head>
+<body>
+
+<div class="day-nav">
+  <button onclick="changeDay(-1)">◀ Trước</button>
+  <div class="day-info">
+    <div class="date" id="navDate">Đang tải...</div>
+  </div>
+  <button onclick="changeDay(1)">Sau ▶</button>
+</div>
+
+<div class="table-block">
+  <table id="dataTable">
+    <thead>
+      <tr>
+        <th>Loại hàng</th>
+        <th>Thông tin</th>
+        <th>Booking</th>
+        <th>FC</th>
+        <th>%Booking/FC</th>
+        <th>%QC & LH</th>
+        <th>Bk theo tồn</th>
+        <th>Thực xuất</th>
+        <th>Tỉ lệ pick rớt</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Content will be injected here -->
+    </tbody>
+  </table>
+</div>
+
+<script>
+let dates = [];
+let currentDayIndex = 0;
+let parsedData = {}; 
+
+window.addEventListener('message', (event) => {
+  if (event.data && event.data.action === 'setTheme') {
+    document.body.classList.toggle('light-mode', event.data.isLight);
+  }
+});
+
+async function loadData() {
+  try {
+    // Add timestamp to bypass caching
+    const response = await fetch('../data/san_luong_xuat.json?t=' + Date.now());
+    if (!response.ok) throw new Error('Không thể tải file san_luong_xuat.json');
+    const rows = await response.json();
+    
+    // Process JSON (Google Sheet 2D Array)
+    const dateRow = rows[1]; // Row index 1 has "1-Aug", "2-Aug"...
+    
+    let currentTempDate = "";
+    for (let i = 2; i < dateRow.length; i++) {
+        const val = dateRow[i].trim();
+        if (val !== "") {
+            currentTempDate = val;
+            if (!dates.includes(val)) {
+                dates.push(val);
+                parsedData[val] = { startCol: i, endCol: i };
+            }
+        }
+        if (currentTempDate !== "") {
+            parsedData[currentTempDate].endCol = i;
+        }
+    }
+
+    // Default to the latest date
+    currentDayIndex = dates.length - 1;
+    
+    // Save raw rows for rendering
+    window.sheetRows = rows;
+    
+    renderTable();
+  } catch (err) {
+    document.getElementById('navDate').textContent = "Lỗi tải dữ liệu";
+    console.error(err);
+  }
+}
+
+function changeDay(step) {
+  currentDayIndex += step;
+  if (currentDayIndex < 0) currentDayIndex = 0;
+  if (currentDayIndex >= dates.length) currentDayIndex = dates.length - 1;
+  renderTable();
+}
+
+function renderTable() {
+  const dateStr = dates[currentDayIndex];
+  document.getElementById('navDate').textContent = dateStr;
+  
+  const colInfo = parsedData[dateStr];
+  const startCol = colInfo.startCol;
+  
+  const tbody = document.querySelector('#dataTable tbody');
+  tbody.innerHTML = "";
+  
+  // Rows 3 to end are data rows
+  for (let i = 3; i < window.sheetRows.length; i++) {
+      const row = window.sheetRows[i];
+      if (!row || row.length === 0) continue;
+      
+      const catName = row[0] || "";
+      const infoName = row[1] || "";
+      
+      // Skip empty filler rows
+      if (catName === "" && infoName === "") continue;
+      
+      const tr = document.createElement('tr');
+      if (catName.toLowerCase().includes('tổng hợp') || catName.toLowerCase().includes('tổng cộng')) {
+          tr.className = 'summary';
+      }
+      
+      let html = `<td>${catName}</td><td>${infoName}</td>`;
+      
+      // We expect 7 metric columns (from startCol to startCol + 6)
+      for (let c = 0; c < 7; c++) {
+          const val = row[startCol + c] || "-";
+          
+          let colorStyle = "";
+          if (val.includes('%')) {
+             const num = parseFloat(val.replace('%', '').replace(/,/g, ''));
+             if (!isNaN(num)) {
+                 if (c === 6) { // Pick rot
+                     colorStyle = num > 1 ? "color: var(--red); font-weight: bold;" : "color: var(--green);";
+                 } else { // Booking/FC
+                     colorStyle = "color: var(--cyan); font-weight: bold;";
+                 }
+             }
+          } else if (val !== "-" && val !== "0" && val !== "") {
+              colorStyle = "color: var(--cyan); font-weight: bold;";
+          }
+          
+          html += `<td style="${colorStyle}">${val}</td>`;
+      }
+      
+      tr.innerHTML = html;
+      tbody.appendChild(tr);
+  }
+}
+
+// Initial check for theme
+if (localStorage.getItem('kfm-dashboard-theme-override') === 'light' || 
+    (window.parent && window.parent.document.body.classList.contains('light-mode'))) {
+  document.body.classList.add('light-mode');
+}
+
+loadData();
+</script>
+</body>
+</html>
