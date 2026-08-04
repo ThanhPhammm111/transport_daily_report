@@ -110,6 +110,9 @@ body.light-mode tbody td:nth-child(2) { color: #475569; }
         <th>FC</th>
         <th>%Booking/FC</th>
         <th>%QC & LH</th>
+        <th>Bk theo tồn</th>
+        <th>Thực xuất</th>
+        <th>Tỉ lệ pick rớt</th>
       </tr>
     </thead>
     <tbody>
@@ -133,15 +136,12 @@ window.addEventListener('message', (event) => {
 
 async function loadData() {
   try {
-    // Add timestamp to bypass caching
     const response = await fetch('../data/san_luong_xuat.json?t=' + Date.now());
     if (!response.ok) throw new Error('Không thể tải file san_luong_xuat.json');
     const rows = await response.json();
     window.sheetRows = rows;
     
     const dateMap = {}; 
-    
-    // Find all dates by scanning first 5 rows
     for (let r = 0; r < Math.min(5, rows.length); r++) {
         const row = rows[r];
         if (!row) continue;
@@ -159,7 +159,7 @@ async function loadData() {
     if (cols.length === 0) throw new Error("Không tìm thấy hàng ngày tháng");
     
     const firstDateCol = cols[0];
-    let metricsPerDay = 6; // Default new layout
+    let metricsPerDay = 6; 
     if (cols.length >= 2) {
         metricsPerDay = cols[1] - cols[0];
     }
@@ -172,49 +172,41 @@ async function loadData() {
         }
     }
     
-    // Extract metrics headers (they are usually in row 0)
     metricNames = [];
     const headerRow = rows[0] || [];
     for (let c = 0; c < metricsPerDay; c++) {
         let name = headerRow[firstDateCol + c] || "";
-        name = name.replace(/\d{5}$/, '').trim(); // Remove Excel date serial
+        name = name.replace(/\d{5}$/, '').trim();
         if (name === "") name = "Chỉ số " + (c+1);
         if (name.toLowerCase() === "tỉ lệ đáp ứng") name = "Tỉ lệ đáp ứng";
         metricNames.push(name);
     }
     
-    // Fallback if headers are empty
     if (metricsPerDay === 6 && metricNames[0].startsWith("Chỉ số")) {
         metricNames = ["Booking", "FC", "%Booking/FC", "Bk theo tồn", "Thực xuất", "Tỉ lệ đáp ứng"];
     } else if (metricsPerDay === 7 && metricNames[0].startsWith("Chỉ số")) {
         metricNames = ["Booking", "FC", "%Booking/FC", "%QC & LH", "Bk theo tồn", "Thực xuất", "Tỉ lệ pick rớt"];
     }
     
-    // Render HTML Table headers
     const theadTr = document.querySelector('#dataTable thead tr');
     let thHtml = '<th>Loại hàng</th><th>Thông tin</th>';
     for (let m of metricNames) {
-        thHtml += `<th>${m}</th>`;
+        thHtml += <th></th>;
     }
     theadTr.innerHTML = thHtml;
     
-    // Find data start row
-    dataStartRowIndex = 4; // Default
+    dataStartRowIndex = 4;
     for (let r = 2; r < Math.min(10, rows.length); r++) {
         const row = rows[r];
         if (!row) continue;
         const cat = (row[0] || "").toLowerCase();
-        // Skip header rows
-        if (cat.includes("báo cáo") || cat.includes("xuất hàng") || cat.includes("loại hàng")) {
-            continue;
-        }
+        if (cat.includes("báo cáo") || cat.includes("xuất hàng") || cat.includes("loại hàng")) continue;
         if (cat !== "") {
             dataStartRowIndex = r;
             break;
         }
     }
 
-    // Default to the latest date
     currentDayIndex = dates.length - 1;
     renderTable();
   } catch (err) {
@@ -247,7 +239,6 @@ function renderTable() {
       const catName = (row[0] || "").trim();
       const infoName = (row[1] || "").trim();
       
-      // Skip empty filler rows
       if (catName === "" && infoName === "") continue;
       if (catName.toLowerCase().includes("loại hàng")) continue;
       
@@ -256,7 +247,7 @@ function renderTable() {
           tr.className = 'summary';
       }
       
-      let html = `<td>${catName}</td><td>${infoName}</td>`;
+      let html = <td></td><td></td>;
       
       for (let c = 0; c < metricNames.length; c++) {
           const val = row[startCol + c] || "-";
@@ -278,7 +269,7 @@ function renderTable() {
               colorStyle = "color: var(--cyan); font-weight: bold;";
           }
           
-          html += `<td style="${colorStyle}">${val}</td>`;
+          html += <td style=""></td>;
       }
       
       tr.innerHTML = html;
