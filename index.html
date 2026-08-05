@@ -2626,265 +2626,89 @@ function renderTongHopNhap() {
 }
 
 
-function renderTongHopXuat() {
-  const container = document.getElementById('content');
-  if (!container) return;
+﻿function renderTongHopXuat() {
+    const container = document.getElementById('content');
+    if (!container) return;
 
-  let groupId = 0;
-  const rowsWithGroup = D.map((day, idx) => {
-    const isMon = day.w === 'Mon' || day.w === 'T2';
-    if (isMon && idx > 0) groupId++;
-    return { day, groupId };
-  });
+    let displayRows = typeof D_THX !== 'undefined' ? D_THX : [];
 
-  const weeklySums = new Map();
-  rowsWithGroup.forEach(({ day, groupId }) => {
-    const isMon = day.w === 'Mon' || day.w === 'T2';
-    if (isMon) return;
+    let h = `
+    <div style="padding: 16px; font-family: sans-serif;">
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; background: var(--sidebar-bg, #0d0d21); border: 1px solid var(--sidebar-border, rgba(255,255,255,0.1)); padding: 14px 18px; border-radius: 12px;">
+        <h2 style="margin: 0; font-size: 16px; font-weight: 700; color: var(--txt);">Báo Cáo Tổng Hợp Xuất Hàng (Tỷ lệ đáp ứng)</h2>
+        <button onclick="exportTongHopXuatExcel()" style="display: flex; align-items: center; gap: 6px; padding: 6px 14px; font-size: 12px; font-weight: 700; border-radius: 6px; border: 1px solid #059669; background: #10b981; color:#fff; cursor: pointer; transition: all 0.2s;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>Xuất Excel</span>
+        </button>
+      </div>
+      <div style="overflow-x: auto; border: 1px solid var(--sidebar-border, rgba(255,255,255,0.1)); border-radius: 12px; background: var(--sidebar-bg, #0d0d21);">
+        <table style="width: 100%; border-collapse: collapse; min-width: 900px; font-size: 13px; text-align: center;">
+          <thead style="background: rgba(255,255,255,0.05); color: var(--txt);">
+            <tr>
+              <th rowspan="2" style="padding: 12px 8px; border: 1px solid var(--sidebar-border, #333); font-weight: 600;">Ngày</th>
+              <th rowspan="2" style="padding: 12px 8px; border: 1px solid var(--sidebar-border, #333); font-weight: 600;">Thứ</th>
+              <th colspan="3" style="padding: 12px 8px; border: 1px solid var(--sidebar-border, #333); font-weight: 600; color: #a78bfa;">ITEM</th>
+              <th colspan="3" style="padding: 12px 8px; border: 1px solid var(--sidebar-border, #333); font-weight: 600; color: #34d399;">Trọng lượng (Kg)</th>
+            </tr>
+            <tr style="background: rgba(255,255,255,0.02);">
+              <th style="padding: 10px 6px; border: 1px solid var(--sidebar-border, #333); color: #fbbf24;">Quá Cảnh</th>
+              <th style="padding: 10px 6px; border: 1px solid var(--sidebar-border, #333); color: #60a5fa;">Mát</th>
+              <th style="padding: 10px 6px; border: 1px solid var(--sidebar-border, #333); color: #a78bfa;">Đông</th>
+              <th style="padding: 10px 6px; border: 1px solid var(--sidebar-border, #333); color: #fbbf24;">Quá Cảnh</th>
+              <th style="padding: 10px 6px; border: 1px solid var(--sidebar-border, #333); color: #60a5fa;">Mát</th>
+              <th style="padding: 10px 6px; border: 1px solid var(--sidebar-border, #333); color: #a78bfa;">Đông</th>
+            </tr>
+          </thead>
+          <tbody>
+`;
 
-    if (!weeklySums.has(groupId)) {
-      const weekDays = rowsWithGroup.filter(g => g.groupId === groupId);
-      const monDay = weekDays.find(g => g.day.w === 'Mon' || g.day.w === 'T2');
-      const labelDay = monDay ? monDay.day : weekDays[0].day;
-      const label = 'Tuần ' + labelDay.d;
-      weeklySums.set(groupId, {
-        label,
-        item: { quaCanh: 0, mat: 0, dong: 0 },
-        kg: { quaCanh: 0, mat: 0, dong: 0 }
-      });
+    if (displayRows.length === 0) {
+        h += `<tr><td colspan="8" style="padding: 20px; color: #94a3b8; font-style: italic;">Không có dữ liệu</td></tr>`;
+    } else {
+        displayRows.forEach(row => {
+            let rowStyle = "border-bottom: 1px solid var(--sidebar-border, #333);";
+            if (row.type === 'week') {
+                rowStyle += " background: rgba(56, 189, 248, 0.1); font-weight: 700; color: #38bdf8;";
+            } else if (row.type === 'month') {
+                rowStyle += " background: rgba(250, 204, 21, 0.15); font-weight: 700; color: #facc15;";
+            } else {
+                rowStyle += " color: var(--txt);";
+            }
+            
+            let labelCol = `<td style="padding: 10px 8px; border-right: 1px solid var(--sidebar-border, #333);">${row.d}</td><td style="padding: 10px 8px; border-right: 1px solid var(--sidebar-border, #333);">${row.w}</td>`;
+            if (row.type === 'week' || row.type === 'month') {
+                labelCol = `<td colspan="2" style="padding: 10px 8px; border-right: 1px solid var(--sidebar-border, #333); text-align: left; padding-left: 20px; text-transform: uppercase;">${row.d}</td>`;
+            }
+
+            h += `
+            <tr style="${rowStyle}" class="table-row-hover">
+              ${labelCol}
+              <td style="padding: 10px 8px; border-right: 1px solid var(--sidebar-border, #333);">${fmt(row.item.qc)}</td>
+              <td style="padding: 10px 8px; border-right: 1px solid var(--sidebar-border, #333);">${fmt(row.item.mat)}</td>
+              <td style="padding: 10px 8px; border-right: 1px solid var(--sidebar-border, #333);">${fmt(row.item.dong)}</td>
+              <td style="padding: 10px 8px; border-right: 1px solid var(--sidebar-border, #333);">${fmt(row.kg.qc)}</td>
+              <td style="padding: 10px 8px; border-right: 1px solid var(--sidebar-border, #333);">${fmt(row.kg.mat)}</td>
+              <td style="padding: 10px 8px; border-right: 1px solid var(--sidebar-border, #333);">${fmt(row.kg.dong)}</td>
+            </tr>`;
+        });
     }
 
-    const qc = day.qc || Array(13).fill(0);
-    const tqc = day.tqc || Array(13).fill(0);
-    const mat = day.mat || Array(13).fill(0);
-    const tlh = day.tlh || Array(13).fill(0);
-    const dong = day.dong || Array(13).fill(0);
-
-    const qcItem = (qc[6] || 0) + (tqc[6] || 0);
-    const qcKg = (qc[11] || 0) + (tqc[11] || 0);
-    const matItem = ((mat[6] || 0) - (qc[6] || 0)) + (tlh[6] || 0);
-    const matKg = ((mat[11] || 0) - (qc[11] || 0)) + (tlh[11] || 0);
-    const dongItem = dong[6] || 0;
-    const dongKg = dong[11] || 0;
-
-    const cur = weeklySums.get(groupId);
-    cur.item.quaCanh += qcItem;
-    cur.item.mat += matItem;
-    cur.item.dong += dongItem;
-    cur.kg.quaCanh += qcKg;
-    cur.kg.mat += matKg;
-    cur.kg.dong += dongKg;
-  });
-
-  let displayRows = [];
-
-  if (summaryViewMode === 'day') {
-    displayRows = rowsWithGroup.map(({ day, groupId }) => {
-      const isMonday = day.w === 'Mon' || day.w === 'T2';
-      if (isMonday) {
-        const weekSum = weeklySums.get(groupId - 1) || {
-          item: { quaCanh: 0, mat: 0, dong: 0 },
-          kg: { quaCanh: 0, mat: 0, dong: 0 }
-        };
-        return {
-          date: day.d,
-          dow: 'T2',
-          off: false,
-          isHighlight: true,
-          item: weekSum.item,
-          kg: weekSum.kg
-        };
-      }
-      if (day.off) {
-        return {
-          date: day.d,
-          dow: day.w,
-          off: true,
-          isHighlight: false,
-          item: { quaCanh: 0, mat: 0, dong: 0 },
-          kg: { quaCanh: 0, mat: 0, dong: 0 }
-        };
-      }
-      const qc = day.qc || Array(13).fill(0);
-      const tqc = day.tqc || Array(13).fill(0);
-      const mat = day.mat || Array(13).fill(0);
-      const tlh = day.tlh || Array(13).fill(0);
-      const dong = day.dong || Array(13).fill(0);
-
-      const qcItem = (qc[6] || 0) + (tqc[6] || 0);
-      const qcKg = (qc[11] || 0) + (tqc[11] || 0);
-      const matItem = ((mat[6] || 0) - (qc[6] || 0)) + (tlh[6] || 0);
-      const matKg = ((mat[11] || 0) - (qc[11] || 0)) + (tlh[11] || 0);
-      const dongItem = dong[6] || 0;
-      const dongKg = dong[11] || 0;
-
-      return {
-        date: day.d,
-        dow: day.w,
-        off: false,
-        isHighlight: false,
-        item: { quaCanh: qcItem, mat: matItem, dong: dongItem },
-        kg: { quaCanh: qcKg, mat: matKg, dong: dongKg }
-      };
-    });
-  } else if (summaryViewMode === 'week') {
-    const sortedGroupIds = Array.from(weeklySums.keys()).sort((a, b) => a - b);
-    displayRows = sortedGroupIds.map(gId => {
-      const sum = weeklySums.get(gId);
-      return {
-        date: sum.label,
-        dow: '—',
-        off: false,
-        isHighlight: true,
-        item: sum.item,
-        kg: sum.kg
-      };
-    });
-  } else if (summaryViewMode === 'month') {
-    const monthlySums = new Map();
-    D.forEach(day => {
-      if (day.off || day.w === 'Mon' || day.w === 'T2') return;
-      const mKey = (day.d || '').split('-')[1] || 'Unknown';
-      if (!monthlySums.has(mKey)) {
-        monthlySums.set(mKey, {
-          item: { quaCanh: 0, mat: 0, dong: 0 },
-          kg: { quaCanh: 0, mat: 0, dong: 0 }
-        });
-      }
-      const qc = day.qc || Array(13).fill(0);
-      const tqc = day.tqc || Array(13).fill(0);
-      const mat = day.mat || Array(13).fill(0);
-      const tlh = day.tlh || Array(13).fill(0);
-      const dong = day.dong || Array(13).fill(0);
-
-      const qcItem = (qc[6] || 0) + (tqc[6] || 0);
-      const qcKg = (qc[11] || 0) + (tqc[11] || 0);
-      const matItem = ((mat[6] || 0) - (qc[6] || 0)) + (tlh[6] || 0);
-      const matKg = ((mat[11] || 0) - (qc[11] || 0)) + (tlh[11] || 0);
-      const dongItem = dong[6] || 0;
-      const dongKg = dong[11] || 0;
-
-      const cur = monthlySums.get(mKey);
-      cur.item.quaCanh += qcItem;
-      cur.item.mat += matItem;
-      cur.item.dong += dongItem;
-      cur.kg.quaCanh += qcKg;
-      cur.kg.mat += matKg;
-      cur.kg.dong += dongKg;
-    });
-
-    const uniqueMonths = [];
-    D.forEach(day => {
-      const mKey = (day.d || '').split('-')[1];
-      if (mKey && !uniqueMonths.includes(mKey) && monthlySums.has(mKey)) {
-        uniqueMonths.push(mKey);
-      }
-    });
-
-    displayRows = uniqueMonths.map(mKey => {
-      const sum = monthlySums.get(mKey);
-      const monthNames = { Jan:'Tháng 1', Feb:'Tháng 2', Mar:'Tháng 3', Apr:'Tháng 4', May:'Tháng 5', Jun:'Tháng 6', Jul:'Tháng 7', Aug:'Tháng 8', Sep:'Tháng 9', Oct:'Tháng 10', Nov:'Tháng 11', Dec:'Tháng 12' };
-      return {
-        date: monthNames[mKey] || ('Tháng ' + mKey),
-        dow: '—',
-        off: false,
-        isHighlight: true,
-        item: sum.item,
-        kg: sum.kg
-      };
-    });
-  }
-
-  let filteredRows = displayRows;
-  if (sumStartIdx > 0 || sumEndIdx > 0) {
-    const s = sumStartIdx > 0 ? sumStartIdx : 0;
-    const e = sumEndIdx > 0 ? sumEndIdx : displayRows.length - 1;
-    filteredRows = displayRows.slice(Math.min(s, e), Math.max(s, e) + 1);
-  }
-
-  let h = `
-  <div style="padding: 16px; font-family: sans-serif;">
-    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; background: var(--sidebar-bg, #0d0d21); border: 1px solid var(--sidebar-border, rgba(255,255,255,0.1)); padding: 14px 18px; border-radius: 12px;">
-      <div style="display: flex; gap: 6px; background: rgba(0,0,0,0.2); padding: 4px; border-radius: 8px;">
-        <button onclick="setSummaryViewMode('day')" style="padding: 6px 14px; font-size: 12px; font-weight: 700; border-radius: 6px; border: none; cursor: pointer; transition: all 0.2s; ${summaryViewMode==='day' ? 'background: #3b82f6; color:var(--txt);' : 'background: transparent; color: #94a3b8;'}">Theo Ngày</button>
-        <button onclick="setSummaryViewMode('week')" style="padding: 6px 14px; font-size: 12px; font-weight: 700; border-radius: 6px; border: none; cursor: pointer; transition: all 0.2s; ${summaryViewMode==='week' ? 'background: #3b82f6; color:var(--txt);' : 'background: transparent; color: #94a3b8;'}">Theo Tuần</button>
-        <button onclick="setSummaryViewMode('month')" style="padding: 6px 14px; font-size: 12px; font-weight: 700; border-radius: 6px; border: none; cursor: pointer; transition: all 0.2s; ${summaryViewMode==='month' ? 'background: #3b82f6; color:var(--txt);' : 'background: transparent; color: #94a3b8;'}">Theo Tháng</button>
-      </div>
-
-      <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-        <div style="display: flex; align-items: center; gap: 6px; font-size: 12px;">
-          <span style="color: #94a3b8;">Từ:</span>
-          <select onchange="sumStartIdx=parseInt(this.value); renderTongHopXuat();" style="background: var(--bg-primary, #070714); color: var(--text-color, #e2e8f0); border: 1px solid var(--sidebar-border, #333); padding: 5px 8px; border-radius: 6px; font-size: 12px;">
-            ${displayRows.map((r, i) => `<option value="${i}" ${i===(sumStartIdx||0)?'selected':''}>${r.date}</option>`).join('')}
-          </select>
-        </div>
-        <div style="display: flex; align-items: center; gap: 6px; font-size: 12px;">
-          <span style="color: #94a3b8;">Đến:</span>
-          <select onchange="sumEndIdx=parseInt(this.value); renderTongHopXuat();" style="background: var(--bg-primary, #070714); color: var(--text-color, #e2e8f0); border: 1px solid var(--sidebar-border, #333); padding: 5px 8px; border-radius: 6px; font-size: 12px;">
-            ${displayRows.map((r, i) => `<option value="${i}" ${i===(sumEndIdx||(displayRows.length-1))?'selected':''}>${r.date}</option>`).join('')}
-          </select>
-        </div>
-        <button onclick="resetSummaryFilter()" style="display: flex; align-items: center; gap: 4px; padding: 6px 12px; font-size: 12px; font-weight: 600; border-radius: 6px; border: 1px solid #475569; background: transparent; color: var(--text-color, #e2e8f0); cursor: pointer;">
-          ↺ Reset
-        </button>
-        <button onclick="exportTongHopXuatExcel()" style="display: flex; align-items: center; gap: 6px; padding: 6px 14px; font-size: 12px; font-weight: 700; border-radius: 6px; border: 1px solid #059669; background: #10b981; color:var(--txt)fff; cursor: pointer; transition: all 0.2s;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          <span>Xu&#7845;t Excel</span>
-        </button>
-      </div>
-    </div>
-
-    <div style="overflow-x: auto; border: 1px solid var(--sidebar-border, rgba(255,255,255,0.1)); border-radius: 12px; background: var(--sidebar-bg, #0d0d21);">
-      <table style="width: 100%; border-collapse: collapse; text-align: right; font-size: 13px;">
-        <thead style="position: sticky; top: 0; z-index: 10;">
-            <tr style="background: #141938; border-bottom: 2px solid var(--sidebar-border, #333); font-weight: 700;">
-            <th style="padding: 10px 12px; text-align: left;">${summaryViewMode==='day'?'Ngày':summaryViewMode==='week'?'Tuần':'Tháng'}</th>
-            <th style="padding: 10px 12px; text-align: center; width: 60px;">Thứ</th>
-            <th style="padding: 10px 12px; color: #38bdf8;">Item Quá Cảnh</th>
-            <th style="padding: 10px 12px; color: #60a5fa;">Item Mát</th>
-            <th style="padding: 10px 12px; color: #818cf8;">Item Đông</th>
-            <th style="padding: 10px 12px; color: #38bdf8; background: rgba(56,189,248,0.08); font-weight: 800;">TỔNG ITEM</th>
-            <th style="padding: 10px 12px; color: #f472b6;">Kg Quá Cảnh</th>
-            <th style="padding: 10px 12px; color: #fb7185;">Kg Mát</th>
-            <th style="padding: 10px 12px; color: #f43f5e;">Kg Đông</th>
-            <th style="padding: 10px 12px; color: #f472b6; background: rgba(244,114,182,0.08); font-weight: 800;">TỔNG KG</th>
-          </tr>
-        </thead>
-        <tbody>
-  `;
-
-  filteredRows.forEach(r => {
-    const totalItem = r.item.quaCanh + r.item.mat + r.item.dong;
-    const totalKg = r.kg.quaCanh + r.kg.mat + r.kg.dong;
-    const rowBg = r.isHighlight ? 'background: rgba(16, 185, 129, 0.15); border-top: 2px solid rgba(16, 185, 129, 0.4); border-bottom: 2px solid rgba(16, 185, 129, 0.4); font-weight: 800;' : (r.off ? 'opacity: 0.5;' : '');
-    const fmtN = (v) => v ? v.toLocaleString('vi-VN') : '—';
-    const fmtKg = (v) => v ? v.toLocaleString('vi-VN', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) : '—';
-
     h += `
-      <tr style="border-bottom: 1px solid var(--sidebar-border, rgba(255,255,255,0.05)); ${rowBg}">
-        <td style="padding: 10px 12px; text-align: left; font-weight: 800; ${r.isHighlight ? 'color: #10b981;' : ''}">${r.date}${r.isHighlight && summaryViewMode === 'day' ? ' <span style="font-size: 10px; color: #34d399; font-weight: 700;">(Tổng tuần)</span>' : ''}</td>
-        <td style="padding: 10px 12px; text-align: center; color: #94a3b8;">${r.dow}</td>
-        <td style="padding: 10px 12px;">${fmtN(r.item.quaCanh)}</td>
-        <td style="padding: 10px 12px;">${fmtN(r.item.mat)}</td>
-        <td style="padding: 10px 12px;">${fmtN(r.item.dong)}</td>
-        <td style="padding: 10px 12px; background: rgba(56,189,248,0.05); font-weight: 800; color: #38bdf8;">${fmtN(totalItem)}</td>
-        <td style="padding: 10px 12px;">${fmtKg(r.kg.quaCanh)}</td>
-        <td style="padding: 10px 12px;">${fmtKg(r.kg.mat)}</td>
-        <td style="padding: 10px 12px;">${fmtKg(r.kg.dong)}</td>
-        <td style="padding: 10px 12px; background: rgba(244,114,182,0.05); font-weight: 800; color: #f472b6;">${fmtKg(totalKg)}</td>
-      </tr>
-    `;
-  });
-
-  h += `
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
-  `;
+    <style>
+      .table-row-hover:hover {
+          background: rgba(255,255,255,0.05) !important;
+      }
+    </style>
+    `;
 
-  container.innerHTML = h;
+    container.innerHTML = h;
 }
+
+
 
 function nhCatBlock(catLabel, arr, nccVal, isFirst) {
   let h = `<tr${isFirst?' class="cat-first"':''}>
@@ -2967,6 +2791,9 @@ function renderNhap() {
 // ===================== NHẬP HÀNG =====================
 const DNH = [
 {d:'28-Apr',w:'T3',wk:'W18',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'29-Apr',w:'T4',wk:'W18',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'30-Apr',w:'T5',wk:'W18',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'1-May',w:'T6',wk:'W18',qc:181.0,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'2-May',w:'T7',wk:'W18',qc:14141.0,mat:1337.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'3-May',w:'CN',wk:'W18',qc:14322.0,mat:1337.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'4-May',w:'T2',wk:'W19',qc:6226.0,mat:3389.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'5-May',w:'T3',wk:'W19',qc:15522.0,mat:2467.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'6-May',w:'T4',wk:'W19',qc:18789.0,mat:3904.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'7-May',w:'T5',wk:'W19',qc:18500.0,mat:2346.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'8-May',w:'T6',wk:'W19',qc:17083.0,mat:4678.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'9-May',w:'T7',wk:'W19',qc:19820.0,mat:2944.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'10-May',w:'CN',wk:'W19',qc:95939.0,mat:19729.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'11-May',w:'T2',wk:'W20',qc:15990.0,mat:7196.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'12-May',w:'T3',wk:'W20',qc:19657.0,mat:2375.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'13-May',w:'T4',wk:'W20',qc:20366.0,mat:3557.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'14-May',w:'T5',wk:'W20',qc:19823.0,mat:4526.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'15-May',w:'T6',wk:'W20',qc:21413.0,mat:4084.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'16-May',w:'T7',wk:'W20',qc:22914.0,mat:2341.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'17-May',w:'CN',wk:'W20',qc:120162.0,mat:24079.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'18-May',w:'T2',wk:'W21',qc:13618.0,mat:3109.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'19-May',w:'T3',wk:'W21',qc:19770.0,mat:2059.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'20-May',w:'T4',wk:'W21',qc:16949.0,mat:3418.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'21-May',w:'T5',wk:'W21',qc:11150.0,mat:2791.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'22-May',w:'T6',wk:'W21',qc:14200.0,mat:4349.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'23-May',w:'T7',wk:'W21',qc:18708.0,mat:1894.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'24-May',w:'CN',wk:'W21',qc:94395.0,mat:17620.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'25-May',w:'T2',wk:'W22',qc:8468.0,mat:6481.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'26-May',w:'T3',wk:'W22',qc:23472.0,mat:2351.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'27-May',w:'T4',wk:'W22',qc:16384.0,mat:3691.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'28-May',w:'T5',wk:'W22',qc:21369.0,mat:3692.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'29-May',w:'T6',wk:'W22',qc:12262.0,mat:3549.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'30-May',w:'T7',wk:'W22',qc:15283.0,mat:1031.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'31-May',w:'CN',wk:'W22',qc:97238.0,mat:20795.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'1-Jun',w:'T2',wk:'W23',qc:9943.0,mat:2744.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'2-Jun',w:'T3',wk:'W23',qc:19488.0,mat:1298.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'3-Jun',w:'T4',wk:'W23',qc:11378.0,mat:3907.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'4-Jun',w:'T5',wk:'W23',qc:14644.0,mat:5113.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'5-Jun',w:'T6',wk:'W23',qc:20716.0,mat:3524.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'6-Jun',w:'T7',wk:'W23',qc:20134.0,mat:3812.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'7-Jun',w:'CN',wk:'W23',qc:96303.0,mat:20398.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'8-Jun',w:'T2',wk:'W24',qc:13062.0,mat:2912.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'9-Jun',w:'T3',wk:'W24',qc:21890.0,mat:4242.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'10-Jun',w:'T4',wk:'W24',qc:13497.0,mat:2912.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'11-Jun',w:'T5',wk:'W24',qc:15614.0,mat:2562.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'12-Jun',w:'T6',wk:'W24',qc:18987.0,mat:6531.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'13-Jun',w:'T7',wk:'W24',qc:11569.0,mat:1674.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'14-Jun',w:'CN',wk:'W24',qc:94619.0,mat:20833.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'15-Jun',w:'T2',wk:'W25',qc:6243.0,mat:4349.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'16-Jun',w:'T3',wk:'W25',qc:23700.0,mat:2644.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'17-Jun',w:'T4',wk:'W25',qc:12855.0,mat:4034.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'18-Jun',w:'T5',wk:'W25',qc:13571.0,mat:2433.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'19-Jun',w:'T6',wk:'W25',qc:15445.0,mat:2914.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'20-Jun',w:'T7',wk:'W25',qc:17222.0,mat:2460.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'21-Jun',w:'CN',wk:'W25',qc:89036.0,mat:18834.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'22-Jun',w:'T2',wk:'W26',qc:14883.0,mat:4294.0,dong:19177.0,kgQc:null,kgMat:null,kgDong:null},{d:'23-Jun',w:'T3',wk:'W26',qc:18734.0,mat:2036.0,dong:20770.0,kgQc:null,kgMat:null,kgDong:null},{d:'24-Jun',w:'T4',wk:'W26',qc:16298.0,mat:5257.0,dong:21555.0,kgQc:null,kgMat:null,kgDong:null},{d:'25-Jun',w:'T5',wk:'W26',qc:16139.0,mat:4724.0,dong:20863.0,kgQc:null,kgMat:null,kgDong:null},{d:'26-Jun',w:'T6',wk:'W26',qc:14059.0,mat:2699.0,dong:16758.0,kgQc:null,kgMat:null,kgDong:null},{d:'27-Jun',w:'T7',wk:'W26',qc:16008.0,mat:852.0,dong:16860.0,kgQc:null,kgMat:null,kgDong:null},{d:'28-Jun',w:'CN',wk:'W26',qc:96121.0,mat:19862.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'29-Jun',w:'T2',wk:'W27',qc:14672.0,mat:3417.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'30-Jun',w:'T3',wk:'W27',qc:19927.0,mat:1295.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'1-Jul',w:'T4',wk:'W27',qc:20396.0,mat:4328.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'2-Jul',w:'T5',wk:'W27',qc:9718.0,mat:4091.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'3-Jul',w:'T6',wk:'W27',qc:13985.0,mat:2086.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'4-Jul',w:'T7',wk:'W27',qc:11122.0,mat:1773.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'5-Jul',w:'CN',wk:'W27',qc:89819.0,mat:16991.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'6-Jul',w:'T2',wk:'W28',qc:9754.0,mat:2412.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'7-Jul',w:'T3',wk:'W28',qc:25561.0,mat:3040.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'8-Jul',w:'T4',wk:'W28',qc:15976.0,mat:6421.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'9-Jul',w:'T5',wk:'W28',qc:14236.0,mat:3567.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'10-Jul',w:'T6',wk:'W28',qc:16535.0,mat:2739.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'11-Jul',w:'T7',wk:'W28',qc:8476.0,mat:4523.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'12-Jul',w:'CN',wk:'W28',qc:90538.0,mat:22702.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'13-Jul',w:'T2',wk:'W29',qc:7419.0,mat:3063.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'14-Jul',w:'T3',wk:'W29',qc:23047.0,mat:3058.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'15-Jul',w:'T4',wk:'W29',qc:13640.0,mat:3634.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'16-Jul',w:'T5',wk:'W29',qc:21862.0,mat:4189.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'17-Jul',w:'T6',wk:'W29',qc:13700.0,mat:6578.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'18-Jul',w:'T7',wk:'W29',qc:15979.0,mat:1132.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'19-Jul',w:'CN',wk:'W29',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'20-Jul',w:'T2',wk:'W30',qc:10173.0,mat:4197.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'21-Jul',w:'T3',wk:'W30',qc:27980.0,mat:2788.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'22-Jul',w:'T4',wk:'W30',qc:16042.0,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'23-Jul',w:'T5',wk:'W30',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'24-Jul',w:'T6',wk:'W30',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'25-Jul',w:'T7',wk:'W30',qc:1240.0,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'26-Jul',w:'CN',wk:'W30',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'27-Jul',w:'T2',wk:'W31',qc:6357.0,mat:1702.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'28-Jul',w:'T3',wk:'W31',qc:20657.0,mat:1886.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'29-Jul',w:'T4',wk:'W31',qc:7416.0,mat:2728.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'30-Jul',w:'T5',wk:'W31',qc:20299.0,mat:1631.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'31-Jul',w:'T6',wk:'W31',qc:14074.0,mat:2591.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'1-Aug',w:'T7',wk:'W31',qc:16529.0,mat:334.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'2-Aug',w:'CN',wk:'W31',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'3-Aug',w:'T2',wk:'W32',qc:7597.0,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'4-Aug',w:'T3',wk:'W32',qc:20652.0,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'5-Aug',w:'T4',wk:'W32',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'6-Aug',w:'T5',wk:'W32',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'7-Aug',w:'T6',wk:'W32',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'8-Aug',w:'T7',wk:'W32',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'9-Aug',w:'CN',wk:'W32',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'10-Aug',w:'T2',wk:'W33',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'11-Aug',w:'T3',wk:'W33',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'12-Aug',w:'T4',wk:'W33',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'13-Aug',w:'T5',wk:'W33',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'14-Aug',w:'T6',wk:'W33',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null}
+];
+const D_THX = [
+{type:'day', d:'01-Aug', w:'T7', item:{qc:0.0,mat:0.0,dong:189.0}, kg:{qc:0.0,mat:0.0,dong:46738.0}},{type:'day', d:'02-Aug', w:'CN', item:{qc:0.0,mat:0.0,dong:183.0}, kg:{qc:0.0,mat:0.0,dong:50113.0}},{type:'week', d:'Total tuần', w:'', item:{qc:0.0,mat:0.0,dong:372.0}, kg:{qc:0.0,mat:0.0,dong:96851.0}},{type:'day', d:'04-Aug', w:'T3', item:{qc:0.0,mat:0.0,dong:187.0}, kg:{qc:0.0,mat:0.0,dong:47272.0}},{type:'day', d:'05-Aug', w:'T4', item:{qc:0.0,mat:0.0,dong:169.0}, kg:{qc:0.0,mat:0.0,dong:29048.0}},{type:'day', d:'06-Aug', w:'T5', item:{qc:0.0,mat:0.0,dong:0.0}, kg:{qc:0.0,mat:0.0,dong:0.0}},{type:'week', d:'Total tuần', w:'', item:{qc:0.0,mat:0.0,dong:356.0}, kg:{qc:0.0,mat:0.0,dong:76320.0}},{type:'month', d:'Total tháng', w:'', item:{qc:0.0,mat:0.0,dong:728.0}, kg:{qc:0.0,mat:0.0,dong:173171.0}}
 ];
 const DN = [
 {d:'1-Aug',w:'T7',wk:'W31',po:0.0,qcN:0.0,qc:[151.0,149.0,36481.0,34979.0,9127.0,7899.0],lkN:0.0,lk:[132.0,85.0,82037.0,80004.0,16665.0,16877.0],tqcN:0.0,tqc:[38.0,37.0,10317.0,16790.0,7772.0,11607.0],tlhN:0.0,tlh:[0.0,1.0,0.0,300.0,0.0,300.0],ti:[128835.0,132073.0],ts:[321.0,272.0],tk:[33563.0,36683.0],dongN:0.0,dong:[34.0,16.0,8923.0,914.0,2591.0,335.0],matN:0.0,mat:[98.0,70.0,73114.0,79390.0,14074.0,16842.0],qc2N:0.0,qc2:[189.0,186.0,46798.0,51769.0,16899.0,19506.0]},{d:'2-Aug',w:'CN',wk:'W31',po:0.0,qcN:0.0,qc:[0.0,0.0,0.0,0.0,0.0,0.0],lkN:0.0,lk:[0.0,0.0,0.0,0.0,0.0,0.0],tqcN:0.0,tqc:[0.0,0.0,0.0,0.0,0.0,0.0],tlhN:0.0,tlh:[0.0,0.0,0.0,0.0,0.0,0.0],ti:[0.0,0.0],ts:[0.0,0.0],tk:[0.0,0.0],dongN:0.0,dong:[0.0,0.0,0.0,0.0,0.0,0.0],matN:0.0,mat:[0.0,0.0,0.0,0.0,0.0,0.0],qc2N:0.0,qc2:[0.0,0.0,0.0,0.0,0.0,0.0]},{d:'3-Aug',w:'T2',wk:'W32',po:0.0,qcN:0.0,qc:[154.0,134.0,36187.0,20877.0,8482.0,5721.0],lkN:0.0,lk:[40.0,95.0,30253.0,67311.0,7597.0,19845.0],tqcN:0.0,tqc:[33.0,36.0,10126.0,9782.0,8401.0,6479.0],tlhN:0.0,tlh:[0.0,5.0,0.0,3305.0,0.0,3305.0],ti:[76566.0,101275.0],ts:[227.0,270.0],tk:[24480.0,35350.0],dongN:0.0,dong:[0.0,0.0,0.0,0.0,0.0,0.0],matN:0.0,mat:[40.0,100.0,30253.0,70616.0,7597.0,23150.0],qc2N:0.0,qc2:[187.0,170.0,46313.0,30659.0,16883.0,12200.0]},{d:'4-Aug',w:'T3',wk:'W32',po:0.0,qcN:0.0,qc:[0.0,0.0,0.0,0.0,0.0,0.0],lkN:0.0,lk:[0.0,0.0,0.0,0.0,0.0,0.0],tqcN:0.0,tqc:[0.0,0.0,0.0,0.0,0.0,0.0],tlhN:0.0,tlh:[0.0,0.0,0.0,0.0,0.0,0.0],ti:[0.0,0.0],ts:[0.0,0.0],tk:[0.0,0.0],dongN:0.0,dong:[0.0,0.0,0.0,0.0,0.0,0.0],matN:0.0,mat:[0.0,0.0,0.0,0.0,0.0,0.0],qc2N:0.0,qc2:[0.0,0.0,0.0,0.0,0.0,0.0]},{d:'5-Aug',w:'T4',wk:'W32',po:0.0,qcN:0.0,qc:[0.0,0.0,0.0,0.0,0.0,0.0],lkN:0.0,lk:[0.0,0.0,0.0,0.0,0.0,0.0],tqcN:0.0,tqc:[0.0,0.0,0.0,0.0,0.0,0.0],tlhN:0.0,tlh:[0.0,0.0,0.0,0.0,0.0,0.0],ti:[0.0,0.0],ts:[0.0,0.0],tk:[0.0,0.0],dongN:0.0,dong:[0.0,0.0,0.0,0.0,0.0,0.0],matN:0.0,mat:[0.0,0.0,0.0,0.0,0.0,0.0],qc2N:0.0,qc2:[0.0,0.0,0.0,0.0,0.0,0.0]},{d:'6-Aug',w:'T5',wk:'W32',po:0.0,qcN:0.0,qc:[0.0,0.0,0.0,0.0,0.0,0.0],lkN:0.0,lk:[0.0,0.0,0.0,0.0,0.0,0.0],tqcN:0.0,tqc:[0.0,0.0,0.0,0.0,0.0,0.0],tlhN:0.0,tlh:[0.0,0.0,0.0,0.0,0.0,0.0],ti:[0.0,0.0],ts:[0.0,0.0],tk:[0.0,0.0],dongN:0.0,dong:[0.0,0.0,0.0,0.0,0.0,0.0],matN:0.0,mat:[0.0,0.0,0.0,0.0,0.0,0.0],qc2N:0.0,qc2:[0.0,0.0,0.0,0.0,0.0,0.0]}
