@@ -129485,6 +129485,19 @@ function pickCls(v) {
   return 'pick-ok';
 }
 
+
+function pickClsDapUng(tx, bt) {
+  if (!bt || bt === 0) return 'pick-ok';
+  const du = (tx / bt) * 100;
+  return du < 99 ? 'pick-warn' : 'pick-ok';
+}
+function fmtPickDapUng(tx, bt) {
+  if (!bt || bt === 0) return `<span class="pick-ok">-</span>`;
+  const du = (tx / bt) * 100;
+  const cls = du < 99 ? 'pick-warn' : 'pick-ok';
+  return `<span class="${cls}">${du.toFixed(2)}%</span>`;
+}
+
 function fmtPick(v) {
   const cls = pickCls(v);
   const txt = v !== 0 ? fmtD(v,2)+'%' : '0.00%';
