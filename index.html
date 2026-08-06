@@ -129504,19 +129504,19 @@ function catRows(label, c, isFirst) {
     <td class="c-cat" rowspan="3">${label}</td>
     <td class="c-info">So lượng SKU</td>
     <td class="c-bk">${fmt(c[0])}</td><td class="c-fc c-empty"></td><td class="c-pct c-empty"></td>
-    <td class="c-bt">${fmt(sku_bkTon)}</td><td class="c-tx">${fmt(c[1])}</td><td class="c-pk ${pickCls(c[2])}">${fmtPick(c[2])}</td>
+    <td class="c-bt">${fmt(sku_bkTon)}</td><td class="c-tx">${fmt(c[1])}</td><td class="c-pk ${pickClsDapUng(c[1], sku_bkTon)}">${fmtPickDapUng(c[1], sku_bkTon)}</td>
   </tr>
   <tr class="row-2">
     <td class="c-info">So lượng (ITEM)</td>
     <td class="c-bk">${fmt(c[3])}</td><td class="c-fc">${fmt(c[4])}</td>
     <td class="c-pct ${pctCls(c[5])}">${c[5]?fmtD(c[5],2)+'%':'—'}</td>
-    <td class="c-bt">${fmt(item_bkTon)}</td><td class="c-tx">${fmt(c[6])}</td><td class="c-pk ${pickCls(c[7])}">${fmtPick(c[7])}</td>
+    <td class="c-bt">${fmt(item_bkTon)}</td><td class="c-tx">${fmt(c[6])}</td><td class="c-pk ${pickClsDapUng(c[6], item_bkTon)}">${fmtPickDapUng(c[6], item_bkTon)}</td>
   </tr>
   <tr class="row-3">
     <td class="c-info">Trọng lượng (kg)</td>
     <td class="c-bk">${fmt(c[8])}</td><td class="c-fc">${fmt(c[9])}</td>
     <td class="c-pct ${pctCls(c[10])}">${c[10]?fmtD(c[10],2)+'%':'—'}</td>
-    <td class="c-bt">${fmt(kg_bkTon)}</td><td class="c-tx">${fmt(c[11])}</td><td class="c-pk ${pickCls(c[12])}">${fmtPick(c[12])}</td>
+    <td class="c-bt">${fmt(kg_bkTon)}</td><td class="c-tx">${fmt(c[11])}</td><td class="c-pk ${pickClsDapUng(c[11], kg_bkTon)}">${fmtPickDapUng(c[11], kg_bkTon)}</td>
   </tr>`;
 }
 
@@ -129534,33 +129534,33 @@ function sumRows(day) {
     <td class="c-cat" rowspan="5" style="vertical-align:top">Tổng hợp</td>
     <td class="c-info">Tổng SKU</td>
     <td class="c-bk">${fmt(d.ts[0])}</td><td class="c-fc c-empty"></td><td class="c-pct c-empty"></td>
-    <td class="c-bt">${fmt(ts_bkTon)}</td><td class="c-tx">${fmt(d.ts[1])}</td><td class="c-pk ${pickCls(d.ts[2])}">${fmtPick(d.ts[2])}</td>
+    <td class="c-bt">${fmt(ts_bkTon)}</td><td class="c-tx">${fmt(d.ts[1])}</td><td class="c-pk ${pickClsDapUng(d.ts[1], ts_bkTon)}">${fmtPickDapUng(d.ts[1], ts_bkTon)}</td>
   </tr>
   <tr class="summary row-2">
     <td class="c-info">Total ITEM</td>
     <td class="c-bk">${fmt(d.ti[0])}</td><td class="c-fc">${fmt(d.ti[1])}</td>
     <td class="c-pct ${pctCls(d.ti[2])}">${fmtD(d.ti[2],2)}%</td>
-    <td class="c-bt">${fmt(ti_bkTon)}</td><td class="c-tx">${fmt(d.ti[3])}</td><td class="c-pk ${pickCls(d.ti[4])}">${fmtPick(d.ti[4])}</td>
+    <td class="c-bt">${fmt(ti_bkTon)}</td><td class="c-tx">${fmt(d.ti[3])}</td><td class="c-pk ${pickClsDapUng(d.ti[3], ti_bkTon)}">${fmtPickDapUng(d.ti[3], ti_bkTon)}</td>
   </tr>
   <tr class="summary row-3">
     <td class="c-info">Total Quá Cảnh</td>
     <td class="c-bk">${fmt(d.tQ[0])}</td><td class="c-fc">${fmt(d.tQ[1])}</td>
     <td class="c-pct ${pctCls(d.tQ[2])}">${fmtD(d.tQ[2],2)}%</td>
     
-    <td class="c-bt">${fmt(tQ_bkTon)}</td><td class="c-tx">${fmt(d.tQ[4])}</td><td class="c-pk ${pickCls(d.tQ[5])}">${fmtPick(d.tQ[5])}</td>
+    <td class="c-bt">${fmt(tQ_bkTon)}</td><td class="c-tx">${fmt(d.tQ[4])}</td><td class="c-pk ${pickClsDapUng(d.tQ[4], tQ_bkTon)}">${fmtPickDapUng(d.tQ[4], tQ_bkTon)}</td>
   </tr>
   <tr class="summary">
     <td class="c-info">Total Lưu Hàng</td>
     <td class="c-bk">${fmt(d.tL[0])}</td><td class="c-fc">${fmt(d.tL[1])}</td>
     <td class="c-pct ${pctCls(d.tL[2])}">${fmtD(d.tL[2],2)}%</td>
     
-    <td class="c-bt">${fmt(tL_bkTon)}</td><td class="c-tx">${fmt(d.tL[4])}</td><td class="c-pk ${pickCls(d.tL[5])}">${fmtPick(d.tL[5])}</td>
+    <td class="c-bt">${fmt(tL_bkTon)}</td><td class="c-tx">${fmt(d.tL[4])}</td><td class="c-pk ${pickClsDapUng(d.tL[4], tL_bkTon)}">${fmtPickDapUng(d.tL[4], tL_bkTon)}</td>
   </tr>
   <tr class="summary row-2">
     <td class="c-info">Total trá» ng lượng</td>
     <td class="c-bk">${fmt(d.tk[0])}</td><td class="c-fc">${fmt(d.tk[1])}</td>
     <td class="c-pct ${pctCls(d.tk[2])}">${fmtD(d.tk[2],2)}%</td>
-    <td class="c-bt">${fmt(tk_bkTon)}</td><td class="c-tx">${fmt(d.tk[3])}</td><td class="c-pk ${pickCls(d.tk[4])}">${fmtPick(d.tk[4])}</td>
+    <td class="c-bt">${fmt(tk_bkTon)}</td><td class="c-tx">${fmt(d.tk[3])}</td><td class="c-pk ${pickClsDapUng(d.tk[3], tk_bkTon)}">${fmtPickDapUng(d.tk[3], tk_bkTon)}</td>
   </tr>`;
 }
 
@@ -129576,7 +129576,7 @@ function tableHead(day) {
     <tr>
       <th class="h-cat">Loại hàng</th><th class="h-info">Thông tin</th>
       <th>Booking</th><th>FC</th><th>%Booking/FC</th>
-      <th>Bk theo tồn</th><th>Thực xuất</th><th>Tỉ lệ pick rớt</th>
+      <th>Bk theo tồn</th><th>Thực xuất</th><th>Tỉ lệ đáp ứng</th>
     </tr>
   </thead>`;
 }
@@ -129745,7 +129745,7 @@ function renderChiTiet() {
   }
   totalDiff = totalBk - totalTx;
   const pickRate = totalBk > 0 ? ((totalTx / totalBk) * 100).toFixed(2) : '0.00';
-  const pickRotRate = totalBk > 0 ? ((totalDiff / totalBk) * 100).toFixed(2) : '0.00';
+  const pickRotRate = totalBk > 0 ? ((totalTx / totalBk) * 100).toFixed(2) : '0.00';
 
   const uniqueDates = [...new Set(allItems.map(it => it.date))];
   const monthOrder = { 'Jan':1, 'Feb':2, 'Mar':3, 'Apr':4, 'May':5, 'Jun':6, 'Jul':7, 'Aug':8, 'Sep':9, 'Oct':10, 'Nov':11, 'Dec':12 };
@@ -130510,12 +130510,12 @@ function nhCatBlock(catLabel, arr, nccVal, isFirst) {
   let h = `<tr${isFirst?' class="cat-first"':''}>
     <td class="c-cat" rowspan="4">${catLabel}</td>`;
   h += `<td class="c-info">Số lượng NCC</td><td class="c-bk">${fmt(nccVal)}</td><td class="c-tx c-empty"></td><td class="c-pk c-empty"></td></tr>`;
-  const skuPct = arr[0]>0 ? ((arr[0]-arr[1])/arr[0]*100) : 0;
-  h += `<tr><td class="c-info">Số lượng SKU</td><td class="c-bk">${fmt(arr[0])}</td><td class="c-tx">${fmt(arr[1])}</td><td class="c-pk ${skuPct>1?'pick-warn':'pick-ok'}">${arr[0]>0?skuPct.toFixed(2)+'%':'0.00%'}</td></tr>`;
-  const iPct = arr[2]>0 ? ((arr[2]-arr[3])/arr[2]*100) : 0;
-  h += `<tr class="row-2"><td class="c-info">Số lượng (ITEM)</td><td class="c-bk">${fmt(arr[2])}</td><td class="c-tx">${fmt(arr[3])}</td><td class="c-pk ${iPct>1?'pick-warn':'pick-ok'}">${arr[2]>0?iPct.toFixed(2)+'%':'0.00%'}</td></tr>`;
-  const kPct = arr[4]>0 ? ((arr[4]-arr[5])/arr[4]*100) : 0;
-  h += `<tr class="row-3"><td class="c-info">Trọng lượng (kg)</td><td class="c-bk">${fmt(arr[4])}</td><td class="c-tx">${fmt(arr[5])}</td><td class="c-pk ${kPct>1?'pick-warn':'pick-ok'}">${arr[4]>0?kPct.toFixed(2)+'%':'0.00%'}</td></tr>`;
+  const skuPct = arr[0]>0 ? (arr[1]/arr[0]*100) : 0;
+  h += `<tr><td class="c-info">Số lượng SKU</td><td class="c-bk">${fmt(arr[0])}</td><td class="c-tx">${fmt(arr[1])}</td><td class="c-pk ${skuPct>1?'pick-warn':'pick-ok'}">${arr[0]>0?skuPct.toFixed(2)+'%':'-'}</td></tr>`;
+  const iPct = arr[2]>0 ? (arr[3]/arr[2]*100) : 0;
+  h += `<tr class="row-2"><td class="c-info">Số lượng (ITEM)</td><td class="c-bk">${fmt(arr[2])}</td><td class="c-tx">${fmt(arr[3])}</td><td class="c-pk ${iPct>1?'pick-warn':'pick-ok'}">${arr[2]>0?iPct.toFixed(2)+'%':'-'}</td></tr>`;
+  const kPct = arr[4]>0 ? (arr[5]/arr[4]*100) : 0;
+  h += `<tr class="row-3"><td class="c-info">Trọng lượng (kg)</td><td class="c-bk">${fmt(arr[4])}</td><td class="c-tx">${fmt(arr[5])}</td><td class="c-pk ${kPct>1?'pick-warn':'pick-ok'}">${arr[4]>0?kPct.toFixed(2)+'%':'-'}</td></tr>`;
   return h;
 }
 
@@ -130525,7 +130525,7 @@ function nhTableHead(day) {
     <col style="width:90px"><col style="width:90px"><col style="width:90px">
   </colgroup>
   <thead><tr><th class="h-cat" colspan="2"></th><th class="date-head" colspan="3">${day.d} — ${day.w}</th></tr>
-  <tr><th class="h-cat">Loại hàng</th><th class="h-info">Thông tin</th><th>Booking</th><th>Thực nhập</th><th>Tỉ lệ rớt</th></tr></thead>`;
+  <tr><th class="h-cat">Loại hàng</th><th class="h-info">Thông tin</th><th>Booking</th><th>Thực nhập</th><th>Tỉ lệ đáp ứng</th></tr></thead>`;
 }
 
 function renderNhap() {
@@ -130540,9 +130540,9 @@ function renderNhap() {
     document.getElementById('content').innerHTML = `<div class="table-block"><div class="off-msg">— ${day.d} (${day.w}) — Ngày nghỉ, không có dữ liệu</div></div>`;
     return;
   }
-  const tiPct = day.ti[0]>0 ? ((day.ti[0]-day.ti[1])/day.ti[0]*100) : 0;
-  const tsPct = day.ts[0]>0 ? ((day.ts[0]-day.ts[1])/day.ts[0]*100) : 0;
-  const tkPct = day.tk[0]>0 ? ((day.tk[0]-day.tk[1])/day.tk[0]*100) : 0;
+  const tiPct = day.ti[0]>0 ? (day.ti[1]/day.ti[0]*100) : 0;
+  const tsPct = day.ts[0]>0 ? (day.ts[1]/day.ts[0]*100) : 0;
+  const tkPct = day.tk[0]>0 ? (day.tk[1]/day.tk[0]*100) : 0;
   const sumHtml = `
   <tr class="summary cat-first"><td class="c-cat" rowspan="3" style="vertical-align:top">TỔNG</td>
     <td class="c-info">Total ITEM</td><td class="c-bk">${fmt(day.ti[0])}</td><td class="c-tx">${fmt(day.ti[1])}</td><td class="c-pk ${tiPct>1?'pick-warn':'pick-ok'}">${tiPct.toFixed(2)}%</td></tr>
@@ -130553,7 +130553,7 @@ function renderNhap() {
       <div class="s-card" style="border-color:#f59e0b"><div class="s-label" style="color:#f59e0b">PO NCC giao</div><div class="s-val">${fmt(day.po)}</div></div>
       <div class="s-card" style="border-color:#22d3ee"><div class="s-label">Total ITEM Bk</div><div class="s-val">${fmt(day.ti[0])}</div></div>
       <div class="s-card" style="border-color:#22d3ee"><div class="s-label">Total ITEM Nhập</div><div class="s-val">${fmt(day.ti[1])}</div></div>
-      <div class="s-card" style="border-color:${tiPct>1?'#f87171':'#22d3ee'}"><div class="s-label">Tỉ lệ rớt</div><div class="s-val" style="color:${tiPct>1?'#f87171':'#22d3ee'}">${tiPct.toFixed(2)}%</div></div>
+      <div class="s-card" style="border-color:${tiPct>1?'#f87171':'#22d3ee'}"><div class="s-label">Tỉ lệ đáp ứng</div><div class="s-val" style="color:${tiPct>1?'#f87171':'#22d3ee'}">${tiPct.toFixed(2)}%</div></div>
       <div class="s-card" style="border-color:#a78bfa"><div class="s-label">Total SKUs</div><div class="s-val">${fmt(day.ts[0])} / ${fmt(day.ts[1])}</div></div>
     </div>
   </div>
@@ -130587,6 +130587,101 @@ function renderNhap() {
 // ===================== NHẬP HÀNG =====================
 const DNH = [
 {d:'28-Apr',w:'T3',wk:'W18',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'29-Apr',w:'T4',wk:'W18',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'30-Apr',w:'T5',wk:'W18',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'1-May',w:'T6',wk:'W18',qc:181.0,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'2-May',w:'T7',wk:'W18',qc:14141.0,mat:1337.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'3-May',w:'CN',wk:'W18',qc:14322.0,mat:1337.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'4-May',w:'T2',wk:'W19',qc:6226.0,mat:3389.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'5-May',w:'T3',wk:'W19',qc:15522.0,mat:2467.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'6-May',w:'T4',wk:'W19',qc:18789.0,mat:3904.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'7-May',w:'T5',wk:'W19',qc:18500.0,mat:2346.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'8-May',w:'T6',wk:'W19',qc:17083.0,mat:4678.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'9-May',w:'T7',wk:'W19',qc:19820.0,mat:2944.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'10-May',w:'CN',wk:'W19',qc:95939.0,mat:19729.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'11-May',w:'T2',wk:'W20',qc:15990.0,mat:7196.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'12-May',w:'T3',wk:'W20',qc:19657.0,mat:2375.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'13-May',w:'T4',wk:'W20',qc:20366.0,mat:3557.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'14-May',w:'T5',wk:'W20',qc:19823.0,mat:4526.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'15-May',w:'T6',wk:'W20',qc:21413.0,mat:4084.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'16-May',w:'T7',wk:'W20',qc:22914.0,mat:2341.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'17-May',w:'CN',wk:'W20',qc:120162.0,mat:24079.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'18-May',w:'T2',wk:'W21',qc:13618.0,mat:3109.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'19-May',w:'T3',wk:'W21',qc:19770.0,mat:2059.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'20-May',w:'T4',wk:'W21',qc:16949.0,mat:3418.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'21-May',w:'T5',wk:'W21',qc:11150.0,mat:2791.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'22-May',w:'T6',wk:'W21',qc:14200.0,mat:4349.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'23-May',w:'T7',wk:'W21',qc:18708.0,mat:1894.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'24-May',w:'CN',wk:'W21',qc:94395.0,mat:17620.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'25-May',w:'T2',wk:'W22',qc:8468.0,mat:6481.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'26-May',w:'T3',wk:'W22',qc:23472.0,mat:2351.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'27-May',w:'T4',wk:'W22',qc:16384.0,mat:3691.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'28-May',w:'T5',wk:'W22',qc:21369.0,mat:3692.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'29-May',w:'T6',wk:'W22',qc:12262.0,mat:3549.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'30-May',w:'T7',wk:'W22',qc:15283.0,mat:1031.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'31-May',w:'CN',wk:'W22',qc:97238.0,mat:20795.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'1-Jun',w:'T2',wk:'W23',qc:9943.0,mat:2744.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'2-Jun',w:'T3',wk:'W23',qc:19488.0,mat:1298.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'3-Jun',w:'T4',wk:'W23',qc:11378.0,mat:3907.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'4-Jun',w:'T5',wk:'W23',qc:14644.0,mat:5113.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'5-Jun',w:'T6',wk:'W23',qc:20716.0,mat:3524.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'6-Jun',w:'T7',wk:'W23',qc:20134.0,mat:3812.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'7-Jun',w:'CN',wk:'W23',qc:96303.0,mat:20398.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'8-Jun',w:'T2',wk:'W24',qc:13062.0,mat:2912.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'9-Jun',w:'T3',wk:'W24',qc:21890.0,mat:4242.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'10-Jun',w:'T4',wk:'W24',qc:13497.0,mat:2912.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'11-Jun',w:'T5',wk:'W24',qc:15614.0,mat:2562.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'12-Jun',w:'T6',wk:'W24',qc:18987.0,mat:6531.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'13-Jun',w:'T7',wk:'W24',qc:11569.0,mat:1674.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'14-Jun',w:'CN',wk:'W24',qc:94619.0,mat:20833.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'15-Jun',w:'T2',wk:'W25',qc:6243.0,mat:4349.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'16-Jun',w:'T3',wk:'W25',qc:23700.0,mat:2644.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'17-Jun',w:'T4',wk:'W25',qc:12855.0,mat:4034.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'18-Jun',w:'T5',wk:'W25',qc:13571.0,mat:2433.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'19-Jun',w:'T6',wk:'W25',qc:15445.0,mat:2914.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'20-Jun',w:'T7',wk:'W25',qc:17222.0,mat:2460.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'21-Jun',w:'CN',wk:'W25',qc:89036.0,mat:18834.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'22-Jun',w:'T2',wk:'W26',qc:14883.0,mat:4294.0,dong:19177.0,kgQc:null,kgMat:null,kgDong:null},{d:'23-Jun',w:'T3',wk:'W26',qc:18734.0,mat:2036.0,dong:20770.0,kgQc:null,kgMat:null,kgDong:null},{d:'24-Jun',w:'T4',wk:'W26',qc:16298.0,mat:5257.0,dong:21555.0,kgQc:null,kgMat:null,kgDong:null},{d:'25-Jun',w:'T5',wk:'W26',qc:16139.0,mat:4724.0,dong:20863.0,kgQc:null,kgMat:null,kgDong:null},{d:'26-Jun',w:'T6',wk:'W26',qc:14059.0,mat:2699.0,dong:16758.0,kgQc:null,kgMat:null,kgDong:null},{d:'27-Jun',w:'T7',wk:'W26',qc:16008.0,mat:852.0,dong:16860.0,kgQc:null,kgMat:null,kgDong:null},{d:'28-Jun',w:'CN',wk:'W26',qc:96121.0,mat:19862.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'29-Jun',w:'T2',wk:'W27',qc:14672.0,mat:3417.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'30-Jun',w:'T3',wk:'W27',qc:19927.0,mat:1295.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'1-Jul',w:'T4',wk:'W27',qc:20396.0,mat:4328.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'2-Jul',w:'T5',wk:'W27',qc:9718.0,mat:4091.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'3-Jul',w:'T6',wk:'W27',qc:13985.0,mat:2086.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'4-Jul',w:'T7',wk:'W27',qc:11122.0,mat:1773.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'5-Jul',w:'CN',wk:'W27',qc:89819.0,mat:16991.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'6-Jul',w:'T2',wk:'W28',qc:9754.0,mat:2412.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'7-Jul',w:'T3',wk:'W28',qc:25561.0,mat:3040.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'8-Jul',w:'T4',wk:'W28',qc:15976.0,mat:6421.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'9-Jul',w:'T5',wk:'W28',qc:14236.0,mat:3567.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'10-Jul',w:'T6',wk:'W28',qc:16535.0,mat:2739.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'11-Jul',w:'T7',wk:'W28',qc:8476.0,mat:4523.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'12-Jul',w:'CN',wk:'W28',qc:90538.0,mat:22702.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'13-Jul',w:'T2',wk:'W29',qc:7419.0,mat:3063.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'14-Jul',w:'T3',wk:'W29',qc:23047.0,mat:3058.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'15-Jul',w:'T4',wk:'W29',qc:13640.0,mat:3634.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'16-Jul',w:'T5',wk:'W29',qc:21862.0,mat:4189.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'17-Jul',w:'T6',wk:'W29',qc:13700.0,mat:6578.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'18-Jul',w:'T7',wk:'W29',qc:15979.0,mat:1132.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'19-Jul',w:'CN',wk:'W29',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'20-Jul',w:'T2',wk:'W30',qc:10173.0,mat:4197.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'21-Jul',w:'T3',wk:'W30',qc:27980.0,mat:2788.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'22-Jul',w:'T4',wk:'W30',qc:16042.0,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'23-Jul',w:'T5',wk:'W30',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'24-Jul',w:'T6',wk:'W30',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'25-Jul',w:'T7',wk:'W30',qc:1240.0,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'26-Jul',w:'CN',wk:'W30',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'27-Jul',w:'T2',wk:'W31',qc:6357.0,mat:1702.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'28-Jul',w:'T3',wk:'W31',qc:20657.0,mat:1886.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'29-Jul',w:'T4',wk:'W31',qc:7416.0,mat:2728.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'30-Jul',w:'T5',wk:'W31',qc:20299.0,mat:1631.0,dong:null,kgQc:null,kgMat:null,kgDong:null},{d:'31-Jul',w:'T6',wk:'W31',qc:14074.0,mat:2591.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'28-Apr',w:'T3',wk:'W18',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'29-Apr',w:'T4',wk:'W18',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'30-Apr',w:'T5',wk:'W18',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'1-May',w:'T6',wk:'W18',qc:181.0,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'2-May',w:'T7',wk:'W18',qc:14141.0,mat:1337.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'3-May',w:'CN',wk:'W18',qc:14322.0,mat:1337.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'4-May',w:'T2',wk:'W19',qc:6226.0,mat:3389.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'5-May',w:'T3',wk:'W19',qc:15522.0,mat:2467.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'6-May',w:'T4',wk:'W19',qc:18789.0,mat:3904.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'7-May',w:'T5',wk:'W19',qc:18500.0,mat:2346.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'8-May',w:'T6',wk:'W19',qc:17083.0,mat:4678.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'9-May',w:'T7',wk:'W19',qc:19820.0,mat:2944.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'10-May',w:'CN',wk:'W19',qc:95939.0,mat:19729.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'11-May',w:'T2',wk:'W20',qc:15990.0,mat:7196.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'12-May',w:'T3',wk:'W20',qc:19657.0,mat:2375.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'13-May',w:'T4',wk:'W20',qc:20366.0,mat:3557.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'14-May',w:'T5',wk:'W20',qc:19823.0,mat:4526.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'15-May',w:'T6',wk:'W20',qc:21413.0,mat:4084.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'16-May',w:'T7',wk:'W20',qc:22914.0,mat:2341.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'17-May',w:'CN',wk:'W20',qc:120162.0,mat:24079.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'18-May',w:'T2',wk:'W21',qc:13618.0,mat:3109.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'19-May',w:'T3',wk:'W21',qc:19770.0,mat:2059.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'20-May',w:'T4',wk:'W21',qc:16949.0,mat:3418.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'21-May',w:'T5',wk:'W21',qc:11150.0,mat:2791.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'22-May',w:'T6',wk:'W21',qc:14200.0,mat:4349.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'23-May',w:'T7',wk:'W21',qc:18708.0,mat:1894.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'24-May',w:'CN',wk:'W21',qc:94395.0,mat:17620.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'25-May',w:'T2',wk:'W22',qc:8468.0,mat:6481.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'26-May',w:'T3',wk:'W22',qc:23472.0,mat:2351.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'27-May',w:'T4',wk:'W22',qc:16384.0,mat:3691.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'28-May',w:'T5',wk:'W22',qc:21369.0,mat:3692.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'29-May',w:'T6',wk:'W22',qc:12262.0,mat:3549.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'30-May',w:'T7',wk:'W22',qc:15283.0,mat:1031.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'31-May',w:'CN',wk:'W22',qc:97238.0,mat:20795.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'1-Jun',w:'T2',wk:'W23',qc:9943.0,mat:2744.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'2-Jun',w:'T3',wk:'W23',qc:19488.0,mat:1298.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'3-Jun',w:'T4',wk:'W23',qc:11378.0,mat:3907.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'4-Jun',w:'T5',wk:'W23',qc:14644.0,mat:5113.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'5-Jun',w:'T6',wk:'W23',qc:20716.0,mat:3524.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'6-Jun',w:'T7',wk:'W23',qc:20134.0,mat:3812.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'7-Jun',w:'CN',wk:'W23',qc:96303.0,mat:20398.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'8-Jun',w:'T2',wk:'W24',qc:13062.0,mat:2912.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'9-Jun',w:'T3',wk:'W24',qc:21890.0,mat:4242.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'10-Jun',w:'T4',wk:'W24',qc:13497.0,mat:2912.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'11-Jun',w:'T5',wk:'W24',qc:15614.0,mat:2562.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'12-Jun',w:'T6',wk:'W24',qc:18987.0,mat:6531.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'13-Jun',w:'T7',wk:'W24',qc:11569.0,mat:1674.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'14-Jun',w:'CN',wk:'W24',qc:94619.0,mat:20833.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'15-Jun',w:'T2',wk:'W25',qc:6243.0,mat:4349.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'16-Jun',w:'T3',wk:'W25',qc:23700.0,mat:2644.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'17-Jun',w:'T4',wk:'W25',qc:12855.0,mat:4034.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'18-Jun',w:'T5',wk:'W25',qc:13571.0,mat:2433.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'19-Jun',w:'T6',wk:'W25',qc:15445.0,mat:2914.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'20-Jun',w:'T7',wk:'W25',qc:17222.0,mat:2460.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'21-Jun',w:'CN',wk:'W25',qc:89036.0,mat:18834.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'22-Jun',w:'T2',wk:'W26',qc:14883.0,mat:4294.0,dong:19177.0,kgQc:null,kgMat:null,kgDong:null},
+{d:'23-Jun',w:'T3',wk:'W26',qc:18734.0,mat:2036.0,dong:20770.0,kgQc:null,kgMat:null,kgDong:null},
+{d:'24-Jun',w:'T4',wk:'W26',qc:16298.0,mat:5257.0,dong:21555.0,kgQc:null,kgMat:null,kgDong:null},
+{d:'25-Jun',w:'T5',wk:'W26',qc:16139.0,mat:4724.0,dong:20863.0,kgQc:null,kgMat:null,kgDong:null},
+{d:'26-Jun',w:'T6',wk:'W26',qc:14059.0,mat:2699.0,dong:16758.0,kgQc:null,kgMat:null,kgDong:null},
+{d:'27-Jun',w:'T7',wk:'W26',qc:16008.0,mat:852.0,dong:16860.0,kgQc:null,kgMat:null,kgDong:null},
+{d:'28-Jun',w:'CN',wk:'W26',qc:96121.0,mat:19862.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'29-Jun',w:'T2',wk:'W27',qc:14672.0,mat:3417.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'30-Jun',w:'T3',wk:'W27',qc:19927.0,mat:1295.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'1-Jul',w:'T4',wk:'W27',qc:20396.0,mat:4328.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'2-Jul',w:'T5',wk:'W27',qc:9718.0,mat:4091.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'3-Jul',w:'T6',wk:'W27',qc:13985.0,mat:2086.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'4-Jul',w:'T7',wk:'W27',qc:11122.0,mat:1773.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'5-Jul',w:'CN',wk:'W27',qc:89819.0,mat:16991.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'6-Jul',w:'T2',wk:'W28',qc:9754.0,mat:2412.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'7-Jul',w:'T3',wk:'W28',qc:25561.0,mat:3040.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'8-Jul',w:'T4',wk:'W28',qc:15976.0,mat:6421.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'9-Jul',w:'T5',wk:'W28',qc:14236.0,mat:3567.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'10-Jul',w:'T6',wk:'W28',qc:16535.0,mat:2739.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'11-Jul',w:'T7',wk:'W28',qc:8476.0,mat:4523.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'12-Jul',w:'CN',wk:'W28',qc:90538.0,mat:22702.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'13-Jul',w:'T2',wk:'W29',qc:7419.0,mat:3063.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'14-Jul',w:'T3',wk:'W29',qc:23047.0,mat:3058.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'15-Jul',w:'T4',wk:'W29',qc:13640.0,mat:3634.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'16-Jul',w:'T5',wk:'W29',qc:21862.0,mat:4189.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'17-Jul',w:'T6',wk:'W29',qc:13700.0,mat:6578.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'18-Jul',w:'T7',wk:'W29',qc:15979.0,mat:1132.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'19-Jul',w:'CN',wk:'W29',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'20-Jul',w:'T2',wk:'W30',qc:10173.0,mat:4197.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'21-Jul',w:'T3',wk:'W30',qc:27980.0,mat:2788.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'22-Jul',w:'T4',wk:'W30',qc:16042.0,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'23-Jul',w:'T5',wk:'W30',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'24-Jul',w:'T6',wk:'W30',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'25-Jul',w:'T7',wk:'W30',qc:1240.0,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'26-Jul',w:'CN',wk:'W30',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'27-Jul',w:'T2',wk:'W31',qc:6357.0,mat:1702.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'28-Jul',w:'T3',wk:'W31',qc:20657.0,mat:1886.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'29-Jul',w:'T4',wk:'W31',qc:7416.0,mat:2728.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'30-Jul',w:'T5',wk:'W31',qc:20299.0,mat:1631.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
+{d:'31-Jul',w:'T6',wk:'W31',qc:14074.0,mat:2591.0,dong:null,kgQc:null,kgMat:null,kgDong:null},
 {d:'28-Apr',w:'T3',wk:'W18',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},
 {d:'29-Apr',w:'T4',wk:'W18',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},
 {d:'30-Apr',w:'T5',wk:'W18',qc:null,mat:null,dong:null,kgQc:null,kgMat:null,kgDong:null},
